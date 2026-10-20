@@ -389,7 +389,7 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
       "makesTrue": [],
@@ -398,7 +398,7 @@
       "version": "0.2.0",
       "name": "Plain HTML reads right",
       "track": "Native HTML",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Approved to start by Niko 2026-10-20 ('finish 0.2.0 now please').",
       "dependsOn": [
         "0.1.0"
       ],

@@ -1,0 +1,810 @@
+{
+  "about": "Every element of the HTML living standard and Primal's outcome for it: styled (by the classless base), enhanced (by a component, in the release named), native (left to the browser, with why) or excluded (infrastructure). Deprecated elements are not listed.",
+  "elements": [
+    {
+      "element": "html",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The page ground, text colour, font and both directions."
+    },
+    {
+      "element": "body",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The page ground, text colour, font and both directions."
+    },
+    {
+      "element": "main",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Landmarks keep their roles; Primal sets block display and the spacing between them, never a box."
+    },
+    {
+      "element": "article",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Landmarks keep their roles; Primal sets block display and the spacing between them, never a box."
+    },
+    {
+      "element": "section",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Landmarks keep their roles; Primal sets block display and the spacing between them, never a box."
+    },
+    {
+      "element": "nav",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Landmarks keep their roles; Primal sets block display and the spacing between them, never a box."
+    },
+    {
+      "element": "aside",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Landmarks keep their roles; Primal sets block display and the spacing between them, never a box."
+    },
+    {
+      "element": "header",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Landmarks keep their roles; Primal sets block display and the spacing between them, never a box."
+    },
+    {
+      "element": "footer",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Landmarks keep their roles; Primal sets block display and the spacing between them, never a box."
+    },
+    {
+      "element": "search",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Landmarks keep their roles; Primal sets block display and the spacing between them, never a box."
+    },
+    {
+      "element": "hgroup",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Landmarks keep their roles; Primal sets block display and the spacing between them, never a box."
+    },
+    {
+      "element": "h1",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The fluid scale, with each heading closer to what follows it than to what came before."
+    },
+    {
+      "element": "h2",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The fluid scale, with each heading closer to what follows it than to what came before."
+    },
+    {
+      "element": "h3",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The fluid scale, with each heading closer to what follows it than to what came before."
+    },
+    {
+      "element": "h4",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The fluid scale, with each heading closer to what follows it than to what came before."
+    },
+    {
+      "element": "h5",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The fluid scale, with each heading closer to what follows it than to what came before."
+    },
+    {
+      "element": "h6",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The fluid scale, with each heading closer to what follows it than to what came before."
+    },
+    {
+      "element": "address",
+      "group": "Page structure",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Contact information, set as plain text."
+    },
+    {
+      "element": "p",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "Body text, stopped at a readable line length."
+    },
+    {
+      "element": "hr",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "A faint separating line with a section gap on each side."
+    },
+    {
+      "element": "pre",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "A well for preformatted text that scrolls sideways within itself."
+    },
+    {
+      "element": "blockquote",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Someone else's words, set in by a line at their start."
+    },
+    {
+      "element": "ul",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Lists with muted markers and tight item spacing."
+    },
+    {
+      "element": "ol",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Lists with muted markers and tight item spacing."
+    },
+    {
+      "element": "li",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Lists with muted markers and tight item spacing."
+    },
+    {
+      "element": "menu",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "A list of commands, laid out in a row."
+    },
+    {
+      "element": "dl",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Each definition close under its term, a group gap before the next."
+    },
+    {
+      "element": "dt",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Each definition close under its term, a group gap before the next."
+    },
+    {
+      "element": "dd",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Each definition close under its term, a group gap before the next."
+    },
+    {
+      "element": "figure",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Media with its caption close under it."
+    },
+    {
+      "element": "figcaption",
+      "group": "Grouping",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Media with its caption close under it."
+    },
+    {
+      "element": "div",
+      "group": "Grouping",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "A generic container with no meaning, so no style: it groups by space only when a layout gives it one."
+    },
+    {
+      "element": "a",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The primary colour and an underline; 0.4.0 adds the Link primitive (external and download)."
+    },
+    {
+      "element": "em",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Italic."
+    },
+    {
+      "element": "i",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Italic."
+    },
+    {
+      "element": "cite",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Italic."
+    },
+    {
+      "element": "var",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Italic."
+    },
+    {
+      "element": "strong",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The strong weight, the one step above regular."
+    },
+    {
+      "element": "b",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The strong weight, the one step above regular."
+    },
+    {
+      "element": "small",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "The small step of the type scale."
+    },
+    {
+      "element": "s",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Struck through and muted: no longer accurate, or removed."
+    },
+    {
+      "element": "del",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Struck through and muted: no longer accurate, or removed."
+    },
+    {
+      "element": "ins",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Underlined: added."
+    },
+    {
+      "element": "u",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "A wavy line, so it is never mistaken for a link."
+    },
+    {
+      "element": "mark",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "The selection colour: \"look here\"."
+    },
+    {
+      "element": "q",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Curly quotes, in the language's own order for English and Hebrew."
+    },
+    {
+      "element": "dfn",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "The term being defined: italic and strong, once."
+    },
+    {
+      "element": "abbr",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "A dotted underline when it carries a title to reveal."
+    },
+    {
+      "element": "code",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "Monospace, kept left to right; code and keys sit in a quiet well."
+    },
+    {
+      "element": "kbd",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "Monospace, kept left to right; code and keys sit in a quiet well."
+    },
+    {
+      "element": "samp",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "Monospace, kept left to right; code and keys sit in a quiet well."
+    },
+    {
+      "element": "sub",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Raised or lowered without stretching the line."
+    },
+    {
+      "element": "sup",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Raised or lowered without stretching the line."
+    },
+    {
+      "element": "time",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Tabular figures so values line up."
+    },
+    {
+      "element": "data",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Tabular figures so values line up."
+    },
+    {
+      "element": "bdi",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Isolation, so a run in the other direction never reorders its neighbours."
+    },
+    {
+      "element": "bdo",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Isolation, so a run in the other direction never reorders its neighbours."
+    },
+    {
+      "element": "ruby",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "The annotation small and muted above its text; rp stays for browsers without ruby."
+    },
+    {
+      "element": "rt",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "The annotation small and muted above its text; rp stays for browsers without ruby."
+    },
+    {
+      "element": "rp",
+      "group": "Text-level",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "The annotation small and muted above its text; rp stays for browsers without ruby."
+    },
+    {
+      "element": "span",
+      "group": "Text-level",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "A generic inline with no meaning, so no style."
+    },
+    {
+      "element": "br",
+      "group": "Text-level",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "Line breaks are behaviour, not appearance."
+    },
+    {
+      "element": "wbr",
+      "group": "Text-level",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "Line breaks are behaviour, not appearance."
+    },
+    {
+      "element": "img",
+      "group": "Embedded content",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Never wider than its container; width and height attributes reserve the space before it loads."
+    },
+    {
+      "element": "picture",
+      "group": "Embedded content",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Never wider than its container; width and height attributes reserve the space before it loads."
+    },
+    {
+      "element": "source",
+      "group": "Embedded content",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Never wider than its container; width and height attributes reserve the space before it loads."
+    },
+    {
+      "element": "video",
+      "group": "Embedded content",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Fits its container, with native controls; a quiet ground before it plays."
+    },
+    {
+      "element": "audio",
+      "group": "Embedded content",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "The browser's player is accessible and familiar; Primal only sets its width. Captions stay native tracks."
+    },
+    {
+      "element": "track",
+      "group": "Embedded content",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "The browser's player is accessible and familiar; Primal only sets its width. Captions stay native tracks."
+    },
+    {
+      "element": "iframe",
+      "group": "Embedded content",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Fit their container; an iframe with width and height keeps that shape as it shrinks."
+    },
+    {
+      "element": "embed",
+      "group": "Embedded content",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Fit their container; an iframe with width and height keeps that shape as it shrinks."
+    },
+    {
+      "element": "object",
+      "group": "Embedded content",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Fit their container; an iframe with width and height keeps that shape as it shrinks."
+    },
+    {
+      "element": "svg",
+      "group": "Embedded content",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Fit their container; each needs a text alternative (role=\"img\" and a label) or aria-hidden."
+    },
+    {
+      "element": "canvas",
+      "group": "Embedded content",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Fit their container; each needs a text alternative (role=\"img\" and a label) or aria-hidden."
+    },
+    {
+      "element": "map",
+      "group": "Embedded content",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "Image maps work as the browser defines them; Primal adds nothing they need."
+    },
+    {
+      "element": "area",
+      "group": "Embedded content",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "Image maps work as the browser defines them; Primal adds nothing they need."
+    },
+    {
+      "element": "math",
+      "group": "Embedded content",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "MathML renders with the browser's math fonts; Primal leaves it alone."
+    },
+    {
+      "element": "table",
+      "group": "Tables",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+    },
+    {
+      "element": "caption",
+      "group": "Tables",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+    },
+    {
+      "element": "thead",
+      "group": "Tables",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+    },
+    {
+      "element": "tbody",
+      "group": "Tables",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+    },
+    {
+      "element": "tfoot",
+      "group": "Tables",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+    },
+    {
+      "element": "tr",
+      "group": "Tables",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+    },
+    {
+      "element": "th",
+      "group": "Tables",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+    },
+    {
+      "element": "td",
+      "group": "Tables",
+      "outcome": "styled",
+      "where": "0.2.0",
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+    },
+    {
+      "element": "colgroup",
+      "group": "Tables",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "Column sizing is the author's; Primal adds nothing."
+    },
+    {
+      "element": "col",
+      "group": "Tables",
+      "outcome": "native",
+      "where": "0.2.0",
+      "reason": "Column sizing is the author's; Primal adds nothing."
+    },
+    {
+      "element": "form",
+      "group": "Forms",
+      "outcome": "native",
+      "where": "0.3.0",
+      "reason": "A form has no look; its fields do."
+    },
+    {
+      "element": "input",
+      "group": "Forms",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "An early base: edge, size and colour from tokens. 0.3.0 builds the field primitives, 0.4.0 the action ones."
+    },
+    {
+      "element": "button",
+      "group": "Forms",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "An early base: edge, size and colour from tokens. 0.3.0 builds the field primitives, 0.4.0 the action ones."
+    },
+    {
+      "element": "select",
+      "group": "Forms",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "An early base: edge, size and colour from tokens. 0.3.0 builds the field primitives, 0.4.0 the action ones."
+    },
+    {
+      "element": "textarea",
+      "group": "Forms",
+      "outcome": "styled",
+      "where": "0.1.0",
+      "reason": "An early base: edge, size and colour from tokens. 0.3.0 builds the field primitives, 0.4.0 the action ones."
+    },
+    {
+      "element": "label",
+      "group": "Forms",
+      "outcome": "enhanced",
+      "where": "0.3.0",
+      "reason": "FieldLabel and FieldGroup."
+    },
+    {
+      "element": "fieldset",
+      "group": "Forms",
+      "outcome": "enhanced",
+      "where": "0.3.0",
+      "reason": "FieldLabel and FieldGroup."
+    },
+    {
+      "element": "legend",
+      "group": "Forms",
+      "outcome": "enhanced",
+      "where": "0.3.0",
+      "reason": "FieldLabel and FieldGroup."
+    },
+    {
+      "element": "option",
+      "group": "Forms",
+      "outcome": "native",
+      "where": "0.3.0",
+      "reason": "The browser draws option lists, and it does it accessibly; Primal keeps it."
+    },
+    {
+      "element": "optgroup",
+      "group": "Forms",
+      "outcome": "native",
+      "where": "0.3.0",
+      "reason": "The browser draws option lists, and it does it accessibly; Primal keeps it."
+    },
+    {
+      "element": "datalist",
+      "group": "Forms",
+      "outcome": "native",
+      "where": "0.3.0",
+      "reason": "The browser draws option lists, and it does it accessibly; Primal keeps it."
+    },
+    {
+      "element": "selectedcontent",
+      "group": "Forms",
+      "outcome": "native",
+      "where": "0.3.0",
+      "reason": "Part of the newer customizable select; 0.3.0's Select decides whether to use it."
+    },
+    {
+      "element": "output",
+      "group": "Forms",
+      "outcome": "enhanced",
+      "where": "0.3.0",
+      "reason": "OutputValue, Progress and Meter."
+    },
+    {
+      "element": "progress",
+      "group": "Forms",
+      "outcome": "enhanced",
+      "where": "0.3.0",
+      "reason": "OutputValue, Progress and Meter."
+    },
+    {
+      "element": "meter",
+      "group": "Forms",
+      "outcome": "enhanced",
+      "where": "0.3.0",
+      "reason": "OutputValue, Progress and Meter."
+    },
+    {
+      "element": "details",
+      "group": "Interactive",
+      "outcome": "enhanced",
+      "where": "0.5.0",
+      "reason": "Disclosure and Accordion."
+    },
+    {
+      "element": "summary",
+      "group": "Interactive",
+      "outcome": "enhanced",
+      "where": "0.5.0",
+      "reason": "Disclosure and Accordion."
+    },
+    {
+      "element": "dialog",
+      "group": "Interactive",
+      "outcome": "enhanced",
+      "where": "0.5.0",
+      "reason": "Dialog and confirmation dialog, keeping the native top layer, focus and Escape."
+    },
+    {
+      "element": "head",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    },
+    {
+      "element": "title",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    },
+    {
+      "element": "base",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    },
+    {
+      "element": "link",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    },
+    {
+      "element": "meta",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    },
+    {
+      "element": "style",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    },
+    {
+      "element": "script",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    },
+    {
+      "element": "noscript",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    },
+    {
+      "element": "template",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    },
+    {
+      "element": "slot",
+      "group": "Infrastructure",
+      "outcome": "excluded",
+      "where": "none",
+      "reason": "Infrastructure, not interface: nothing to see."
+    }
+  ]
+}

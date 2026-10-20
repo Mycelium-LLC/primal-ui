@@ -1,7 +1,8 @@
 /*
- * Mycelium Primal core styles: reset and base typography, in plain CSS.
- * Load after primal-tokens.css. Every value comes from a token; logical properties throughout.
- * 0.2.0 extends this to every native element (the classless base).
+ * Mycelium Primal core styles, in plain CSS: the reset, and a classless base for every native
+ * element, so plain HTML and Markdown read well with no classes at all. Load after
+ * primal-tokens.css. Every value comes from a token; logical properties throughout.
+ * Where an element is left to the browser, packages/css/coverage.json says so and why.
  */
 
 @import './fonts/google-sans.css';
@@ -167,6 +168,198 @@ a {
   text-underline-offset: 0.15em;
 }
 
+/* ---------------------------------------------------------------- inline text */
+
+em,
+i,
+cite,
+dfn,
+var {
+  font-style: italic;
+}
+
+/* A defined term is the word being defined: emphasis plus weight, once, where it is defined. */
+dfn {
+  font-weight: var(--pr-weight-strong);
+}
+
+/* A highlight is the selection colour: "this part, look here". */
+mark {
+  background-color: var(--pr-color-selection);
+  color: inherit;
+  padding-inline: 0.1em;
+  border-radius: var(--pr-radius-well);
+}
+
+/* An edit shows what changed: what was removed is struck and muted, what was added is underlined. */
+del,
+s {
+  text-decoration-line: line-through;
+  text-decoration-thickness: from-font;
+  color: var(--pr-color-text-muted);
+}
+
+ins {
+  text-decoration-line: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+
+/* u marks an unarticulated annotation (a misspelling, a proper name in Chinese): a wavy line, never a link's line. */
+u {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--pr-color-danger);
+  text-decoration-thickness: from-font;
+}
+
+abbr[title] {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.15em;
+  cursor: help;
+}
+
+q {
+  quotes: '\201C' '\201D' '\2018' '\2019';
+}
+
+:lang(he) q {
+  quotes: '\201D' '\201D' '\2019' '\2019';
+}
+
+/* Sub and sup sit on the line without stretching it. */
+sub,
+sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  inset-block-start: -0.5em;
+}
+
+sub {
+  inset-block-end: -0.25em;
+}
+
+time,
+data {
+  font-variant-numeric: tabular-nums;
+}
+
+address {
+  font-style: normal;
+  margin-block: 0 var(--pr-gap-group);
+}
+
+/* Isolate runs of the other direction so names and numbers never reorder their neighbours. */
+bdi {
+  unicode-bidi: isolate;
+}
+
+ruby {
+  ruby-position: over;
+}
+
+rt {
+  font-size: 0.5em;
+  color: var(--pr-color-text-muted);
+}
+
+/* ---------------------------------------------------------------- quotes */
+
+/* A quotation is someone else's words: set in from the text by a line at its start. */
+blockquote {
+  margin: 0 0 var(--pr-gap-group);
+  padding-inline-start: var(--pr-gap-group);
+  border-inline-start: var(--pr-focus-width) solid var(--pr-color-border);
+}
+
+blockquote > :last-child {
+  margin-block-end: 0;
+}
+
+blockquote footer {
+  margin-block-start: var(--pr-gap-component);
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+/* ---------------------------------------------------------------- page structure */
+
+main,
+article,
+section,
+aside,
+nav,
+header,
+footer,
+search,
+hgroup {
+  display: block;
+}
+
+/* A heading group: the subtitle belongs to its heading, close under it and muted. */
+hgroup > :is(h1, h2, h3, h4, h5, h6) {
+  margin-block-end: var(--pr-gap-component);
+}
+
+hgroup > p {
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-large);
+}
+
+/* ---------------------------------------------------------------- media */
+
+/* Media holds its place: width and height attributes reserve the box before it loads. */
+img,
+video,
+canvas,
+svg,
+iframe,
+embed,
+object {
+  max-inline-size: 100%;
+}
+
+iframe {
+  border: 0;
+}
+
+/* An embed given width and height keeps that shape as it shrinks. */
+iframe[width][height] {
+  block-size: auto;
+  aspect-ratio: attr(width type(<number>)) / attr(height type(<number>));
+}
+
+video {
+  background-color: var(--pr-color-surface-sunken);
+}
+
+audio {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--pr-measure);
+}
+
+figure {
+  margin-block: 0 var(--pr-gap-group);
+}
+
+figure > img,
+figure > picture,
+figure > video,
+figure > svg {
+  border-radius: var(--pr-radius-well);
+}
+
+figcaption {
+  margin-block-start: var(--pr-gap-component);
+}
+
 /* ---------------------------------------------------------------- focus */
 
 /* The focus ring means one thing: this is where the keyboard is. */
@@ -180,8 +373,6 @@ a {
 }
 
 /* ---------------------------------------------------------------- lists */
-/* Early classless base (0.2.0 completes it): what 0.1.0's pages need. */
-
 ul,
 ol {
   margin-block: 0 var(--pr-gap-group);
@@ -190,6 +381,28 @@ ol {
 
 li + li {
   margin-block-start: calc(var(--pr-gap-component) / 2);
+}
+
+li > :is(ul, ol) {
+  margin-block: calc(var(--pr-gap-component) / 2) 0;
+}
+
+li::marker {
+  color: var(--pr-color-text-muted);
+}
+
+/* A menu is a list of commands: no bullets, the commands in a row. */
+menu {
+  list-style: none;
+  padding: 0;
+  margin-block: 0 var(--pr-gap-group);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+}
+
+menu > li + li {
+  margin-block-start: 0;
 }
 
 dl {
@@ -233,6 +446,46 @@ td {
 thead th {
   font-weight: var(--pr-weight-regular);
   color: var(--pr-color-text-muted);
+  border-block-end-color: var(--pr-color-border-control);
+}
+
+tfoot :is(th, td) {
+  font-weight: var(--pr-weight-strong);
+  border-block-end: 0;
+}
+
+/* Numbers align on their end, so digits line up down a column: mark the cells (or a <col>) with data-numeric. */
+:is(th, td)[data-numeric] {
+  text-align: end;
+}
+
+/* An empty table says why it is empty, in place of its rows. */
+td[data-empty] {
+  padding-block: var(--pr-gap-section);
+  text-align: center;
+  color: var(--pr-color-text-muted);
+}
+
+/*
+ * .pr-table wraps a table so it scrolls within itself, never the page: sideways on a narrow
+ * screen, and down with its header kept in view when it is long. It's a focusable region, so a
+ * keyboard can scroll it: <div class="pr-table" role="region" aria-label="…" tabindex="0">.
+ */
+.pr-table {
+  overflow: auto;
+  max-block-size: 70dvh;
+  margin-block-end: var(--pr-gap-group);
+}
+
+.pr-table > table {
+  margin-block-end: 0;
+}
+
+.pr-table thead th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--pr-layer-sticky);
+  background-color: var(--pr-color-surface);
 }
 
 /* ---------------------------------------------------------------- code */

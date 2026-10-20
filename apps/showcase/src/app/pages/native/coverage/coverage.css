@@ -1,0 +1,26 @@
+.pr-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+  margin-block: var(--pr-gap-group) var(--pr-gap-section);
+}
+
+/* The chosen filter wears the primary edge: "this is what you're looking at". */
+.pr-filters button[aria-pressed='true'] {
+  border-color: var(--pr-color-primary);
+  box-shadow: inset 0 0 0 1px var(--pr-color-primary);
+}
+
+.pr-count {
+  color: var(--pr-color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+table {
+  font-size: var(--pr-text-small);
+}
+
+tbody th {
+  font-weight: var(--pr-weight-regular);
+  white-space: nowrap;
+}

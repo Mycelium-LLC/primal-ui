@@ -1,15 +1,59 @@
-<pr-page-placeholder title="Media" release="0.2.0" covers="Images, figures, audio, video, embeds, svg and canvas.">
-<figure>
-  <svg width="320" height="180" viewBox="0 0 320 180" role="img" aria-label="A grey placeholder rectangle">
-    <rect width="320" height="180" fill="#ccc"></rect>
-  </svg>
-  <figcaption>A figure with its caption (svg specimen).</figcaption>
-</figure>
-<picture>
-  <img src="favicon.ico" alt="The Primal favicon" width="32" height="32">
-</picture>
-<p><audio controls aria-label="Audio specimen with no source"></audio></p>
-<p><video controls width="320" height="180" aria-label="Video specimen with no source"></video></p>
-<p><canvas width="160" height="40" aria-label="Canvas specimen">A canvas specimen.</canvas></p>
-<iframe title="Embed specimen" srcdoc="&lt;p&gt;An embedded document.&lt;/p&gt;" width="320" height="80"></iframe>
-</pr-page-placeholder>
+<h1>Media</h1>
+<p>
+  Media holds its place. Give an image or a video its <code>width</code> and <code>height</code> and the browser reserves the box
+  before it loads, so nothing below it jumps. It never grows wider than its container, and it always says what it shows, or
+  says that it's decoration.
+</p>
+
+<h2>Images and figures</h2>
+<div class="pr-specimen">
+  <figure>
+    <img src="specimens/landscape.svg" width="1200" height="800" alt="Layered blue hills under a pale sky with a yellow sun" />
+    <figcaption>A figure: the image, with its caption close under it.</figcaption>
+  </figure>
+  <picture>
+    <source srcset="specimens/landscape.svg" media="(width >= 48rem)" />
+    <img src="specimens/landscape.svg" width="600" height="400" alt="The same hills, chosen by picture for the screen width" />
+  </picture>
+</div>
+
+<h2>Video and sound</h2>
+<p>The browser's own players are accessible and familiar, so Primal keeps them. Captions are a native track.</p>
+<div class="pr-specimen">
+  <figure>
+    <video controls width="640" height="360" poster="specimens/poster.jpg" preload="metadata">
+      <source src="specimens/clip.webm" type="video/webm" />
+      <track kind="captions" src="specimens/clip.vtt" srclang="en" label="English" default />
+    </video>
+    <figcaption>A four-second gradient, with captions and no sound.</figcaption>
+  </figure>
+  <figure>
+    <audio controls preload="metadata" src="specimens/tone.webm"></audio>
+    <figcaption>A two-second tone at 440 Hz.</figcaption>
+  </figure>
+</div>
+
+<h2>Drawn and embedded</h2>
+<div class="pr-specimen">
+  <figure>
+    <svg width="320" height="80" viewBox="0 0 320 80" role="img" aria-label="Three circles: primary, companion and tertiary">
+      <circle cx="40" cy="40" r="32" fill="var(--pr-color-primary)" />
+      <circle cx="120" cy="40" r="32" fill="var(--pr-color-companion)" />
+      <circle cx="200" cy="40" r="32" fill="var(--pr-color-tertiary)" />
+    </svg>
+    <figcaption>An SVG with a text alternative, drawn in the theme's colours.</figcaption>
+  </figure>
+  <figure>
+    <canvas #chart width="280" height="120" role="img" aria-label="A bar chart of builds per day over a week">
+      Builds per day over a week: 3, 5, 4, 7, 6, 8 and 5.
+    </canvas>
+    <figcaption>A canvas, with a label and a fallback that says the same thing.</figcaption>
+  </figure>
+  <figure>
+    <iframe title="An embedded document" width="560" height="120" srcdoc="&lt;p style=&quot;font:16px system-ui;margin:16px&quot;&gt;An embedded document, inside an iframe.&lt;/p&gt;"></iframe>
+    <figcaption>An iframe given width and height keeps its shape as it shrinks.</figcaption>
+  </figure>
+</div>
+
+<h2>Coverage</h2>
+<pr-coverage-table elements="img picture source figure figcaption video audio track svg canvas iframe embed object map area math" />

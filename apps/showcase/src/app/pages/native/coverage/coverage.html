@@ -1,12 +1,43 @@
-<pr-page-placeholder title="Coverage" release="0.2.0" covers="Every rendering element and its outcome: styled, enhanced or left native.">
-<table>
-  <caption>Native HTML coverage (the inventory grows through 0.2.0)</caption>
-  <thead><tr><th scope="col">Element</th><th scope="col">Outcome</th><th scope="col">Where</th></tr></thead>
-  <tbody>
-    <tr><td><code>button</code></td><td>Enhanced</td><td>Actions, 0.4.0</td></tr>
-    <tr><td><code>input type="date"</code></td><td>Styled, kept native</td><td>Forms, 0.3.0</td></tr>
-    <tr><td><code>dialog</code></td><td>Enhanced</td><td>Navigation and layers, 0.5.0</td></tr>
-    <tr><td><code>script</code>, <code>style</code>, <code>meta</code></td><td>Excluded (infrastructure)</td><td>None</td></tr>
-  </tbody>
-</table>
-</pr-page-placeholder>
+<h1>Coverage</h1>
+<p>
+  Every element of the HTML standard has a decided outcome. It's styled by Primal's classless base, enhanced by a component in a
+  later release, left to the browser with a reason, or excluded because it's infrastructure with nothing to see. The list is
+  checked against the standard's own index of elements.
+</p>
+<p>
+  The source is <code>packages/css/coverage.json</code>, so the list in this page and the list in the code are the same one.
+</p>
+
+<div class="pr-filters" role="group" aria-label="Show elements by outcome">
+  @for (f of filters; track f.key) {
+    <button type="button" [attr.aria-pressed]="filter() === f.key" (click)="filter.set(f.key)">
+      {{ f.label }} <span class="pr-count">{{ f.count }}</span>
+    </button>
+  }
+</div>
+
+@for (g of groups(); track g.group) {
+  <h2>{{ g.group }}</h2>
+  <div class="pr-table" role="region" [attr.aria-label]="g.group" tabindex="0">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Element</th>
+          <th scope="col">Outcome</th>
+          <th scope="col">Release</th>
+          <th scope="col">Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of g.rows; track row.element) {
+          <tr>
+            <th scope="row"><code>{{ row.element }}</code></th>
+            <td>{{ label[row.outcome] }}</td>
+            <td>{{ row.where === 'none' ? '' : row.where }}</td>
+            <td>{{ row.reason }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
