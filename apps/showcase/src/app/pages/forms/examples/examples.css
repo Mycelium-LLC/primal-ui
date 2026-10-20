@@ -1,0 +1,4 @@
+/* Each example is a section of the page: the section gap between them, nothing drawn around them. */
+.pr-example {
+  margin-block-end: var(--pr-gap-section);
+}
