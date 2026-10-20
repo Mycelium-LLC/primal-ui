@@ -1,1 +1,6 @@
 /* The showcase loads Primal's core the same way any project would: tokens, then core styles (angular.json). */
+
+/* The page cross-fades in place: its box settles at once instead of sliding as the page scrolls to its top. */
+::view-transition-group(pr-page) {
+  animation: none;
+}

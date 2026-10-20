@@ -119,6 +119,11 @@
       "n": 19,
       "decision": "Route change",
       "ruling": "Moving to a new page scrolls to its top, as a switch that is on by default (PrimalPreferences.scrollToTop); back and forward keep the browser's own position, and a link to an anchor goes to the anchor (Niko, 2026-10-20: 'route change scroll to top. as a switch, default on')."
+    },
+    {
+      "n": 20,
+      "decision": "Page transitions",
+      "ruling": "A page change is a short cross-fade of the page content, timed by the motion tokens; the shell holds still and nothing slides; instant under reduced motion (Niko, 2026-10-20: 'smoother page transitions please. it jumps')."
     }
   ],
   "releases": [
@@ -156,6 +161,9 @@
         },
         {
           "text": "primal-angular: PrimalPreferences (theme, direction, scroll to top) and providePrimalRouteScroll: a new page starts at its top, a switch that is on by default; back and forward keep the browser's position (decision 19)."
+        },
+        {
+          "text": "Page changes cross-fade (withPrimalTransitions: the browser's View Transitions, timed by the motion tokens, instant under reduced motion) instead of jumping (decision 20)."
         },
         {
           "text": "Modern reset and base typography; logical properties throughout; reduced motion honoured."
