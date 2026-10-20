@@ -1,0 +1,30 @@
+<h1>Direction</h1>
+<p>
+  Every component is laid out with logical properties: start and end instead of left and right, block and inline instead of
+  top and side. That way the same styles work left to right and right to left. Switch Direction in the header and the whole
+  showcase mirrors, including the navigation, the tables and the spacing.
+</p>
+<p>
+  When there's no logical form (a translate, for example), the right-to-left rule is written out and documented with the
+  component that needs it.
+</p>
+
+<h2>Both directions</h2>
+<div class="pr-pair">
+  <section class="pr-region" dir="ltr" lang="en" aria-label="Left to right sample">
+    <h3>Left to right</h3>
+    <p>Notifications <span class="pr-end">On</span></p>
+    <ul>
+      <li>Email me when a report is ready</li>
+      <li>Email me a weekly summary</li>
+    </ul>
+  </section>
+  <section class="pr-region" dir="rtl" lang="he" aria-label="Right to left sample">
+    <h3>מימין לשמאל</h3>
+    <p>התראות <span class="pr-end">פעיל</span></p>
+    <ul>
+      <li>שלחו לי מייל כשדוח מוכן</li>
+      <li>שלחו לי סיכום שבועי</li>
+    </ul>
+  </section>
+</div>

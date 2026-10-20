@@ -1,0 +1,36 @@
+<h1>Spacing</h1>
+<p>
+  Space shows how things are grouped. Primal has three gaps: a large one between sections, a medium one between the elements of
+  a group, and a small one inside a component. The gaps differ enough to see at a glance. Two things the same distance apart
+  read as equals, so every gap is chosen on purpose.
+</p>
+
+<h2>The three gaps</h2>
+@for (gap of gaps; track gap.name) {
+  <div class="pr-gap">
+    <span class="pr-bar" [style.inline-size]="'var(' + gap.name + ')'" aria-hidden="true"></span>
+    <p><code>{{ gap.name }}</code>: {{ gap.meaning }}</p>
+  </div>
+}
+
+<h2>The gaps at work</h2>
+<p>Two sections, each a heading with a group of items. Each item is a label and a description.</p>
+<div class="pr-demo">
+  <section class="pr-demo-section" aria-label="Spacing demo, first section">
+    <h3>Notifications</h3>
+    <div class="pr-demo-group">
+      <div class="pr-demo-item"><strong>Email</strong><span>When a report is ready</span></div>
+      <div class="pr-demo-item"><strong>Phone</strong><span>Only when something fails</span></div>
+    </div>
+  </section>
+  <section class="pr-demo-section" aria-label="Spacing demo, second section">
+    <h3>Appearance</h3>
+    <div class="pr-demo-group">
+      <div class="pr-demo-item"><strong>Theme</strong><span>Follow the system</span></div>
+      <div class="pr-demo-item"><strong>Language</strong><span>English</span></div>
+    </div>
+  </section>
+</div>
+
+<pr-token-table caption="Space" [tokens]="space" />
+<pr-token-table caption="Layout" [tokens]="layout" />

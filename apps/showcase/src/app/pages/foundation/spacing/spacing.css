@@ -1,0 +1,50 @@
+.pr-gap {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  align-items: center;
+  gap: var(--pr-gap-group);
+}
+
+.pr-gap p {
+  margin: 0;
+}
+
+/* A bar as long as the gap it shows; the primary fill marks it as the measured thing. */
+.pr-bar {
+  flex: none;
+  block-size: 1.5rem;
+  background-color: var(--pr-color-primary);
+  border-radius: 2px;
+  min-inline-size: 2px;
+}
+
+.pr-gap + .pr-gap {
+  margin-block-start: var(--pr-gap-component);
+}
+
+.pr-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pr-gap-section);
+  margin-block-end: var(--pr-gap-section);
+}
+
+.pr-demo-section h3 {
+  margin-block: 0 var(--pr-gap-group);
+}
+
+.pr-demo-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pr-gap-group);
+}
+
+.pr-demo-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pr-gap-component);
+}
+
+.pr-demo-item span {
+  color: var(--pr-color-text-muted);
+}

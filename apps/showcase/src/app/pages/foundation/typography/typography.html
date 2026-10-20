@@ -1,0 +1,26 @@
+<h1>Typography</h1>
+<p>
+  Primal's typeface is Google Sans, for English and Hebrew alike. It ships inside the library, so a product never calls
+  Google Fonts at runtime. Sizes are fluid: each step grows smoothly between phone and
+  desk widths with no jump at a breakpoint. Weight has two steps, regular and strong, so a heavier weight always means higher
+  rank. Body text stops at a readable line length.
+</p>
+
+<h2>The scale</h2>
+@for (size of sizes; track size.name) {
+  <div class="pr-step">
+    <p class="pr-sample" [style.font-size]="'var(' + size.name + ')'">Design from first principles</p>
+    <p class="pr-about">
+      <code>{{ size.name }}</code> · {{ size.px?.[0] }} to {{ size.px?.[1] }}px · {{ size.meaning }}
+    </p>
+  </div>
+}
+
+<h2>The measure</h2>
+<p>
+  This paragraph is as wide as body text ever gets: about 68 characters. Longer lines make the eye lose its place when it
+  jumps back to the start of the next one. Shorter lines break the reading rhythm. A wide screen gets more space around the
+  text, not longer lines.
+</p>
+
+<pr-token-table caption="Families, leading, weights and measure" [tokens]="rest" />

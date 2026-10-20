@@ -1,0 +1,29 @@
+<h1>Themes</h1>
+<p>
+  Primal looks plain on purpose. It's the base that other design systems start from, so it carries no brand, and what you see
+  here is exactly what a project gets when it imports Primal. A project gets its own look by overriding tokens in one file of
+  its own, and no component changes.
+</p>
+
+<h2>Light and dark</h2>
+<p>
+  Light and dark are the same base, with each colour role given a value for both. The base follows the system, and the Theme
+  switch in the header forces one. <code>data-theme="light"</code> or <code>"dark"</code> also forces one on any element, so a
+  single region can differ from the page:
+</p>
+<section class="pr-region" data-theme="dark" aria-label="Dark region">
+  <h3>A dark region</h3>
+  <p>Body text with <a href="#">a link</a>.</p>
+  <p class="pr-muted">A description in muted text.</p>
+  <p class="pr-controls">
+    <label>Email <input type="email" /></label>
+    <button type="button">Save Changes</button>
+  </p>
+</section>
+
+<h2>Making a theme</h2>
+<p>
+  For colour, a project sets three choices (its black, its white and its primary) and a harmony, and every colour role
+  follows, in light and dark. Pick them on the <a routerLink="/foundation/colour">Colour</a> page and copy the file it writes.
+</p>
+<pre><code>{{ example }}</code></pre>
