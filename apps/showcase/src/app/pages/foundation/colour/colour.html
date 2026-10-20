@@ -2,7 +2,7 @@
 <p>
   A project's colour comes from three choices: its black, its white and its primary. Its black doesn't have to be #000, and
   its white doesn't have to be #fff. Every other colour is derived from these three, in light and in dark, and stays
-  readable. Try your own below.
+  readable. Primal starts from Mycelium's own: Magma on ink and white. Try your own below.
 </p>
 
 <div class="pr-choices" role="group" aria-label="Your three colours">
@@ -96,6 +96,43 @@
     </ul>
   </section>
 }
+
+<h2>The primary</h2>
+<p>
+  The primary keeps the colour you chose wherever it reads. Where it wouldn't, it is darkened in light or lightened in dark,
+  keeping its hue, only as far as reading needs. Its states move towards the text colour: a step on hover, two when pressed.
+</p>
+<div class="pr-states-pair">
+  @for (mode of ['light', 'dark']; track mode) {
+    <section class="pr-states" data-palette [attr.data-theme]="mode" [style]="vars()" [attr.aria-label]="mode + ' states of the primary'">
+      <h3>{{ mode === 'light' ? 'Light' : 'Dark' }}</h3>
+      <ul>
+        @for (s of states; track s.role) {
+          <li>
+            <span class="pr-state" [attr.data-state]="s.role" aria-hidden="true">{{ s.sample }}</span>
+            <strong>{{ s.label }}</strong>
+            <code>--pr-color-{{ s.role }}</code>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>
+
+<h3>Its scale</h3>
+<p>
+  Eleven steps for illustration, charts and anything the roles don't name. Step 500 is your primary; the lighter steps mix it
+  with your white, the darker ones with your black. Reach for a role first: a step says nothing about what it's for.
+</p>
+<ol class="pr-scale" aria-label="The primary's scale">
+  @for (s of steps(); track s.step) {
+    <li [style.background-color]="s.hex" [style.color]="s.fg" [class.pr-base]="s.step === '500'">
+      <strong>{{ s.step }}</strong>
+      <code>{{ s.hex }}</code>
+    </li>
+  }
+</ol>
+<p class="pr-muted">Each step is <code>--pr-primary-50</code> to <code>--pr-primary-950</code>.</p>
 
 <h2>In use</h2>
 <div class="pr-previews">

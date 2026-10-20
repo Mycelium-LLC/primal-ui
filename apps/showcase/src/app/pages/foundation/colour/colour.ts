@@ -12,6 +12,8 @@ import {
   fromHex,
   harmony,
   palette,
+  scale,
+  SCALE,
   toHex,
 } from '../../../../../../../packages/tokens/src/colour-model.mjs';
 
@@ -93,6 +95,23 @@ export class FoundationColourPage {
       };
     }),
   );
+
+  /** The primary's states, as a person meets them; each sample is drawn by the browser from the roles. */
+  protected readonly states = [
+    { label: 'Fill', role: 'primary', sample: 'Save' },
+    { label: 'Hover', role: 'primary-hover', sample: 'Save' },
+    { label: 'Pressed', role: 'primary-pressed', sample: 'Save' },
+    { label: 'Quiet fill', role: 'primary-surface', sample: 'Current' },
+    { label: 'Text', role: 'primary-text', sample: 'A link' },
+    { label: 'Focus', role: 'focus', sample: 'Focus' },
+  ];
+
+  /** The primary's scale, 50 to 950: step 500 is the primary as chosen. */
+  protected readonly steps = computed(() => {
+    const s = scale(this.choices());
+    const { black, white } = this.choices();
+    return Object.keys(SCALE).map((step) => ({ step, hex: toHex(s[step]), fg: toHex(s[step][0] < 0.6 ? white : black) }));
+  });
 
   protected readonly system = computed(() =>
     Object.keys(SYSTEM).map((name) => ({

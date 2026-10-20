@@ -39,10 +39,8 @@ video {
   block-size: auto;
 }
 
-input,
-button,
-textarea,
-select {
+/* Zero specificity, like every Primal rule on controls, so the control rules below can set colour. */
+:where(input, button, textarea, select) {
   font: inherit;
   color: inherit;
 }
@@ -163,7 +161,7 @@ pre {
 }
 
 a {
-  color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
   text-decoration-thickness: from-font;
   text-underline-offset: 0.15em;
 }
@@ -364,7 +362,7 @@ figcaption {
 
 /* The focus ring means one thing: this is where the keyboard is. */
 :focus-visible {
-  outline: var(--pr-focus-width) solid var(--pr-color-primary);
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
   outline-offset: var(--pr-focus-offset);
 }
 
@@ -538,7 +536,7 @@ figcaption {
 /* ---------------------------------------------------------------- native controls */
 /*
  * Every native control keeps the browser's own behaviour (autofill, pickers, the phone's
- * keyboard, arrow keys in a radio group); Primal sets its edge, size and states. 0.4.0 builds
+ * keyboard, arrow keys in a radio group); Primal sets its edge, size and states. 0.5.0 builds
  * the action primitives on the button.
  */
 
@@ -587,7 +585,13 @@ button:hover {
 }
 
 :where(button[type='submit'], input[type='submit']):hover:not(:disabled) {
-  background-color: color-mix(in oklch, var(--pr-color-primary) 88%, var(--pr-color-text));
+  background-color: var(--pr-color-primary-hover);
+  border-color: var(--pr-color-primary-hover);
+}
+
+:where(button[type='submit'], input[type='submit']):active:not(:disabled) {
+  background-color: var(--pr-color-primary-pressed);
+  border-color: var(--pr-color-primary-pressed);
 }
 
 :where(input, select, textarea):hover:not(:disabled, [readonly]) {
@@ -596,7 +600,7 @@ button:hover {
 
 /* Focus on a field is where the typing goes: the ring, always, even from a pointer. */
 :where(input, select, textarea):focus {
-  outline: var(--pr-focus-width) solid var(--pr-color-primary);
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
   outline-offset: var(--pr-focus-offset);
 }
 

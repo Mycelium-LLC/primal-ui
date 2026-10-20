@@ -116,7 +116,7 @@
 }
 
 .pr-nav a:hover {
-  color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
 }
 
 /* A page still to be built steps back: muted, with the release that builds it. */
@@ -131,7 +131,7 @@
 
 /* The current place: the primary, because the primary means where something is happening. */
 .pr-nav a.pr-current {
-  color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
   font-weight: var(--pr-weight-strong);
 }
 

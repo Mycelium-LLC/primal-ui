@@ -3,7 +3,8 @@
  *
  * Re-theme Primal by overriding these custom properties in your own file, loaded after this one.
  * For colour, override only the choices: --pr-black, --pr-white, --pr-primary and the two
- * harmony angles. Every colour role is derived from them.
+ * harmony angles. Every colour role, the primary's states and its 50–950 scale derive from them.
+ * Primal's own choices are Mycelium's: Magma #E61924 on ink #0B0B0D and white #FFFFFF.
  *
  * Light and dark follow the system; data-theme="light" or "dark" forces one on any element.
  */
@@ -11,14 +12,14 @@
 :root {
   color-scheme: light dark;
 
-  /* The project's black: text in light, the page in dark. Need not be #000. */
-  --pr-black: oklch(22% 0.01 255);
+  /* The project's black: text in light, the page in dark. Need not be #000. Primal's is Mycelium ink, #0B0B0D. */
+  --pr-black: oklch(15.05% 0.0042 285.88);
 
-  /* The project's white: the page in light, text in dark. Need not be #fff. */
-  --pr-white: oklch(99.5% 0 0);
+  /* The project's white: the page in light, text in dark. Need not be #fff. Primal's is white, #FFFFFF. */
+  --pr-white: oklch(100% 0 0);
 
-  /* The project's one theme colour. Roles derive from it, adjusted for contrast. */
-  --pr-primary: oklch(50% 0.17 255);
+  /* The project's one theme colour. Every primary role, state and step derives from it. Primal's is Mycelium Magma, #E61924. */
+  --pr-primary: oklch(58.89% 0.23 26.6);
 
   /* How far round the wheel the companion sits from the primary (Complementary by default). */
   --pr-companion-angle: 180;
@@ -169,7 +170,7 @@
 }
 
 /*
- * The colour roles, derived from the choices above. Declared again on [data-palette], so a region
+ * The colour roles and the primary's scale, derived from the choices above. Declared again on [data-palette], so a region
  * that sets its own --pr-black, --pr-white or --pr-primary gets its own derived roles.
  */
 :root,
@@ -181,25 +182,40 @@
   --pr-color-text: light-dark(var(--pr-black), var(--pr-white));
 
   /* Text that supports other text: descriptions, captions, metadata. */
-  --pr-color-text-muted: color-mix(in oklch, var(--pr-color-text) 62%, var(--pr-color-surface));
+  --pr-color-text-muted: color-mix(in oklab, var(--pr-color-text) 62%, var(--pr-color-surface));
 
   /* Something on top of the page: a menu, a popover, a dialog. */
-  --pr-color-surface-raised: light-dark(var(--pr-white), color-mix(in oklch, var(--pr-white) 7%, var(--pr-black)));
+  --pr-color-surface-raised: light-dark(var(--pr-white), color-mix(in oklab, var(--pr-white) 7%, var(--pr-black)));
 
   /* A well in the page holding content of another kind: code, a table header. */
   --pr-color-surface-sunken: oklch(from var(--pr-color-surface) calc(l - 0.035) c h);
 
   /* A line that separates: a divider, a table rule. Decoration, so faint. */
-  --pr-color-border: color-mix(in oklch, var(--pr-color-text) 13%, var(--pr-color-surface));
+  --pr-color-border: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
 
   /* The edge of something you operate: a field, a checkbox. Meets 3:1. */
-  --pr-color-border-control: color-mix(in oklch, var(--pr-color-text) 50%, var(--pr-color-surface));
+  --pr-color-border-control: color-mix(in oklab, var(--pr-color-text) 50%, var(--pr-color-surface));
 
-  /* Where something happens: the primary action, links, the current place, focus. The primary, darkened or lightened until it reads. */
-  --pr-color-primary: light-dark(oklch(from var(--pr-primary) min(l, 0.5) c h), oklch(from var(--pr-primary) max(l, 0.76) min(c, 0.15) h));
+  /* Where something happens: the primary action's fill, a checked control, an accent. The primary as chosen, darkened (light) or lightened (dark) only if white or black text on it would not read. */
+  --pr-color-primary: light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))));
 
-  /* Text and icons on a primary fill: black or white, whichever reads. */
-  --pr-color-on-primary: oklch(from var(--pr-color-primary) clamp(0, (0.64 - l) * 1000, 1) 0 0);
+  /* The primary as text: links, the current place, a primary label. A shade further than the fill when needed, so it reads on every surface. */
+  --pr-color-primary-text: light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))));
+
+  /* A primary fill under the pointer: a step towards the text colour. */
+  --pr-color-primary-hover: light-dark(oklch(from var(--pr-color-primary) calc(l - 0.0375) calc(c * 0.94) h), oklch(from var(--pr-color-primary) calc(l + 0.0375) calc(c * 0.94) h));
+
+  /* A primary fill being pressed: two steps towards the text colour. */
+  --pr-color-primary-pressed: light-dark(oklch(from var(--pr-color-primary) calc(l - 0.075) calc(c * 0.875) h), oklch(from var(--pr-color-primary) calc(l + 0.075) calc(c * 0.875) h));
+
+  /* Text and icons on a primary fill in any state: white in light, black in dark, because the primary is kept dark enough or light enough for it. */
+  --pr-color-on-primary: light-dark(oklch(1 0 0), oklch(0 0 0));
+
+  /* The focus ring: where the keyboard is. The primary, so it is never mistaken for an error or a divider. */
+  --pr-color-focus: var(--pr-color-primary);
+
+  /* The primary at a whisper: behind the current item, a chosen option, a note that belongs to the primary. */
+  --pr-color-primary-surface: color-mix(in oklab, var(--pr-color-primary) 12%, var(--pr-color-surface));
 
   /* Goes with the primary: a second emphasis, a highlight, a second series. Never an action. */
   --pr-color-companion: oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle)));
@@ -208,7 +224,7 @@
   --pr-color-tertiary: oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle)));
 
   /* Text the person has selected. */
-  --pr-color-selection: color-mix(in oklch, var(--pr-color-primary) 28%, var(--pr-color-surface));
+  --pr-color-selection: color-mix(in oklab, var(--pr-color-primary) 28%, var(--pr-color-surface));
 
   /* Covers the page behind something that interrupts. */
   --pr-color-backdrop: oklch(from var(--pr-black) l c h / 0.55);
@@ -217,25 +233,58 @@
   --pr-color-danger: light-dark(oklch(52% 0.19 27), oklch(74% 0.14 27));
 
   /* The quiet background behind a danger message. */
-  --pr-color-danger-surface: color-mix(in oklch, var(--pr-color-danger) 12%, var(--pr-color-surface));
+  --pr-color-danger-surface: color-mix(in oklab, var(--pr-color-danger) 12%, var(--pr-color-surface));
 
   /* Needs attention soon; nothing has failed. */
   --pr-color-warning: light-dark(oklch(50% 0.11 65), oklch(80% 0.12 80));
 
   /* The quiet background behind a warning message. */
-  --pr-color-warning-surface: color-mix(in oklch, var(--pr-color-warning) 12%, var(--pr-color-surface));
+  --pr-color-warning-surface: color-mix(in oklab, var(--pr-color-warning) 12%, var(--pr-color-surface));
 
   /* Worth knowing; nothing to do. */
   --pr-color-info: light-dark(oklch(50% 0.13 235), oklch(76% 0.11 235));
 
   /* The quiet background behind an info message. */
-  --pr-color-info-surface: color-mix(in oklch, var(--pr-color-info) 12%, var(--pr-color-surface));
+  --pr-color-info-surface: color-mix(in oklab, var(--pr-color-info) 12%, var(--pr-color-surface));
 
   /* Done, resolved, safe. */
   --pr-color-success: light-dark(oklch(48% 0.12 150), oklch(76% 0.13 150));
 
   /* The quiet background behind a success message. */
-  --pr-color-success-surface: color-mix(in oklch, var(--pr-color-success) 12%, var(--pr-color-surface));
+  --pr-color-success-surface: color-mix(in oklab, var(--pr-color-success) 12%, var(--pr-color-surface));
+
+  /* Step 50: 8% primary, the rest the project's white. */
+  --pr-primary-50: color-mix(in oklab, var(--pr-primary) 8%, var(--pr-white));
+
+  /* Step 100: 16% primary, the rest the project's white. */
+  --pr-primary-100: color-mix(in oklab, var(--pr-primary) 16%, var(--pr-white));
+
+  /* Step 200: 32% primary, the rest the project's white. */
+  --pr-primary-200: color-mix(in oklab, var(--pr-primary) 32%, var(--pr-white));
+
+  /* Step 300: 52% primary, the rest the project's white. */
+  --pr-primary-300: color-mix(in oklab, var(--pr-primary) 52%, var(--pr-white));
+
+  /* Step 400: 76% primary, the rest the project's white. */
+  --pr-primary-400: color-mix(in oklab, var(--pr-primary) 76%, var(--pr-white));
+
+  /* Step 500: the primary as chosen. */
+  --pr-primary-500: var(--pr-primary);
+
+  /* Step 600: 82% primary, the rest the project's black. */
+  --pr-primary-600: color-mix(in oklab, var(--pr-primary) 82%, var(--pr-black));
+
+  /* Step 700: 64% primary, the rest the project's black. */
+  --pr-primary-700: color-mix(in oklab, var(--pr-primary) 64%, var(--pr-black));
+
+  /* Step 800: 48% primary, the rest the project's black. */
+  --pr-primary-800: color-mix(in oklab, var(--pr-primary) 48%, var(--pr-black));
+
+  /* Step 900: 32% primary, the rest the project's black. */
+  --pr-primary-900: color-mix(in oklab, var(--pr-primary) 32%, var(--pr-black));
+
+  /* Step 950: 20% primary, the rest the project's black. */
+  --pr-primary-950: color-mix(in oklab, var(--pr-primary) 20%, var(--pr-black));
 }
 
 [data-theme='light'] {

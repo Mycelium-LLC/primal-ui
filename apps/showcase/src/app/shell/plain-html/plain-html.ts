@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
     summary {
       cursor: pointer;
-      color: var(--pr-color-primary);
+      color: var(--pr-color-primary-text);
       margin-block-end: var(--pr-gap-component);
     }
   `,

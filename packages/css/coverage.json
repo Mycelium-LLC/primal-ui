@@ -230,7 +230,7 @@
       "group": "Text-level",
       "outcome": "styled",
       "where": "0.1.0",
-      "reason": "The primary colour and an underline; 0.4.0 adds the Link primitive (external and download)."
+      "reason": "The primary colour and an underline; 0.5.0 adds the Link primitive (external and download)."
     },
     {
       "element": "em",
@@ -629,7 +629,7 @@
       "group": "Forms",
       "outcome": "styled",
       "where": "0.1.0",
-      "reason": "Edge, size and colour from tokens; a submit button wears the primary. 0.4.0 builds the action primitives on it."
+      "reason": "Edge, size and colour from tokens; a submit button wears the primary. 0.5.0 builds the action primitives on it."
     },
     {
       "element": "select",
@@ -719,21 +719,21 @@
       "element": "details",
       "group": "Interactive",
       "outcome": "enhanced",
-      "where": "0.5.0",
+      "where": "0.6.0",
       "reason": "Disclosure and Accordion."
     },
     {
       "element": "summary",
       "group": "Interactive",
       "outcome": "enhanced",
-      "where": "0.5.0",
+      "where": "0.6.0",
       "reason": "Disclosure and Accordion."
     },
     {
       "element": "dialog",
       "group": "Interactive",
       "outcome": "enhanced",
-      "where": "0.5.0",
+      "where": "0.6.0",
       "reason": "Dialog and confirmation dialog, keeping the native top layer, focus and Escape."
     },
     {
