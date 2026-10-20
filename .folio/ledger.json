@@ -93,7 +93,7 @@
     {
       "n": 14,
       "decision": "Theme modes",
-      "ruling": "Colour scheme (light, dark) and contrast (standard, more) are independent, so high contrast exists in both light and dark; each follows the system and can be forced per page or region. Decided by Claude under decision 12."
+      "ruling": "Superseded by decision 17. (Was: colour scheme and contrast are independent modes.)"
     },
     {
       "n": 15,
@@ -104,6 +104,11 @@
       "n": 16,
       "decision": "One base, no second theme",
       "ruling": "Primal is built and shown as a single base, exactly what people get when they import it. No demo or alternative theme ships or appears in the showcase; light, dark, contrast and density are modes of the one base. That a project can re-theme from tokens alone is proven by the token check, not by a second theme (Niko, 2026-10-20: 'why we have 2 themes? we build and work on single base no theme. as people would see when importing the lib')."
+    },
+    {
+      "n": 17,
+      "decision": "One solution",
+      "ruling": "Primal designs for one solution only: no contrast mode and no density mode. The base has light and dark values and both text directions, nothing else (Niko, 2026-10-20: 'remove contrast and density. we design for one solution only'). Decision 14 is superseded."
     }
   ],
   "releases": [
@@ -121,7 +126,7 @@
       "status": "Approved to start by Niko 2026-10-20.",
       "dependsOn": [],
       "goal": "Primal exists as a neutral foundation whose whole look is set by tokens, so it works as it is and any future Mycelium design system starts from it.",
-      "usersSee": "A live showcase of the single base Primal ships (exactly what a project gets when it imports it), with every token's name and meaning, and switches for theme (light, dark), contrast, density and text direction.",
+      "usersSee": "A live showcase of the single base Primal ships (exactly what a project gets when it imports it), with every token's name and meaning, in light and dark, and switches for the colour scheme and text direction.",
       "size": "L",
       "items": [
         {
@@ -131,10 +136,10 @@
           "text": "Repository layout: an Angular CLI workspace. packages/tokens (framework-independent tokens as CSS custom properties, later also JSON), packages/css (reset, base typography and layout in plain CSS), packages/angular (the first adapter, Angular 22+, standalone and zoneless, signals-first), apps/showcase (the live showcase, Angular). CI builds both and checks this ledger."
         },
         {
-          "text": "Semantic tokens: colour roles, type scale (fluid), the three gaps plus a dense mode, radius, borders, elevation levels with written meanings, layers, motion durations and easing, density."
+          "text": "Semantic tokens: colour roles, type scale (fluid), the three gaps, radius, borders, elevation levels with written meanings, layers, motion durations and easing."
         },
         {
-          "text": "Modes of the one base: light and dark, standard and more contrast, comfortable and dense, each following the system and forceable per page or region. No second theme ships or shows (decision 16)."
+          "text": "Light and dark: the one base with a value for each colour role in both, following the system and forceable per page or region (decision 17)."
         },
         {
           "text": "Modern reset and base typography; logical properties throughout; reduced motion honoured."
@@ -143,7 +148,7 @@
           "text": "Token check in CI: no component or core style uses a literal colour, length or duration outside the token definitions, so overriding tokens re-themes everything."
         },
         {
-          "text": "Contrast check in CI: every text and control pair in every shipped theme against WCAG 2.2 AA."
+          "text": "Contrast check in CI: every text and control pair, in light and dark, against WCAG 2.2 AA."
         },
         {
           "text": "Showcase deployed (hosting to be confirmed by Niko); it states the version it shows."
@@ -153,7 +158,7 @@
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
-      "doneWhen": "The showcase, opened by Niko, shows every token in light and dark, both contrasts, both densities and both directions; the contrast and token checks pass in CI; the QA table is ✓ by eye; Niko's review of the release is done.",
+      "doneWhen": "The showcase, opened by Niko, shows every token in light and dark and both directions; the contrast and token checks pass in CI; the QA table is ✓ by eye; Niko's review of the release is done.",
       "mutations": [
         {
           "op": "add",
@@ -179,8 +184,8 @@
           "kind": "requirement",
           "address": "primal/tokens/spacing-is-three-gaps-that-clearly-contrast-between-sections",
           "requirementKind": "invariant",
-          "statement": "Spacing is three gaps that clearly contrast (between sections, between elements of a group, inside a component), with a denser two-gap mode for screens people live in all day.",
-          "success": "Every gap in every component maps to one of the three gap tokens or the dense pair, and the three are visibly different at a glance.",
+          "statement": "Spacing is three gaps that clearly contrast: between sections, between elements of a group, and inside a component.",
+          "success": "Every gap in every component maps to one of the three gap tokens, and the three are visibly different at a glance.",
           "disqualifier": "A gap is chosen by eye, or two of the three gaps read as the same size.",
           "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.3"
         },
@@ -229,11 +234,11 @@
         {
           "op": "add",
           "kind": "requirement",
-          "address": "primal/themes/light-dark-and-high-contrast-themes-ship-follow-the-system",
+          "address": "primal/themes/light-and-dark-ship-as-values-of-the-one-base-follow-the",
           "requirementKind": "invariant",
-          "statement": "Light, dark and high-contrast themes ship, follow the system preference by default, and can be forced for a page or a region of it.",
-          "success": "With the system preference set to each mode, the matching theme shows; a forced region keeps its theme inside a page in another.",
-          "disqualifier": "A theme ignores the system preference, or forcing a region changes the whole page.",
+          "statement": "Light and dark ship as values of the one base, follow the system preference by default, and can be forced for a page or a region of it.",
+          "success": "With the system preference set to each, the matching scheme shows; a forced region keeps its scheme inside a page in the other.",
+          "disqualifier": "The scheme ignores the system preference, or forcing a region changes the whole page.",
           "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
         },
         {
@@ -278,10 +283,10 @@
         {
           "op": "add",
           "kind": "requirement",
-          "address": "primal/direction-and-motion/all-text-and-controls-meet-wcag-2-2-aa-contrast-in-every",
+          "address": "primal/direction-and-motion/all-text-and-controls-meet-wcag-2-2-aa-contrast-in-light",
           "requirementKind": "invariant",
-          "statement": "All text and controls meet WCAG 2.2 AA contrast in every shipped theme, checked automatically.",
-          "success": "The contrast check covers every foreground and background pair in every theme and fails the build on any miss.",
+          "statement": "All text and controls meet WCAG 2.2 AA contrast in light and in dark, checked automatically.",
+          "success": "The contrast check covers every foreground and background pair in light and dark and fails the build on any miss.",
           "disqualifier": "A pair below AA ships, or the check is run by hand only.",
           "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
         },
@@ -319,7 +324,7 @@
           "address": "primal/showcase/a-person-opens-the-live-showcase-sees-every-foundation-token",
           "requirementKind": "user",
           "statement": "A person opens the live showcase, sees every foundation token and theme, and switches theme and text direction in place.",
-          "success": "From the showcase, every token is visible with its name and meaning, and switching theme, contrast, density or direction changes the whole page at once without a reload.",
+          "success": "From the showcase, every token is visible with its name and meaning, and switching the colour scheme or direction changes the whole page at once without a reload.",
           "disqualifier": "A token is missing, a switch needs a reload, or the showcase shows anything not built.",
           "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)",
           "role": "a designer or developer at Mycelium",

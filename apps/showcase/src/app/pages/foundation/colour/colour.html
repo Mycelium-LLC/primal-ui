@@ -4,13 +4,12 @@
   "something happens here". The other roles are quiet, so that whatever needs attention can lead.
 </p>
 <p>
-  Each role has a value for light and dark, and stronger values for more contrast. Every text and control pair is checked
-  against WCAG 2.2 AA on every build.
+  Each role has a value for light and dark. Every text and control pair is checked against WCAG 2.2 AA on every build.
 </p>
 
 <div class="pr-table-scroll">
   <table class="pr-colours">
-    <caption>Colour roles in every mode</caption>
+    <caption>Colour roles in light and dark</caption>
     <thead>
       <tr>
         <th scope="col">Role</th>
@@ -29,7 +28,6 @@
               <span
                 class="pr-swatch"
                 [attr.data-theme]="mode.theme"
-                [attr.data-contrast]="mode.contrast"
                 [style.background-color]="'var(' + c.name + ')'"
                 role="img"
                 [attr.aria-label]="c.name + ' in ' + mode.label"
@@ -44,10 +42,10 @@
 </div>
 
 <h2>In use</h2>
-<p>The same few elements in each mode, so you can see how the roles work together.</p>
+<p>The same few elements in light and dark, so you can see how the roles work together.</p>
 <div class="pr-in-use">
   @for (mode of modes; track mode.label) {
-    <section class="pr-region" [attr.data-theme]="mode.theme" [attr.data-contrast]="mode.contrast" [attr.aria-label]="mode.label">
+    <section class="pr-region" [attr.data-theme]="mode.theme" [attr.aria-label]="mode.label">
       <h3>{{ mode.label }}</h3>
       <p>Body text with <a href="#">a link</a>.</p>
       <p class="pr-muted">Muted text: a caption or description.</p>

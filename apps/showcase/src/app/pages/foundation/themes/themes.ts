@@ -7,12 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoundationThemesPage {
-  protected readonly regions = [
-    { label: 'Dark', attrs: { theme: 'dark', contrast: null, density: null } },
-    { label: 'More contrast', attrs: { theme: null, contrast: 'more', density: null } },
-    { label: 'Dense', attrs: { theme: null, contrast: null, density: 'dense' } },
-  ];
-
   protected readonly example = `/* my-product-theme.css, loaded after primal-tokens.css */
 :root {
   --pr-color-accent: light-dark(oklch(45% 0.1 160), oklch(76% 0.11 160));

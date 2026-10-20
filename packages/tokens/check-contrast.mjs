@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Check every foreground and background pair Primal names, in every mode
- * (light, dark, light with more contrast, dark with more contrast), against WCAG 2.2 AA:
+ * (light and dark), against WCAG 2.2 AA:
  * 4.5:1 for text (1.4.3) and 3:1 for interface edges (1.4.11). Exit 1 on any miss.
  *
  *   node packages/tokens/check-contrast.mjs
@@ -10,7 +10,7 @@
 import { colour } from './src/tokens.mjs';
 
 const NEED = { text: 4.5, ui: 3 };
-const MODES = ['light', 'dark', 'lightMore', 'darkMore'];
+const MODES = ['light', 'dark'];
 
 /** OKLCH → relative luminance (via OKLab → linear sRGB, clipped to gamut). */
 function luminance([L, C, h]) {
@@ -31,8 +31,7 @@ const ratio = (x, y) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
-/** A mode's value: the "more" modes fall back to the standard value where none is given. */
-const at = (token, mode) => token[mode] ?? token[mode.replace('More', '')];
+const at = (token, mode) => token[mode];
 
 const misses = [];
 let checked = 0;

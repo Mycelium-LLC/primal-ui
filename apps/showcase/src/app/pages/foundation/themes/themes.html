@@ -5,37 +5,21 @@
   its own, and no component changes.
 </p>
 
-<h2>The modes</h2>
-<dl>
-  <dt>Theme: light or dark</dt>
-  <dd>Follows the system, or is forced with <code>data-theme</code>.</dd>
-  <dt>Contrast: standard or more</dt>
-  <dd>Independent of the theme, so more contrast works in light and in dark. Follows the system, or is forced with <code>data-contrast</code>.</dd>
-  <dt>Density: comfortable or dense</dt>
-  <dd>The three gaps tighten, set with <code>data-density</code>.</dd>
-</dl>
-<p>Each mode can be set on the whole page or on one region of it, as in the regions below.</p>
-
-<h2>Regions</h2>
-<div class="pr-regions">
-  @for (r of regions; track r.label) {
-    <section
-      class="pr-region"
-      [attr.data-theme]="r.attrs.theme"
-      [attr.data-contrast]="r.attrs.contrast"
-      [attr.data-density]="r.attrs.density"
-      [attr.aria-label]="r.label + ' region'"
-    >
-      <h3>{{ r.label }}</h3>
-      <p>Body text with <a href="#">a link</a>.</p>
-      <p class="pr-muted">A description in muted text.</p>
-      <p class="pr-controls">
-        <label>Email <input type="email" /></label>
-        <button type="button">Save Changes</button>
-      </p>
-    </section>
-  }
-</div>
+<h2>Light and dark</h2>
+<p>
+  Light and dark are the same base, with each colour role given a value for both. The base follows the system, and the Theme
+  switch in the header forces one. <code>data-theme="light"</code> or <code>"dark"</code> also forces one on any element, so a
+  single region can differ from the page:
+</p>
+<section class="pr-region" data-theme="dark" aria-label="Dark region">
+  <h3>A dark region</h3>
+  <p>Body text with <a href="#">a link</a>.</p>
+  <p class="pr-muted">A description in muted text.</p>
+  <p class="pr-controls">
+    <label>Email <input type="email" /></label>
+    <button type="button">Save Changes</button>
+  </p>
+</section>
 
 <h2>Making a theme</h2>
 <p>Override any token in a file loaded after Primal's. Colours take a light and a dark value.</p>

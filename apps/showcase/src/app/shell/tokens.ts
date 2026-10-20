@@ -8,9 +8,6 @@ export interface Token {
   meaning: string;
   light?: string;
   dark?: string;
-  lightMore?: string;
-  darkMore?: string;
-  dense?: string;
   px?: number[];
 }
 

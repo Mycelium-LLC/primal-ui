@@ -3,10 +3,7 @@
  *
  * Re-theme Primal by overriding these custom properties in your own file, loaded after this one.
  *
- * Modes, each following the system and forceable on any element (the page or one region):
- *   data-theme="light" | "dark"           colour scheme
- *   data-contrast="more" | "standard"     contrast
- *   data-density="dense" | "comfortable"  the three gaps tighten
+ * Light and dark follow the system; data-theme="light" or "dark" forces one on any element.
  */
 
 :root {
@@ -196,64 +193,6 @@
 
 [data-theme='dark'] {
   color-scheme: dark;
-}
-
-@media (prefers-contrast: more) {
-  :root:not([data-contrast='standard']) {
-    --pr-color-text: light-dark(oklch(0% 0 0), oklch(100% 0 0));
-    --pr-color-text-muted: light-dark(oklch(22% 0.01 255), oklch(94% 0.005 255));
-    --pr-color-border: light-dark(oklch(22% 0.01 255), oklch(94% 0.005 255));
-    --pr-color-border-control: light-dark(oklch(22% 0.01 255), oklch(94% 0.005 255));
-    --pr-color-accent: light-dark(oklch(36% 0.17 255), oklch(86% 0.09 255));
-    --pr-color-on-accent: light-dark(oklch(100% 0 0), oklch(0% 0 0));
-    --pr-color-danger: light-dark(oklch(40% 0.17 27), oklch(86% 0.09 27));
-    --pr-color-warning: light-dark(oklch(38% 0.09 65), oklch(90% 0.09 85));
-    --pr-color-success: light-dark(oklch(36% 0.1 150), oklch(88% 0.1 150));
-  }
-}
-
-[data-contrast='more'] {
-  --pr-color-text: light-dark(oklch(0% 0 0), oklch(100% 0 0));
-  --pr-color-text-muted: light-dark(oklch(22% 0.01 255), oklch(94% 0.005 255));
-  --pr-color-border: light-dark(oklch(22% 0.01 255), oklch(94% 0.005 255));
-  --pr-color-border-control: light-dark(oklch(22% 0.01 255), oklch(94% 0.005 255));
-  --pr-color-accent: light-dark(oklch(36% 0.17 255), oklch(86% 0.09 255));
-  --pr-color-on-accent: light-dark(oklch(100% 0 0), oklch(0% 0 0));
-  --pr-color-danger: light-dark(oklch(40% 0.17 27), oklch(86% 0.09 27));
-  --pr-color-warning: light-dark(oklch(38% 0.09 65), oklch(90% 0.09 85));
-  --pr-color-success: light-dark(oklch(36% 0.1 150), oklch(88% 0.1 150));
-}
-
-[data-contrast='standard'] {
-  --pr-color-text: light-dark(oklch(22% 0.01 255), oklch(94% 0.005 255));
-  --pr-color-text-muted: light-dark(oklch(46% 0.01 255), oklch(74% 0.008 255));
-  --pr-color-border: light-dark(oklch(89% 0.004 255), oklch(30% 0.006 255));
-  --pr-color-border-control: light-dark(oklch(60% 0.01 255), oklch(56% 0.01 255));
-  --pr-color-accent: light-dark(oklch(50% 0.17 255), oklch(74% 0.12 255));
-  --pr-color-on-accent: light-dark(oklch(100% 0 0), oklch(17% 0.005 255));
-  --pr-color-danger: light-dark(oklch(52% 0.19 27), oklch(74% 0.14 27));
-  --pr-color-warning: light-dark(oklch(50% 0.11 65), oklch(80% 0.12 80));
-  --pr-color-success: light-dark(oklch(48% 0.12 150), oklch(76% 0.13 150));
-}
-
-[data-density='dense'] {
-  --pr-gap-component: 0.25rem;
-  --pr-gap-group: 0.5rem;
-  --pr-gap-section: 1.5rem;
-  --pr-gutter: clamp(0.75rem, 0.5rem + 1.25vw, 1.25rem);
-  --pr-control-height: 2rem;
-  --pr-control-inset: 0.5rem;
-  --pr-target-min: 1.5rem;
-}
-
-[data-density='comfortable'] {
-  --pr-gap-component: 0.5rem;
-  --pr-gap-group: 1rem;
-  --pr-gap-section: clamp(2rem, 1.6rem + 2vw, 3rem);
-  --pr-gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
-  --pr-control-height: 2.5rem;
-  --pr-control-inset: 0.75rem;
-  --pr-target-min: 1.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

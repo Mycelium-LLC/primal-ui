@@ -7,7 +7,7 @@
  * editing components.
  *
  * Colours are written in OKLCH: [lightness 0–1, chroma, hue]. Each colour token has a
- * light and a dark value, and a value for more contrast in each.
+ * light and a dark value.
  */
 
 export const PREFIX = 'pr';
@@ -39,55 +39,41 @@ export const colour = {
     meaning: 'Text and icons that carry content.',
     light: [0.22, 0.01, HUE],
     dark: [0.94, 0.005, HUE],
-    lightMore: [0, 0, 0],
-    darkMore: [1, 0, 0],
     pairs: { surface: 'text', 'surface-raised': 'text', 'surface-sunken': 'text' },
   },
   'text-muted': {
     meaning: 'Text that supports other text: descriptions, captions, metadata. Steps back, still readable.',
     light: [0.46, 0.01, HUE],
     dark: [0.74, 0.008, HUE],
-    lightMore: [0.22, 0.01, HUE],
-    darkMore: [0.94, 0.005, HUE],
     pairs: { surface: 'text', 'surface-raised': 'text', 'surface-sunken': 'text' },
   },
   border: {
     meaning: 'A line that separates: a divider, a table rule. Decorative, so it stays faint.',
     light: [0.89, 0.004, HUE],
     dark: [0.3, 0.006, HUE],
-    lightMore: [0.22, 0.01, HUE],
-    darkMore: [0.94, 0.005, HUE],
   },
   'border-control': {
     meaning: 'The edge of something you operate: a field, a checkbox. Must be seen, so it meets 3:1.',
     light: [0.6, 0.01, HUE],
     dark: [0.56, 0.01, HUE],
-    lightMore: [0.22, 0.01, HUE],
-    darkMore: [0.94, 0.005, HUE],
     pairs: { surface: 'ui', 'surface-raised': 'ui' },
   },
   accent: {
     meaning: 'Where something happens: links, the primary action, the current place, focus.',
     light: [0.5, 0.17, HUE],
     dark: [0.74, 0.12, HUE],
-    lightMore: [0.36, 0.17, HUE],
-    darkMore: [0.86, 0.09, HUE],
     pairs: { surface: 'text', 'surface-raised': 'text', 'surface-sunken': 'text' },
   },
   'on-accent': {
     meaning: 'Text and icons on an accent fill.',
     light: [1, 0, 0],
     dark: [0.17, 0.005, HUE],
-    lightMore: [1, 0, 0],
-    darkMore: [0, 0, 0],
     pairs: { accent: 'text' },
   },
   danger: {
     meaning: 'Something failed, or an action cannot be undone.',
     light: [0.52, 0.19, 27],
     dark: [0.74, 0.14, 27],
-    lightMore: [0.4, 0.17, 27],
-    darkMore: [0.86, 0.09, 27],
     pairs: { surface: 'text', 'surface-raised': 'text', 'danger-surface': 'text' },
   },
   'danger-surface': {
@@ -99,8 +85,6 @@ export const colour = {
     meaning: 'Something needs attention soon, but nothing has failed.',
     light: [0.5, 0.11, 65],
     dark: [0.8, 0.12, 80],
-    lightMore: [0.38, 0.09, 65],
-    darkMore: [0.9, 0.09, 85],
     pairs: { surface: 'text', 'surface-raised': 'text', 'warning-surface': 'text' },
   },
   'warning-surface': {
@@ -112,8 +96,6 @@ export const colour = {
     meaning: 'Done, resolved, safe.',
     light: [0.48, 0.12, 150],
     dark: [0.76, 0.13, 150],
-    lightMore: [0.36, 0.1, 150],
-    darkMore: [0.88, 0.1, 150],
     pairs: { surface: 'text', 'surface-raised': 'text', 'success-surface': 'text' },
   },
   'success-surface': {
@@ -168,16 +150,16 @@ export const type = {
 
 /**
  * The three gaps (Niko's book: large between sections, medium between elements of a group,
- * small inside a component) and the dense mode, where they tighten.
+ * small inside a component).
  */
 export const space = {
-  'gap-component': { meaning: 'Inside a component: icon to label, label to field.', comfortable: '0.5rem', dense: '0.25rem' },
-  'gap-group': { meaning: 'Between the elements of one group: fields in a form, items in a list.', comfortable: '1rem', dense: '0.5rem' },
-  'gap-section': { meaning: 'Between sections. Clearly larger than a group gap, so grouping reads.', comfortable: 'clamp(2rem, 1.6rem + 2vw, 3rem)', dense: '1.5rem' },
-  gutter: { meaning: 'The space between the viewport edge and content.', comfortable: 'clamp(1rem, 0.6rem + 2vw, 2rem)', dense: 'clamp(0.75rem, 0.5rem + 1.25vw, 1.25rem)' },
-  'control-height': { meaning: 'The height of a single-line control.', comfortable: '2.5rem', dense: '2rem' },
-  'control-inset': { meaning: 'Horizontal padding inside a control.', comfortable: '0.75rem', dense: '0.5rem' },
-  'target-min': { meaning: 'The smallest pointer target (WCAG 2.2 AA asks 24px).', comfortable: '1.5rem', dense: '1.5rem' },
+  'gap-component': { meaning: 'Inside a component: icon to label, label to field.', value: '0.5rem' },
+  'gap-group': { meaning: 'Between the elements of one group: fields in a form, items in a list.', value: '1rem' },
+  'gap-section': { meaning: 'Between sections. Clearly larger than a group gap, so grouping reads.', value: 'clamp(2rem, 1.6rem + 2vw, 3rem)' },
+  gutter: { meaning: 'The space between the viewport edge and content.', value: 'clamp(1rem, 0.6rem + 2vw, 2rem)' },
+  'control-height': { meaning: 'The height of a single-line control.', value: '2.5rem' },
+  'control-inset': { meaning: 'Horizontal padding inside a control.', value: '0.75rem' },
+  'target-min': { meaning: 'The smallest pointer target (WCAG 2.2 AA asks 24px).', value: '1.5rem' },
 };
 
 export const layout = {

@@ -19,7 +19,7 @@ import { Token } from '../tokens';
           @for (token of tokens(); track token.name) {
             <tr>
               <th scope="row"><code>{{ token.name }}</code></th>
-              <td><code>{{ token.value }}</code>@if (token.dense) {<br /><small>dense: <code>{{ token.dense }}</code></small>}</td>
+              <td><code>{{ token.value }}</code></td>
               <td>{{ token.meaning }}</td>
             </tr>
           }

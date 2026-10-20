@@ -8,21 +8,6 @@
     </select>
   </label>
   <label>
-    <span>Contrast</span>
-    <select [value]="prefs.contrast()" (change)="setContrast($any($event.target).value)">
-      <option value="system">System</option>
-      <option value="standard">Standard</option>
-      <option value="more">More</option>
-    </select>
-  </label>
-  <label>
-    <span>Density</span>
-    <select [value]="prefs.density()" (change)="setDensity($any($event.target).value)">
-      <option value="comfortable">Comfortable</option>
-      <option value="dense">Dense</option>
-    </select>
-  </label>
-  <label>
     <span>Direction</span>
     <select [value]="prefs.direction()" (change)="setDirection($any($event.target).value)">
       <option value="ltr">Left to right</option>

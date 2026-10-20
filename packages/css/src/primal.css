@@ -69,8 +69,7 @@ h6 {
 /* ---------------------------------------------------------------- the page */
 
 :root,
-[data-theme],
-[data-contrast] {
+[data-theme] {
   background-color: var(--pr-color-surface);
   color: var(--pr-color-text);
 }

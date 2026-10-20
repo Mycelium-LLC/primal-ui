@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Emit Primal's tokens from src/tokens.mjs:
- *   primal-tokens.css   CSS custom properties, themes, contrast, density, reduced motion
+ *   primal-tokens.css   CSS custom properties, light and dark, reduced motion
  *   primal-tokens.json  every token with its value(s) and meaning
  *
  *   node packages/tokens/build.mjs           write both files
@@ -39,7 +39,6 @@ for (const [name, c] of Object.entries(t.colour)) {
   add('colour', `color-${name}`, ld(c.light, c.dark), c.meaning, {
     light: oklch(c.light),
     dark: oklch(c.dark),
-    ...(c.lightMore && { lightMore: oklch(c.lightMore), darkMore: oklch(c.darkMore) }),
   });
 }
 for (const [name, f] of Object.entries(t.type.family)) add('type', `font-${name}`, f.value, f.meaning);
@@ -47,20 +46,13 @@ for (const [name, s] of Object.entries(t.type.size)) add('type', `text-${name}`,
 for (const [name, l] of Object.entries(t.type.leading)) add('type', `leading-${name}`, l.value, l.meaning);
 for (const [name, w] of Object.entries(t.type.weight)) add('type', `weight-${name}`, w.value, w.meaning);
 add('type', 'measure', t.type.measure.value, t.type.measure.meaning);
-for (const [name, s] of Object.entries(t.space)) add('space', name, s.comfortable, s.meaning, { dense: s.dense });
+for (const [name, s] of Object.entries(t.space)) add('space', name, s.value, s.meaning);
 for (const [name, l] of Object.entries(t.layout)) add('layout', name, l.value, l.meaning);
 for (const [name, s] of Object.entries(t.shape)) add('shape', name, s.value, s.meaning);
 for (const [name, e] of Object.entries(t.elevation)) add('elevation', `elevation-${name}`, e.value, e.meaning);
 for (const [name, l] of Object.entries(t.layer)) add('layer', `layer-${name}`, l.value, l.meaning);
 for (const [name, m] of Object.entries(t.motion)) add('motion', name, m.value, m.meaning);
 
-const more = Object.entries(t.colour)
-  .filter(([, c]) => c.lightMore)
-  .map(([name, c]) => `  ${v(`color-${name}`)}: ${ld(c.lightMore, c.darkMore)};`);
-const standard = Object.entries(t.colour)
-  .filter(([, c]) => c.lightMore)
-  .map(([name, c]) => `  ${v(`color-${name}`)}: ${ld(c.light, c.dark)};`);
-const dense = Object.entries(t.space).map(([name, s]) => `  ${v(name)}: ${s.dense};`);
 const still = Object.keys(t.motion)
   .filter((name) => name.startsWith('duration-'))
   .map((name) => `  ${v(name)}: 0ms;`);
@@ -70,10 +62,7 @@ const css = `/*
  *
  * Re-theme Primal by overriding these custom properties in your own file, loaded after this one.
  *
- * Modes, each following the system and forceable on any element (the page or one region):
- *   data-theme="light" | "dark"           colour scheme
- *   data-contrast="more" | "standard"     contrast
- *   data-density="dense" | "comfortable"  the three gaps tighten
+ * Light and dark follow the system; data-theme="light" or "dark" forces one on any element.
  */
 
 :root {
@@ -88,28 +77,6 @@ ${root.join('\n\n')}
 
 [data-theme='dark'] {
   color-scheme: dark;
-}
-
-@media (prefers-contrast: more) {
-  :root:not([data-contrast='standard']) {
-${more.map((l) => `  ${l}`).join('\n')}
-  }
-}
-
-[data-contrast='more'] {
-${more.join('\n')}
-}
-
-[data-contrast='standard'] {
-${standard.join('\n')}
-}
-
-[data-density='dense'] {
-${dense.join('\n')}
-}
-
-[data-density='comfortable'] {
-${Object.entries(t.space).map(([name, s]) => `  ${v(name)}: ${s.comfortable};`).join('\n')}
 }
 
 @media (prefers-reduced-motion: reduce) {

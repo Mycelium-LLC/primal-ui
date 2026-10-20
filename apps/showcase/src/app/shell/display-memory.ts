@@ -16,8 +16,6 @@ export class DisplayMemory {
     effect(() => {
       const saved = {
         theme: this.prefs.theme(),
-        contrast: this.prefs.contrast(),
-        density: this.prefs.density(),
         direction: this.prefs.direction(),
       };
       try {
@@ -33,8 +31,6 @@ export class DisplayMemory {
       const saved = JSON.parse(localStorage.getItem(KEY) ?? 'null');
       if (!saved) return;
       if (['system', 'light', 'dark'].includes(saved.theme)) this.prefs.theme.set(saved.theme);
-      if (['system', 'standard', 'more'].includes(saved.contrast)) this.prefs.contrast.set(saved.contrast);
-      if (['comfortable', 'dense'].includes(saved.density)) this.prefs.density.set(saved.density);
       if (['ltr', 'rtl'].includes(saved.direction)) this.prefs.direction.set(saved.direction);
     } catch {
       // Unreadable or no storage: keep the defaults.

@@ -1,13 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
-  PrimalContrast,
-  PrimalDensity,
   PrimalDirection,
   PrimalPreferences,
   PrimalTheme,
 } from 'primal-angular';
 
-/** The showcase's display switches: every mode the tokens respond to, applied to the whole page in place. */
+/** The showcase's display switches: the colour scheme and the text direction, applied to the whole page in place. */
 @Component({
   selector: 'pr-display-options',
   templateUrl: './display-options.html',
@@ -19,14 +17,6 @@ export class DisplayOptions {
 
   protected setTheme(value: string): void {
     this.prefs.theme.set(value as PrimalTheme);
-  }
-
-  protected setContrast(value: string): void {
-    this.prefs.contrast.set(value as PrimalContrast);
-  }
-
-  protected setDensity(value: string): void {
-    this.prefs.density.set(value as PrimalDensity);
   }
 
   protected setDirection(value: string): void {
