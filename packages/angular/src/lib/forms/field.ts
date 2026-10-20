@@ -20,7 +20,7 @@ import { PrimalFieldGroup } from './group';
   // One projection slot, always rendered: the control must never sit inside a branch, or Angular
   // drops it when the branch changes. Choices are laid out by .pr-choice's grid instead.
   template: `
-    <label [attr.for]="control()?.id()">{{ label() }}@if (showOptional()) {&#32;<span class="pr-optional">Optional</span>}</label>
+    <label [id]="labelId" [attr.for]="control()?.id()">{{ label() }}@if (showOptional()) {&#32;<span class="pr-optional">Optional</span>}</label>
     @if (description()) {
       <p class="pr-field-description" [id]="descriptionId">{{ description() }}</p>
     }
@@ -46,6 +46,7 @@ export class PrimalField {
   private readonly key = `pr-field-${++PrimalField.next}`;
   protected readonly descriptionId = `${this.key}-description`;
   protected readonly messageId = `${this.key}-message`;
+  protected readonly labelId = `${this.key}-label`;
 
   protected readonly choice = computed(() => !!this.control()?.isChoice);
   /** A radio inside a group: the group asks the question and owns the message. */
@@ -71,6 +72,7 @@ export class PrimalField {
       const c = this.control();
       if (!c) return;
       c.label.set(this.label());
+      c.labelId.set(this.labelId);
       const ids = [this.description() ? this.descriptionId : '', this.inGroupRadio() ? '' : this.messageId].filter(Boolean);
       c.describedByIds.set(ids);
     });
