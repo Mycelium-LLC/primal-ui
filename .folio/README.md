@@ -15,7 +15,7 @@ Addresses are `primal/<feature>/<requirement>`. Statements never name a screen, 
 | Release | Name | State (2026-10-20) |
 |---|---|---|
 | 0.0.0 | The seed (the baseline) | main @ ab3d82fe, README only |
-| 0.1.0 | A base you can make your own (tokens, themes, both directions, the showcase) | draft |
+| 0.1.0 | A base you can make your own (the shell with every page, tokens, themes, both directions) | approved 2026-10-20, in progress |
 | 0.2.0 | Plain HTML reads right (every native element accounted for) | draft |
 | 0.3.0 | Fields that never leave you guessing (forms) | draft |
 | 0.4.0 | Every action answers (actions, feedback, the behaviour model) | draft |
@@ -32,5 +32,5 @@ node .folio/check-ledger.mjs              # exit 1 on any problem
 node .folio/check-ledger.mjs --fold 0.1.0 # the requirements at a release
 ```
 
-This plan isn't loaded into Folio yet. Once Niko approves it, it gets loaded with HQ's `folio-prd-to-vault.mjs` and
+Niko approved the plan on 2026-10-20. It isn't loaded into Folio yet; it gets loaded with HQ's `folio-prd-to-vault.mjs` and
 `folio-ledger-to-vault.mjs`, the same scripts Fenn's `.folio/README.md` describes.

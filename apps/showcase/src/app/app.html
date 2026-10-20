@@ -1,0 +1,23 @@
+<a class="pr-skip" href="#main">Skip to Content</a>
+<header class="pr-header">
+  <a class="pr-brand" routerLink="/">Mycelium Primal</a>
+  <span class="pr-version">{{ version }}</span>
+</header>
+<div class="pr-body">
+  <nav class="pr-nav" aria-label="Showcase">
+    @for (section of nav; track section.title) {
+      <h2 class="pr-nav-section">{{ section.title }}</h2>
+      <ul>
+        @for (page of section.pages; track page.path) {
+          <li>
+            <a [routerLink]="page.path" routerLinkActive="pr-current" ariaCurrentWhenActive="page">{{ page.title }}</a>
+            <small>{{ page.release }}</small>
+          </li>
+        }
+      </ul>
+    }
+  </nav>
+  <main id="main" class="pr-main" tabindex="-1">
+    <router-outlet />
+  </main>
+</div>

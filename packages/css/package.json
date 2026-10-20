@@ -1,0 +1,8 @@
+{
+  "name": "primal-css",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mycelium Primal's reset, base typography and layout, in plain CSS. Needs primal-tokens.",
+  "style": "src/primal.css",
+  "files": ["src"]
+}

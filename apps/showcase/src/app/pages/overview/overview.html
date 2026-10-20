@@ -1,0 +1,39 @@
+<h1>Mycelium Primal</h1>
+<p>The open-source design system by Mycelium. Design from first principles.</p>
+<p>
+  You can use Primal as it is, and it's also the base every future Mycelium design system starts from, so its own look stays
+  minimal and is set through tokens. Each element is a primitive, a cell or a surface, depending on the promise it keeps.
+</p>
+<dl>
+  <dt>Primitive</dt>
+  <dd>Part of a promise that isn't a whole job yet: a label, a field, a button, a heading.</dd>
+  <dt>Cell</dt>
+  <dd>One complete, predictable job: a newsletter signup, a search with its results.</dd>
+  <dt>Surface</dt>
+  <dd>Where cells serve a journey: a sign-in page, a settings area.</dd>
+</dl>
+
+<h2>What's here</h2>
+<p>
+  Every planned page is already in the menu. A page not built yet shows the plain native HTML elements it will cover, and
+  the release that builds it replaces it.
+</p>
+<table>
+  <caption>Pages by section</caption>
+  <thead>
+    <tr>
+      <th scope="col">Section</th>
+      <th scope="col">Pages</th>
+      <th scope="col">Built in</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (section of sections; track section.title) {
+      <tr>
+        <td><a [routerLink]="section.pages[0].path">{{ section.title }}</a></td>
+        <td>{{ section.pages.length }}</td>
+        <td>{{ section.pages[0].release }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

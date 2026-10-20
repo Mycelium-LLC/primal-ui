@@ -1,0 +1,15 @@
+<pr-page-placeholder title="Form structure" release="0.3.0" covers="FieldLabel, FormField, FieldGroup, OutputValue, Progress, Meter.">
+<form (submit)="$event.preventDefault()">
+  <fieldset>
+    <legend>Fieldset and legend</legend>
+    <p><label for="a">Label (for)</label> <input id="a" name="a" type="number" value="2"> +
+       <input id="b" name="b" type="number" value="3" aria-label="Second number"> =
+       <output name="total" for="a b">5</output></p>
+  </fieldset>
+  <p><label>Progress <progress value="40" max="100">40%</progress></label></p>
+  <p><label>Indeterminate <progress></progress></label></p>
+  <p><label>Meter <meter min="0" max="100" low="30" high="80" optimum="90" value="65">65</meter></label></p>
+  <p><button type="submit">Save Changes</button> <button type="reset">Reset Form</button>
+     <input type="submit" value="Send Request"> <input type="reset" value="Clear Fields"> <input type="button" value="Run Check"></p>
+</form>
+</pr-page-placeholder>

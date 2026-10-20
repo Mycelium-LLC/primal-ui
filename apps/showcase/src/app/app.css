@@ -1,0 +1,65 @@
+/* The showcase shell, deliberately bare until 0.1.0's tokens and layout land. */
+:host {
+  display: block;
+}
+
+.pr-skip {
+  position: absolute;
+  inset-inline-start: -100vw;
+}
+
+.pr-skip:focus {
+  inset-inline-start: 1rem;
+  inset-block-start: 1rem;
+}
+
+.pr-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.pr-brand {
+  font-weight: bold;
+}
+
+.pr-body {
+  display: grid;
+  grid-template-columns: minmax(14rem, 18rem) 1fr;
+}
+
+.pr-nav {
+  padding: 0 1rem 2rem;
+}
+
+.pr-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pr-nav li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.pr-nav-section {
+  font-size: 1rem;
+  margin-block: 1.5rem 0.5rem;
+}
+
+.pr-current {
+  font-weight: bold;
+}
+
+.pr-main {
+  padding: 0 1rem 4rem;
+  min-inline-size: 0;
+}
+
+@media (width < 48rem) {
+  .pr-body {
+    grid-template-columns: 1fr;
+  }
+}

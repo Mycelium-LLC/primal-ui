@@ -20,9 +20,9 @@
     "status": "the estate's approved scheme (Meeny, 2026-09-17)"
   },
   "approval": {
-    "by": null,
-    "at": null,
-    "what": "Merging the ledger PR approves the plan as written; every release stays draft until Niko approves it to start."
+    "by": "Niko",
+    "at": "2026-10-20",
+    "what": "Niko approved the plan in session 7F on 2026-10-20 ('plan approved') and 0.1.0 to start. Every later release stays draft until he approves it to start, after his review of the release before it (decision 9)."
   },
   "decisions": [
     {
@@ -48,7 +48,7 @@
     {
       "n": 5,
       "decision": "Visibility",
-      "ruling": "The repository is private until 1.0.0, then public (Niko, 2026-10-20)."
+      "ruling": "Private until 1.0.0, then the whole repository flips to public (option A of three: not a public mirror, not public from day one). GitHub cannot make only some branches public, so everything is written from day one as if public (Niko, 2026-10-20)."
     },
     {
       "n": 6,
@@ -59,12 +59,27 @@
       "n": 7,
       "decision": "Out of v1",
       "ruling": "Rich text editors, advanced data grids, charts, drag-and-drop builders, complex calendars, maps, file managers, application dashboards (Niko's brief §8)."
+    },
+    {
+      "n": 8,
+      "decision": "Internal notes",
+      "ruling": "Decisions, session ids and notes stay in .folio/ when the repository goes public: honest, and it shows how Primal was built ('folio it is', Niko, 2026-10-20)."
+    },
+    {
+      "n": 9,
+      "decision": "Review per release",
+      "ruling": "After each release Niko reviews the newly built chapter or page by hand until it is right, before the next release starts (Niko, 2026-10-20)."
+    },
+    {
+      "n": 10,
+      "decision": "The shell first",
+      "ruling": "0.1.0 starts with the Angular workspace, the showcase shell and the infrastructure, with every planned page present from the start. A page not yet built shows the plain native HTML elements it will cover, and each release replaces its pages with the real ones (Niko, 2026-10-20)."
     }
   ],
   "releases": [
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
       "makesTrue": [],
@@ -73,14 +88,17 @@
       "version": "0.1.0",
       "name": "A base you can make your own",
       "track": "Foundation",
-      "status": "Draft; waits for Niko's approval of the plan.",
+      "status": "Approved to start by Niko 2026-10-20.",
       "dependsOn": [],
       "goal": "Primal exists as a neutral foundation whose whole look is set by tokens, so it works as it is and any future Mycelium design system starts from it.",
       "usersSee": "A live showcase of every token in the light, dark and high-contrast themes, with a theme switch, a direction switch (left-to-right and right-to-left) and a second, deliberately different demo theme made from tokens alone.",
       "size": "L",
       "items": [
         {
-          "text": "Repository layout: npm workspaces. packages/tokens (framework-independent tokens, emitted as CSS custom properties and JSON), packages/css (reset, base typography, layout primitives in plain CSS), packages/angular (the first adapter, Angular 22+, standalone and zoneless, signals-first), apps/showcase (the live showcase, Angular)."
+          "text": "The shell first (decision 10): the showcase with every planned page from the start, each unbuilt page showing the plain native HTML it will cover and the release that builds it."
+        },
+        {
+          "text": "Repository layout: an Angular CLI workspace. packages/tokens (framework-independent tokens as CSS custom properties, later also JSON), packages/css (reset, base typography and layout in plain CSS), packages/angular (the first adapter, Angular 22+, standalone and zoneless, signals-first), apps/showcase (the live showcase, Angular). CI builds both and checks this ledger."
         },
         {
           "text": "Semantic tokens: colour roles, type scale (fluid), the three gaps plus a dense mode, radius, borders, elevation levels with written meanings, layers, motion durations and easing, density."
@@ -288,7 +306,7 @@
       "version": "0.2.0",
       "name": "Plain HTML reads right",
       "track": "Native HTML",
-      "status": "Draft; waits for Niko's approval of the plan.",
+      "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
         "0.1.0"
       ],
@@ -427,7 +445,7 @@
       "version": "0.3.0",
       "name": "Fields that never leave you guessing",
       "track": "Forms",
-      "status": "Draft; waits for Niko's approval of the plan.",
+      "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
         "0.2.0"
       ],
@@ -557,7 +575,7 @@
       "version": "0.4.0",
       "name": "Every action answers",
       "track": "Actions and feedback",
-      "status": "Draft; waits for Niko's approval of the plan.",
+      "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
         "0.3.0"
       ],
@@ -703,7 +721,7 @@
       "version": "0.5.0",
       "name": "You always know where you are",
       "track": "Navigation and top layers",
-      "status": "Draft; waits for Niko's approval of the plan.",
+      "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
         "0.4.0"
       ],
@@ -830,7 +848,7 @@
       "version": "0.6.0",
       "name": "Things look like what they are",
       "track": "Content, information and cells",
-      "status": "Draft; waits for Niko's approval of the plan.",
+      "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
         "0.5.0"
       ],
@@ -960,7 +978,7 @@
       "version": "0.7.0",
       "name": "Whole places to work in",
       "track": "Surfaces",
-      "status": "Draft; waits for Niko's approval of the plan.",
+      "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
         "0.6.0"
       ],
@@ -1046,7 +1064,7 @@
       "version": "0.8.0",
       "name": "Every element keeps its promise",
       "track": "Contracts",
-      "status": "Draft; waits for Niko's approval of the plan.",
+      "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
         "0.7.0"
       ],
@@ -1132,7 +1150,7 @@
       "version": "1.0.0",
       "name": "Open to everyone",
       "track": "Distribution",
-      "status": "Draft; waits for Niko's approval of the plan.",
+      "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
         "0.8.0"
       ],

@@ -1,0 +1,10 @@
+/* Shell-only styles; Primal's tokens replace these values in 0.1.0. */
+.pr-placeholder-note {
+  max-inline-size: 60ch;
+}
+
+.pr-specimen {
+  all: revert;
+  display: block;
+  margin-block-start: 2rem;
+}

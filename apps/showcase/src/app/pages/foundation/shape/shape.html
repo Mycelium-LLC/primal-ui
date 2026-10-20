@@ -1,0 +1,10 @@
+<pr-page-placeholder title="Radius, borders and elevation" release="0.1.0" covers="Every treatment with its written meaning.">
+<p><button type="button">Save Changes</button> <button type="button" disabled>Disabled Action</button></p>
+<p><label>Text <input type="text" placeholder="Your name"></label></p>
+<p><button type="button" (click)="specDialog.showModal()">Open Dialog</button>
+<dialog #specDialog aria-labelledby="dlg-title">
+  <h2 id="dlg-title">Native dialog</h2>
+  <p>Escape closes it. Focus returns to the button that opened it.</p>
+  <form method="dialog"><button>Close Dialog</button></form>
+</dialog></p>
+</pr-page-placeholder>
