@@ -1,8 +1,9 @@
-/* The showcase shell. Every value is a Primal token, so it follows every mode and the demo theme. */
+/* The showcase shell. Every value is a Primal token, so it follows light, dark and both directions. */
 :host {
   display: block;
   max-inline-size: var(--pr-container-reading);
   margin-inline: auto;
+  padding-inline: var(--pr-gutter);
 }
 
 .pr-skip {
@@ -17,53 +18,51 @@
   padding: var(--pr-gap-component);
 }
 
+/* ---------------------------------------------------------------- header */
+
 .pr-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
+  align-items: center;
   gap: var(--pr-gap-group);
-  padding: var(--pr-gutter);
-}
-
-.pr-header-row {
-  display: flex;
-  align-items: baseline;
-  gap: var(--pr-gap-component);
-  inline-size: 100%;
-}
-
-@media (width >= 48rem) {
-  .pr-header-row {
-    inline-size: auto;
-  }
+  padding-block: var(--pr-gap-group);
+  margin-block-end: var(--pr-gap-section);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
 }
 
 .pr-brand {
-  font-weight: var(--pr-weight-strong);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  min-block-size: var(--pr-control-height);
   font-size: var(--pr-text-large);
   color: var(--pr-color-text);
   text-decoration: none;
 }
 
-.pr-version {
-  color: var(--pr-color-text-muted);
+.pr-options {
+  margin-inline-start: auto;
 }
 
-.pr-menu-button {
-  margin-inline-start: auto;
-  min-block-size: var(--pr-control-height);
-  padding-inline: var(--pr-control-inset);
-  border: var(--pr-border-width) solid var(--pr-color-border-control);
-  border-radius: var(--pr-radius-control);
-  background-color: var(--pr-color-surface);
+/* On a phone the switches take their own row under the brand. */
+@media (width < 48rem) {
+  .pr-options {
+    order: 3;
+    inline-size: 100%;
+    margin-inline-start: 0;
+  }
+
+  .pr-menu-button {
+    margin-inline-start: auto;
+  }
 }
+
+/* ---------------------------------------------------------------- body */
 
 .pr-body {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--pr-gap-section);
-  padding-inline: var(--pr-gutter);
 }
 
 .pr-nav {
@@ -80,17 +79,17 @@
   }
 
   .pr-body {
-    grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr);
+    grid-template-columns: 13rem minmax(0, 1fr);
   }
 
   .pr-nav {
     display: block;
     position: sticky;
-    inset-block-start: 0;
+    inset-block-start: var(--pr-gap-group);
     align-self: start;
-    max-block-size: 100dvh;
+    max-block-size: calc(100dvh - 2 * var(--pr-gap-group));
     overflow-y: auto;
-    padding-block-end: var(--pr-gap-section);
+    padding-block-end: var(--pr-gap-group);
   }
 }
 
@@ -105,16 +104,29 @@
   justify-content: space-between;
   align-items: baseline;
   gap: var(--pr-gap-component);
-  min-block-size: var(--pr-target-min);
+  margin: 0;
 }
 
 .pr-nav a {
+  display: block;
+  padding-block: calc(var(--pr-gap-component) / 2);
+  min-block-size: var(--pr-target-min);
   color: var(--pr-color-text);
   text-decoration: none;
 }
 
-.pr-nav small {
+.pr-nav a:hover {
+  color: var(--pr-color-accent);
+}
+
+/* A page still to be built steps back: muted, with the release that builds it. */
+.pr-later a {
   color: var(--pr-color-text-muted);
+}
+
+.pr-later small {
+  color: var(--pr-color-text-muted);
+  font-variant-numeric: tabular-nums;
 }
 
 /* The current place: the accent, because the accent means where something is happening. */
@@ -125,8 +137,18 @@
 
 .pr-nav-section {
   font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-strong);
   color: var(--pr-color-text-muted);
   margin-block: var(--pr-gap-group) var(--pr-gap-component);
+}
+
+.pr-visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .pr-main {
@@ -136,4 +158,17 @@
 
 .pr-main:focus {
   outline: none;
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.pr-footer {
+  padding-block: var(--pr-gap-group) var(--pr-gap-section);
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+.pr-footer p {
+  margin: 0;
 }

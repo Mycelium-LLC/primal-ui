@@ -4,6 +4,8 @@
  * 0.2.0 extends this to every native element (the classless base).
  */
 
+@import './fonts/google-sans.css';
+
 /* ---------------------------------------------------------------- reset */
 
 *,
@@ -175,4 +177,149 @@ a {
 
 :focus:not(:focus-visible) {
   outline: none;
+}
+
+/* ---------------------------------------------------------------- lists */
+/* Early classless base (0.2.0 completes it): what 0.1.0's pages need. */
+
+ul,
+ol {
+  margin-block: 0 var(--pr-gap-group);
+  padding-inline-start: 1.5em;
+}
+
+li + li {
+  margin-block-start: calc(var(--pr-gap-component) / 2);
+}
+
+dl {
+  margin-block: 0 var(--pr-gap-group);
+}
+
+dt {
+  font-weight: var(--pr-weight-strong);
+}
+
+/* A definition belongs to its term: close to it, then a group gap before the next term. */
+dd {
+  margin-inline-start: 0;
+  margin-block: calc(var(--pr-gap-component) / 2) var(--pr-gap-group);
+  max-inline-size: var(--pr-measure);
+}
+
+/* ---------------------------------------------------------------- tables */
+
+table {
+  border-collapse: collapse;
+  inline-size: 100%;
+  font-variant-numeric: tabular-nums;
+  margin-block-end: var(--pr-gap-group);
+}
+
+caption {
+  text-align: start;
+  font-weight: var(--pr-weight-strong);
+  padding-block-end: var(--pr-gap-component);
+}
+
+th,
+td {
+  text-align: start;
+  vertical-align: top;
+  padding: var(--pr-gap-component);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+thead th {
+  font-weight: var(--pr-weight-regular);
+  color: var(--pr-color-text-muted);
+}
+
+/* ---------------------------------------------------------------- code */
+
+pre {
+  margin-block: 0 var(--pr-gap-group);
+  padding: var(--pr-gap-group);
+  background-color: var(--pr-color-surface-sunken);
+  border-radius: var(--pr-radius-well);
+  overflow-x: auto;
+  line-height: var(--pr-leading-body);
+}
+
+pre code {
+  font-size: inherit;
+}
+
+:not(pre) > code {
+  padding: 0.1em 0.3em;
+  background-color: var(--pr-color-surface-sunken);
+  border-radius: var(--pr-radius-well);
+}
+
+kbd {
+  padding: 0.1em 0.4em;
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-well);
+}
+
+hr {
+  border: 0;
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+  margin-block: var(--pr-gap-section);
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+/* ---------------------------------------------------------------- native controls */
+/* Early base (0.3.0 and 0.4.0 build the field and action primitives on it). */
+
+:root {
+  accent-color: var(--pr-color-accent);
+}
+
+button,
+select,
+textarea,
+input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file'], [type='image'], [type='hidden']) {
+  min-block-size: var(--pr-control-height);
+  padding-inline: var(--pr-control-inset);
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+  line-height: var(--pr-leading-tight);
+}
+
+textarea {
+  padding-block: var(--pr-gap-component);
+  line-height: var(--pr-leading-body);
+}
+
+button {
+  cursor: pointer;
+  transition: background-color var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+button:hover {
+  background-color: var(--pr-color-surface-sunken);
+}
+
+button:disabled,
+select:disabled,
+textarea:disabled,
+input:disabled {
+  cursor: not-allowed;
+  border-color: var(--pr-color-border);
+  color: var(--pr-color-text-muted);
+}
+
+label {
+  cursor: default;
 }

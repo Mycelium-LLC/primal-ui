@@ -6,19 +6,13 @@
 
 label {
   display: flex;
-  flex-direction: column;
-  gap: calc(var(--pr-gap-component) / 2);
+  align-items: center;
+  gap: var(--pr-gap-component);
   font-size: var(--pr-text-small);
   color: var(--pr-color-text-muted);
 }
 
-/* Native selects until 0.3.0's Select: only their edge and size come from tokens. */
 select {
-  min-block-size: var(--pr-control-height);
-  padding-inline: var(--pr-control-inset);
-  border: var(--pr-border-width) solid var(--pr-color-border-control);
-  border-radius: var(--pr-radius-control);
-  background-color: var(--pr-color-surface);
-  color: var(--pr-color-text);
-  font-size: var(--pr-text-body);
+  font-size: var(--pr-text-small);
 }
+

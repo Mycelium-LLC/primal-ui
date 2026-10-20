@@ -5,7 +5,7 @@ import { filter } from 'rxjs';
 import pkg from '../../../../package.json';
 import { DisplayOptions } from './shell/display-options/display-options';
 import { DisplayMemory } from './shell/display-memory';
-import { NAV } from './shell/nav';
+import { NAV, isBuilt } from './shell/nav';
 
 @Component({
   selector: 'pr-root',
@@ -17,6 +17,7 @@ import { NAV } from './shell/nav';
 export class App {
   protected readonly nav = NAV;
   protected readonly version = pkg.version;
+  protected readonly isBuilt = (release: string) => isBuilt(release, pkg.version);
   /** On a phone the page list is a menu the person opens; on a desk it is always there. */
   protected readonly menuOpen = signal(false);
 

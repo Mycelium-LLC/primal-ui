@@ -109,6 +109,11 @@
       "n": 17,
       "decision": "One solution",
       "ruling": "Primal designs for one solution only: no contrast mode and no density mode. The base has light and dark values and both text directions, nothing else (Niko, 2026-10-20: 'remove contrast and density. we design for one solution only'). Decision 14 is superseded."
+    },
+    {
+      "n": 18,
+      "decision": "Typeface",
+      "ruling": "Google Sans is Primal's default typeface for English and Hebrew, bundled with the library (Latin, Latin Extended and Hebrew, variable weight 400–700, OFL) so products never call Google Fonts at runtime (Niko, 2026-10-20: 'font to use in the design system by default and imported with the library is google font \"google sans\" for both languages')."
     }
   ],
   "releases": [
@@ -137,6 +142,9 @@
         },
         {
           "text": "Semantic tokens: colour roles, type scale (fluid), the three gaps, radius, borders, elevation levels with written meanings, layers, motion durations and easing."
+        },
+        {
+          "text": "Typeface: Google Sans bundled in the core package with its OFL licence, for English and Hebrew (decision 18)."
         },
         {
           "text": "Light and dark: the one base with a value for each colour role in both, following the system and forceable per page or region (decision 17)."

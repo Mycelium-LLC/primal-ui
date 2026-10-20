@@ -6,7 +6,7 @@ export const NAV: NavSection[] = [
   {
     title: 'Start',
     pages: [
-      { path: '/start', title: 'Getting started', release: '1.0.0' },
+      { path: '/start', title: 'Getting started', release: '0.1.0' },
     ],
   },
   {
@@ -15,7 +15,7 @@ export const NAV: NavSection[] = [
       { path: '/foundation/colour', title: 'Colour', release: '0.1.0' },
       { path: '/foundation/typography', title: 'Typography', release: '0.1.0' },
       { path: '/foundation/spacing', title: 'Spacing', release: '0.1.0' },
-      { path: '/foundation/shape', title: 'Radius, borders and elevation', release: '0.1.0' },
+      { path: '/foundation/shape', title: 'Shape and elevation', release: '0.1.0' },
       { path: '/foundation/motion', title: 'Motion', release: '0.1.0' },
       { path: '/foundation/themes', title: 'Themes', release: '0.1.0' },
       { path: '/foundation/direction', title: 'Direction', release: '0.1.0' },
@@ -90,3 +90,10 @@ export const NAV: NavSection[] = [
     ],
   },
 ];
+
+/** A page is built once its release is at or below the showcase's version. */
+export function isBuilt(release: string, version: string): boolean {
+  const [a, b] = [release, version].map((v) => v.split('.').map(Number));
+  for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return a[i] < b[i];
+  return true;
+}

@@ -24,32 +24,15 @@
   gap: var(--pr-gap-component);
 }
 
-/* Native controls until 0.3.0 and 0.4.0: only their edge, size and accent come from tokens. */
-label {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--pr-gap-component) / 2);
-}
-
-input,
-button {
-  min-block-size: var(--pr-control-height);
-  padding-inline: var(--pr-control-inset);
-  border: var(--pr-border-width) solid var(--pr-color-border-control);
-  border-radius: var(--pr-radius-control);
-  background-color: var(--pr-color-surface);
-  color: var(--pr-color-text);
-}
-
+/* The primary action wears the accent: the accent means "something happens here". */
 button {
   background-color: var(--pr-color-accent);
   border-color: var(--pr-color-accent);
   color: var(--pr-color-on-accent);
 }
 
-pre {
-  background-color: var(--pr-color-surface-sunken);
-  padding: var(--pr-gap-group);
-  border-radius: var(--pr-radius-control);
-  overflow-x: auto;
+label {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--pr-gap-component) / 2);
 }

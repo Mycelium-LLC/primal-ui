@@ -119,8 +119,8 @@ export const colour = {
 export const type = {
   family: {
     sans: {
-      meaning: 'All interface and reading text. The system font, so Primal carries no typeface of its own.',
-      value: 'system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif',
+      meaning: 'All interface and reading text, in English and Hebrew: Google Sans, bundled with Primal, falling back to the system font.',
+      value: '"Google Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Hebrew", Arial, sans-serif',
     },
     mono: {
       meaning: 'Code, keys and sample output.',
@@ -170,6 +170,7 @@ export const layout = {
 /** Every treatment completes the sentence "this style means: …". */
 export const shape = {
   'radius-control': { meaning: 'This is something you operate (a button, a field).', value: '0.375rem' },
+  'radius-well': { meaning: 'This holds content of another kind (code, a key).', value: '0.25rem' },
   'radius-layer': { meaning: 'This sits on top of the page (a popover, a dialog).', value: '0.5rem' },
   'radius-round': { meaning: 'This is a person or a single status (an avatar, a dot).', value: '999px' },
   'border-width': { meaning: 'A line that separates or outlines.', value: '1px' },

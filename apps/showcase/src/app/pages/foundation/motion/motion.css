@@ -1,9 +1,4 @@
 .pr-play {
-  min-block-size: var(--pr-control-height);
-  padding-inline: var(--pr-control-inset);
-  border: var(--pr-border-width) solid var(--pr-color-border-control);
-  border-radius: var(--pr-radius-control);
-  background-color: var(--pr-color-surface);
   margin-block-end: var(--pr-gap-group);
 }
 

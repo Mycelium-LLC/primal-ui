@@ -1,0 +1,8 @@
+.pr-display {
+  font-size: var(--pr-text-display);
+}
+
+.pr-lead {
+  font-size: var(--pr-text-large);
+  color: var(--pr-color-text-muted);
+}

@@ -1,5 +1,45 @@
-<pr-page-placeholder title="Getting started" release="1.0.0" covers="Install, set up and theme Primal in a new project.">
-<p>Primal isn't installable yet. Packages arrive at 1.0.0. For now, the repository builds the showcase you're reading:</p>
-<pre><code>npm install
-npx ng build showcase</code></pre>
-</pr-page-placeholder>
+<h1>Getting started</h1>
+<p>
+  Primal is two CSS files, the tokens and the core styles, plus an adapter for each framework. The CSS works on any web page.
+  Angular is the first framework with an adapter.
+</p>
+<p>
+  Primal isn't published to a package registry yet, so you use it from its repository, <code>Mycelium-LLC/primal-ui</code>,
+  which is private for now.
+</p>
+
+<h2>1. Get the files</h2>
+<p>Clone the repository and build it. This needs Node 24.</p>
+<pre><code>{{ build }}</code></pre>
+<dl>
+  <dt><code>packages/tokens/primal-tokens.css</code></dt>
+  <dd>Every token as a CSS custom property, with its light and dark values.</dd>
+  <dt><code>packages/css/src/</code></dt>
+  <dd>The core styles (<code>primal.css</code>) and the Google Sans font files they load. Keep the folder together.</dd>
+  <dt><code>dist/primal-angular</code></dt>
+  <dd>The Angular adapter, produced by the build.</dd>
+</dl>
+
+<h2>2. Load Primal</h2>
+<p>Load the tokens first, then the core styles, then your own theme file if you have one.</p>
+<h3>On any web page</h3>
+<pre><code>{{ html }}</code></pre>
+<h3>In Angular 22 or later</h3>
+<p>Add the files to your project's styles in <code>angular.json</code>:</p>
+<pre><code>{{ angularJson }}</code></pre>
+<p>
+  To switch light and dark, or the text direction, use <code>PrimalPreferences</code> from the adapter. Each setting writes
+  one attribute on the page, and Primal's tokens respond to it.
+</p>
+<pre><code>{{ prefs }}</code></pre>
+
+<h2>3. Make it yours</h2>
+<p>
+  Primal's look is plain on purpose. Override any token in your own file, loaded after Primal's, and every element follows.
+  You never edit a component. Colours take a light and a dark value.
+</p>
+<pre><code>{{ theme }}</code></pre>
+<p>
+  Every token, its value and its meaning are under <a routerLink="/foundation/colour">Foundation</a>. Read the meaning before
+  you override a token: a token keeps its meaning in every theme.
+</p>

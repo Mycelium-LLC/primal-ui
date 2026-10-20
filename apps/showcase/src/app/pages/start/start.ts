@@ -1,11 +1,44 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../shell/page-placeholder/page-placeholder';
+import { RouterLink } from '@angular/router';
 
-/** Placeholder until 1.0.0: the plain native elements this page will cover (decision 10). */
 @Component({
   selector: 'pr-start-page',
-  imports: [PagePlaceholder],
+  imports: [RouterLink],
   templateUrl: './start.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StartPage {}
+export class StartPage {
+  protected readonly html = `<link rel="stylesheet" href="primal/primal-tokens.css" />
+<link rel="stylesheet" href="primal/css/primal.css" />
+<link rel="stylesheet" href="my-theme.css" />`;
+
+  protected readonly angularJson = `"styles": [
+  "primal-ui/packages/tokens/primal-tokens.css",
+  "primal-ui/packages/css/src/primal.css",
+  "src/my-theme.css"
+]`;
+
+  protected readonly prefs = `import { inject } from '@angular/core';
+import { PrimalPreferences } from 'primal-angular';
+
+export class AppShell {
+  private readonly prefs = inject(PrimalPreferences);
+
+  protected useDark(): void {
+    this.prefs.theme.set('dark'); // 'system' | 'light' | 'dark'
+  }
+
+  protected useHebrew(): void {
+    this.prefs.direction.set('rtl'); // 'ltr' | 'rtl'
+  }
+}`;
+
+  protected readonly theme = `/* my-theme.css, loaded after Primal */
+:root {
+  --pr-color-accent: light-dark(oklch(45% 0.1 160), oklch(76% 0.11 160));
+  --pr-radius-control: 999px;
+}`;
+
+  protected readonly build = `npm install
+npm run build`;
+}

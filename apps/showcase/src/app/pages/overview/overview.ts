@@ -6,6 +6,7 @@ import { NAV } from '../../shell/nav';
   selector: 'pr-overview-page',
   imports: [RouterLink],
   templateUrl: './overview.html',
+  styleUrl: './overview.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OverviewPage {
