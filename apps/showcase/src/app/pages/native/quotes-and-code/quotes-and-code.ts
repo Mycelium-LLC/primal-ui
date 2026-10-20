@@ -1,11 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { CoverageTable } from '../../../shell/coverage-table/coverage-table';
 
-/** Placeholder until 0.2.0: the plain native elements this page will cover (decision 10). */
 @Component({
   selector: 'pr-native-quotes-and-code-page',
-  imports: [PagePlaceholder],
+  imports: [CoverageTable],
   templateUrl: './quotes-and-code.html',
+  styleUrl: './quotes-and-code.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NativeQuotesAndCodePage {}
+export class NativeQuotesAndCodePage {
+  protected readonly snippet = `:root {
+  --pr-black: oklch(22% 0.01 255);
+  --pr-white: oklch(99.5% 0 0);
+  --pr-primary: oklch(50% 0.17 255);
+}`;
+}

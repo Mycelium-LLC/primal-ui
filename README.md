@@ -10,8 +10,8 @@ Primal is meant to be two things. It's a design system you install and use as it
 
 | Path | What it is |
 |---|---|
-| `packages/tokens` | The design tokens as CSS custom properties, framework-independent (empty until 0.1.0 fills it) |
-| `packages/css` | Reset, base typography and layout in plain CSS (empty until 0.1.0 fills it) |
+| `packages/tokens` | The design tokens and the colour model, framework-independent, built to CSS and JSON |
+| `packages/css` | The reset and the classless base for every native element, Google Sans, and the coverage inventory |
 | `packages/angular` | The Angular adapter (Angular 22+) |
 | `apps/showcase` | The live showcase: every planned page, each showing the native HTML it covers until its release builds it |
 | `.folio/` | The plan in Folio: the baseline, the ledger of releases 0.1.0 to 1.0.0, and Niko's decisions |
@@ -29,4 +29,4 @@ npm run check:folio    # checks the ledger
 
 ## Status
 
-Active. Release 0.1.0 is in progress: so far the workspace, the showcase shell and CI. Tokens and themes come next.
+Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are built and waiting for review; the plan to 1.0.0 is in `.folio/`.

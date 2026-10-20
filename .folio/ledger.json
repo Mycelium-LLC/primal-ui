@@ -389,7 +389,7 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
       "makesTrue": [],
@@ -398,7 +398,7 @@
       "version": "0.2.0",
       "name": "Plain HTML reads right",
       "track": "Native HTML",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Built 2026-10-20; release/0.2.0 cut, ready for Niko's review and QA.",
       "dependsOn": [
         "0.1.0"
       ],
@@ -407,22 +407,28 @@
       "size": "M",
       "items": [
         {
-          "text": "The coverage inventory: every rendering element of the HTML living standard, each marked styled, enhanced by a component, or left native, with why. Infrastructure elements (script, style, meta, link, head, title) and deprecated ones are listed as excluded."
+          "text": "*Done 2026-10-20:* The coverage inventory: every rendering element of the HTML living standard, each marked styled, enhanced by a component, or left native, with why. Infrastructure elements (script, style, meta, link, head, title) and deprecated ones are listed as excluded. Source: packages/css/coverage.json (115 elements), checked against the WHATWG element index on 2026-10-20.",
+          "state": "done"
         },
         {
-          "text": "Classless base for text and document semantics, lists and definitions, quotes, technical content (code, pre, kbd, samp, var), revisions and highlights, metadata (time, data, address), bidirectional and ruby text."
+          "text": "*Done 2026-10-20:* Classless base for text and document semantics, lists and definitions, quotes, technical content (code, pre, kbd, samp, var), revisions and highlights, metadata (time, data, address), bidirectional and ruby text.",
+          "state": "done"
         },
         {
-          "text": "Page structure: landmarks (header, main, nav, aside, footer, section, article, search, hgroup) documented with their accessibility roles."
+          "text": "*Done 2026-10-20:* Page structure: landmarks (header, main, nav, aside, footer, section, article, search, hgroup) documented with their accessibility roles.",
+          "state": "done"
         },
         {
-          "text": "Table foundation: caption, regions, numeric alignment, sticky header, overflow inside the table, empty state."
+          "text": "*Done 2026-10-20:* Table foundation: caption, regions, numeric alignment, sticky header, overflow inside the table, empty state. Numbers align with data-numeric, the empty state is data-empty, and .pr-table (plus data-tall for long tables) scrolls within itself with a sticky header.",
+          "state": "done"
         },
         {
-          "text": "Media: responsive images and picture, figure with caption, audio and video with native controls and tracks, responsive iframe embeds, svg and canvas sizing and labelling."
+          "text": "*Done 2026-10-20:* Media: responsive images and picture, figure with caption, audio and video with native controls and tracks, responsive iframe embeds, svg and canvas sizing and labelling.",
+          "state": "done"
         },
         {
-          "text": "Release chain for 0.2.0."
+          "text": "*Done 2026-10-20:* Release chain for 0.2.0: release/0.2.0, docs/qa/0.2.0.md, version 0.2.0.",
+          "state": "done"
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",

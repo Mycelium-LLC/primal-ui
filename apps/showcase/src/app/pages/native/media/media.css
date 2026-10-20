@@ -1,0 +1,24 @@
+/* A specimen sits in the page as plain content, marked off only by a line at its start. */
+.pr-specimen {
+  margin-block-end: var(--pr-gap-section);
+  padding-inline-start: var(--pr-gap-group);
+  border-inline-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-specimen > :first-child {
+  margin-block-start: 0;
+}
+
+.pr-specimen picture img {
+  max-inline-size: min(100%, 18rem);
+}
+
+.pr-specimen figure > img {
+  max-inline-size: min(100%, 40rem);
+}
+
+/* An embedded document is another page inside this one: its edge is the separating line. */
+.pr-specimen iframe {
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-well);
+}

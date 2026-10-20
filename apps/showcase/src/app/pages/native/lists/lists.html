@@ -1,22 +1,55 @@
-<pr-page-placeholder title="Lists" release="0.2.0" covers="Unordered, ordered and description lists, and menu.">
-<ul>
-  <li>An unordered item</li>
-  <li>Another item
-    <ul><li>A nested item</li></ul>
-  </li>
-</ul>
-<ol>
-  <li>First step</li>
-  <li>Second step</li>
-  <li>Third step</li>
-</ol>
-<dl>
-  <dt>Primitive</dt><dd>Part of a promise that isn't a whole job yet.</dd>
-  <dt>Cell</dt><dd>One complete, predictable job.</dd>
-  <dt>Surface</dt><dd>Where cells serve a journey.</dd>
-</dl>
-<menu>
-  <li><button type="button">Copy Link</button></li>
-  <li><button type="button">Rename File</button></li>
-</menu>
-</pr-page-placeholder>
+<h1>Lists</h1>
+<p>
+  Lists group things that belong together. Items sit close to each other, markers step back into muted ink, and a nested list
+  stays with the item that holds it.
+</p>
+
+<h2>Unordered</h2>
+<div class="pr-specimen">
+  <ul>
+    <li>Tokens and themes</li>
+    <li>
+      Native HTML
+      <ul>
+        <li>Text and lists</li>
+        <li>Tables and media</li>
+      </ul>
+    </li>
+    <li>Forms</li>
+  </ul>
+</div>
+
+<h2>Ordered</h2>
+<div class="pr-specimen">
+  <ol>
+    <li>Choose your black, your white and your primary.</li>
+    <li>Pick a harmony.</li>
+    <li>Copy the theme file into your project.</li>
+  </ol>
+</div>
+
+<h2>Definitions</h2>
+<p>Each definition sits close under its term, with a group gap before the next term.</p>
+<div class="pr-specimen">
+  <dl>
+    <dt>Primitive</dt>
+    <dd>Part of a promise that isn't a whole job yet: a label, a field, a button.</dd>
+    <dt>Cell</dt>
+    <dd>One complete, predictable job: a newsletter signup, a search with its results.</dd>
+    <dt>Surface</dt>
+    <dd>Where cells serve a journey: a sign-in page, a settings area.</dd>
+  </dl>
+</div>
+
+<h2>Menu</h2>
+<p>A <code>menu</code> is a list of commands, laid out in a row.</p>
+<div class="pr-specimen">
+  <menu>
+    <li><button type="button">Copy Link</button></li>
+    <li><button type="button">Rename File</button></li>
+    <li><button type="button">Move to Folder</button></li>
+  </menu>
+</div>
+
+<h2>Coverage</h2>
+<pr-coverage-table elements="ul ol li dl dt dd menu" />

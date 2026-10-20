@@ -1,0 +1,4 @@
+/* The long table is kept short enough here that its own scrolling shows. */
+.pr-long {
+  max-block-size: 22rem;
+}

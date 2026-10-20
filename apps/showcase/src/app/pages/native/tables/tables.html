@@ -1,18 +1,79 @@
-<pr-page-placeholder title="Tables" release="0.2.0" covers="Caption, regions, numeric alignment, sticky header, overflow, empty state.">
+<h1>Tables</h1>
+<p>
+  A table is for reading across and down. Rows are separated by faint lines, and the header steps back. Numbers line up on their
+  end. A table scrolls within itself and never moves the page, and when it's empty it says why.
+</p>
+
+<h2>A table</h2>
+<p>Mark numeric cells with <code>data-numeric</code> so digits line up down the column.</p>
 <table>
   <caption>Releases planned for v1</caption>
-  <colgroup><col><col><col></colgroup>
   <thead>
-    <tr><th scope="col">Release</th><th scope="col">Name</th><th scope="col">Requirements</th></tr>
+    <tr>
+      <th scope="col">Release</th>
+      <th scope="col">Name</th>
+      <th scope="col" data-numeric>Requirements</th>
+    </tr>
   </thead>
   <tbody>
-    <!-- MOCK DATA: specimen rows -->
-    <tr><td>0.1.0</td><td>A base you can make your own</td><td>13</td></tr>
-    <tr><td>0.2.0</td><td>Plain HTML reads right</td><td>6</td></tr>
-    <tr><td>0.3.0</td><td>Fields that never leave you guessing</td><td>6</td></tr>
+    <tr><td>0.1.0</td><td>A base you can make your own</td><td data-numeric>12</td></tr>
+    <tr><td>0.2.0</td><td>Plain HTML reads right</td><td data-numeric>6</td></tr>
+    <tr><td>0.3.0</td><td>Fields that never leave you guessing</td><td data-numeric>6</td></tr>
+    <tr><td>1.0.0</td><td>Open to everyone</td><td data-numeric>3</td></tr>
   </tbody>
   <tfoot>
-    <tr><th scope="row" colspan="2">Total</th><td>25</td></tr>
+    <tr><th scope="row" colspan="2">Across these four</th><td data-numeric>27</td></tr>
   </tfoot>
 </table>
-</pr-page-placeholder>
+
+<h2>A long table</h2>
+<p>
+  Wrap a table in <code>.pr-table</code>, a focusable region, and it scrolls sideways within itself on a narrow screen. A long
+  one also gets <code>data-tall</code>: it stops short of the screen's height and scrolls down within itself, with its header kept
+  in view.
+</p>
+<div class="pr-table pr-long" data-tall role="region" aria-label="Builds in October" tabindex="0">
+  <table>
+    <caption>Builds in October</caption>
+    <thead>
+      <tr>
+        <th scope="col">Day</th>
+        <th scope="col" data-numeric>Builds</th>
+        <th scope="col" data-numeric>Average seconds</th>
+        <th scope="col" data-numeric>Failed</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (b of builds; track b.day) {
+        <tr>
+          <td><time [attr.datetime]="'2026-10-' + (b.day < 10 ? '0' : '') + b.day">{{ b.day }} October</time></td>
+          <td data-numeric>{{ b.builds }}</td>
+          <td data-numeric>{{ b.seconds.toFixed(1) }}</td>
+          <td data-numeric>{{ b.failed }}</td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr><th scope="row">The month</th><td data-numeric>{{ total }}</td><td></td><td></td></tr>
+    </tfoot>
+  </table>
+</div>
+
+<h2>An empty table</h2>
+<p>Mark the one cell with <code>data-empty</code> and say why the table is empty and what comes next.</p>
+<table>
+  <caption>Shipped releases</caption>
+  <thead>
+    <tr>
+      <th scope="col">Release</th>
+      <th scope="col">Shipped</th>
+      <th scope="col" data-numeric>Requirements</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td colspan="3" data-empty>Nothing has shipped yet. The first release lands here once it's merged and tagged.</td></tr>
+  </tbody>
+</table>
+
+<h2>Coverage</h2>
+<pr-coverage-table elements="table caption colgroup col thead tbody tfoot tr th td" />
