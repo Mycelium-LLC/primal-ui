@@ -154,6 +154,11 @@
       "n": 26,
       "decision": "Magma by default",
       "ruling": "Primal's default primary is Mycelium Magma (#E61924), on the brand's ink (#0B0B0D) and white (#FFFFFF), reversing the earlier rule that the base carries no brand (decision 2's base, and the retired requirement primal/themes/primal-s-own-look-is-minimal-and-carries-no-brand-so-its). The model stays as it was: one primary, every role derived, so any project still replaces it with one token (Niko, 2026-10-20, through TL: 'set mycelium magma as the primary color as default. with proper color pallete'). Decision 16 stands: there is still one base and no second theme."
+    },
+    {
+      "n": 27,
+      "decision": "Exact Magma in dark",
+      "ruling": "In dark the primary fill stays exactly the primary, with white text, as in light (Niko, 2026-10-20: 'keep exact magma'): Magma is #E61924 with white text at 4.64:1 in both modes, and its hover and pressed deepen in both. A fill is lifted towards white in dark only if it would sink into the page (under 3:1 against the dark surfaces). Text in the primary (links) is still lightened in dark so it reads on the page."
     }
   ],
   "releases": [
@@ -763,7 +768,7 @@
           "state": "done"
         },
         {
-          "text": "*Done 2026-10-20:* The primary's states from the one token: primary-hover, primary-pressed (Magma pressed is the brand's magma-deep #C0121C), focus and primary-surface; on-primary meets AA on every state.",
+          "text": "*Done 2026-10-20:* The primary's states from the one token: primary-hover, primary-pressed (Magma pressed is the brand's magma-deep #C0121C), focus and primary-surface. The fill is exact Magma with white text in light and dark (decision 27); on-primary meets AA on every state.",
           "state": "done"
         },
         {
@@ -1569,11 +1574,6 @@
       "question": "Where is the showcase hosted while the repository is private?",
       "why": "0.1.0's done-when needs a live showcase Niko can open; Firebase Hosting in an existing Mycelium project is the usual path.",
       "from": "Session 7F, 2026-10-20"
-    },
-    {
-      "question": "In dark, should the primary fill stay exactly Magma with white text (4.64:1), or be lightened to #E8585B with black text, as 0.4.0 does?",
-      "why": "Exact Magma in dark is truer to the brand; the lightened fill is the rule that holds for any primary. Both pass AA.",
-      "from": "Session 7F, 2026-10-20 (0.4.0)"
     }
   ],
   "notPlanned": [

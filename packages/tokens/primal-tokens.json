@@ -85,10 +85,10 @@
   },
   "--pr-color-primary": {
     "group": "colour",
-    "value": "light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))))",
-    "meaning": "Where something happens: the primary action's fill, a checked control, an accent. The primary as chosen, darkened (light) or lightened (dark) only if white or black text on it would not read.",
+    "value": "light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))))",
+    "meaning": "Where something happens: the primary action's fill, a checked control, an accent. The primary as chosen, the same in light and dark: darkened only if white text on it would not read, lifted in dark only if it would sink into the page.",
     "light": "oklch(58.89% 0.23 26.6)",
-    "dark": "oklch(65.16% 0.1789 22.3)"
+    "dark": "oklch(58.89% 0.23 26.6)"
   },
   "--pr-color-primary-text": {
     "group": "colour",
@@ -99,59 +99,59 @@
   },
   "--pr-color-primary-hover": {
     "group": "colour",
-    "value": "light-dark(oklch(from var(--pr-color-primary) calc(l - 0.0375) calc(c * 0.94) h), oklch(from var(--pr-color-primary) calc(l + 0.0375) calc(c * 0.94) h))",
-    "meaning": "A primary fill under the pointer: a step towards the text colour.",
+    "value": "oklch(from var(--pr-color-primary) calc(l - 0.0375) calc(c * 0.94) h)",
+    "meaning": "A primary fill under the pointer: a step deeper.",
     "light": "oklch(55.14% 0.2162 26.6)",
-    "dark": "oklch(68.91% 0.1682 22.3)"
+    "dark": "oklch(55.14% 0.2162 26.6)"
   },
   "--pr-color-primary-pressed": {
     "group": "colour",
-    "value": "light-dark(oklch(from var(--pr-color-primary) calc(l - 0.075) calc(c * 0.875) h), oklch(from var(--pr-color-primary) calc(l + 0.075) calc(c * 0.875) h))",
-    "meaning": "A primary fill being pressed: two steps towards the text colour.",
+    "value": "oklch(from var(--pr-color-primary) calc(l - 0.075) calc(c * 0.875) h)",
+    "meaning": "A primary fill being pressed: two steps deeper.",
     "light": "oklch(51.39% 0.2013 26.6)",
-    "dark": "oklch(72.66% 0.1565 22.3)"
+    "dark": "oklch(51.39% 0.2013 26.6)"
   },
   "--pr-color-on-primary": {
     "group": "colour",
-    "value": "light-dark(oklch(1 0 0), oklch(0 0 0))",
-    "meaning": "Text and icons on a primary fill in any state: white in light, black in dark, because the primary is kept dark enough or light enough for it.",
+    "value": "oklch(1 0 0)",
+    "meaning": "Text and icons on a primary fill in any state: white, in light and dark, because the fill is kept dark enough for it.",
     "light": "oklch(100% 0 0)",
-    "dark": "oklch(0% 0 0)"
+    "dark": "oklch(100% 0 0)"
   },
   "--pr-color-focus": {
     "group": "colour",
     "value": "var(--pr-color-primary)",
     "meaning": "The focus ring: where the keyboard is. The primary, so it is never mistaken for an error or a divider.",
     "light": "oklch(58.89% 0.23 26.6)",
-    "dark": "oklch(65.16% 0.1789 22.3)"
+    "dark": "oklch(58.89% 0.23 26.6)"
   },
   "--pr-color-primary-surface": {
     "group": "colour",
     "value": "color-mix(in oklab, var(--pr-color-primary) 12%, var(--pr-color-surface))",
     "meaning": "The primary at a whisper: behind the current item, a chosen option, a note that belongs to the primary.",
     "light": "oklch(95.07% 0.0276 26.6)",
-    "dark": "oklch(21.06% 0.0214 12.4)"
+    "dark": "oklch(20.31% 0.0272 18.92)"
   },
   "--pr-color-companion": {
     "group": "colour",
     "value": "oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle)))",
     "meaning": "Goes with the primary: a second emphasis, a highlight, a second series. Never an action.",
     "light": "oklch(58.89% 0.23 206.6)",
-    "dark": "oklch(65.16% 0.1789 202.3)"
+    "dark": "oklch(58.89% 0.23 206.6)"
   },
   "--pr-color-tertiary": {
     "group": "colour",
     "value": "oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle)))",
     "meaning": "A third hue for decoration and a third series. Never an action.",
     "light": "oklch(58.89% 0.23 56.6)",
-    "dark": "oklch(65.16% 0.1789 52.3)"
+    "dark": "oklch(58.89% 0.23 56.6)"
   },
   "--pr-color-selection": {
     "group": "colour",
     "value": "color-mix(in oklab, var(--pr-color-primary) 28%, var(--pr-color-surface))",
     "meaning": "Text the person has selected.",
     "light": "oklch(88.49% 0.0644 26.6)",
-    "dark": "oklch(29.08% 0.0498 18.84)"
+    "dark": "oklch(27.33% 0.0639 23.94)"
   },
   "--pr-color-backdrop": {
     "group": "colour",

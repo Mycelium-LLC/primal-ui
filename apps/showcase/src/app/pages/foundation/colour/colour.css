@@ -109,12 +109,6 @@ input[type='color'] {
   margin-block-start: 0;
 }
 
-.pr-preview button {
-  background-color: var(--pr-color-surface);
-  border-color: var(--pr-color-border-control);
-  color: var(--pr-color-text);
-}
-
 .pr-preview .pr-primary-action {
   background-color: var(--pr-color-primary);
   border-color: var(--pr-color-primary);
