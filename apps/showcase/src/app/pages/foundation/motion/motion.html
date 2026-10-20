@@ -14,12 +14,14 @@
 <div class="pr-tracks">
   @for (d of durations; track d.name) {
     <div class="pr-track">
+      <div class="pr-rail">
       <span
         class="pr-dot"
         [class.pr-moved]="moved()"
         [style.transition-duration]="'var(' + d.name + ')'"
         aria-hidden="true"
       ></span>
+      </div>
       <p><code>{{ d.name }}</code>: {{ d.meaning }}</p>
     </div>
   }

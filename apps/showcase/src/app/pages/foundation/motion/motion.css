@@ -16,6 +16,16 @@
   color: var(--pr-color-text-muted);
 }
 
+/* The rail is the path the dot travels, so the distance reads before anything moves. */
+.pr-rail {
+  inline-size: 13rem;
+  max-inline-size: 100%;
+  padding: 2px;
+  margin-block-end: var(--pr-gap-component);
+  background-color: var(--pr-color-surface-sunken);
+  border-radius: var(--pr-radius-round);
+}
+
 .pr-dot {
   display: block;
   inline-size: 1rem;
@@ -27,10 +37,10 @@
 }
 
 .pr-moved {
-  translate: 12rem 0;
+  translate: calc(12rem - 4px) 0;
 }
 
 /* translate has no logical form, so right-to-left is the one direction-specific rule here. */
 :host-context([dir='rtl']) .pr-moved {
-  translate: -12rem 0;
+  translate: calc(-12rem + 4px) 0;
 }
