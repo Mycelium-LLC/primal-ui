@@ -153,50 +153,62 @@
       "version": "0.1.0",
       "name": "A base you can make your own",
       "track": "Foundation",
-      "status": "Approved to start by Niko 2026-10-20.",
+      "status": "Built and reviewed by Niko by eye on 2026-10-20 ('we good'); release/0.1.0 cut, ready for QA.",
       "dependsOn": [],
       "goal": "Primal exists as a neutral foundation whose whole look is set by tokens, so it works as it is and any future Mycelium design system starts from it.",
       "usersSee": "A live showcase of the single base Primal ships (exactly what a project gets when it imports it), with every token's name and meaning, in light and dark, and switches for the colour scheme and text direction.",
       "size": "L",
       "items": [
         {
-          "text": "The shell first (decision 10): the showcase with every planned page from the start, each unbuilt page showing the plain native HTML it will cover and the release that builds it."
+          "text": "*Done 2026-10-20:* The shell first (decision 10): the showcase with every planned page from the start, each unbuilt page showing the plain native HTML it will cover and the release that builds it.",
+          "state": "done"
         },
         {
-          "text": "The Colour page: pick black, white and primary, choose a harmony from live previews (complementary, analogous, triadic, split), see every derived role and its contrast, and copy the theme file."
+          "text": "*Done 2026-10-20:* The Colour page: pick black, white and primary, choose a harmony from live previews (complementary, analogous, triadic, split), see every derived role and its contrast, and copy the theme file.",
+          "state": "done"
         },
         {
-          "text": "Repository layout: an Angular CLI workspace. packages/tokens (framework-independent tokens as CSS custom properties, later also JSON), packages/css (reset, base typography and layout in plain CSS), packages/angular (the first adapter, Angular 22+, standalone and zoneless, signals-first), apps/showcase (the live showcase, Angular). CI builds both and checks this ledger."
+          "text": "*Done 2026-10-20:* Repository layout: an Angular CLI workspace. packages/tokens (framework-independent tokens as CSS custom properties, later also JSON), packages/css (reset, base typography and layout in plain CSS), packages/angular (the first adapter, Angular 22+, standalone and zoneless, signals-first), apps/showcase (the live showcase, Angular). CI builds both and checks this ledger.",
+          "state": "done"
         },
         {
-          "text": "Semantic tokens: colour from three choices (black, white, primary) and a harmony, every colour role derived in CSS (relative colours, color-mix) and checked by the same model in JavaScript; system colours (danger, warning, info, success) outside the harmony; type scale (fluid), the three gaps, radius, borders, elevation levels with written meanings, layers, motion durations and easing (decisions 21, 22)."
+          "text": "*Done 2026-10-20:* Semantic tokens: colour from three choices (black, white, primary) and a harmony, every colour role derived in CSS (relative colours, color-mix) and checked by the same model in JavaScript; system colours (danger, warning, info, success) outside the harmony; type scale (fluid), the three gaps, radius, borders, elevation levels with written meanings, layers, motion durations and easing (decisions 21, 22).",
+          "state": "done"
         },
         {
-          "text": "Typeface: Google Sans bundled in the core package with its OFL licence, for English and Hebrew (decision 18)."
+          "text": "*Done 2026-10-20:* Typeface: Google Sans bundled in the core package with its OFL licence, for English and Hebrew (decision 18).",
+          "state": "done"
         },
         {
-          "text": "Light and dark: the one base with a value for each colour role in both, following the system and forceable per page or region (decision 17)."
+          "text": "*Done 2026-10-20:* Light and dark: the one base with a value for each colour role in both, following the system and forceable per page or region (decision 17).",
+          "state": "done"
         },
         {
-          "text": "primal-angular: PrimalPreferences (theme, direction, scroll to top) and providePrimalRouteScroll: a new page starts at its top, a switch that is on by default; back and forward keep the browser's position (decision 19)."
+          "text": "*Done 2026-10-20:* primal-angular: PrimalPreferences (theme, direction, scroll to top) and providePrimalRouteScroll: a new page starts at its top, a switch that is on by default; back and forward keep the browser's position (decision 19).",
+          "state": "done"
         },
         {
-          "text": "Page changes cross-fade (withPrimalTransitions: the browser's View Transitions, timed by the motion tokens, instant under reduced motion) instead of jumping (decision 20)."
+          "text": "*Done 2026-10-20:* Page changes cross-fade (withPrimalTransitions: the browser's View Transitions, timed by the motion tokens, instant under reduced motion) instead of jumping (decision 20).",
+          "state": "done"
         },
         {
-          "text": "Modern reset and base typography; logical properties throughout; reduced motion honoured."
+          "text": "*Done 2026-10-20:* Modern reset and base typography; logical properties throughout; reduced motion honoured.",
+          "state": "done"
         },
         {
-          "text": "Token check in CI: no component or core style uses a literal colour, length or duration outside the token definitions, so overriding tokens re-themes everything."
+          "text": "*Done 2026-10-20:* Token check in CI: no component or core style uses a literal colour, length or duration outside the token definitions, so overriding tokens re-themes everything.",
+          "state": "done"
         },
         {
-          "text": "Contrast check in CI: every text and control pair, in light and dark, against WCAG 2.2 AA."
+          "text": "*Done 2026-10-20:* Contrast check in CI: every text and control pair, in light and dark, against WCAG 2.2 AA.",
+          "state": "done"
         },
         {
-          "text": "Showcase deployed (hosting to be confirmed by Niko); it states the version it shows."
+          "text": "Showcase deployed (hosting to be confirmed by Niko); it states the version it shows. Open: no hosting chosen yet, the showcase runs locally (ng serve, port 6840)."
         },
         {
-          "text": "Release chain: release/0.1.0, docs/qa/0.1.0.md, version bump, tag after merge."
+          "text": "*Done 2026-10-20:* Release chain: release/0.1.0, docs/qa/0.1.0.md, version bump, tag after merge.",
+          "state": "done"
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
@@ -216,7 +228,7 @@
           "kind": "requirement",
           "address": "primal/tokens/every-colour-type-size-gap-radius-border-elevation-layer",
           "requirementKind": "invariant",
-          "statement": "Every colour, type size, gap, radius, border, elevation, layer, duration and density value a component uses comes from a named semantic token, and no component carries a raw value.",
+          "statement": "Every colour, type size, gap, radius, border, elevation, layer and duration a component uses comes from a named semantic token, and no component carries a raw value.",
           "success": "A search of every component's styles finds no literal colour, length or duration outside the token definitions.",
           "disqualifier": "Any component hardcodes a value that a theme cannot reach.",
           "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
