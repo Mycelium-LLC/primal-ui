@@ -56,7 +56,7 @@ interface Shown extends PrimalListItem {
             (pointermove)="item.disabled || active.set($index)"
             (click)="choose(item)"
           >
-            {{ item.before }}@if (item.match) {<mark class="pr-match">{{ item.match }}</mark>}{{ item.after }}
+            <span>{{ item.before }}@if (item.match) {<mark class="pr-match">{{ item.match }}</mark>}{{ item.after }}</span>
           </li>
         }
       </ul>

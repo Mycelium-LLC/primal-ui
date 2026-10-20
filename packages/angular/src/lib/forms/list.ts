@@ -71,8 +71,10 @@ export class PrimalListPopup {
   }
 
   show(): void {
-    if (this.open()) return;
     const popup = this.popup();
+    if (this.open() && popup.matches(':popover-open')) return;
+    // Closed by something else (a script, the browser): start clean.
+    this.cleanup?.();
     popup.showPopover?.();
     this.open.set(true);
     this.place();
@@ -110,7 +112,7 @@ export class PrimalListPopup {
     const up = below < Math.min(popup.scrollHeight, 240) && above > below;
     popup.style.left = `${field.left}px`;
     popup.style.minWidth = `${field.width}px`;
-    popup.style.maxHeight = `${Math.max(120, (up ? above : below) - 16)}px`;
+    popup.style.maxHeight = `min(var(--pr-list-height), ${Math.max(120, (up ? above : below) - 16)}px)`;
     popup.style.top = up ? 'auto' : `${field.bottom}px`;
     popup.style.bottom = up ? `${window.innerHeight - field.top}px` : 'auto';
     popup.toggleAttribute('data-above', up);

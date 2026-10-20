@@ -72,7 +72,7 @@ import { PrimalListItem, PrimalListPopup, firstEnabled, fold, lastEnabled, listK
             (pointermove)="item.disabled || active.set(item.index)"
             (click)="choose(item)"
           >
-            {{ item.label }}
+            <span>{{ item.label }}</span>
           </li>
         }
       </ul>
@@ -223,6 +223,7 @@ export class PrimalSelect {
 
   private close(): void {
     this.popup.hide();
+    this.typed = '';
   }
 
   private setActive(index: number): void {
@@ -267,6 +268,14 @@ export class PrimalSelect {
     select.setAttribute('aria-hidden', 'true');
     // The label points at the native select; focus (from the label, or a failed submit) goes on to the button.
     select.addEventListener('focus', () => this.trigger().nativeElement.focus());
+    const toTrigger = (e: Event) => {
+      e.preventDefault();
+      this.trigger().nativeElement.focus();
+    };
+    for (const label of select.labels ?? []) {
+      label.addEventListener('click', toTrigger);
+      this.destroyRef.onDestroy(() => label.removeEventListener('click', toTrigger));
+    }
   }
 
   /** Follows the native select when code changes it: new options, a value set by a forms API, disabled. */

@@ -737,20 +737,20 @@ input[type='radio']::before {
   border-radius: var(--pr-radius-round);
 }
 
-input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, :indeterminate) {
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, [type='checkbox']:indeterminate) {
   border-color: var(--pr-color-primary);
   background-color: var(--pr-color-primary);
 }
 
-input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, :indeterminate)::before {
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, [type='checkbox']:indeterminate)::before {
   scale: 1;
 }
 
-input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled, :checked, :indeterminate) {
+input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled, :checked, [type='checkbox']:indeterminate) {
   border-color: var(--pr-color-text);
 }
 
-input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled):is(:checked, :indeterminate) {
+input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled):is(:checked, [type='checkbox']:indeterminate) {
   border-color: color-mix(in oklch, var(--pr-color-primary) 88%, var(--pr-color-text));
   background-color: color-mix(in oklch, var(--pr-color-primary) 88%, var(--pr-color-text));
 }
@@ -770,7 +770,7 @@ input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled {
   cursor: not-allowed;
 }
 
-input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled:is(:checked, :indeterminate) {
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled:is(:checked, [type='checkbox']:indeterminate) {
   background-color: var(--pr-color-border);
 }
 
@@ -1011,7 +1011,7 @@ input[type='file']:hover::file-selector-button {
 }
 
 .pr-option-active {
-  background-color: var(--pr-color-surface-sunken);
+  background-color: color-mix(in oklch, var(--pr-color-text) 8%, var(--pr-color-surface-raised));
 }
 
 /* The chosen option: a check before it, in the primary. */
