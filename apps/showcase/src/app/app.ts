@@ -4,7 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import pkg from '../../../../package.json';
 import { DisplayOptions } from './shell/display-options/display-options';
-import { ShowcaseLook } from './shell/look';
+import { DisplayMemory } from './shell/display-memory';
 import { NAV } from './shell/nav';
 
 @Component({
@@ -21,7 +21,7 @@ export class App {
   protected readonly menuOpen = signal(false);
 
   constructor() {
-    inject(ShowcaseLook);
+    inject(DisplayMemory);
     inject(Router)
       .events.pipe(
         filter((e) => e instanceof NavigationEnd),

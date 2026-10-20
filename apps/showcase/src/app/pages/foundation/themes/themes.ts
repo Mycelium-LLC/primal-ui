@@ -8,10 +8,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class FoundationThemesPage {
   protected readonly regions = [
-    { label: 'Dark', attrs: { theme: 'dark', contrast: null, density: null, look: null } },
-    { label: 'More contrast', attrs: { theme: null, contrast: 'more', density: null, look: null } },
-    { label: 'Dense', attrs: { theme: null, contrast: null, density: 'dense', look: null } },
-    { label: 'The demo theme', attrs: { theme: null, contrast: null, density: null, look: 'demo' } },
+    { label: 'Dark', attrs: { theme: 'dark', contrast: null, density: null } },
+    { label: 'More contrast', attrs: { theme: null, contrast: 'more', density: null } },
+    { label: 'Dense', attrs: { theme: null, contrast: null, density: 'dense' } },
   ];
 
   protected readonly example = `/* my-product-theme.css, loaded after primal-tokens.css */

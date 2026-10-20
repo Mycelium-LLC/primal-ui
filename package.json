@@ -7,7 +7,7 @@
     "watch": "ng build showcase --watch --configuration development",
     "check:folio": "node .folio/check-ledger.mjs",
     "test": "ng test",
-    "check:tokens": "node packages/tokens/build.mjs --check && node packages/tokens/check-contrast.mjs"
+    "check:tokens": "node packages/tokens/build.mjs --check && node packages/tokens/check-contrast.mjs && node packages/tokens/check-literals.mjs"
   },
   "private": true,
   "packageManager": "npm@11.19.1",

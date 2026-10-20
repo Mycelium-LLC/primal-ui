@@ -99,6 +99,11 @@
       "n": 15,
       "decision": "Token source",
       "ruling": "Tokens are authored once in JavaScript data and emitted as CSS custom properties and JSON, so the contrast check reads the same values a product gets. Decided by Claude under decision 12."
+    },
+    {
+      "n": 16,
+      "decision": "One base, no second theme",
+      "ruling": "Primal is built and shown as a single base, exactly what people get when they import it. No demo or alternative theme ships or appears in the showcase; light, dark, contrast and density are modes of the one base. That a project can re-theme from tokens alone is proven by the token check, not by a second theme (Niko, 2026-10-20: 'why we have 2 themes? we build and work on single base no theme. as people would see when importing the lib')."
     }
   ],
   "releases": [
@@ -116,7 +121,7 @@
       "status": "Approved to start by Niko 2026-10-20.",
       "dependsOn": [],
       "goal": "Primal exists as a neutral foundation whose whole look is set by tokens, so it works as it is and any future Mycelium design system starts from it.",
-      "usersSee": "A live showcase of every token in the light, dark and high-contrast themes, with a theme switch, a direction switch (left-to-right and right-to-left) and a second, deliberately different demo theme made from tokens alone.",
+      "usersSee": "A live showcase of the single base Primal ships (exactly what a project gets when it imports it), with every token's name and meaning, and switches for theme (light, dark), contrast, density and text direction.",
       "size": "L",
       "items": [
         {
@@ -129,10 +134,13 @@
           "text": "Semantic tokens: colour roles, type scale (fluid), the three gaps plus a dense mode, radius, borders, elevation levels with written meanings, layers, motion durations and easing, density."
         },
         {
-          "text": "Themes: light, dark and high-contrast, following the system preference, forced per page or per region; a demo theme that changes colour, type, radius and density from a token file alone."
+          "text": "Modes of the one base: light and dark, standard and more contrast, comfortable and dense, each following the system and forceable per page or region. No second theme ships or shows (decision 16)."
         },
         {
           "text": "Modern reset and base typography; logical properties throughout; reduced motion honoured."
+        },
+        {
+          "text": "Token check in CI: no component or core style uses a literal colour, length or duration outside the token definitions, so overriding tokens re-themes everything."
         },
         {
           "text": "Contrast check in CI: every text and control pair in every shipped theme against WCAG 2.2 AA."
@@ -145,7 +153,7 @@
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
-      "doneWhen": "The showcase, opened by Niko, shows every token in all three themes and both directions; the demo theme looks clearly different with no component changed; the contrast check passes in CI; the QA table is ✓ by eye.",
+      "doneWhen": "The showcase, opened by Niko, shows every token in light and dark, both contrasts, both densities and both directions; the contrast and token checks pass in CI; the QA table is ✓ by eye; Niko's review of the release is done.",
       "mutations": [
         {
           "op": "add",
@@ -211,8 +219,8 @@
           "address": "primal/themes/a-designer-creates-a-complete-new-theme-for-a-project-by",
           "requirementKind": "user",
           "statement": "A designer creates a complete new theme for a project by overriding tokens only, without forking or editing any component.",
-          "success": "A second theme, clearly different in colour, type, radius and density, is built from one token file, and every showcase page renders correctly in it.",
-          "disqualifier": "Any part of the new look needs a component change, a copied component or a style that targets a component's internals.",
+          "success": "Overriding tokens in one file loaded after Primal's changes the look of every page, and the build check finds no component or core style using a value outside the tokens.",
+          "disqualifier": "Any part of a new look needs a component change, a copied component or a style that targets a component's internals; or the build check finds a literal value.",
           "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)",
           "role": "a designer starting a new Mycelium design system",
           "action": "start the project's design system from Primal",
@@ -311,7 +319,7 @@
           "address": "primal/showcase/a-person-opens-the-live-showcase-sees-every-foundation-token",
           "requirementKind": "user",
           "statement": "A person opens the live showcase, sees every foundation token and theme, and switches theme and text direction in place.",
-          "success": "From the showcase, every token is visible with its name and meaning, and switching theme or direction changes the whole page at once without a reload.",
+          "success": "From the showcase, every token is visible with its name and meaning, and switching theme, contrast, density or direction changes the whole page at once without a reload.",
           "disqualifier": "A token is missing, a switch needs a reload, or the showcase shows anything not built.",
           "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)",
           "role": "a designer or developer at Mycelium",

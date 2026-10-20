@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -52,7 +53,6 @@
             "styles": [
               "packages/tokens/primal-tokens.css",
               "packages/css/src/primal.css",
-              "apps/showcase/src/themes/demo.css",
               "apps/showcase/src/styles.css"
             ]
           },

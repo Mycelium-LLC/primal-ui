@@ -6,7 +6,6 @@ import {
   PrimalPreferences,
   PrimalTheme,
 } from 'primal-angular';
-import { Look, ShowcaseLook } from '../look';
 
 /** The showcase's display switches: every mode the tokens respond to, applied to the whole page in place. */
 @Component({
@@ -17,7 +16,6 @@ import { Look, ShowcaseLook } from '../look';
 })
 export class DisplayOptions {
   protected readonly prefs = inject(PrimalPreferences);
-  protected readonly look = inject(ShowcaseLook);
 
   protected setTheme(value: string): void {
     this.prefs.theme.set(value as PrimalTheme);
@@ -35,7 +33,4 @@ export class DisplayOptions {
     this.prefs.direction.set(value as PrimalDirection);
   }
 
-  protected setLook(value: string): void {
-    this.look.look.set(value as Look);
-  }
 }
