@@ -1,0 +1,38 @@
+{
+  "name": "primal-ui",
+  "version": "0.1.0",
+  "scripts": {
+    "ng": "ng",
+    "build": "node packages/tokens/build.mjs && ng build primal-angular && ng build showcase",
+    "watch": "ng build showcase --watch --configuration development",
+    "check:folio": "node .folio/check-ledger.mjs",
+    "test": "ng test",
+    "check:tokens": "node packages/tokens/build.mjs --check && node packages/tokens/check-contrast.mjs && node packages/tokens/check-literals.mjs"
+  },
+  "private": true,
+  "packageManager": "npm@11.19.1",
+  "dependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/compiler": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/forms": "^22.2.0",
+    "@angular/platform-browser": "^22.2.0",
+    "@angular/router": "^22.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.2.3",
+    "@angular/cli": "^22.2.3",
+    "@angular/compiler-cli": "^22.2.0",
+    "jsdom": "^30.0.0",
+    "ng-packagr": "^22.2.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.0"
+  },
+  "description": "Mycelium Primal: the open-source design system by Mycelium.",
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

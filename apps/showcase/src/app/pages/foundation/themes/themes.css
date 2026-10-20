@@ -1,0 +1,38 @@
+/* A region forced into another mode, outlined so its edge reads against the page. */
+.pr-region {
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  /* Re-read the tokens here, so a region's own scheme applies to it and not only to the page. */
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+  margin-block-end: var(--pr-gap-section);
+}
+
+.pr-region h3 {
+  margin-block-start: 0;
+}
+
+.pr-muted {
+  color: var(--pr-color-text-muted);
+}
+
+.pr-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--pr-gap-component);
+}
+
+/* The primary action wears the primary: it means "something happens here". */
+button {
+  background-color: var(--pr-color-primary);
+  border-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--pr-gap-component) / 2);
+}

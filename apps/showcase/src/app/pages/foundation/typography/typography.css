@@ -1,0 +1,16 @@
+.pr-step {
+  margin-block-end: var(--pr-gap-group);
+}
+
+.pr-sample {
+  margin: 0;
+  line-height: var(--pr-leading-tight);
+  font-weight: var(--pr-weight-strong);
+  max-inline-size: none;
+}
+
+.pr-about {
+  margin: 0;
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}

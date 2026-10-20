@@ -1,0 +1,14 @@
+<pr-page-placeholder title="Authentication" release="0.7.0" covers="Sign in, sign up, reset.">
+<form (submit)="$event.preventDefault()" aria-label="Sign in specimen">
+  <h2>Sign in</h2>
+  <p><label>Email <input type="email" autocomplete="username"></label></p>
+  <p><label>Password <input type="password" autocomplete="current-password"></label></p>
+  <p><button type="submit">Sign In</button></p>
+</form>
+<form (submit)="$event.preventDefault()" aria-label="Sign up specimen">
+  <h2>Create your account</h2>
+  <p><label>Email <input type="email" autocomplete="email"></label></p>
+  <p><label>Password <input type="password" autocomplete="new-password"></label></p>
+  <p><button type="submit">Create Account</button></p>
+</form>
+</pr-page-placeholder>

@@ -1,0 +1,427 @@
+{
+  "--pr-black": {
+    "group": "choice",
+    "value": "oklch(22% 0.01 255)",
+    "meaning": "The project's black: text in light, the page in dark. Need not be #000."
+  },
+  "--pr-white": {
+    "group": "choice",
+    "value": "oklch(99.5% 0 0)",
+    "meaning": "The project's white: the page in light, text in dark. Need not be #fff."
+  },
+  "--pr-primary": {
+    "group": "choice",
+    "value": "oklch(50% 0.17 255)",
+    "meaning": "The project's one theme colour. Roles derive from it, adjusted for contrast."
+  },
+  "--pr-companion-angle": {
+    "group": "choice",
+    "value": "180",
+    "meaning": "How far round the wheel the companion sits from the primary (Complementary by default)."
+  },
+  "--pr-tertiary-angle": {
+    "group": "choice",
+    "value": "30",
+    "meaning": "How far round the wheel the tertiary sits from the primary (Complementary by default)."
+  },
+  "--pr-companion-lightness": {
+    "group": "choice",
+    "value": "0",
+    "meaning": "How much lighter (positive) or darker (negative) the companion is than the primary."
+  },
+  "--pr-tertiary-lightness": {
+    "group": "choice",
+    "value": "0",
+    "meaning": "How much lighter (positive) or darker (negative) the tertiary is than the primary."
+  },
+  "--pr-color-surface": {
+    "group": "colour",
+    "value": "light-dark(var(--pr-white), var(--pr-black))",
+    "meaning": "The page itself. The white in light, the black in dark.",
+    "light": "oklch(99.5% 0 0)",
+    "dark": "oklch(22% 0.01 255)"
+  },
+  "--pr-color-text": {
+    "group": "colour",
+    "value": "light-dark(var(--pr-black), var(--pr-white))",
+    "meaning": "Text and icons that carry content. The black in light, the white in dark.",
+    "light": "oklch(22% 0.01 255)",
+    "dark": "oklch(99.5% 0 0)"
+  },
+  "--pr-color-text-muted": {
+    "group": "colour",
+    "value": "color-mix(in oklch, var(--pr-color-text) 62%, var(--pr-color-surface))",
+    "meaning": "Text that supports other text: descriptions, captions, metadata.",
+    "light": "oklch(51.45% 0.0062 255)",
+    "dark": "oklch(70.05% 0.0038 255)"
+  },
+  "--pr-color-surface-raised": {
+    "group": "colour",
+    "value": "light-dark(var(--pr-white), color-mix(in oklch, var(--pr-white) 7%, var(--pr-black)))",
+    "meaning": "Something on top of the page: a menu, a popover, a dialog.",
+    "light": "oklch(99.5% 0 0)",
+    "dark": "oklch(27.43% 0.0093 255)"
+  },
+  "--pr-color-surface-sunken": {
+    "group": "colour",
+    "value": "oklch(from var(--pr-color-surface) calc(l - 0.035) c h)",
+    "meaning": "A well in the page holding content of another kind: code, a table header.",
+    "light": "oklch(96% 0 0)",
+    "dark": "oklch(18.5% 0.01 255)"
+  },
+  "--pr-color-border": {
+    "group": "colour",
+    "value": "color-mix(in oklch, var(--pr-color-text) 13%, var(--pr-color-surface))",
+    "meaning": "A line that separates: a divider, a table rule. Decoration, so faint.",
+    "light": "oklch(89.42% 0.0013 255)",
+    "dark": "oklch(32.07% 0.0087 255)"
+  },
+  "--pr-color-border-control": {
+    "group": "colour",
+    "value": "color-mix(in oklch, var(--pr-color-text) 50%, var(--pr-color-surface))",
+    "meaning": "The edge of something you operate: a field, a checkbox. Meets 3:1.",
+    "light": "oklch(60.75% 0.005 255)",
+    "dark": "oklch(60.75% 0.005 255)"
+  },
+  "--pr-color-primary": {
+    "group": "colour",
+    "value": "light-dark(oklch(from var(--pr-primary) min(l, 0.5) c h), oklch(from var(--pr-primary) max(l, 0.76) min(c, 0.15) h))",
+    "meaning": "Where something happens: the primary action, links, the current place, focus. The primary, darkened or lightened until it reads.",
+    "light": "oklch(50% 0.17 255)",
+    "dark": "oklch(76% 0.15 255)"
+  },
+  "--pr-color-on-primary": {
+    "group": "colour",
+    "value": "oklch(from var(--pr-color-primary) clamp(0, (0.64 - l) * 1000, 1) 0 0)",
+    "meaning": "Text and icons on a primary fill: black or white, whichever reads.",
+    "light": "oklch(100% 0 0)",
+    "dark": "oklch(0% 0 0)"
+  },
+  "--pr-color-companion": {
+    "group": "colour",
+    "value": "oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle)))",
+    "meaning": "Goes with the primary: a second emphasis, a highlight, a second series. Never an action.",
+    "light": "oklch(50% 0.17 75)",
+    "dark": "oklch(76% 0.15 75)"
+  },
+  "--pr-color-tertiary": {
+    "group": "colour",
+    "value": "oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle)))",
+    "meaning": "A third hue for decoration and a third series. Never an action.",
+    "light": "oklch(50% 0.17 285)",
+    "dark": "oklch(76% 0.15 285)"
+  },
+  "--pr-color-selection": {
+    "group": "colour",
+    "value": "color-mix(in oklch, var(--pr-color-primary) 28%, var(--pr-color-surface))",
+    "meaning": "Text the person has selected.",
+    "light": "oklch(85.64% 0.0476 255)",
+    "dark": "oklch(37.12% 0.0492 255)"
+  },
+  "--pr-color-backdrop": {
+    "group": "colour",
+    "value": "oklch(from var(--pr-black) l c h / 0.55)",
+    "meaning": "Covers the page behind something that interrupts.",
+    "light": "oklch(22% 0.01 255 / 0.55)",
+    "dark": "oklch(22% 0.01 255 / 0.55)"
+  },
+  "--pr-color-danger": {
+    "group": "system",
+    "value": "light-dark(oklch(52% 0.19 27), oklch(74% 0.14 27))",
+    "meaning": "Something failed, or cannot be undone.",
+    "light": "oklch(52% 0.19 27)",
+    "dark": "oklch(74% 0.14 27)"
+  },
+  "--pr-color-danger-surface": {
+    "group": "system",
+    "value": "color-mix(in oklch, var(--pr-color-danger) 12%, var(--pr-color-surface))",
+    "meaning": "The quiet background behind a danger message.",
+    "light": "oklch(93.8% 0.0228 27)",
+    "dark": "oklch(28.24% 0.0256 270.84)"
+  },
+  "--pr-color-warning": {
+    "group": "system",
+    "value": "light-dark(oklch(50% 0.11 65), oklch(80% 0.12 80))",
+    "meaning": "Needs attention soon; nothing has failed.",
+    "light": "oklch(50% 0.11 65)",
+    "dark": "oklch(80% 0.12 80)"
+  },
+  "--pr-color-warning-surface": {
+    "group": "system",
+    "value": "color-mix(in oklch, var(--pr-color-warning) 12%, var(--pr-color-surface))",
+    "meaning": "The quiet background behind a warning message.",
+    "light": "oklch(93.56% 0.0132 65)",
+    "dark": "oklch(28.96% 0.0232 234)"
+  },
+  "--pr-color-info": {
+    "group": "system",
+    "value": "light-dark(oklch(50% 0.13 235), oklch(76% 0.11 235))",
+    "meaning": "Worth knowing; nothing to do.",
+    "light": "oklch(50% 0.13 235)",
+    "dark": "oklch(76% 0.11 235)"
+  },
+  "--pr-color-info-surface": {
+    "group": "system",
+    "value": "color-mix(in oklch, var(--pr-color-info) 12%, var(--pr-color-surface))",
+    "meaning": "The quiet background behind an info message.",
+    "light": "oklch(93.56% 0.0156 235)",
+    "dark": "oklch(28.48% 0.022 252.6)"
+  },
+  "--pr-color-success": {
+    "group": "system",
+    "value": "light-dark(oklch(48% 0.12 150), oklch(76% 0.13 150))",
+    "meaning": "Done, resolved, safe.",
+    "light": "oklch(48% 0.12 150)",
+    "dark": "oklch(76% 0.13 150)"
+  },
+  "--pr-color-success-surface": {
+    "group": "system",
+    "value": "color-mix(in oklch, var(--pr-color-success) 12%, var(--pr-color-surface))",
+    "meaning": "The quiet background behind a success message.",
+    "light": "oklch(93.32% 0.0144 150)",
+    "dark": "oklch(28.48% 0.0244 242.4)"
+  },
+  "--pr-font-sans": {
+    "group": "type",
+    "value": "\"Google Sans\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Noto Sans\", \"Noto Sans Hebrew\", Arial, sans-serif",
+    "meaning": "All interface and reading text, in English and Hebrew: Google Sans, bundled with Primal, falling back to the system font."
+  },
+  "--pr-font-mono": {
+    "group": "type",
+    "value": "ui-monospace, \"SF Mono\", Menlo, Consolas, \"Liberation Mono\", monospace",
+    "meaning": "Code, keys and sample output."
+  },
+  "--pr-text-small": {
+    "group": "type",
+    "value": "clamp(0.8125rem, 0.7946rem + 0.0893vw, 0.875rem)",
+    "meaning": "Fine print, captions, metadata.",
+    "px": [
+      13,
+      14
+    ]
+  },
+  "--pr-text-body": {
+    "group": "type",
+    "value": "clamp(1rem, 0.9821rem + 0.0893vw, 1.0625rem)",
+    "meaning": "Body text and controls.",
+    "px": [
+      16,
+      17
+    ]
+  },
+  "--pr-text-large": {
+    "group": "type",
+    "value": "clamp(1.125rem, 1.0893rem + 0.1786vw, 1.25rem)",
+    "meaning": "Lead text and heading level 4.",
+    "px": [
+      18,
+      20
+    ]
+  },
+  "--pr-text-xl": {
+    "group": "type",
+    "value": "clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem)",
+    "meaning": "Heading level 3.",
+    "px": [
+      20,
+      24
+    ]
+  },
+  "--pr-text-2xl": {
+    "group": "type",
+    "value": "clamp(1.5rem, 1.3929rem + 0.5357vw, 1.875rem)",
+    "meaning": "Heading level 2.",
+    "px": [
+      24,
+      30
+    ]
+  },
+  "--pr-text-3xl": {
+    "group": "type",
+    "value": "clamp(1.75rem, 1.5714rem + 0.8929vw, 2.375rem)",
+    "meaning": "Heading level 1.",
+    "px": [
+      28,
+      38
+    ]
+  },
+  "--pr-text-display": {
+    "group": "type",
+    "value": "clamp(2.125rem, 1.8393rem + 1.4286vw, 3.125rem)",
+    "meaning": "A display title, at most one per page.",
+    "px": [
+      34,
+      50
+    ]
+  },
+  "--pr-leading-body": {
+    "group": "type",
+    "value": "1.55",
+    "meaning": "Line height for reading text."
+  },
+  "--pr-leading-tight": {
+    "group": "type",
+    "value": "1.2",
+    "meaning": "Line height for headings and single-line controls."
+  },
+  "--pr-weight-regular": {
+    "group": "type",
+    "value": "400",
+    "meaning": "Body text."
+  },
+  "--pr-weight-strong": {
+    "group": "type",
+    "value": "600",
+    "meaning": "Headings and emphasis. One step, so weight keeps meaning rank."
+  },
+  "--pr-measure": {
+    "group": "type",
+    "value": "68ch",
+    "meaning": "The longest comfortable line for reading text."
+  },
+  "--pr-gap-component": {
+    "group": "space",
+    "value": "0.5rem",
+    "meaning": "Inside a component: icon to label, label to field."
+  },
+  "--pr-gap-group": {
+    "group": "space",
+    "value": "1rem",
+    "meaning": "Between the elements of one group: fields in a form, items in a list."
+  },
+  "--pr-gap-section": {
+    "group": "space",
+    "value": "clamp(2rem, 1.6rem + 2vw, 3rem)",
+    "meaning": "Between sections. Clearly larger than a group gap, so grouping reads."
+  },
+  "--pr-gutter": {
+    "group": "space",
+    "value": "clamp(1rem, 0.6rem + 2vw, 2rem)",
+    "meaning": "The space between the viewport edge and content."
+  },
+  "--pr-control-height": {
+    "group": "space",
+    "value": "2.5rem",
+    "meaning": "The height of a single-line control."
+  },
+  "--pr-control-inset": {
+    "group": "space",
+    "value": "0.75rem",
+    "meaning": "Horizontal padding inside a control."
+  },
+  "--pr-target-min": {
+    "group": "space",
+    "value": "1.5rem",
+    "meaning": "The smallest pointer target (WCAG 2.2 AA asks 24px)."
+  },
+  "--pr-container-reading": {
+    "group": "layout",
+    "value": "72rem",
+    "meaning": "The maximum width of reading pages and documentation."
+  },
+  "--pr-container-full": {
+    "group": "layout",
+    "value": "100%",
+    "meaning": "Full width, for app surfaces that use the whole screen."
+  },
+  "--pr-radius-control": {
+    "group": "shape",
+    "value": "0.375rem",
+    "meaning": "This is something you operate (a button, a field)."
+  },
+  "--pr-radius-well": {
+    "group": "shape",
+    "value": "0.25rem",
+    "meaning": "This holds content of another kind (code, a key)."
+  },
+  "--pr-radius-layer": {
+    "group": "shape",
+    "value": "0.5rem",
+    "meaning": "This sits on top of the page (a popover, a dialog)."
+  },
+  "--pr-radius-round": {
+    "group": "shape",
+    "value": "999px",
+    "meaning": "This is a person or a single status (an avatar, a dot)."
+  },
+  "--pr-border-width": {
+    "group": "shape",
+    "value": "1px",
+    "meaning": "A line that separates or outlines."
+  },
+  "--pr-focus-width": {
+    "group": "shape",
+    "value": "2px",
+    "meaning": "The width of the focus ring: here is where the keyboard is."
+  },
+  "--pr-focus-offset": {
+    "group": "shape",
+    "value": "2px",
+    "meaning": "The gap between an element and its focus ring."
+  },
+  "--pr-elevation-0": {
+    "group": "elevation",
+    "value": "none",
+    "meaning": "Part of the page. No shadow."
+  },
+  "--pr-elevation-1": {
+    "group": "elevation",
+    "value": "0 1px 2px oklch(0% 0 0 / 0.08), 0 4px 12px oklch(0% 0 0 / 0.08)",
+    "meaning": "On top of the page but not interrupting it: a menu, a popover, a tooltip."
+  },
+  "--pr-elevation-2": {
+    "group": "elevation",
+    "value": "0 2px 4px oklch(0% 0 0 / 0.1), 0 12px 32px oklch(0% 0 0 / 0.16)",
+    "meaning": "Interrupts the page: a dialog. Only one at a time."
+  },
+  "--pr-layer-base": {
+    "group": "layer",
+    "value": "0",
+    "meaning": "The page."
+  },
+  "--pr-layer-sticky": {
+    "group": "layer",
+    "value": "100",
+    "meaning": "Something that stays while the page scrolls (a table header, a toolbar)."
+  },
+  "--pr-layer-overlay": {
+    "group": "layer",
+    "value": "1000",
+    "meaning": "A layer above the page that is not in the browser top layer."
+  },
+  "--pr-layer-toast": {
+    "group": "layer",
+    "value": "1100",
+    "meaning": "A message that must stay visible over everything else on the page."
+  },
+  "--pr-duration-fast": {
+    "group": "motion",
+    "value": "120ms",
+    "meaning": "Acknowledgement: hover, press, a state change."
+  },
+  "--pr-duration-base": {
+    "group": "motion",
+    "value": "200ms",
+    "meaning": "Something entering or leaving: a popover, a disclosure."
+  },
+  "--pr-duration-slow": {
+    "group": "motion",
+    "value": "280ms",
+    "meaning": "A large layer entering: a dialog, a panel."
+  },
+  "--pr-ease-standard": {
+    "group": "motion",
+    "value": "cubic-bezier(0.2, 0, 0, 1)",
+    "meaning": "A change in place."
+  },
+  "--pr-ease-enter": {
+    "group": "motion",
+    "value": "cubic-bezier(0, 0, 0, 1)",
+    "meaning": "Arriving: fast start, gentle stop."
+  },
+  "--pr-ease-exit": {
+    "group": "motion",
+    "value": "cubic-bezier(0.3, 0, 1, 1)",
+    "meaning": "Leaving: gentle start, fast end."
+  }
+}

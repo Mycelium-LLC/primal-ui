@@ -1,0 +1,174 @@
+/* The showcase shell. Every value is a Primal token, so it follows light, dark and both directions. */
+:host {
+  display: block;
+  max-inline-size: var(--pr-container-reading);
+  margin-inline: auto;
+  padding-inline: var(--pr-gutter);
+}
+
+.pr-skip {
+  position: absolute;
+  inset-inline-start: -100vw;
+}
+
+.pr-skip:focus {
+  inset-inline-start: var(--pr-gutter);
+  inset-block-start: var(--pr-gutter);
+  background-color: var(--pr-color-surface-raised);
+  padding: var(--pr-gap-component);
+}
+
+/* ---------------------------------------------------------------- header */
+
+.pr-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pr-gap-group);
+  padding-block: var(--pr-gap-group);
+  margin-block-end: var(--pr-gap-section);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  min-block-size: var(--pr-control-height);
+  font-size: var(--pr-text-large);
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.pr-options {
+  margin-inline-start: auto;
+}
+
+/* On a phone the switches take their own row under the brand. */
+@media (width < 48rem) {
+  .pr-options {
+    order: 3;
+    inline-size: 100%;
+    margin-inline-start: 0;
+  }
+
+  .pr-menu-button {
+    margin-inline-start: auto;
+  }
+}
+
+/* ---------------------------------------------------------------- body */
+
+.pr-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--pr-gap-section);
+}
+
+.pr-nav {
+  display: none;
+}
+
+.pr-nav-open {
+  display: block;
+}
+
+@media (width >= 48rem) {
+  .pr-menu-button {
+    display: none;
+  }
+
+  .pr-body {
+    grid-template-columns: 13rem minmax(0, 1fr);
+  }
+
+  .pr-nav {
+    display: block;
+    position: sticky;
+    inset-block-start: var(--pr-gap-group);
+    align-self: start;
+    max-block-size: calc(100dvh - 2 * var(--pr-gap-group));
+    overflow-y: auto;
+    padding-block-end: var(--pr-gap-group);
+  }
+}
+
+.pr-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pr-nav li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--pr-gap-component);
+  margin: 0;
+}
+
+.pr-nav a {
+  display: block;
+  padding-block: calc(var(--pr-gap-component) / 2);
+  min-block-size: var(--pr-target-min);
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.pr-nav a:hover {
+  color: var(--pr-color-primary);
+}
+
+/* A page still to be built steps back: muted, with the release that builds it. */
+.pr-later a {
+  color: var(--pr-color-text-muted);
+}
+
+.pr-later small {
+  color: var(--pr-color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The current place: the primary, because the primary means where something is happening. */
+.pr-nav a.pr-current {
+  color: var(--pr-color-primary);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-nav-section {
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-strong);
+  color: var(--pr-color-text-muted);
+  margin-block: var(--pr-gap-group) var(--pr-gap-component);
+}
+
+.pr-visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.pr-main {
+  min-inline-size: 0;
+  padding-block-end: var(--pr-gap-section);
+}
+
+.pr-main:focus {
+  outline: none;
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.pr-footer {
+  padding-block: var(--pr-gap-group) var(--pr-gap-section);
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+.pr-footer p {
+  margin: 0;
+}

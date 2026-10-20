@@ -1,0 +1,9 @@
+<pr-page-placeholder title="Validation" release="0.3.0" covers="Errors that say what to type, under their field.">
+<form (submit)="$event.preventDefault()">
+  <p><label>Email (required) <input type="email" required value="not-an-email"></label></p>
+  <p><label>Age (18 to 120) <input type="number" min="18" max="120" value="12"></label></p>
+  <p><label>Code (6 digits) <input type="text" pattern="[0-9]{6}" value="12ab"></label></p>
+  <p><button type="submit">Check Fields</button></p>
+</form>
+<p>Native constraint validation only; the field-level error contract arrives in 0.3.0.</p>
+</pr-page-placeholder>

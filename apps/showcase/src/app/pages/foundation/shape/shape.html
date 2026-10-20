@@ -1,0 +1,47 @@
+<h1>Radius, borders and elevation</h1>
+<p>
+  A treatment is a promise. Every radius, line and shadow in Primal finishes the sentence "this style means: …". If a
+  treatment can't finish it, Primal doesn't use it. Space does the grouping, so a box gets a line only when it's something you
+  act on or something on top of the page.
+</p>
+
+<h2>Radius</h2>
+<div class="pr-samples">
+  @for (r of radii; track r.name) {
+    <figure class="pr-sample">
+      <span class="pr-shape" [style.border-radius]="'var(' + r.name + ')'" aria-hidden="true"></span>
+      <figcaption><code>{{ r.name }}</code><br />{{ r.meaning }}</figcaption>
+    </figure>
+  }
+</div>
+
+<h2>Lines and focus</h2>
+<div class="pr-samples">
+  <figure class="pr-sample">
+    <span class="pr-line" aria-hidden="true"></span>
+    <figcaption><code>--pr-color-border</code><br />A line that separates. Faint, because it's decoration.</figcaption>
+  </figure>
+  <figure class="pr-sample">
+    <span class="pr-shape pr-control" aria-hidden="true"></span>
+    <figcaption><code>--pr-color-border-control</code><br />The edge of something you operate. It meets 3:1.</figcaption>
+  </figure>
+  <figure class="pr-sample">
+    <span class="pr-shape pr-focus" aria-hidden="true"></span>
+    <figcaption><code>--pr-focus-width</code><br />Here is where the keyboard is. Press Tab on this page to see it on real elements.</figcaption>
+  </figure>
+</div>
+
+<h2>Elevation</h2>
+<p>There are three levels, and each has one meaning. Only something on top of the page gets a shadow.</p>
+<div class="pr-samples">
+  @for (e of elevation; track e.name) {
+    <figure class="pr-sample">
+      <span class="pr-shape pr-raised" [style.box-shadow]="'var(' + e.name + ')'" aria-hidden="true"></span>
+      <figcaption><code>{{ e.name }}</code><br />{{ e.meaning }}</figcaption>
+    </figure>
+  }
+</div>
+
+<pr-token-table caption="Shape" [tokens]="shape" />
+<pr-token-table caption="Elevation" [tokens]="elevation" />
+<pr-token-table caption="Layers (stacking order)" [tokens]="layer" />
