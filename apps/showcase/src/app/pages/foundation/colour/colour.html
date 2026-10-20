@@ -99,8 +99,9 @@
 
 <h2>The primary</h2>
 <p>
-  The primary keeps the colour you chose wherever it reads. Where it wouldn't, it is darkened in light or lightened in dark,
-  keeping its hue, only as far as reading needs. Its states move towards the text colour: a step on hover, two when pressed.
+  The primary keeps the colour you chose, with white text on it, in light and in dark. Only if white text wouldn't read is it
+  darkened, keeping its hue, and only as far as reading needs. Its states deepen: a step on hover, two when pressed. As text
+  (a link) it is lightened in dark, so it reads on the page.
 </p>
 <div class="pr-states-pair">
   @for (mode of ['light', 'dark']; track mode) {

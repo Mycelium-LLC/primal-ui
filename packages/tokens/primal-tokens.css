@@ -205,20 +205,20 @@
   /* The edge of something you operate: a field, a checkbox. Meets 3:1. */
   --pr-color-border-control: color-mix(in oklab, var(--pr-color-text) 50%, var(--pr-color-surface));
 
-  /* Where something happens: the primary action's fill, a checked control, an accent. The primary as chosen, darkened (light) or lightened (dark) only if white or black text on it would not read. */
-  --pr-color-primary: light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))));
+  /* Where something happens: the primary action's fill, a checked control, an accent. The primary as chosen, the same in light and dark: darkened only if white text on it would not read, lifted in dark only if it would sink into the page. */
+  --pr-color-primary: light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))));
 
   /* The primary as text: links, the current place, a primary label. A shade further than the fill when needed, so it reads on every surface. */
   --pr-color-primary-text: light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))));
 
-  /* A primary fill under the pointer: a step towards the text colour. */
-  --pr-color-primary-hover: light-dark(oklch(from var(--pr-color-primary) calc(l - 0.0375) calc(c * 0.94) h), oklch(from var(--pr-color-primary) calc(l + 0.0375) calc(c * 0.94) h));
+  /* A primary fill under the pointer: a step deeper. */
+  --pr-color-primary-hover: oklch(from var(--pr-color-primary) calc(l - 0.0375) calc(c * 0.94) h);
 
-  /* A primary fill being pressed: two steps towards the text colour. */
-  --pr-color-primary-pressed: light-dark(oklch(from var(--pr-color-primary) calc(l - 0.075) calc(c * 0.875) h), oklch(from var(--pr-color-primary) calc(l + 0.075) calc(c * 0.875) h));
+  /* A primary fill being pressed: two steps deeper. */
+  --pr-color-primary-pressed: oklch(from var(--pr-color-primary) calc(l - 0.075) calc(c * 0.875) h);
 
-  /* Text and icons on a primary fill in any state: white in light, black in dark, because the primary is kept dark enough or light enough for it. */
-  --pr-color-on-primary: light-dark(oklch(1 0 0), oklch(0 0 0));
+  /* Text and icons on a primary fill in any state: white, in light and dark, because the fill is kept dark enough for it. */
+  --pr-color-on-primary: oklch(1 0 0);
 
   /* The focus ring: where the keyboard is. The primary, so it is never mistaken for an error or a divider. */
   --pr-color-focus: var(--pr-color-primary);

@@ -115,14 +115,18 @@ const paper = (x) => (x.mode === 'light' ? x.white : x.black);
 const ink = (x) => (x.mode === 'light' ? x.black : x.white);
 
 /**
- * The primary is moved in luminance, never in hue, and only as far as reading needs (decision 25).
- * In light it is darkened, in linear light, until its luminance is at most LIGHT_CAP (4.5:1 on a
- * white of luminance 0.976 or more, so on any white from L 0.992 up); in dark it is lightened
- * towards white until its luminance is at least DARK_FLOOR (5:1 and more on a black up to L 0.3).
- * A primary already inside the limit stays exactly as chosen: Magma is Magma on white.
+ * The primary is moved in luminance, never in hue, and only as far as reading needs (decision 26).
+ * As a fill it is darkened, in linear light, until its luminance is at most LIGHT_CAP, so white
+ * text on it reads (4.5:1); a primary already inside the limit stays exactly as chosen: Magma is
+ * Magma, in light and in dark.
  */
 export const LIGHT_CAP = 0.178;
-export const DARK_FLOOR = 0.25;
+/**
+ * The fill is the same in light and dark (Niko, 2026-10-20: "keep exact magma"): white text on it
+ * in both. In dark it is only lifted, towards white, if it would sink into the page: below
+ * FILL_FLOOR it misses 3:1 against the dark surfaces.
+ */
+export const FILL_FLOOR = 0.13;
 /** Primary text (links, the current place) must also read on the sunken well and the primary's own quiet fill, so it goes a little further. */
 export const TEXT_CAP = 0.14;
 export const TEXT_FLOOR = 0.3;
@@ -130,6 +134,9 @@ export const TEXT_FLOOR = 0.3;
 const ch = (c) => `clamp(0, ${c}, 1)`;
 const Y = `(0.2126 * ${ch('r')} + 0.7152 * ${ch('g')} + 0.0722 * ${ch('b')})`;
 const darkenTo = (cap) => `color(from var(--pr-primary) srgb-linear ${['r', 'g', 'b'].map((c) => `calc(${ch(c)} * min(1, ${cap} / ${Y}))`).join(' ')})`;
+/** Lifts a colour (by default the primary) towards white until its luminance is at least `floor`. */
+const lift = (floor, from) =>
+  `color(from ${from} srgb-linear ${['r', 'g', 'b'].map((c) => `calc(1 - (1 - ${ch(c)}) * min(1, ${+(1 - floor).toFixed(3)} / (1 - ${Y})))`).join(' ')})`;
 const lightenTo = (floor) =>
   `color(from var(--pr-primary) srgb-linear ${['r', 'g', 'b'].map((c) => `calc(1 - (1 - ${ch(c)}) * min(1, ${+(1 - floor).toFixed(3)} / (1 - ${Y})))`).join(' ')})`;
 const lum = ([r, g, b]) => 0.2126 * r + 0.7152 * g + 0.0722 * b;
@@ -139,16 +146,20 @@ const moved = (x, cap, floor) => {
   if (x.mode === 'light') return y <= cap ? x.primary : fromLinear(lin.map((v) => v * (cap / y)));
   return y >= floor ? x.primary : fromLinear(lin.map((v) => 1 - (1 - v) * ((1 - floor) / (1 - y))));
 };
-const primaryRole = (x) => moved(x, LIGHT_CAP, DARK_FLOOR);
+const primaryRole = (x) => {
+  const fill = moved({ ...x, mode: 'light' }, LIGHT_CAP, 0);
+  if (x.mode === 'light') return fill;
+  return moved({ ...x, mode: 'dark', primary: fill }, 1, FILL_FLOOR);
+};
 const primaryText = (x) => moved(x, TEXT_CAP, TEXT_FLOOR);
 
-/** Pressing moves the primary towards the text colour: darker in light, lighter in dark. Magma pressed is the brand's magma-deep, #C0121C. */
+/** Pressing deepens the fill, in light and dark: a step on hover, two when pressed. Magma pressed is the brand's magma-deep, #C0121C. */
 const STATE = { hover: { l: 0.0375, c: 0.94 }, pressed: { l: 0.075, c: 0.875 } };
-const stateCss = ({ l, c }) =>
-  `light-dark(oklch(from var(--pr-color-primary) calc(l - ${l}) calc(c * ${c}) h), oklch(from var(--pr-color-primary) calc(l + ${l}) calc(c * ${c}) h))`;
+// The fill keeps white text in both modes, so its states deepen in both: Magma pressed is magma-deep.
+const stateCss = ({ l, c }) => `oklch(from var(--pr-color-primary) calc(l - ${l}) calc(c * ${c}) h)`;
 const stateValue = ({ l, c }) => (x) => {
   const p = primaryRole(x);
-  return [p[0] + (x.mode === 'light' ? -l : l), p[1] * c, p[2]];
+  return [p[0] - l, p[1] * c, p[2]];
 };
 
 export const ROLES = {
@@ -191,8 +202,8 @@ export const ROLES = {
     pairs: { surface: 'ui', 'surface-raised': 'ui' },
   },
   primary: {
-    meaning: 'Where something happens: the primary action\'s fill, a checked control, an accent. The primary as chosen, darkened (light) or lightened (dark) only if white or black text on it would not read.',
-    css: `light-dark(${darkenTo(LIGHT_CAP)}, ${lightenTo(DARK_FLOOR)})`,
+    meaning: 'Where something happens: the primary action\'s fill, a checked control, an accent. The primary as chosen, the same in light and dark: darkened only if white text on it would not read, lifted in dark only if it would sink into the page.',
+    css: `light-dark(${darkenTo(LIGHT_CAP)}, ${lift(FILL_FLOOR, darkenTo(LIGHT_CAP))})`,
     value: primaryRole,
     pairs: { surface: 'ui', 'surface-raised': 'ui', 'surface-sunken': 'ui' },
   },
@@ -203,19 +214,19 @@ export const ROLES = {
     pairs: { surface: 'text', 'surface-raised': 'text', 'surface-sunken': 'text', 'primary-surface': 'text' },
   },
   'primary-hover': {
-    meaning: 'A primary fill under the pointer: a step towards the text colour.',
+    meaning: 'A primary fill under the pointer: a step deeper.',
     css: stateCss(STATE.hover),
     value: stateValue(STATE.hover),
   },
   'primary-pressed': {
-    meaning: 'A primary fill being pressed: two steps towards the text colour.',
+    meaning: 'A primary fill being pressed: two steps deeper.',
     css: stateCss(STATE.pressed),
     value: stateValue(STATE.pressed),
   },
   'on-primary': {
-    meaning: 'Text and icons on a primary fill in any state: white in light, black in dark, because the primary is kept dark enough or light enough for it.',
-    css: 'light-dark(oklch(1 0 0), oklch(0 0 0))',
-    value: (x) => (x.mode === 'light' ? [1, 0, 0] : [0, 0, 0]),
+    meaning: 'Text and icons on a primary fill in any state: white, in light and dark, because the fill is kept dark enough for it.',
+    css: 'oklch(1 0 0)',
+    value: () => [1, 0, 0],
     pairs: { primary: 'text', 'primary-hover': 'text', 'primary-pressed': 'text' },
   },
   focus: {

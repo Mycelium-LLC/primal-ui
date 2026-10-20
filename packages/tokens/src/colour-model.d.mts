@@ -60,7 +60,7 @@ export function harmony(choices: Choices): {
   tertiaryLightness: number;
 };
 export const LIGHT_CAP: number;
-export const DARK_FLOOR: number;
+export const FILL_FLOOR: number;
 export const TEXT_CAP: number;
 export const TEXT_FLOOR: number;
 /** Each step's mix: [the input it mixes towards, the primary's share in percent], or null for the primary itself. */
