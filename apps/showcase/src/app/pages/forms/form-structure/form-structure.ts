@@ -1,11 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { PRIMAL_FORMS } from 'primal-angular';
 
-/** Placeholder until 0.3.0: the plain native elements this page will cover (decision 10). */
 @Component({
   selector: 'pr-forms-form-structure-page',
-  imports: [PagePlaceholder],
+  imports: [PRIMAL_FORMS],
   templateUrl: './form-structure.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormsFormStructurePage {}
+export class FormsFormStructurePage {
+  protected readonly seats = signal(5);
+  protected readonly price = 12;
+  protected readonly total = computed(() => this.seats() * this.price);
+  protected readonly storage = 64;
+}

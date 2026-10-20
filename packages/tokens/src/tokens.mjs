@@ -58,11 +58,13 @@ export const space = {
   gutter: { meaning: 'The space between the viewport edge and content.', value: 'clamp(1rem, 0.6rem + 2vw, 2rem)' },
   'control-height': { meaning: 'The height of a single-line control.', value: '2.5rem' },
   'control-inset': { meaning: 'Horizontal padding inside a control.', value: '0.75rem' },
+  'track-thickness': { meaning: 'The thickness of a progress or meter track.', value: '0.5rem' },
   'target-min': { meaning: 'The smallest pointer target (WCAG 2.2 AA asks 24px).', value: '1.5rem' },
 };
 
 export const layout = {
   'container-reading': { meaning: 'The maximum width of reading pages and documentation.', value: '72rem' },
+  'field-width': { meaning: 'The widest a single-line field grows: as wide as the answer it asks for.', value: '28rem' },
   'container-full': { meaning: 'Full width, for app surfaces that use the whole screen.', value: '100%' },
 };
 

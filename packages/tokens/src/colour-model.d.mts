@@ -59,5 +59,13 @@ export function harmony(choices: Choices): {
   companionLightness: number;
   tertiaryLightness: number;
 };
+export const LIGHT_CAP: number;
+export const DARK_FLOOR: number;
+export const TEXT_CAP: number;
+export const TEXT_FLOOR: number;
+/** Each step's mix: [the input it mixes towards, the primary's share in percent], or null for the primary itself. */
+export const SCALE: Record<string, ['white' | 'black', number] | null>;
+export function scaleCss(step: string): string;
+export function scale(choices: Choices): Record<string, Oklch>;
 export function palette(choices: Choices, mode: Mode): Record<string, Oklch>;
 export function audit(choices: Choices): Pair[];

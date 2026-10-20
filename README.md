@@ -4,7 +4,7 @@
 
 ## What it is
 
-Primal is meant to be two things. It's a design system you install and use as it is. It's also the base that every future Mycelium design system starts from, so its own look stays minimal and is set through tokens. Its tokens, styles and component contracts don't depend on any framework, and each framework gets its own set of packages. Angular comes first; the others come only when Mycelium needs them.
+Primal is meant to be two things. It's a design system you install and use as it is. It's also the base that every future Mycelium design system starts from, so its own look stays minimal (Mycelium's Magma on ink and white) and is set through tokens. Its tokens, styles and component contracts don't depend on any framework, and each framework gets its own set of packages. Angular comes first; the others come only when Mycelium needs them.
 
 ## What's in here
 
@@ -29,4 +29,4 @@ npm run check:folio    # checks the ledger
 
 ## Status
 
-Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are built and waiting for review; the plan to 1.0.0 is in `.folio/`.
+Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are shipped; 0.3.0 (forms) and 0.4.0 (Magma by default) are ready for QA. The plan to 1.0.0 is in `.folio/`.

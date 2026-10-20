@@ -1,18 +1,18 @@
 {
   "--pr-black": {
     "group": "choice",
-    "value": "oklch(22% 0.01 255)",
-    "meaning": "The project's black: text in light, the page in dark. Need not be #000."
+    "value": "oklch(15.05% 0.0042 285.88)",
+    "meaning": "The project's black: text in light, the page in dark. Need not be #000. Primal's is Mycelium ink, #0B0B0D."
   },
   "--pr-white": {
     "group": "choice",
-    "value": "oklch(99.5% 0 0)",
-    "meaning": "The project's white: the page in light, text in dark. Need not be #fff."
+    "value": "oklch(100% 0 0)",
+    "meaning": "The project's white: the page in light, text in dark. Need not be #fff. Primal's is white, #FFFFFF."
   },
   "--pr-primary": {
     "group": "choice",
-    "value": "oklch(50% 0.17 255)",
-    "meaning": "The project's one theme colour. Roles derive from it, adjusted for contrast."
+    "value": "oklch(58.89% 0.23 26.6)",
+    "meaning": "The project's one theme colour. Every primary role, state and step derives from it. Primal's is Mycelium Magma, #E61924."
   },
   "--pr-companion-angle": {
     "group": "choice",
@@ -38,92 +38,127 @@
     "group": "colour",
     "value": "light-dark(var(--pr-white), var(--pr-black))",
     "meaning": "The page itself. The white in light, the black in dark.",
-    "light": "oklch(99.5% 0 0)",
-    "dark": "oklch(22% 0.01 255)"
+    "light": "oklch(100% 0 0)",
+    "dark": "oklch(15.05% 0.0042 285.88)"
   },
   "--pr-color-text": {
     "group": "colour",
     "value": "light-dark(var(--pr-black), var(--pr-white))",
     "meaning": "Text and icons that carry content. The black in light, the white in dark.",
-    "light": "oklch(22% 0.01 255)",
-    "dark": "oklch(99.5% 0 0)"
+    "light": "oklch(15.05% 0.0042 285.88)",
+    "dark": "oklch(100% 0 0)"
   },
   "--pr-color-text-muted": {
     "group": "colour",
-    "value": "color-mix(in oklch, var(--pr-color-text) 62%, var(--pr-color-surface))",
+    "value": "color-mix(in oklab, var(--pr-color-text) 62%, var(--pr-color-surface))",
     "meaning": "Text that supports other text: descriptions, captions, metadata.",
-    "light": "oklch(51.45% 0.0062 255)",
-    "dark": "oklch(70.05% 0.0038 255)"
+    "light": "oklch(47.33% 0.0026 285.88)",
+    "dark": "oklch(67.72% 0.0016 285.88)"
   },
   "--pr-color-surface-raised": {
     "group": "colour",
-    "value": "light-dark(var(--pr-white), color-mix(in oklch, var(--pr-white) 7%, var(--pr-black)))",
+    "value": "light-dark(var(--pr-white), color-mix(in oklab, var(--pr-white) 7%, var(--pr-black)))",
     "meaning": "Something on top of the page: a menu, a popover, a dialog.",
-    "light": "oklch(99.5% 0 0)",
-    "dark": "oklch(27.43% 0.0093 255)"
+    "light": "oklch(100% 0 0)",
+    "dark": "oklch(21% 0.0039 285.88)"
   },
   "--pr-color-surface-sunken": {
     "group": "colour",
     "value": "oklch(from var(--pr-color-surface) calc(l - 0.035) c h)",
     "meaning": "A well in the page holding content of another kind: code, a table header.",
-    "light": "oklch(96% 0 0)",
-    "dark": "oklch(18.5% 0.01 255)"
+    "light": "oklch(96.5% 0 0)",
+    "dark": "oklch(11.55% 0.0042 285.88)"
   },
   "--pr-color-border": {
     "group": "colour",
-    "value": "color-mix(in oklch, var(--pr-color-text) 13%, var(--pr-color-surface))",
+    "value": "color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface))",
     "meaning": "A line that separates: a divider, a table rule. Decoration, so faint.",
-    "light": "oklch(89.42% 0.0013 255)",
-    "dark": "oklch(32.07% 0.0087 255)"
+    "light": "oklch(88.96% 0.0005 285.88)",
+    "dark": "oklch(26.09% 0.0037 285.88)"
   },
   "--pr-color-border-control": {
     "group": "colour",
-    "value": "color-mix(in oklch, var(--pr-color-text) 50%, var(--pr-color-surface))",
+    "value": "color-mix(in oklab, var(--pr-color-text) 50%, var(--pr-color-surface))",
     "meaning": "The edge of something you operate: a field, a checkbox. Meets 3:1.",
-    "light": "oklch(60.75% 0.005 255)",
-    "dark": "oklch(60.75% 0.005 255)"
+    "light": "oklch(57.53% 0.0021 285.88)",
+    "dark": "oklch(57.53% 0.0021 285.88)"
   },
   "--pr-color-primary": {
     "group": "colour",
-    "value": "light-dark(oklch(from var(--pr-primary) min(l, 0.5) c h), oklch(from var(--pr-primary) max(l, 0.76) min(c, 0.15) h))",
-    "meaning": "Where something happens: the primary action, links, the current place, focus. The primary, darkened or lightened until it reads.",
-    "light": "oklch(50% 0.17 255)",
-    "dark": "oklch(76% 0.15 255)"
+    "value": "light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.75 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))))",
+    "meaning": "Where something happens: the primary action's fill, a checked control, an accent. The primary as chosen, darkened (light) or lightened (dark) only if white or black text on it would not read.",
+    "light": "oklch(58.89% 0.23 26.6)",
+    "dark": "oklch(65.16% 0.1789 22.3)"
+  },
+  "--pr-color-primary-text": {
+    "group": "colour",
+    "value": "light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))))",
+    "meaning": "The primary as text: links, the current place, a primary label. A shade further than the fill when needed, so it reads on every surface.",
+    "light": "oklch(54.52% 0.2129 26.6)",
+    "dark": "oklch(68.78% 0.1529 20.84)"
+  },
+  "--pr-color-primary-hover": {
+    "group": "colour",
+    "value": "light-dark(oklch(from var(--pr-color-primary) calc(l - 0.0375) calc(c * 0.94) h), oklch(from var(--pr-color-primary) calc(l + 0.0375) calc(c * 0.94) h))",
+    "meaning": "A primary fill under the pointer: a step towards the text colour.",
+    "light": "oklch(55.14% 0.2162 26.6)",
+    "dark": "oklch(68.91% 0.1682 22.3)"
+  },
+  "--pr-color-primary-pressed": {
+    "group": "colour",
+    "value": "light-dark(oklch(from var(--pr-color-primary) calc(l - 0.075) calc(c * 0.875) h), oklch(from var(--pr-color-primary) calc(l + 0.075) calc(c * 0.875) h))",
+    "meaning": "A primary fill being pressed: two steps towards the text colour.",
+    "light": "oklch(51.39% 0.2013 26.6)",
+    "dark": "oklch(72.66% 0.1565 22.3)"
   },
   "--pr-color-on-primary": {
     "group": "colour",
-    "value": "oklch(from var(--pr-color-primary) clamp(0, (0.64 - l) * 1000, 1) 0 0)",
-    "meaning": "Text and icons on a primary fill: black or white, whichever reads.",
+    "value": "light-dark(oklch(1 0 0), oklch(0 0 0))",
+    "meaning": "Text and icons on a primary fill in any state: white in light, black in dark, because the primary is kept dark enough or light enough for it.",
     "light": "oklch(100% 0 0)",
     "dark": "oklch(0% 0 0)"
+  },
+  "--pr-color-focus": {
+    "group": "colour",
+    "value": "var(--pr-color-primary)",
+    "meaning": "The focus ring: where the keyboard is. The primary, so it is never mistaken for an error or a divider.",
+    "light": "oklch(58.89% 0.23 26.6)",
+    "dark": "oklch(65.16% 0.1789 22.3)"
+  },
+  "--pr-color-primary-surface": {
+    "group": "colour",
+    "value": "color-mix(in oklab, var(--pr-color-primary) 12%, var(--pr-color-surface))",
+    "meaning": "The primary at a whisper: behind the current item, a chosen option, a note that belongs to the primary.",
+    "light": "oklch(95.07% 0.0276 26.6)",
+    "dark": "oklch(21.06% 0.0214 12.4)"
   },
   "--pr-color-companion": {
     "group": "colour",
     "value": "oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle)))",
     "meaning": "Goes with the primary: a second emphasis, a highlight, a second series. Never an action.",
-    "light": "oklch(50% 0.17 75)",
-    "dark": "oklch(76% 0.15 75)"
+    "light": "oklch(58.89% 0.23 206.6)",
+    "dark": "oklch(65.16% 0.1789 202.3)"
   },
   "--pr-color-tertiary": {
     "group": "colour",
     "value": "oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle)))",
     "meaning": "A third hue for decoration and a third series. Never an action.",
-    "light": "oklch(50% 0.17 285)",
-    "dark": "oklch(76% 0.15 285)"
+    "light": "oklch(58.89% 0.23 56.6)",
+    "dark": "oklch(65.16% 0.1789 52.3)"
   },
   "--pr-color-selection": {
     "group": "colour",
-    "value": "color-mix(in oklch, var(--pr-color-primary) 28%, var(--pr-color-surface))",
+    "value": "color-mix(in oklab, var(--pr-color-primary) 28%, var(--pr-color-surface))",
     "meaning": "Text the person has selected.",
-    "light": "oklch(85.64% 0.0476 255)",
-    "dark": "oklch(37.12% 0.0492 255)"
+    "light": "oklch(88.49% 0.0644 26.6)",
+    "dark": "oklch(29.08% 0.0498 18.84)"
   },
   "--pr-color-backdrop": {
     "group": "colour",
     "value": "oklch(from var(--pr-black) l c h / 0.55)",
     "meaning": "Covers the page behind something that interrupts.",
-    "light": "oklch(22% 0.01 255 / 0.55)",
-    "dark": "oklch(22% 0.01 255 / 0.55)"
+    "light": "oklch(15.05% 0.0042 285.88 / 0.55)",
+    "dark": "oklch(15.05% 0.0042 285.88 / 0.55)"
   },
   "--pr-color-danger": {
     "group": "system",
@@ -134,10 +169,10 @@
   },
   "--pr-color-danger-surface": {
     "group": "system",
-    "value": "color-mix(in oklch, var(--pr-color-danger) 12%, var(--pr-color-surface))",
+    "value": "color-mix(in oklab, var(--pr-color-danger) 12%, var(--pr-color-surface))",
     "meaning": "The quiet background behind a danger message.",
-    "light": "oklch(93.8% 0.0228 27)",
-    "dark": "oklch(28.24% 0.0256 270.84)"
+    "light": "oklch(94.24% 0.0228 27)",
+    "dark": "oklch(22.12% 0.0165 14.3)"
   },
   "--pr-color-warning": {
     "group": "system",
@@ -148,10 +183,10 @@
   },
   "--pr-color-warning-surface": {
     "group": "system",
-    "value": "color-mix(in oklch, var(--pr-color-warning) 12%, var(--pr-color-surface))",
+    "value": "color-mix(in oklab, var(--pr-color-warning) 12%, var(--pr-color-surface))",
     "meaning": "The quiet background behind a warning message.",
-    "light": "oklch(93.56% 0.0132 65)",
-    "dark": "oklch(28.96% 0.0232 234)"
+    "light": "oklch(94% 0.0132 65)",
+    "dark": "oklch(22.84% 0.0112 71.71)"
   },
   "--pr-color-info": {
     "group": "system",
@@ -162,10 +197,10 @@
   },
   "--pr-color-info-surface": {
     "group": "system",
-    "value": "color-mix(in oklch, var(--pr-color-info) 12%, var(--pr-color-surface))",
+    "value": "color-mix(in oklab, var(--pr-color-info) 12%, var(--pr-color-surface))",
     "meaning": "The quiet background behind an info message.",
-    "light": "oklch(93.56% 0.0156 235)",
-    "dark": "oklch(28.48% 0.022 252.6)"
+    "light": "oklch(94% 0.0156 235)",
+    "dark": "oklch(22.36% 0.0158 245.46)"
   },
   "--pr-color-success": {
     "group": "system",
@@ -176,10 +211,87 @@
   },
   "--pr-color-success-surface": {
     "group": "system",
-    "value": "color-mix(in oklch, var(--pr-color-success) 12%, var(--pr-color-surface))",
+    "value": "color-mix(in oklab, var(--pr-color-success) 12%, var(--pr-color-surface))",
     "meaning": "The quiet background behind a success message.",
-    "light": "oklch(93.32% 0.0144 150)",
-    "dark": "oklch(28.48% 0.0244 242.4)"
+    "light": "oklch(93.76% 0.0144 150)",
+    "dark": "oklch(22.36% 0.0132 161.24)"
+  },
+  "--pr-primary-50": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 8%, var(--pr-white))",
+    "meaning": "Step 50: 8% primary, the rest the project's white.",
+    "light": "oklch(96.71% 0.0184 26.6)",
+    "dark": "oklch(96.71% 0.0184 26.6)"
+  },
+  "--pr-primary-100": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 16%, var(--pr-white))",
+    "meaning": "Step 100: 16% primary, the rest the project's white.",
+    "light": "oklch(93.42% 0.0368 26.6)",
+    "dark": "oklch(93.42% 0.0368 26.6)"
+  },
+  "--pr-primary-200": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 32%, var(--pr-white))",
+    "meaning": "Step 200: 32% primary, the rest the project's white.",
+    "light": "oklch(86.84% 0.0736 26.6)",
+    "dark": "oklch(86.84% 0.0736 26.6)"
+  },
+  "--pr-primary-300": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 52%, var(--pr-white))",
+    "meaning": "Step 300: 52% primary, the rest the project's white.",
+    "light": "oklch(78.62% 0.1196 26.6)",
+    "dark": "oklch(78.62% 0.1196 26.6)"
+  },
+  "--pr-primary-400": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 76%, var(--pr-white))",
+    "meaning": "Step 400: 76% primary, the rest the project's white.",
+    "light": "oklch(68.76% 0.1748 26.6)",
+    "dark": "oklch(68.76% 0.1748 26.6)"
+  },
+  "--pr-primary-500": {
+    "group": "scale",
+    "value": "var(--pr-primary)",
+    "meaning": "Step 500: the primary as chosen.",
+    "light": "oklch(58.89% 0.23 26.6)",
+    "dark": "oklch(58.89% 0.23 26.6)"
+  },
+  "--pr-primary-600": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 82%, var(--pr-black))",
+    "meaning": "Step 600: 82% primary, the rest the project's black.",
+    "light": "oklch(51% 0.1885 26.37)",
+    "dark": "oklch(51% 0.1885 26.37)"
+  },
+  "--pr-primary-700": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 64%, var(--pr-black))",
+    "meaning": "Step 700: 64% primary, the rest the project's black.",
+    "light": "oklch(43.11% 0.1469 26.02)",
+    "dark": "oklch(43.11% 0.1469 26.02)"
+  },
+  "--pr-primary-800": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 48%, var(--pr-black))",
+    "meaning": "Step 800: 48% primary, the rest the project's black.",
+    "light": "oklch(36.09% 0.11 25.48)",
+    "dark": "oklch(36.09% 0.11 25.48)"
+  },
+  "--pr-primary-900": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 32%, var(--pr-black))",
+    "meaning": "Step 900: 32% primary, the rest the project's black.",
+    "light": "oklch(29.08% 0.0731 24.4)",
+    "dark": "oklch(29.08% 0.0731 24.4)"
+  },
+  "--pr-primary-950": {
+    "group": "scale",
+    "value": "color-mix(in oklab, var(--pr-primary) 20%, var(--pr-black))",
+    "meaning": "Step 950: 20% primary, the rest the project's black.",
+    "light": "oklch(23.82% 0.0455 22.44)",
+    "dark": "oklch(23.82% 0.0455 22.44)"
   },
   "--pr-font-sans": {
     "group": "type",
@@ -309,6 +421,11 @@
     "value": "0.75rem",
     "meaning": "Horizontal padding inside a control."
   },
+  "--pr-track-thickness": {
+    "group": "space",
+    "value": "0.5rem",
+    "meaning": "The thickness of a progress or meter track."
+  },
   "--pr-target-min": {
     "group": "space",
     "value": "1.5rem",
@@ -318,6 +435,11 @@
     "group": "layout",
     "value": "72rem",
     "meaning": "The maximum width of reading pages and documentation."
+  },
+  "--pr-field-width": {
+    "group": "layout",
+    "value": "28rem",
+    "meaning": "The widest a single-line field grows: as wide as the answer it asks for."
   },
   "--pr-container-full": {
     "group": "layout",

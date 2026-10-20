@@ -1,9 +1,68 @@
-<pr-page-placeholder title="Validation" release="0.3.0" covers="Errors that say what to type, under their field.">
-<form (submit)="$event.preventDefault()">
-  <p><label>Email (required) <input type="email" required value="not-an-email"></label></p>
-  <p><label>Age (18 to 120) <input type="number" min="18" max="120" value="12"></label></p>
-  <p><label>Code (6 digits) <input type="text" pattern="[0-9]{6}" value="12ab"></label></p>
-  <p><button type="submit">Check Fields</button></p>
+<h1>Validation</h1>
+<p>An error says what happened and what to type. It sits directly under its field, and it's announced when it appears.</p>
+
+<h2>The contract</h2>
+<dl>
+  <dt>When it appears</dt>
+  <dd>
+    When the person leaves a field they've answered wrongly, or when they try to submit. Never while they're still typing their
+    first try.
+  </dd>
+  <dt>Where</dt>
+  <dd>Directly under its field, in the danger colour, and the field's edge turns the same colour. Never in a banner or a toast.</dd>
+  <dt>How it's announced</dt>
+  <dd>The message is read out as it appears, and again when the field is focused. On submit, focus moves to the first field to fix.</dd>
+  <dt>How it clears</dt>
+  <dd>As soon as the answer is right. The person doesn't have to submit again to see that it's fixed.</dd>
+  <dt>What it says</dt>
+  <dd>
+    What to type, in the person's words, named after the field's label. The browser's own checks (required, email, length,
+    range, pattern) decide what's wrong. Your forms library or your server can supply a message, and theirs wins.
+  </dd>
+</dl>
+
+<h2>Try it</h2>
+<p>Submit this form empty, then fix the answers one by one.</p>
+<form primalForm (validSubmit)="done.set(true)" (reset)="done.set(false)">
+  <primal-field label="Your email">
+    <input primalControl type="email" autocomplete="email" required />
+  </primal-field>
+  <primal-field label="Password" description="At least 12 characters.">
+    <input primalControl type="password" autocomplete="new-password" minlength="12" required />
+  </primal-field>
+  <primal-field label="Age" description="You need to be 18 or over.">
+    <input primalControl type="number" min="18" max="120" required />
+  </primal-field>
+  <primal-field label="Invite code" description="Six digits, from your invitation email.">
+    <input primalControl type="text" inputmode="numeric" pattern="[0-9]{6}" title="Enter the six digits from your invitation email." required />
+  </primal-field>
+  <primal-field-group legend="Plan">
+    <primal-field label="Free"><input primalControl type="radio" name="v-plan" value="free" required /></primal-field>
+    <primal-field label="Team"><input primalControl type="radio" name="v-plan" value="team" /></primal-field>
+  </primal-field-group>
+  <primal-field label="I agree to the terms of service">
+    <input primalControl type="checkbox" required />
+  </primal-field>
+  <div class="pr-form-actions">
+    <button type="submit">Check My Answers</button>
+    <button type="reset">Clear the Form</button>
+  </div>
+  <p role="status">{{ done() ? 'All answers are valid.' : '' }}</p>
 </form>
-<p>Native constraint validation only; the field-level error contract arrives in 0.3.0.</p>
-</pr-page-placeholder>
+
+<h2>The messages</h2>
+<table>
+  <caption>What Primal says, in English</caption>
+  <thead>
+    <tr><th scope="col">When</th><th scope="col">The message</th></tr>
+  </thead>
+  <tbody>
+    @for (m of messages; track m[0]) {
+      <tr><td>{{ m[0] }}</td><td>{{ m[1] }}</td></tr>
+    }
+  </tbody>
+</table>
+<p>
+  Another language or another voice: provide <code>PRIMAL_MESSAGES</code> with your own function, from a control and its label
+  to a message.
+</p>
