@@ -1,6 +1,7 @@
 .pr-options {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--pr-gap-component) var(--pr-gap-group);
 }
 

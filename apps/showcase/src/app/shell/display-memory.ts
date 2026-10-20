@@ -17,6 +17,7 @@ export class DisplayMemory {
       const saved = {
         theme: this.prefs.theme(),
         direction: this.prefs.direction(),
+        scrollToTop: this.prefs.scrollToTop(),
       };
       try {
         localStorage.setItem(KEY, JSON.stringify(saved));
@@ -32,6 +33,7 @@ export class DisplayMemory {
       if (!saved) return;
       if (['system', 'light', 'dark'].includes(saved.theme)) this.prefs.theme.set(saved.theme);
       if (['ltr', 'rtl'].includes(saved.direction)) this.prefs.direction.set(saved.direction);
+      if (typeof saved.scrollToTop === 'boolean') this.prefs.scrollToTop.set(saved.scrollToTop);
     } catch {
       // Unreadable or no storage: keep the defaults.
     }

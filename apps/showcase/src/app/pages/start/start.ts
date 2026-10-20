@@ -18,6 +18,13 @@ export class StartPage {
   "src/my-theme.css"
 ]`;
 
+  protected readonly config = `import { provideRouter } from '@angular/router';
+import { providePrimalRouteScroll } from 'primal-angular';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes), providePrimalRouteScroll()],
+};`;
+
   protected readonly prefs = `import { inject } from '@angular/core';
 import { PrimalPreferences } from 'primal-angular';
 
@@ -30,6 +37,10 @@ export class AppShell {
 
   protected useHebrew(): void {
     this.prefs.direction.set('rtl'); // 'ltr' | 'rtl'
+  }
+
+  protected keepScrollOnPageChange(): void {
+    this.prefs.scrollToTop.set(false); // on by default
   }
 }`;
 

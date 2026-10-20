@@ -14,4 +14,13 @@
       <option value="rtl">Right to left</option>
     </select>
   </label>
+  <label class="pr-switch">
+    <input
+      type="checkbox"
+      role="switch"
+      [checked]="prefs.scrollToTop()"
+      (change)="prefs.scrollToTop.set($any($event.target).checked)"
+    />
+    <span>Start each page at the top</span>
+  </label>
 </div>

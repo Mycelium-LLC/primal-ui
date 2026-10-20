@@ -114,6 +114,11 @@
       "n": 18,
       "decision": "Typeface",
       "ruling": "Google Sans is Primal's default typeface for English and Hebrew, bundled with the library (Latin, Latin Extended and Hebrew, variable weight 400–700, OFL) so products never call Google Fonts at runtime (Niko, 2026-10-20: 'font to use in the design system by default and imported with the library is google font \"google sans\" for both languages')."
+    },
+    {
+      "n": 19,
+      "decision": "Route change",
+      "ruling": "Moving to a new page scrolls to its top, as a switch that is on by default (PrimalPreferences.scrollToTop); back and forward keep the browser's own position, and a link to an anchor goes to the anchor (Niko, 2026-10-20: 'route change scroll to top. as a switch, default on')."
     }
   ],
   "releases": [
@@ -148,6 +153,9 @@
         },
         {
           "text": "Light and dark: the one base with a value for each colour role in both, following the system and forceable per page or region (decision 17)."
+        },
+        {
+          "text": "primal-angular: PrimalPreferences (theme, direction, scroll to top) and providePrimalRouteScroll: a new page starts at its top, a switch that is on by default; back and forward keep the browser's position (decision 19)."
         },
         {
           "text": "Modern reset and base typography; logical properties throughout; reduced motion honoured."

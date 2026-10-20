@@ -14,6 +14,8 @@ export class PrimalPreferences {
 
   readonly theme = signal<PrimalTheme>('system');
   readonly direction = signal<PrimalDirection>('ltr');
+  /** Moving to a new page scrolls to its top (with providePrimalRouteScroll). On by default. */
+  readonly scrollToTop = signal(true);
 
   constructor() {
     effect(() => this.write('data-theme', this.theme() === 'system' ? null : this.theme()));

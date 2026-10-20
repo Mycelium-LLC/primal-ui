@@ -28,7 +28,12 @@
 <p>Add the files to your project's styles in <code>angular.json</code>:</p>
 <pre><code>{{ angularJson }}</code></pre>
 <p>
-  To switch light and dark, or the text direction, use <code>PrimalPreferences</code> from the adapter. Each setting writes
+  So that moving to a new page starts at its top, add <code>providePrimalRouteScroll()</code> next to your router. Back and
+  forward still return the person to where they were.
+</p>
+<pre><code>{{ config }}</code></pre>
+<p>
+  To switch light and dark, the text direction, or scrolling to the top, use <code>PrimalPreferences</code> from the adapter. Each setting writes
   one attribute on the page, and Primal's tokens respond to it.
 </p>
 <pre><code>{{ prefs }}</code></pre>
