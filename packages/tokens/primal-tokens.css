@@ -99,11 +99,17 @@
   /* The smallest pointer target (WCAG 2.2 AA asks 24px). */
   --pr-target-min: 1.5rem;
 
+  /* The box of a checkbox or a radio: the size of a capital letter and a little more. */
+  --pr-choice-size: 1.25rem;
+
   /* The maximum width of reading pages and documentation. */
   --pr-container-reading: 72rem;
 
   /* The widest a single-line field grows: as wide as the answer it asks for. */
   --pr-field-width: 28rem;
+
+  /* The tallest an open list of options grows before it scrolls: about eight options. */
+  --pr-list-height: 20rem;
 
   /* Full width, for app surfaces that use the whole screen. */
   --pr-container-full: 100%;
@@ -122,6 +128,9 @@
 
   /* A line that separates or outlines. */
   --pr-border-width: 1px;
+
+  /* The edge of a checkbox or radio: thicker than a line, so a small control still reads. */
+  --pr-border-width-choice: 1.5px;
 
   /* The width of the focus ring: here is where the keyboard is. */
   --pr-focus-width: 2px;

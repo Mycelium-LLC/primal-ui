@@ -568,30 +568,54 @@ textarea {
   opacity: 1;
 }
 
-button {
+/*
+ * Buttons. A field is outlined (type here); an action is filled (press here). Every button is
+ * a tonal fill in the text colour; the form's one main action, its submit, wears the primary.
+ * Hover and pressed deepen the fill a step at a time, and a press answers at once.
+ */
+:where(button, input[type='button'], input[type='reset'], input[type='submit']) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pr-gap-component);
+  padding-inline: calc(var(--pr-control-inset) * 1.5);
+  border-color: transparent;
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+  color: var(--pr-color-text);
+  font-weight: var(--pr-weight-strong);
   cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--pr-duration-fast) var(--pr-ease-standard),
+    scale var(--pr-duration-fast) var(--pr-ease-standard);
 }
 
-button:hover {
-  background-color: var(--pr-color-surface-sunken);
+:where(button, input[type='button'], input[type='reset'], input[type='submit']):hover:not(:disabled) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
+}
+
+:where(button, input[type='button'], input[type='reset'], input[type='submit']):active:not(:disabled) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 18%, var(--pr-color-surface));
+  scale: 0.98;
+}
+
+:where(button, input[type='button'], input[type='reset'], input[type='submit']):focus-visible {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
 }
 
 /* Submitting is the form's one main action, so it wears the primary: "this is what happens here". */
 :where(button[type='submit'], input[type='submit']) {
   background-color: var(--pr-color-primary);
-  border-color: var(--pr-color-primary);
   color: var(--pr-color-on-primary);
-  font-weight: var(--pr-weight-strong);
 }
 
 :where(button[type='submit'], input[type='submit']):hover:not(:disabled) {
   background-color: var(--pr-color-primary-hover);
-  border-color: var(--pr-color-primary-hover);
 }
 
 :where(button[type='submit'], input[type='submit']):active:not(:disabled) {
   background-color: var(--pr-color-primary-pressed);
-  border-color: var(--pr-color-primary-pressed);
 }
 
 :where(input, select, textarea):hover:not(:disabled, [readonly]) {
@@ -616,6 +640,10 @@ button:hover {
   border-color: var(--pr-color-border);
   background-color: var(--pr-color-surface-sunken);
   color: var(--pr-color-text-muted);
+}
+
+:where(button, input[type='button'], input[type='reset'], input[type='submit']):disabled {
+  border-color: transparent;
 }
 
 /* Invalid, once the person has had their go (on leaving the field, or on submit): the danger edge. */
@@ -655,13 +683,104 @@ select[size]:not([size='1']) {
   background-image: none;
 }
 
-/* Checkbox and radio: the browser's own, sized to the text and in the primary colour. */
-input[type='checkbox'],
-input[type='radio'] {
-  inline-size: 1.15em;
-  block-size: 1.15em;
+/*
+ * Checkbox and radio, drawn by Primal. A checkbox is a square that fills with the primary and
+ * shows a check (or a dash, when some of a group are chosen); a radio is a circle whose centre
+ * fills. Both say "you can choose this" with the control's edge, which meets 3:1.
+ */
+input:is([type='checkbox']:not([role='switch']), [type='radio']) {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  inline-size: var(--pr-choice-size);
+  block-size: var(--pr-choice-size);
   margin: 0;
   flex: none;
+  border: var(--pr-border-width-choice) solid var(--pr-color-border-control);
+  background-color: var(--pr-color-surface);
+  cursor: pointer;
+  transition:
+    background-color var(--pr-duration-fast) var(--pr-ease-standard),
+    border-color var(--pr-duration-fast) var(--pr-ease-standard),
+    scale var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+input[type='checkbox']:not([role='switch']) {
+  border-radius: var(--pr-radius-well);
+}
+
+input[type='radio'] {
+  border-radius: var(--pr-radius-round);
+}
+
+/* The mark: a check, a dash or a dot, drawn in the colour that reads on the fill. */
+input:is([type='checkbox']:not([role='switch']), [type='radio'])::before {
+  content: '';
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  background-color: var(--pr-color-on-primary);
+  scale: 0;
+  transition: scale var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+input[type='checkbox']:not([role='switch'])::before {
+  clip-path: polygon(14% 44%, 0 58%, 38% 96%, 100% 22%, 86% 8%, 38% 68%);
+}
+
+input[type='checkbox']:not([role='switch']):indeterminate::before {
+  clip-path: inset(40% 6%);
+}
+
+input[type='radio']::before {
+  inline-size: 0.5em;
+  block-size: 0.5em;
+  border-radius: var(--pr-radius-round);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, [type='checkbox']:indeterminate) {
+  border-color: var(--pr-color-primary);
+  background-color: var(--pr-color-primary);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, [type='checkbox']:indeterminate)::before {
+  scale: 1;
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled, :checked, [type='checkbox']:indeterminate) {
+  border-color: var(--pr-color-text);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled):is(:checked, [type='checkbox']:indeterminate) {
+  border-color: var(--pr-color-primary-hover);
+  background-color: var(--pr-color-primary-hover);
+}
+
+input:is([type='checkbox'], [type='radio']):active:not(:disabled) {
+  scale: 0.9;
+}
+
+input:is([type='checkbox'], [type='radio']):focus-visible {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled {
+  border-color: var(--pr-color-border);
+  background-color: var(--pr-color-surface-sunken);
+  cursor: not-allowed;
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled:is(:checked, [type='checkbox']:indeterminate) {
+  background-color: var(--pr-color-border);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled::before {
+  background-color: var(--pr-color-text-muted);
+}
+
+/* Invalid once the person has had their go: the danger edge, as on a field. */
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:user-invalid, [aria-invalid='true']) {
+  border-color: var(--pr-color-danger);
 }
 
 /* A switch is a checkbox with role="switch": a track and a thumb. Its label says what it changes. */
@@ -698,6 +817,14 @@ input[type='checkbox'][role='switch']:checked::before {
 
 [dir='rtl'] input[type='checkbox'][role='switch']:checked::before {
   translate: -0.95em 0;
+}
+
+input[type='checkbox'][role='switch']:hover:not(:disabled, :checked) {
+  background-color: var(--pr-color-text-muted);
+}
+
+input[type='checkbox'][role='switch']:hover:not(:disabled):checked {
+  background-color: var(--pr-color-primary-hover);
 }
 
 input[type='checkbox'][role='switch']:disabled {
@@ -737,14 +864,203 @@ input[type='file'] {
 
 input[type='file']::file-selector-button {
   min-block-size: var(--pr-control-height);
-  padding-inline: var(--pr-control-inset);
+  padding-inline: calc(var(--pr-control-inset) * 1.5);
   margin-inline-end: var(--pr-gap-component);
-  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border: 0;
   border-radius: var(--pr-radius-control);
-  background-color: var(--pr-color-surface);
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
   color: var(--pr-color-text);
   font: inherit;
+  font-weight: var(--pr-weight-strong);
   cursor: pointer;
+}
+
+input[type='file']:hover::file-selector-button {
+  background-color: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
+}
+
+/*
+ * Lists Primal draws: the select's and the autocomplete's (decision 25). The closed select is
+ * a field, outlined, with a chevron; the open list sits on top of the page, raised, as wide as
+ * its field. The active option (under the pointer or the arrow keys) is shaded; the chosen one
+ * carries a check in the primary.
+ */
+.pr-select,
+.pr-autocomplete {
+  display: block;
+  max-inline-size: var(--pr-field-width);
+}
+
+.pr-autocomplete > input {
+  inline-size: 100%;
+}
+
+.pr-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pr-gap-component);
+  inline-size: 100%;
+  padding-inline: var(--pr-control-inset);
+  border-color: var(--pr-color-border-control);
+  background-color: var(--pr-color-surface);
+  font-weight: var(--pr-weight-regular);
+  text-align: start;
+}
+
+.pr-select-trigger:hover:not(:disabled) {
+  border-color: var(--pr-color-text-muted);
+  background-color: var(--pr-color-surface);
+}
+
+.pr-select-trigger:active:not(:disabled) {
+  background-color: var(--pr-color-surface);
+  scale: 1;
+}
+
+.pr-select-trigger:focus {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+.pr-select-trigger:disabled {
+  border-color: var(--pr-color-border);
+}
+
+.pr-select-trigger[aria-invalid='true'] {
+  border-color: var(--pr-color-danger);
+}
+
+.pr-select-trigger[aria-invalid='true']:focus {
+  outline-color: var(--pr-color-danger);
+}
+
+.pr-select-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pr-select-placeholder {
+  color: var(--pr-color-text-muted);
+}
+
+/* The chevron points to where the list opens, and turns over while it's open. */
+.pr-select-trigger::after {
+  content: '';
+  flex: none;
+  inline-size: 0.7em;
+  block-size: 0.45em;
+  background-color: currentColor;
+  clip-path: polygon(0 0, 50% 70%, 100% 0, 100% 30%, 50% 100%, 0 30%);
+  transition: rotate var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+.pr-select-trigger[aria-expanded='true']::after {
+  rotate: 180deg;
+}
+
+.pr-list {
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  max-block-size: var(--pr-list-height);
+  margin: calc(var(--pr-gap-component) / 2) 0;
+  padding: calc(var(--pr-gap-component) / 2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-raised);
+  color: var(--pr-color-text);
+  box-shadow: var(--pr-elevation-1);
+  opacity: 1;
+  transition:
+    opacity var(--pr-duration-fast) var(--pr-ease-standard),
+    display var(--pr-duration-fast) allow-discrete,
+    overlay var(--pr-duration-fast) allow-discrete;
+}
+
+@starting-style {
+  .pr-list:popover-open {
+    opacity: 0;
+  }
+}
+
+.pr-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  min-block-size: var(--pr-control-height);
+  padding-block: calc(var(--pr-gap-component) / 2);
+  padding-inline: calc(var(--pr-control-inset) + 1em + var(--pr-gap-component)) var(--pr-control-inset);
+  border-radius: var(--pr-radius-control);
+  cursor: pointer;
+}
+
+.pr-option + .pr-option,
+.pr-list-heading + .pr-option {
+  margin-block-start: 0;
+}
+
+.pr-option-active {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface-raised));
+}
+
+/* The chosen option: a check before it, in the primary. */
+.pr-option[aria-selected='true']::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: var(--pr-control-inset);
+  inline-size: 1em;
+  block-size: 0.8em;
+  background-color: var(--pr-color-primary);
+  clip-path: polygon(14% 44%, 0 58%, 38% 96%, 100% 22%, 86% 8%, 38% 68%);
+}
+
+.pr-option[aria-selected='true'] {
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-option[aria-disabled='true'] {
+  color: var(--pr-color-text-muted);
+  cursor: not-allowed;
+}
+
+.pr-list-heading {
+  padding: var(--pr-gap-component) var(--pr-control-inset) calc(var(--pr-gap-component) / 2);
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-list-heading:not(:first-child) {
+  margin-block-start: calc(var(--pr-gap-component) / 2);
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+/* The text the person typed, marked in each option it matches. */
+.pr-match {
+  padding: 0;
+  background: none;
+  color: inherit;
+  font-weight: var(--pr-weight-strong);
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+
+.pr-list-empty {
+  margin: 0;
+  padding: var(--pr-gap-component) var(--pr-control-inset);
+  color: var(--pr-color-text-muted);
 }
 
 /* Progress: how much of a known job is done. Meter: where a value sits in a known range. */
@@ -894,7 +1210,7 @@ label {
 
 /* A choice that isn't available now steps back as a whole, its words included. */
 .pr-choice:has(> input:disabled) > label,
-.pr-field:has(> :is(input, select, textarea):disabled) > label {
+.pr-field:has(> :is(input, select, textarea):disabled, > :is(.pr-select, .pr-autocomplete) > :is(input, select):disabled) > label {
   color: var(--pr-color-text-muted);
   cursor: not-allowed;
 }

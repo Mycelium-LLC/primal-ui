@@ -15,6 +15,21 @@
   <input primalControl type="checkbox" required />
 </primal-field>
 
+<h3>Some of a group</h3>
+<p>A checkbox that stands for a group shows a dash while only some of it is chosen.</p>
+<primal-field-group legend="Export">
+  <primal-field label="Every column">
+    <input primalControl type="checkbox" [checked]="allColumns()" [indeterminate]="someColumns()" (change)="setAll($any($event.target).checked)" />
+  </primal-field>
+  <div class="pr-nested">
+    @for (c of columns; track c.name) {
+      <primal-field [label]="c.name">
+        <input primalControl type="checkbox" [checked]="chosen().has(c.name)" (change)="toggle(c.name, $any($event.target).checked)" />
+      </primal-field>
+    }
+  </div>
+</primal-field-group>
+
 <h2>A radio group</h2>
 <p>
   One answer from a few. The group is a single stop in the tab order, and the arrow keys move between its options, the way the
@@ -25,6 +40,53 @@
   <primal-field label="Team" description="Up to 20 people."><input primalControl type="radio" name="plan" value="team" /></primal-field>
   <primal-field label="Enterprise" description="Talk to us first."><input primalControl type="radio" name="plan" value="enterprise" disabled /></primal-field>
 </primal-field-group>
+
+<h2>Every state</h2>
+<p>Hover and press any of them; tab to see the focus ring.</p>
+<div class="pr-table">
+  <table class="pr-states-table">
+    <caption>Checkboxes and radios in each state</caption>
+    <thead>
+      <tr>
+        <th scope="col">State</th>
+        <th scope="col">Checkbox</th>
+        <th scope="col">Radio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Not chosen</th>
+        <td><input type="checkbox" aria-label="Checkbox, not chosen" /></td>
+        <td><input type="radio" name="s1" aria-label="Radio, not chosen" /></td>
+      </tr>
+      <tr>
+        <th scope="row">Chosen</th>
+        <td><input type="checkbox" checked aria-label="Checkbox, chosen" /></td>
+        <td><input type="radio" name="s2" checked aria-label="Radio, chosen" /></td>
+      </tr>
+      <tr>
+        <th scope="row">Some of a group</th>
+        <td><input type="checkbox" [indeterminate]="true" aria-label="Checkbox, some of a group" /></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">Not available</th>
+        <td><input type="checkbox" disabled aria-label="Checkbox, not available" /></td>
+        <td><input type="radio" name="s3" disabled aria-label="Radio, not available" /></td>
+      </tr>
+      <tr>
+        <th scope="row">Chosen, not available</th>
+        <td><input type="checkbox" checked disabled aria-label="Checkbox, chosen, not available" /></td>
+        <td><input type="radio" name="s4" checked disabled aria-label="Radio, chosen, not available" /></td>
+      </tr>
+      <tr>
+        <th scope="row">Needs an answer</th>
+        <td><input type="checkbox" aria-invalid="true" aria-label="Checkbox, needs an answer" /></td>
+        <td><input type="radio" name="s5" aria-invalid="true" aria-label="Radio, needs an answer" /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <h2>Switches</h2>
 <p>
