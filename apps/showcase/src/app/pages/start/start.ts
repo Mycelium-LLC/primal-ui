@@ -46,8 +46,11 @@ export class AppShell {
 
   protected readonly theme = `/* my-theme.css, loaded after Primal */
 :root {
-  --pr-color-accent: light-dark(oklch(45% 0.1 160), oklch(76% 0.11 160));
-  --pr-radius-control: 999px;
+  --pr-black: #1f1b16;
+  --pr-white: #faf7f2;
+  --pr-primary: #0b7a5a;
+  --pr-companion-angle: 30; /* Analogous */
+  --pr-tertiary-angle: -30;
 }`;
 
   protected readonly build = `npm install

@@ -162,7 +162,7 @@ pre {
 }
 
 a {
-  color: var(--pr-color-accent);
+  color: var(--pr-color-primary);
   text-decoration-thickness: from-font;
   text-underline-offset: 0.15em;
 }
@@ -171,7 +171,7 @@ a {
 
 /* The focus ring means one thing: this is where the keyboard is. */
 :focus-visible {
-  outline: var(--pr-focus-width) solid var(--pr-color-accent);
+  outline: var(--pr-focus-width) solid var(--pr-color-primary);
   outline-offset: var(--pr-focus-offset);
 }
 
@@ -281,7 +281,7 @@ figcaption {
 /* Early base (0.3.0 and 0.4.0 build the field and action primitives on it). */
 
 :root {
-  accent-color: var(--pr-color-accent);
+  accent-color: var(--pr-color-primary);
 }
 
 button,

@@ -1,122 +1,175 @@
 {
+  "--pr-black": {
+    "group": "choice",
+    "value": "oklch(22% 0.01 255)",
+    "meaning": "The project's black: text in light, the page in dark. Need not be #000."
+  },
+  "--pr-white": {
+    "group": "choice",
+    "value": "oklch(99.5% 0 0)",
+    "meaning": "The project's white: the page in light, text in dark. Need not be #fff."
+  },
+  "--pr-primary": {
+    "group": "choice",
+    "value": "oklch(50% 0.17 255)",
+    "meaning": "The project's one theme colour. Roles derive from it, adjusted for contrast."
+  },
+  "--pr-companion-angle": {
+    "group": "choice",
+    "value": "180",
+    "meaning": "How far round the wheel the companion sits from the primary (Complementary by default)."
+  },
+  "--pr-tertiary-angle": {
+    "group": "choice",
+    "value": "30",
+    "meaning": "How far round the wheel the tertiary sits from the primary (Complementary by default)."
+  },
   "--pr-color-surface": {
     "group": "colour",
-    "value": "light-dark(oklch(99.5% 0 0), oklch(17% 0.005 255))",
-    "meaning": "The page itself. Everything sits on it.",
+    "value": "light-dark(var(--pr-white), var(--pr-black))",
+    "meaning": "The page itself. The white in light, the black in dark.",
     "light": "oklch(99.5% 0 0)",
-    "dark": "oklch(17% 0.005 255)"
-  },
-  "--pr-color-surface-raised": {
-    "group": "colour",
-    "value": "light-dark(oklch(100% 0 0), oklch(22% 0.006 255))",
-    "meaning": "Something on top of the page: a menu, a popover, a dialog. Always paired with an elevation.",
-    "light": "oklch(100% 0 0)",
-    "dark": "oklch(22% 0.006 255)"
-  },
-  "--pr-color-surface-sunken": {
-    "group": "colour",
-    "value": "light-dark(oklch(96.5% 0.003 255), oklch(14% 0.005 255))",
-    "meaning": "A well inside the page that holds content of another kind: code, a quoted block, a table header.",
-    "light": "oklch(96.5% 0.003 255)",
-    "dark": "oklch(14% 0.005 255)"
+    "dark": "oklch(22% 0.01 255)"
   },
   "--pr-color-text": {
     "group": "colour",
-    "value": "light-dark(oklch(22% 0.01 255), oklch(94% 0.005 255))",
-    "meaning": "Text and icons that carry content.",
+    "value": "light-dark(var(--pr-black), var(--pr-white))",
+    "meaning": "Text and icons that carry content. The black in light, the white in dark.",
     "light": "oklch(22% 0.01 255)",
-    "dark": "oklch(94% 0.005 255)"
+    "dark": "oklch(99.5% 0 0)"
   },
   "--pr-color-text-muted": {
     "group": "colour",
-    "value": "light-dark(oklch(46% 0.01 255), oklch(74% 0.008 255))",
-    "meaning": "Text that supports other text: descriptions, captions, metadata. Steps back, still readable.",
-    "light": "oklch(46% 0.01 255)",
-    "dark": "oklch(74% 0.008 255)"
+    "value": "color-mix(in oklch, var(--pr-color-text) 62%, var(--pr-color-surface))",
+    "meaning": "Text that supports other text: descriptions, captions, metadata.",
+    "light": "oklch(51.45% 0.0062 255)",
+    "dark": "oklch(70.05% 0.0038 255)"
+  },
+  "--pr-color-surface-raised": {
+    "group": "colour",
+    "value": "light-dark(var(--pr-white), color-mix(in oklch, var(--pr-white) 7%, var(--pr-black)))",
+    "meaning": "Something on top of the page: a menu, a popover, a dialog.",
+    "light": "oklch(99.5% 0 0)",
+    "dark": "oklch(27.43% 0.0093 255)"
+  },
+  "--pr-color-surface-sunken": {
+    "group": "colour",
+    "value": "oklch(from var(--pr-color-surface) calc(l - 0.035) c h)",
+    "meaning": "A well in the page holding content of another kind: code, a table header.",
+    "light": "oklch(96% 0 0)",
+    "dark": "oklch(18.5% 0.01 255)"
   },
   "--pr-color-border": {
     "group": "colour",
-    "value": "light-dark(oklch(89% 0.004 255), oklch(30% 0.006 255))",
-    "meaning": "A line that separates: a divider, a table rule. Decorative, so it stays faint.",
-    "light": "oklch(89% 0.004 255)",
-    "dark": "oklch(30% 0.006 255)"
+    "value": "color-mix(in oklch, var(--pr-color-text) 13%, var(--pr-color-surface))",
+    "meaning": "A line that separates: a divider, a table rule. Decoration, so faint.",
+    "light": "oklch(89.42% 0.0013 255)",
+    "dark": "oklch(32.07% 0.0087 255)"
   },
   "--pr-color-border-control": {
     "group": "colour",
-    "value": "light-dark(oklch(60% 0.01 255), oklch(56% 0.01 255))",
-    "meaning": "The edge of something you operate: a field, a checkbox. Must be seen, so it meets 3:1.",
-    "light": "oklch(60% 0.01 255)",
-    "dark": "oklch(56% 0.01 255)"
+    "value": "color-mix(in oklch, var(--pr-color-text) 50%, var(--pr-color-surface))",
+    "meaning": "The edge of something you operate: a field, a checkbox. Meets 3:1.",
+    "light": "oklch(60.75% 0.005 255)",
+    "dark": "oklch(60.75% 0.005 255)"
   },
-  "--pr-color-accent": {
+  "--pr-color-primary": {
     "group": "colour",
-    "value": "light-dark(oklch(50% 0.17 255), oklch(74% 0.12 255))",
-    "meaning": "Where something happens: links, the primary action, the current place, focus.",
+    "value": "light-dark(oklch(from var(--pr-primary) min(l, 0.5) c h), oklch(from var(--pr-primary) max(l, 0.76) min(c, 0.15) h))",
+    "meaning": "Where something happens: the primary action, links, the current place, focus. The primary, darkened or lightened until it reads.",
     "light": "oklch(50% 0.17 255)",
-    "dark": "oklch(74% 0.12 255)"
+    "dark": "oklch(76% 0.15 255)"
   },
-  "--pr-color-on-accent": {
+  "--pr-color-on-primary": {
     "group": "colour",
-    "value": "light-dark(oklch(100% 0 0), oklch(17% 0.005 255))",
-    "meaning": "Text and icons on an accent fill.",
+    "value": "oklch(from var(--pr-color-primary) clamp(0, (0.64 - l) * 1000, 1) 0 0)",
+    "meaning": "Text and icons on a primary fill: black or white, whichever reads.",
     "light": "oklch(100% 0 0)",
-    "dark": "oklch(17% 0.005 255)"
+    "dark": "oklch(0% 0 0)"
+  },
+  "--pr-color-companion": {
+    "group": "colour",
+    "value": "oklch(from var(--pr-color-primary) l c calc(h + var(--pr-companion-angle)))",
+    "meaning": "Goes with the primary: a second emphasis, a highlight, a second series. Never an action.",
+    "light": "oklch(50% 0.17 75)",
+    "dark": "oklch(76% 0.15 75)"
+  },
+  "--pr-color-tertiary": {
+    "group": "colour",
+    "value": "oklch(from var(--pr-color-primary) l c calc(h + var(--pr-tertiary-angle)))",
+    "meaning": "A third hue for decoration and a third series. Never an action.",
+    "light": "oklch(50% 0.17 285)",
+    "dark": "oklch(76% 0.15 285)"
+  },
+  "--pr-color-selection": {
+    "group": "colour",
+    "value": "color-mix(in oklch, var(--pr-color-primary) 28%, var(--pr-color-surface))",
+    "meaning": "Text the person has selected.",
+    "light": "oklch(85.64% 0.0476 255)",
+    "dark": "oklch(37.12% 0.0492 255)"
+  },
+  "--pr-color-backdrop": {
+    "group": "colour",
+    "value": "oklch(from var(--pr-black) l c h / 0.55)",
+    "meaning": "Covers the page behind something that interrupts.",
+    "light": "oklch(22% 0.01 255 / 0.55)",
+    "dark": "oklch(22% 0.01 255 / 0.55)"
   },
   "--pr-color-danger": {
-    "group": "colour",
+    "group": "system",
     "value": "light-dark(oklch(52% 0.19 27), oklch(74% 0.14 27))",
-    "meaning": "Something failed, or an action cannot be undone.",
+    "meaning": "Something failed, or cannot be undone.",
     "light": "oklch(52% 0.19 27)",
     "dark": "oklch(74% 0.14 27)"
   },
   "--pr-color-danger-surface": {
-    "group": "colour",
-    "value": "light-dark(oklch(96% 0.025 27), oklch(24% 0.05 27))",
-    "meaning": "The quiet ground behind a danger message.",
-    "light": "oklch(96% 0.025 27)",
-    "dark": "oklch(24% 0.05 27)"
+    "group": "system",
+    "value": "color-mix(in oklch, var(--pr-color-danger) 12%, var(--pr-color-surface))",
+    "meaning": "The quiet background behind a danger message.",
+    "light": "oklch(93.8% 0.0228 27)",
+    "dark": "oklch(28.24% 0.0256 270.84)"
   },
   "--pr-color-warning": {
-    "group": "colour",
+    "group": "system",
     "value": "light-dark(oklch(50% 0.11 65), oklch(80% 0.12 80))",
-    "meaning": "Something needs attention soon, but nothing has failed.",
+    "meaning": "Needs attention soon; nothing has failed.",
     "light": "oklch(50% 0.11 65)",
     "dark": "oklch(80% 0.12 80)"
   },
   "--pr-color-warning-surface": {
-    "group": "colour",
-    "value": "light-dark(oklch(96.5% 0.04 85), oklch(25% 0.04 75))",
-    "meaning": "The quiet ground behind a warning message.",
-    "light": "oklch(96.5% 0.04 85)",
-    "dark": "oklch(25% 0.04 75)"
+    "group": "system",
+    "value": "color-mix(in oklch, var(--pr-color-warning) 12%, var(--pr-color-surface))",
+    "meaning": "The quiet background behind a warning message.",
+    "light": "oklch(93.56% 0.0132 65)",
+    "dark": "oklch(28.96% 0.0232 234)"
+  },
+  "--pr-color-info": {
+    "group": "system",
+    "value": "light-dark(oklch(50% 0.13 235), oklch(76% 0.11 235))",
+    "meaning": "Worth knowing; nothing to do.",
+    "light": "oklch(50% 0.13 235)",
+    "dark": "oklch(76% 0.11 235)"
+  },
+  "--pr-color-info-surface": {
+    "group": "system",
+    "value": "color-mix(in oklch, var(--pr-color-info) 12%, var(--pr-color-surface))",
+    "meaning": "The quiet background behind an info message.",
+    "light": "oklch(93.56% 0.0156 235)",
+    "dark": "oklch(28.48% 0.022 252.6)"
   },
   "--pr-color-success": {
-    "group": "colour",
+    "group": "system",
     "value": "light-dark(oklch(48% 0.12 150), oklch(76% 0.13 150))",
     "meaning": "Done, resolved, safe.",
     "light": "oklch(48% 0.12 150)",
     "dark": "oklch(76% 0.13 150)"
   },
   "--pr-color-success-surface": {
-    "group": "colour",
-    "value": "light-dark(oklch(96% 0.03 150), oklch(24% 0.04 150))",
-    "meaning": "The quiet ground behind a success message.",
-    "light": "oklch(96% 0.03 150)",
-    "dark": "oklch(24% 0.04 150)"
-  },
-  "--pr-color-selection": {
-    "group": "colour",
-    "value": "light-dark(oklch(88% 0.06 255), oklch(36% 0.08 255))",
-    "meaning": "Text the person has selected.",
-    "light": "oklch(88% 0.06 255)",
-    "dark": "oklch(36% 0.08 255)"
-  },
-  "--pr-color-backdrop": {
-    "group": "colour",
-    "value": "light-dark(oklch(20% 0.01 255 / 0.4), oklch(0% 0 0 / 0.6))",
-    "meaning": "Covers the page behind something that interrupts (a modal dialog).",
-    "light": "oklch(20% 0.01 255 / 0.4)",
-    "dark": "oklch(0% 0 0 / 0.6)"
+    "group": "system",
+    "value": "color-mix(in oklch, var(--pr-color-success) 12%, var(--pr-color-surface))",
+    "meaning": "The quiet background behind a success message.",
+    "light": "oklch(93.32% 0.0144 150)",
+    "dark": "oklch(28.48% 0.0244 242.4)"
   },
   "--pr-font-sans": {
     "group": "type",

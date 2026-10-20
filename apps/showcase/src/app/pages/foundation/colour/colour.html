@@ -1,54 +1,138 @@
 <h1>Colour</h1>
 <p>
-  Each colour is a role with one meaning. It is never picked for how it looks in one place. There is one accent, and it means
-  "something happens here". The other roles are quiet, so that whatever needs attention can lead.
-</p>
-<p>
-  Each role has a value for light and dark. Every text and control pair is checked against WCAG 2.2 AA on every build.
+  A project's colour comes from three choices: its black, its white and its primary. Its black doesn't have to be #000, and
+  its white doesn't have to be #fff. Every other colour is derived from these three, in light and in dark, and stays
+  readable. Try your own below.
 </p>
 
+<div class="pr-choices" role="group" aria-label="Your three colours">
+  <label>
+    <input type="color" [value]="toHex(black())" (input)="pick('black', $any($event.target).value)" />
+    <span><strong>Black</strong><small>Text in light, the page in dark</small></span>
+  </label>
+  <label>
+    <input type="color" [value]="toHex(white())" (input)="pick('white', $any($event.target).value)" />
+    <span><strong>White</strong><small>The page in light, text in dark</small></span>
+  </label>
+  <label>
+    <input type="color" [value]="toHex(primary())" (input)="pick('primary', $any($event.target).value)" />
+    <span><strong>Primary</strong><small>The one theme colour</small></span>
+  </label>
+  <button type="button" class="pr-reset" (click)="reset()">Reset to Primal's Colours</button>
+</div>
+
+<h2>Harmony</h2>
+<p>
+  The companion and the tertiary come from the primary, a set distance round the colour wheel. Choose the harmony, and the
+  distance follows.
+</p>
+<ul class="pr-harmonies">
+  @for (h of harmonies(); track h.key) {
+    <li>
+      <button type="button" class="pr-harmony" [attr.aria-pressed]="scheme() === h.key" (click)="useScheme(h.key)">
+        <span class="pr-chips" aria-hidden="true">
+          @for (hex of h.swatches; track $index) {
+            <span [style.background-color]="hex"></span>
+          }
+        </span>
+        <strong>{{ h.label }}</strong>
+        <small>{{ h.meaning }}</small>
+      </button>
+    </li>
+  }
+</ul>
+
+<h2>Preview</h2>
+<div class="pr-previews">
+  @for (mode of ['light', 'dark']; track mode) {
+    <section class="pr-preview" data-palette [attr.data-theme]="mode" [style]="vars()" [attr.aria-label]="mode + ' preview'">
+      <h3>{{ mode === 'light' ? 'Light' : 'Dark' }}</h3>
+      <p>Body text with <a href="#">a link</a>.</p>
+      <p class="pr-muted">Muted text for a description.</p>
+      <p class="pr-row">
+        <button type="button" class="pr-primary-action">Save Changes</button>
+        <button type="button">Cancel Edit</button>
+      </p>
+      <p class="pr-row"><span class="pr-tag pr-companion">Companion</span> <span class="pr-tag pr-tertiary">Tertiary</span></p>
+      <ul class="pr-system">
+        <li class="pr-danger">The report could not be saved.</li>
+        <li class="pr-warning">Your trial ends in 3 days.</li>
+        <li class="pr-info">A new version is available.</li>
+        <li class="pr-success">3 changes saved.</li>
+      </ul>
+    </section>
+  }
+</div>
+
+<p class="pr-audit" role="status">
+  @if (misses().length === 0) {
+    All {{ pairs() }} colour pairs meet WCAG 2.2 AA, in light and dark.
+  } @else {
+    {{ misses().length }} of {{ pairs() }} colour pairs fall below WCAG 2.2 AA. Darken your black or lighten your white:
+  }
+</p>
+@if (misses().length) {
+  <ul class="pr-misses">
+    @for (m of misses(); track m.mode + m.fg + m.bg) {
+      <li>{{ m.mode }}: {{ m.fg }} on {{ m.bg }}, {{ m.ratio.toFixed(2) }}:1 (needs {{ m.need }}:1)</li>
+    }
+  </ul>
+}
+
+<h2>Your theme file</h2>
+<p>These lines are all a project needs for its colour.</p>
+<pre><code>{{ snippet() }}</code></pre>
+<p class="pr-row">
+  <button type="button" (click)="copy()">Copy Theme CSS</button>
+  <span role="status" class="pr-muted">{{ copied() ? 'Copied to the clipboard.' : '' }}</span>
+</p>
+
+<h2>The derived roles</h2>
 <div class="pr-table-scroll">
-  <table class="pr-colours">
-    <caption>Colour roles in light and dark</caption>
+  <table>
+    <caption>Every role, from your choices</caption>
     <thead>
       <tr>
         <th scope="col">Role and meaning</th>
-        @for (mode of modes; track mode.label) {
-          <th scope="col">{{ mode.label }}</th>
-        }
+        <th scope="col">Light</th>
+        <th scope="col">Dark</th>
       </tr>
     </thead>
     <tbody>
-      @for (c of colours; track c.name) {
+      @for (r of roles(); track r.name) {
         <tr>
-          <th scope="row"><code>{{ c.name }}</code><span class="pr-meaning">{{ c.meaning }}</span></th>
-          @for (mode of modes; track mode.label) {
-            <td>
-              <span
-                class="pr-swatch"
-                [attr.data-theme]="mode.theme"
-                [style.background-color]="'var(' + c.name + ')'"
-                role="img"
-                [attr.aria-label]="c.name + ' in ' + mode.label"
-              ></span>
-            </td>
-          }
+          <th scope="row"><code>{{ r.name }}</code><span class="pr-meaning">{{ r.meaning }}</span></th>
+          <td><span class="pr-swatch" [style.background-color]="r.light" role="img" [attr.aria-label]="r.name + ' in light: ' + r.light"></span></td>
+          <td><span class="pr-swatch" [style.background-color]="r.dark" role="img" [attr.aria-label]="r.name + ' in dark: ' + r.dark"></span></td>
         </tr>
       }
     </tbody>
   </table>
 </div>
 
-<h2>In use</h2>
-<p>The same few elements in light and dark, so you can see how the roles work together.</p>
-<div class="pr-in-use">
-  @for (mode of modes; track mode.label) {
-    <section class="pr-region" [attr.data-theme]="mode.theme" [attr.aria-label]="mode.label">
-      <h3>{{ mode.label }}</h3>
-      <p>Body text with <a href="#">a link</a>.</p>
-      <p class="pr-muted">Muted text: a caption or description.</p>
-      <p class="pr-danger">Danger: the report could not be saved.</p>
-      <p class="pr-success">Success: 3 changes saved.</p>
-    </section>
-  }
+<h2>System colours</h2>
+<p>
+  Danger, warning, info and success keep their hues in every project, outside the harmony, so they always read as what they
+  are. Each has a quiet background (<code>--pr-color-danger-surface</code>, and so on) mixed with the page.
+</p>
+<div class="pr-table-scroll">
+  <table>
+    <caption>System colours</caption>
+    <thead>
+      <tr>
+        <th scope="col">Colour and meaning</th>
+        <th scope="col">Light</th>
+        <th scope="col">Dark</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (r of system(); track r.name) {
+        <tr>
+          <th scope="row"><code>--pr-color-{{ r.name }}</code><span class="pr-meaning">{{ r.meaning }}</span></th>
+          <td><span class="pr-swatch" [style.background-color]="r.light" role="img" [attr.aria-label]="r.name + ' in light'"></span></td>
+          <td><span class="pr-swatch" [style.background-color]="r.dark" role="img" [attr.aria-label]="r.name + ' in dark'"></span></td>
+        </tr>
+      }
+    </tbody>
+  </table>
 </div>

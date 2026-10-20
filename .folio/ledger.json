@@ -124,6 +124,16 @@
       "n": 20,
       "decision": "Page transitions",
       "ruling": "A page change is a short cross-fade of the page content, timed by the motion tokens; the shell holds still and nothing slides; instant under reduced motion (Niko, 2026-10-20: 'smoother page transitions please. it jumps')."
+    },
+    {
+      "n": 21,
+      "decision": "Colour from three choices",
+      "ruling": "Every project chooses its black (not necessarily #000), its white (not necessarily #fff) and one primary; every other colour derives from them, and the companion and tertiary come from the primary through a colour-harmony scheme chosen from previews (Niko, 2026-10-20: 'for every project we would choose: whats our black? whats our white? whats our primary? and we can derive rest from this')."
+    },
+    {
+      "n": 22,
+      "decision": "System colours",
+      "ruling": "Danger, warning, info and success are their own group, outside the harmony, keeping their hues in every project; only their backgrounds mix with the page (Niko, 2026-10-20: 'in another contextual group the system ui colors: like warning | info | sucess? at minimum')."
     }
   ],
   "releases": [
@@ -148,10 +158,13 @@
           "text": "The shell first (decision 10): the showcase with every planned page from the start, each unbuilt page showing the plain native HTML it will cover and the release that builds it."
         },
         {
+          "text": "The Colour page: pick black, white and primary, choose a harmony from live previews (complementary, analogous, triadic, split), see every derived role and its contrast, and copy the theme file."
+        },
+        {
           "text": "Repository layout: an Angular CLI workspace. packages/tokens (framework-independent tokens as CSS custom properties, later also JSON), packages/css (reset, base typography and layout in plain CSS), packages/angular (the first adapter, Angular 22+, standalone and zoneless, signals-first), apps/showcase (the live showcase, Angular). CI builds both and checks this ledger."
         },
         {
-          "text": "Semantic tokens: colour roles, type scale (fluid), the three gaps, radius, borders, elevation levels with written meanings, layers, motion durations and easing."
+          "text": "Semantic tokens: colour from three choices (black, white, primary) and a harmony, every colour role derived in CSS (relative colours, color-mix) and checked by the same model in JavaScript; system colours (danger, warning, info, success) outside the harmony; type scale (fluid), the three gaps, radius, borders, elevation levels with written meanings, layers, motion durations and easing (decisions 21, 22)."
         },
         {
           "text": "Typeface: Google Sans bundled in the core package with its OFL licence, for English and Hebrew (decision 18)."

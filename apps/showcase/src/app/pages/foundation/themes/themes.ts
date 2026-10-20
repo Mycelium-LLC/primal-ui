@@ -1,17 +1,20 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'pr-foundation-themes-page',
+  imports: [RouterLink],
   templateUrl: './themes.html',
   styleUrl: './themes.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoundationThemesPage {
-  protected readonly example = `/* my-product-theme.css, loaded after primal-tokens.css */
+  protected readonly example = `/* my-theme.css, loaded after Primal */
 :root {
-  --pr-color-accent: light-dark(oklch(45% 0.1 160), oklch(76% 0.11 160));
-  --pr-font-sans: Georgia, serif;
-  --pr-radius-control: 999px;
-  --pr-gap-group: 0.75rem;
+  --pr-black: #1f1b16;
+  --pr-white: #faf7f2;
+  --pr-primary: #0b7a5a;
+  --pr-companion-angle: 30; /* Analogous */
+  --pr-tertiary-angle: -30;
 }`;
 }

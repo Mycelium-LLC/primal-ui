@@ -116,7 +116,7 @@
 }
 
 .pr-nav a:hover {
-  color: var(--pr-color-accent);
+  color: var(--pr-color-primary);
 }
 
 /* A page still to be built steps back: muted, with the release that builds it. */
@@ -129,9 +129,9 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* The current place: the accent, because the accent means where something is happening. */
+/* The current place: the primary, because the primary means where something is happening. */
 .pr-nav a.pr-current {
-  color: var(--pr-color-accent);
+  color: var(--pr-color-primary);
   font-weight: var(--pr-weight-strong);
 }
 

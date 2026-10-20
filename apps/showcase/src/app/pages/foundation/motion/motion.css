@@ -31,7 +31,7 @@
   inline-size: 1rem;
   block-size: 1rem;
   border-radius: var(--pr-radius-round);
-  background-color: var(--pr-color-accent);
+  background-color: var(--pr-color-primary);
   transition-property: translate;
   transition-timing-function: var(--pr-ease-standard);
 }

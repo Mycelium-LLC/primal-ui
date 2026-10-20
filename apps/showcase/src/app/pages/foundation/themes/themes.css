@@ -24,11 +24,11 @@
   gap: var(--pr-gap-component);
 }
 
-/* The primary action wears the accent: the accent means "something happens here". */
+/* The primary action wears the primary: it means "something happens here". */
 button {
-  background-color: var(--pr-color-accent);
-  border-color: var(--pr-color-accent);
-  color: var(--pr-color-on-accent);
+  background-color: var(--pr-color-primary);
+  border-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
 }
 
 label {

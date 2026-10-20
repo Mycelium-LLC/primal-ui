@@ -1,3 +1,211 @@
+/* ---------------------------------------------------------------- choices */
+
+.pr-choices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pr-gap-group) var(--pr-gap-section);
+  margin-block: var(--pr-gap-group) var(--pr-gap-section);
+}
+
+.pr-choices label {
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+}
+
+.pr-choices label span {
+  display: flex;
+  flex-direction: column;
+}
+
+.pr-choices small {
+  color: var(--pr-color-text-muted);
+}
+
+/* The native colour input, sized as a swatch you press. */
+input[type='color'] {
+  inline-size: 3rem;
+  block-size: 3rem;
+  padding: 0;
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background: none;
+  cursor: pointer;
+}
+
+.pr-reset {
+  margin-inline-start: auto;
+}
+
+/* ---------------------------------------------------------------- harmonies */
+
+.pr-harmonies {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--pr-gap-group);
+}
+
+.pr-harmonies li {
+  margin: 0;
+}
+
+/* Each harmony is something you choose, so it is a control: an edge, and the primary edge when chosen. */
+.pr-harmony {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--pr-gap-component);
+  inline-size: 100%;
+  block-size: 100%;
+  padding: var(--pr-gap-group);
+  text-align: start;
+  border-radius: var(--pr-radius-layer);
+}
+
+.pr-harmony[aria-pressed='true'] {
+  border-color: var(--pr-color-primary);
+  box-shadow: inset 0 0 0 1px var(--pr-color-primary);
+}
+
+.pr-harmony small {
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+  line-height: var(--pr-leading-body);
+}
+
+.pr-chips {
+  display: flex;
+  gap: 4px;
+}
+
+.pr-chips span {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: var(--pr-radius-round);
+}
+
+/* ---------------------------------------------------------------- preview */
+
+.pr-previews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--pr-gap-group);
+}
+
+/* A preview re-reads every token, so its own choices and scheme apply to it alone. */
+.pr-preview {
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+}
+
+.pr-preview h3 {
+  margin-block-start: 0;
+}
+
+.pr-preview button {
+  background-color: var(--pr-color-surface);
+  border-color: var(--pr-color-border-control);
+  color: var(--pr-color-text);
+}
+
+.pr-preview .pr-primary-action {
+  background-color: var(--pr-color-primary);
+  border-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
+}
+
+.pr-preview a {
+  color: var(--pr-color-primary);
+}
+
+.pr-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pr-gap-component);
+}
+
+.pr-muted {
+  color: var(--pr-color-text-muted);
+}
+
+/* Companion and tertiary are decoration: a mark of colour, never shaped like a button. */
+.pr-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  font-size: var(--pr-text-small);
+}
+
+.pr-tag::before {
+  content: '';
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border-radius: var(--pr-radius-round);
+}
+
+.pr-companion::before {
+  background-color: var(--pr-color-companion);
+}
+
+.pr-tertiary::before {
+  background-color: var(--pr-color-tertiary);
+}
+
+.pr-system {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--pr-gap-component);
+  font-size: var(--pr-text-small);
+}
+
+.pr-system li {
+  margin: 0;
+  padding: var(--pr-gap-component) var(--pr-gap-group);
+  border-radius: var(--pr-radius-control);
+}
+
+.pr-danger {
+  color: var(--pr-color-danger);
+  background-color: var(--pr-color-danger-surface);
+}
+
+.pr-warning {
+  color: var(--pr-color-warning);
+  background-color: var(--pr-color-warning-surface);
+}
+
+.pr-info {
+  color: var(--pr-color-info);
+  background-color: var(--pr-color-info-surface);
+}
+
+.pr-success {
+  color: var(--pr-color-success);
+  background-color: var(--pr-color-success-surface);
+}
+
+.pr-audit {
+  margin-block-start: var(--pr-gap-group);
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+.pr-misses {
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-danger);
+}
+
+/* ---------------------------------------------------------------- tables */
+
 .pr-table-scroll {
   overflow-x: auto;
   margin-block-end: var(--pr-gap-section);
@@ -21,40 +229,10 @@ tbody th {
   margin-block-start: calc(var(--pr-gap-component) / 2);
 }
 
-/* A swatch is a sample of a colour, framed by the separating line so pale roles stay visible. */
 .pr-swatch {
   display: block;
   inline-size: 3rem;
   block-size: 2rem;
   border: var(--pr-border-width) solid var(--pr-color-border);
   border-radius: var(--pr-radius-control);
-}
-
-.pr-in-use {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: var(--pr-gap-group);
-}
-
-/* A region forced into another mode, outlined so its edge reads against the page. */
-.pr-region {
-  padding: var(--pr-gap-group);
-  border: var(--pr-border-width) solid var(--pr-color-border);
-  border-radius: var(--pr-radius-layer);
-}
-
-.pr-region h3 {
-  margin-block-start: 0;
-}
-
-.pr-muted {
-  color: var(--pr-color-text-muted);
-}
-
-.pr-danger {
-  color: var(--pr-color-danger);
-}
-
-.pr-success {
-  color: var(--pr-color-success);
 }

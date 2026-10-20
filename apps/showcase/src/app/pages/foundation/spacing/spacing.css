@@ -9,11 +9,11 @@
   margin: 0;
 }
 
-/* A bar as long as the gap it shows; the accent fill marks it as the measured thing. */
+/* A bar as long as the gap it shows; the primary fill marks it as the measured thing. */
 .pr-bar {
   flex: none;
   block-size: 1.5rem;
-  background-color: var(--pr-color-accent);
+  background-color: var(--pr-color-primary);
   border-radius: 2px;
   min-inline-size: 2px;
 }
