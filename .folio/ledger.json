@@ -139,6 +139,11 @@
       "n": 23,
       "decision": "Adjusting the harmony",
       "ruling": "Each harmony colour (companion, tertiary) can be adjusted lightly: up to 20° round the wheel and 0.12 lighter or darker than the primary; the Colour page shows the final palette large, in light and dark (Niko, 2026-10-20: 'lets offer to adjust lightly each option. and see the final pallete properly')."
+    },
+    {
+      "n": 24,
+      "decision": "Fields are native",
+      "ruling": "0.3.0 builds one field around the native control instead of a component per field type (TextField, NumberField…): the browser keeps autofill, pickers, the phone keyboard and arrow keys, any Angular forms API works, and plain HTML gets the same markup. Primal marks what is optional, never what is required, and only on controls that can be left empty. Decided by Claude under decision 12 and the requirement primal/coverage/native-behaviour-is-kept-wherever-it-serves-the-person."
     }
   ],
   "releases": [
@@ -534,7 +539,7 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
       "makesTrue": [],
@@ -543,7 +548,7 @@
       "version": "0.3.0",
       "name": "Fields that never leave you guessing",
       "track": "Forms",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Built 2026-10-20; release/0.3.0 cut, ready for Niko's review and QA.",
       "dependsOn": [
         "0.2.0"
       ],
@@ -552,19 +557,28 @@
       "size": "L",
       "items": [
         {
-          "text": "Field primitives: TextField (text, email, password, tel, url, search), NumberField, date and time fields (native inputs), Checkbox, Radio and RadioGroup, Switch, Slider, ColorField, FileField, TextArea, Select, OutputValue, Progress and Meter as display."
+          "text": "*Done 2026-10-20:* Field primitives, native-first: one primal-field around any native control (text kinds, number, date and time kinds, checkbox, radio, switch, range, colour, file, text area, select), marked with primalControl, so the browser keeps autofill, pickers and the phone keyboard. Output, progress and meter styled in the core.",
+          "state": "done"
         },
         {
-          "text": "Composition: FieldLabel, FormField (label, description, control, message), FieldGroup (fieldset and legend), ValidationMessage."
+          "text": "*Done 2026-10-20:* Composition: primal-field (label, description, Optional, control, message), primal-field-group (fieldset and legend, one message for a radio group), form[primalForm]; plain-HTML classes .pr-field, .pr-choice, .pr-group, .pr-field-description, .pr-field-message, .pr-optional, .pr-form-actions.",
+          "state": "done"
         },
         {
-          "text": "Validation contract: when errors appear (on leaving a field, on submit), where, how they are announced, how they clear."
+          "text": "*Done 2026-10-20:* Validation contract: errors appear on leaving a field or on submit, sit under the field, are announced (polite live region, aria-invalid, aria-describedby), clear as soon as the answer is right; messages from the browser's own validity in the person's words (PRIMAL_MESSAGES to change them); focus moves to the first field to fix; reset starts over.",
+          "state": "done"
         },
         {
-          "text": "Angular adapter: the field primitives as standalone components working with Angular forms, plus the same markup documented for plain HTML."
+          "text": "*Done 2026-10-20:* Angular adapter: PRIMAL_FORMS (PrimalForm, PrimalField, PrimalFieldGroup, PrimalControl), working with any Angular forms API because the control stays native; an outside error (a forms library, a server) wins over the browser's. The same markup documented for plain HTML on each page.",
+          "state": "done"
         },
         {
-          "text": "Release chain for 0.3.0."
+          "text": "*Done 2026-10-20:* The seven Forms pages: Text fields, Choices, Pickers, Select, Form structure, Validation (live), Example forms (sign-in, profile, settings).",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20:* Release chain for 0.3.0: release/0.3.0, docs/qa/0.3.0.md, version 0.3.0.",
+          "state": "done"
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",

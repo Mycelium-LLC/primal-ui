@@ -1,15 +1,55 @@
-<pr-page-placeholder title="Select" release="0.3.0" covers="Select, groups, and suggestions.">
-<p><label>Select
-  <select>
-    <optgroup label="Web">
+<h1>Select</h1>
+<p>
+  A select is one answer from a list that is too long for radios. The browser draws the list, accessibly and in the right place
+  on every device, and Primal styles the closed control. If the person already knows the answer and could type it, a text field
+  with suggestions serves them better.
+</p>
+
+<h2>One from a list</h2>
+<primal-field label="Country">
+  <select primalControl autocomplete="country-name" required>
+    <option value="">Choose a country</option>
+    <option>Israel</option>
+    <option>Portugal</option>
+    <option>United Kingdom</option>
+    <option>United States</option>
+  </select>
+</primal-field>
+
+<h2>Grouped options</h2>
+<primal-field label="Framework" description="Angular is the one Primal supports today.">
+  <select primalControl>
+    <optgroup label="Supported">
       <option>Angular</option>
+      <option>Plain HTML</option>
     </optgroup>
-    <optgroup label="Later">
+    <optgroup label="When Mycelium needs them">
       <option disabled>Mac</option>
       <option disabled>Mobile</option>
     </optgroup>
-  </select></label></p>
-<p><label>Multiple <select multiple size="3"><option>One</option><option>Two</option><option>Three</option></select></label></p>
-<p><label>With suggestions <input list="frameworks"></label>
-<datalist id="frameworks"><option value="Angular"></option><option value="Plain HTML"></option></datalist></p>
-</pr-page-placeholder>
+  </select>
+</primal-field>
+
+<h2>Several from a list</h2>
+<primal-field label="Languages" description="Hold Ctrl or Cmd to choose more than one.">
+  <select primalControl multiple size="4">
+    <option selected>English</option>
+    <option>Hebrew</option>
+    <option>Portuguese</option>
+    <option>Arabic</option>
+  </select>
+</primal-field>
+
+<h2>Typed, with suggestions</h2>
+<p>When the answer is something the person knows, they type it, and suggestions save the rest.</p>
+<primal-field label="City">
+  <input primalControl type="text" list="cities" autocomplete="address-level2" />
+</primal-field>
+<datalist id="cities">
+  <option value="Tel Aviv"></option>
+  <option value="Jerusalem"></option>
+  <option value="Haifa"></option>
+  <option value="Lisbon"></option>
+</datalist>
+
+<pr-plain-html [code]="plain" />

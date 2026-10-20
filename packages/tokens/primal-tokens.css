@@ -92,11 +92,17 @@
   /* Horizontal padding inside a control. */
   --pr-control-inset: 0.75rem;
 
+  /* The thickness of a progress or meter track. */
+  --pr-track-thickness: 0.5rem;
+
   /* The smallest pointer target (WCAG 2.2 AA asks 24px). */
   --pr-target-min: 1.5rem;
 
   /* The maximum width of reading pages and documentation. */
   --pr-container-reading: 72rem;
+
+  /* The widest a single-line field grows: as wide as the answer it asks for. */
+  --pr-field-width: 28rem;
 
   /* Full width, for app surfaces that use the whole screen. */
   --pr-container-full: 100%;

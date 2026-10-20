@@ -613,58 +613,58 @@
     {
       "element": "form",
       "group": "Forms",
-      "outcome": "native",
+      "outcome": "enhanced",
       "where": "0.3.0",
-      "reason": "A form has no look; its fields do."
+      "reason": "form[primalForm]: no browser bubbles, every message on submit, focus to the first field to fix, (validSubmit) only when valid."
     },
     {
       "element": "input",
       "group": "Forms",
-      "outcome": "styled",
-      "where": "0.1.0",
-      "reason": "An early base: edge, size and colour from tokens. 0.3.0 builds the field primitives, 0.4.0 the action ones."
+      "outcome": "enhanced",
+      "where": "0.3.0",
+      "reason": "Kept native (autofill, pickers, the phone keyboard) inside primal-field with primalControl: label, description, Optional, message. Styled states: hover, focus, read-only, disabled, invalid."
     },
     {
       "element": "button",
       "group": "Forms",
       "outcome": "styled",
       "where": "0.1.0",
-      "reason": "An early base: edge, size and colour from tokens. 0.3.0 builds the field primitives, 0.4.0 the action ones."
+      "reason": "Edge, size and colour from tokens; a submit button wears the primary. 0.4.0 builds the action primitives on it."
     },
     {
       "element": "select",
       "group": "Forms",
-      "outcome": "styled",
-      "where": "0.1.0",
-      "reason": "An early base: edge, size and colour from tokens. 0.3.0 builds the field primitives, 0.4.0 the action ones."
+      "outcome": "enhanced",
+      "where": "0.3.0",
+      "reason": "Kept native (the browser draws the list) inside primal-field; Primal draws the closed control and its arrow, in both directions."
     },
     {
       "element": "textarea",
       "group": "Forms",
-      "outcome": "styled",
-      "where": "0.1.0",
-      "reason": "An early base: edge, size and colour from tokens. 0.3.0 builds the field primitives, 0.4.0 the action ones."
+      "outcome": "enhanced",
+      "where": "0.3.0",
+      "reason": "Kept native inside primal-field; grows down only."
     },
     {
       "element": "label",
       "group": "Forms",
       "outcome": "enhanced",
       "where": "0.3.0",
-      "reason": "FieldLabel and FieldGroup."
+      "reason": "primal-field draws the label, ties it to its control and marks what is optional."
     },
     {
       "element": "fieldset",
       "group": "Forms",
       "outcome": "enhanced",
       "where": "0.3.0",
-      "reason": "FieldLabel and FieldGroup."
+      "reason": "primal-field-group: one question asked of several controls."
     },
     {
       "element": "legend",
       "group": "Forms",
       "outcome": "enhanced",
       "where": "0.3.0",
-      "reason": "FieldLabel and FieldGroup."
+      "reason": "The group's question, drawn by primal-field-group."
     },
     {
       "element": "option",
@@ -697,23 +697,23 @@
     {
       "element": "output",
       "group": "Forms",
-      "outcome": "enhanced",
+      "outcome": "styled",
       "where": "0.3.0",
-      "reason": "OutputValue, Progress and Meter."
+      "reason": "A worked-out value, in tabular figures and the strong weight."
     },
     {
       "element": "progress",
       "group": "Forms",
-      "outcome": "enhanced",
+      "outcome": "styled",
       "where": "0.3.0",
-      "reason": "OutputValue, Progress and Meter."
+      "reason": "A track in the page's sunken colour, filled with the primary."
     },
     {
       "element": "meter",
       "group": "Forms",
-      "outcome": "enhanced",
+      "outcome": "styled",
       "where": "0.3.0",
-      "reason": "OutputValue, Progress and Meter."
+      "reason": "A track filled with success, warning or danger, by where the value sits."
     },
     {
       "element": "details",

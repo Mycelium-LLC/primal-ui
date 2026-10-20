@@ -1,11 +1,18 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { PRIMAL_FORMS } from 'primal-angular';
 
-/** Placeholder until 0.3.0: the plain native elements this page will cover (decision 10). */
 @Component({
   selector: 'pr-forms-pickers-page',
-  imports: [PagePlaceholder],
+  imports: [PRIMAL_FORMS],
   templateUrl: './pickers.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormsPickersPage {}
+export class FormsPickersPage {
+  protected readonly volume = signal(40);
+  protected readonly files = signal('');
+
+  protected pickFiles(input: HTMLInputElement): void {
+    const list = [...(input.files ?? [])];
+    this.files.set(list.length ? list.map((f) => `${f.name} (${Math.ceil(f.size / 1024)} KB)`).join(', ') : '');
+  }
+}

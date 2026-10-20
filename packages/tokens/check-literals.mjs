@@ -32,7 +32,11 @@ for (const dir of SCAN) walk(join(root, dir));
 
 const misses = [];
 for (const file of files) {
-  let text = readFileSync(file, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  let text = readFileSync(file, 'utf8')
+    .split('\n')
+    .map((line) => (/allow-literal: \S/.test(line) ? '' : line))
+    .join('\n')
+    .replace(/\/\*[\s\S]*?\*\//g, '');
   // In TypeScript, only inline styles are style: the contents of styles: `...`.
   if (file.endsWith('.ts')) text = [...text.matchAll(/styles:\s*`([\s\S]*?)`/g)].map((m) => m[1]).join('\n');
   text.split('\n').forEach((line, i) => {

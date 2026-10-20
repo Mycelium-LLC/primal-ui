@@ -309,6 +309,11 @@
     "value": "0.75rem",
     "meaning": "Horizontal padding inside a control."
   },
+  "--pr-track-thickness": {
+    "group": "space",
+    "value": "0.5rem",
+    "meaning": "The thickness of a progress or meter track."
+  },
   "--pr-target-min": {
     "group": "space",
     "value": "1.5rem",
@@ -318,6 +323,11 @@
     "group": "layout",
     "value": "72rem",
     "meaning": "The maximum width of reading pages and documentation."
+  },
+  "--pr-field-width": {
+    "group": "layout",
+    "value": "28rem",
+    "meaning": "The widest a single-line field grows: as wide as the answer it asks for."
   },
   "--pr-container-full": {
     "group": "layout",
