@@ -319,6 +319,11 @@
     "value": "1.5rem",
     "meaning": "The smallest pointer target (WCAG 2.2 AA asks 24px)."
   },
+  "--pr-choice-size": {
+    "group": "space",
+    "value": "1.25rem",
+    "meaning": "The box of a checkbox or a radio: the size of a capital letter and a little more."
+  },
   "--pr-container-reading": {
     "group": "layout",
     "value": "72rem",
@@ -328,6 +333,11 @@
     "group": "layout",
     "value": "28rem",
     "meaning": "The widest a single-line field grows: as wide as the answer it asks for."
+  },
+  "--pr-list-height": {
+    "group": "layout",
+    "value": "20rem",
+    "meaning": "The tallest an open list of options grows before it scrolls: about eight options."
   },
   "--pr-container-full": {
     "group": "layout",
@@ -358,6 +368,11 @@
     "group": "shape",
     "value": "1px",
     "meaning": "A line that separates or outlines."
+  },
+  "--pr-border-width-choice": {
+    "group": "shape",
+    "value": "1.5px",
+    "meaning": "The edge of a checkbox or radio: thicker than a line, so a small control still reads."
   },
   "--pr-focus-width": {
     "group": "shape",

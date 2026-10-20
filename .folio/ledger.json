@@ -144,6 +144,11 @@
       "n": 24,
       "decision": "Fields are native",
       "ruling": "0.3.0 builds one field around the native control instead of a component per field type (TextField, NumberField…): the browser keeps autofill, pickers, the phone keyboard and arrow keys, any Angular forms API works, and plain HTML gets the same markup. Primal marks what is optional, never what is required, and only on controls that can be left empty. Decided by Claude under decision 12 and the requirement primal/coverage/native-behaviour-is-kept-wherever-it-serves-the-person."
+    },
+    {
+      "n": 25,
+      "decision": "Lists are drawn by Primal",
+      "ruling": "A select's list and an autocomplete's list are Primal's own, drawn and designed, never the system popup (Niko, 2026-10-20, QA of 0.3.0: 'fully designed select please. and auto complete one please with full options on click'). This narrows decision 24 for lists only: the native select stays inside as the value, so forms, validity and reset still work as native. A multiple select stays a native list box; plain HTML without the Angular adapter keeps the browser's popup."
     }
   ],
   "releases": [
@@ -548,7 +553,7 @@
       "version": "0.3.0",
       "name": "Fields that never leave you guessing",
       "track": "Forms",
-      "status": "Built 2026-10-20; release/0.3.0 cut, ready for Niko's review and QA.",
+      "status": "Built 2026-10-20; reworked after Niko's QA the same day; release/0.3.0 ready for QA again.",
       "dependsOn": [
         "0.2.0"
       ],
@@ -574,6 +579,18 @@
         },
         {
           "text": "*Done 2026-10-20:* The seven Forms pages: Text fields, Choices, Pickers, Select, Form structure, Validation (live), Example forms (sign-in, profile, settings).",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20 (Niko's QA):* Select drawn by Primal: primal-select opens Primal's own list (never the system's popup), keyboard as the native one (arrows, Home, End, type to jump, Enter, Escape), with selected, active, disabled, grouped, invalid, dark and right-to-left states. The native select stays inside as the value, so forms, validity and reset work unchanged.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20 (Niko's QA):* Autocomplete: primal-autocomplete on a text field opens every option on click, then narrows them as the person types, matched text marked; arrow keys and Enter choose; it can require one of its options.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20 (Niko's QA):* Checkbox, radio and buttons designed by Primal in every state: rest, hover, focus, checked, mixed, pressed, disabled, invalid; buttons filled (a field is outlined, an action is filled).",
           "state": "done"
         },
         {
@@ -673,6 +690,39 @@
           "role": "a developer on a Mycelium project",
           "action": "build a form",
           "outcome": "it is consistent and accessible without my own field code"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/a-list-of-options-opens-as-primal-s-own-designed-list-with",
+          "requirementKind": "invariant",
+          "statement": "A list of options opens as Primal's own designed list, with the keyboard, focus and states of the native one, in light, dark and both directions.",
+          "success": "Opening a select or an autocomplete shows Primal's list, never the system's popup; arrows, Home, End, typing, Enter and Escape work as in the native select; selected, active, disabled and invalid each look distinct.",
+          "disqualifier": "The system's popup appears, a key the native select answers does nothing, or a state can't be told from another.",
+          "evidence": "Niko's QA of 0.3.0, 2026-10-20: 'fully designed select please'."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/an-autocomplete-shows-every-option-when-opened-and-narrows",
+          "requirementKind": "user",
+          "statement": "An autocomplete shows every option when opened and narrows them as the person types.",
+          "success": "Clicking the empty field lists every option; typing leaves only the options that contain the text, with the match marked; choosing one fills the field.",
+          "disqualifier": "Clicking shows nothing until the person types, or the list keeps options that do not match.",
+          "evidence": "Niko's QA of 0.3.0, 2026-10-20: 'auto complete one please with full options on click'.",
+          "role": "a person filling a form",
+          "action": "pick a known answer from a long list",
+          "outcome": "I see what I can choose before typing, and get there in a few letters"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/checkboxes-radios-and-buttons-are-drawn-by-primal-in-every",
+          "requirementKind": "invariant",
+          "statement": "Checkboxes, radios and buttons are drawn by Primal in every state, never left at the browser default.",
+          "success": "Rest, hover, focus, checked or pressed, mixed, disabled and invalid each have a designed look from tokens, in light and dark.",
+          "disqualifier": "Any of them shows the browser's default look in some state.",
+          "evidence": "Niko's QA of 0.3.0, 2026-10-20 (screenshot of radio, checkbox and buttons)."
         }
       ]
     },

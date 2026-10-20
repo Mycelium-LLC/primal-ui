@@ -33,6 +33,8 @@ export class PrimalControl {
   readonly describedBy = computed(() => this.describedByIds().join(' ') || null);
   /** The field's label, used to word the message. */
   readonly label = signal('');
+  /** The id of the field's label, for a drawn control (select, autocomplete) to be named by it. */
+  readonly labelId = signal<string | null>(null);
   /** An error from outside (your forms library, the server). It wins over the browser's own. */
   readonly error = input<string | null | undefined>(undefined, { alias: 'primalControl' });
 

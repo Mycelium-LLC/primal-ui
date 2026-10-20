@@ -622,21 +622,21 @@
       "group": "Forms",
       "outcome": "enhanced",
       "where": "0.3.0",
-      "reason": "Kept native (autofill, pickers, the phone keyboard) inside primal-field with primalControl: label, description, Optional, message. Styled states: hover, focus, read-only, disabled, invalid."
+      "reason": "Kept native (autofill, pickers, the phone keyboard) inside primal-field with primalControl: label, description, Optional, message. Styled states: hover, focus, read-only, disabled, invalid. Checkbox and radio drawn by Primal in every state."
     },
     {
       "element": "button",
       "group": "Forms",
       "outcome": "styled",
-      "where": "0.1.0",
-      "reason": "Edge, size and colour from tokens; a submit button wears the primary. 0.4.0 builds the action primitives on it."
+      "where": "0.3.0",
+      "reason": "Drawn by Primal: a quiet fill, or the primary for a submit, with hover, pressed, focus and disabled. 0.4.0 builds the action primitives on it."
     },
     {
       "element": "select",
       "group": "Forms",
       "outcome": "enhanced",
       "where": "0.3.0",
-      "reason": "Kept native (the browser draws the list) inside primal-field; Primal draws the closed control and its arrow, in both directions."
+      "reason": "primal-select draws its list (decision 25): Primal's own list, keyboard as native, every state; the native select stays inside as the value. A multiple select stays the browser's list box."
     },
     {
       "element": "textarea",
@@ -669,23 +669,23 @@
     {
       "element": "option",
       "group": "Forms",
-      "outcome": "native",
+      "outcome": "enhanced",
       "where": "0.3.0",
-      "reason": "The browser draws option lists, and it does it accessibly; Primal keeps it."
+      "reason": "Shown in Primal's list by primal-select: chosen with a check, active shaded, disabled stepped back."
     },
     {
       "element": "optgroup",
       "group": "Forms",
-      "outcome": "native",
+      "outcome": "enhanced",
       "where": "0.3.0",
-      "reason": "The browser draws option lists, and it does it accessibly; Primal keeps it."
+      "reason": "A heading in Primal's list, over the options it groups."
     },
     {
       "element": "datalist",
       "group": "Forms",
       "outcome": "native",
       "where": "0.3.0",
-      "reason": "The browser draws option lists, and it does it accessibly; Primal keeps it."
+      "reason": "Left native for plain HTML; with Angular, primal-autocomplete takes its place: every option on click, narrowed as you type."
     },
     {
       "element": "selectedcontent",
