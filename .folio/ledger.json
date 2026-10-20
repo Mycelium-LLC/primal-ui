@@ -5,7 +5,7 @@
   "baseline": {
     "version": "0.0.0",
     "source": ".folio/prd.json",
-    "note": "The seed: the repository was created on 2026-10-20 with a README only (main @ ab3d82fe). Nothing is built, so the baseline holds the nine chapters and no requirements; every requirement arrives through a release below. Not yet loaded into Folio."
+    "note": "The seed: the repository was created on 2026-10-20 with a README only (main @ ab3d82fe). Nothing is built, so the baseline holds the nine chapters and no requirements; every requirement arrives through a release below."
   },
   "today": null,
   "conventions": {
@@ -153,7 +153,7 @@
       "version": "0.1.0",
       "name": "A base you can make your own",
       "track": "Foundation",
-      "status": "Built and reviewed by Niko by eye on 2026-10-20 ('we good'); release/0.1.0 cut, ready for QA.",
+      "status": "Shipped 2026-10-20: primal-ui#1 merged to main as 4d0284f (pinned to 0ad508d), tag 0.1.0 and its GitHub release. No hosting yet, so no showcase deploy.",
       "dependsOn": [],
       "goal": "Primal exists as a neutral foundation whose whole look is set by tokens, so it works as it is and any future Mycelium design system starts from it.",
       "usersSee": "A live showcase of the single base Primal ships (exactly what a project gets when it imports it), with every token's name and meaning, in light and dark, and switches for the colour scheme and text direction.",
@@ -398,7 +398,7 @@
       "version": "0.2.0",
       "name": "Plain HTML reads right",
       "track": "Native HTML",
-      "status": "Built 2026-10-20; release/0.2.0 cut, ready for Niko's review and QA.",
+      "status": "Shipped 2026-10-20: primal-ui#2 merged to main as afc5b00 (pinned to a6b0cf9), tag 0.2.0 and its GitHub release. No hosting yet, so no showcase deploy.",
       "dependsOn": [
         "0.1.0"
       ],
@@ -1329,7 +1329,54 @@
       ]
     }
   ],
-  "shipped": [],
+  "shipped": [
+    {
+      "version": "0.1.0",
+      "name": "A base you can make your own",
+      "date": "2026-10-20",
+      "deployed": "Not deployed: Primal has no hosting yet (an open question for Niko). Main CI run 39419062651 passed on 4d0284f.",
+      "delivered": "The foundation: tokens, colour from three choices, Google Sans, reset and base styles, light and dark, both text directions; the Angular adapter's first pieces; the showcase with every planned page (primal-ui#1 merged 4d0284f, tag 0.1.0, GitHub release). Not delivered: item 12, the deployed showcase, waits on Niko's hosting choice.",
+      "delivers": [
+        {
+          "milestone": "0.1.0",
+          "items": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            13
+          ]
+        }
+      ]
+    },
+    {
+      "version": "0.2.0",
+      "name": "Plain HTML reads right",
+      "date": "2026-10-20",
+      "deployed": "Not deployed: Primal has no hosting yet (an open question for Niko). Main CI run 39419388724 passed on afc5b00.",
+      "delivered": "Plain HTML and Markdown read right with no classes, and every element of the HTML standard has a decided outcome (primal-ui#2 merged afc5b00, tag 0.2.0, GitHub release).",
+      "delivers": [
+        {
+          "milestone": "0.2.0",
+          "items": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ]
+    }
+  ],
   "awaitingNiko": [],
   "questionsForNiko": [
     {

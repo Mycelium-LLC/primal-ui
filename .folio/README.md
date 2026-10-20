@@ -15,8 +15,8 @@ Addresses are `primal/<feature>/<requirement>`. Statements never name a screen, 
 | Release | Name | State (2026-10-20) |
 |---|---|---|
 | 0.0.0 | The seed (the baseline) | main @ ab3d82fe, README only |
-| 0.1.0 | A base you can make your own (the shell with every page, tokens, themes, both directions) | approved 2026-10-20, in progress |
-| 0.2.0 | Plain HTML reads right (every native element accounted for) | draft |
+| 0.1.0 | A base you can make your own (the shell with every page, tokens, themes, both directions) | shipped 2026-10-20 (#1 → 4d0284f, tag 0.1.0) |
+| 0.2.0 | Plain HTML reads right (every native element accounted for) | shipped 2026-10-20 (#2 → afc5b00, tag 0.2.0) |
 | 0.3.0 | Fields that never leave you guessing (forms) | draft |
 | 0.4.0 | Every action answers (actions, feedback, the behaviour model) | draft |
 | 0.5.0 | You always know where you are (navigation, top layers, focus) | draft |
