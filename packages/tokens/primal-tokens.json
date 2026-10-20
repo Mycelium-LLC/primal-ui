@@ -1,0 +1,384 @@
+{
+  "--pr-color-surface": {
+    "group": "colour",
+    "value": "light-dark(oklch(99.5% 0 0), oklch(17% 0.005 255))",
+    "meaning": "The page itself. Everything sits on it.",
+    "light": "oklch(99.5% 0 0)",
+    "dark": "oklch(17% 0.005 255)"
+  },
+  "--pr-color-surface-raised": {
+    "group": "colour",
+    "value": "light-dark(oklch(100% 0 0), oklch(22% 0.006 255))",
+    "meaning": "Something on top of the page: a menu, a popover, a dialog. Always paired with an elevation.",
+    "light": "oklch(100% 0 0)",
+    "dark": "oklch(22% 0.006 255)"
+  },
+  "--pr-color-surface-sunken": {
+    "group": "colour",
+    "value": "light-dark(oklch(96.5% 0.003 255), oklch(14% 0.005 255))",
+    "meaning": "A well inside the page that holds content of another kind: code, a quoted block, a table header.",
+    "light": "oklch(96.5% 0.003 255)",
+    "dark": "oklch(14% 0.005 255)"
+  },
+  "--pr-color-text": {
+    "group": "colour",
+    "value": "light-dark(oklch(22% 0.01 255), oklch(94% 0.005 255))",
+    "meaning": "Text and icons that carry content.",
+    "light": "oklch(22% 0.01 255)",
+    "dark": "oklch(94% 0.005 255)",
+    "lightMore": "oklch(0% 0 0)",
+    "darkMore": "oklch(100% 0 0)"
+  },
+  "--pr-color-text-muted": {
+    "group": "colour",
+    "value": "light-dark(oklch(46% 0.01 255), oklch(74% 0.008 255))",
+    "meaning": "Text that supports other text: descriptions, captions, metadata. Steps back, still readable.",
+    "light": "oklch(46% 0.01 255)",
+    "dark": "oklch(74% 0.008 255)",
+    "lightMore": "oklch(22% 0.01 255)",
+    "darkMore": "oklch(94% 0.005 255)"
+  },
+  "--pr-color-border": {
+    "group": "colour",
+    "value": "light-dark(oklch(89% 0.004 255), oklch(30% 0.006 255))",
+    "meaning": "A line that separates: a divider, a table rule. Decorative, so it stays faint.",
+    "light": "oklch(89% 0.004 255)",
+    "dark": "oklch(30% 0.006 255)",
+    "lightMore": "oklch(22% 0.01 255)",
+    "darkMore": "oklch(94% 0.005 255)"
+  },
+  "--pr-color-border-control": {
+    "group": "colour",
+    "value": "light-dark(oklch(60% 0.01 255), oklch(56% 0.01 255))",
+    "meaning": "The edge of something you operate: a field, a checkbox. Must be seen, so it meets 3:1.",
+    "light": "oklch(60% 0.01 255)",
+    "dark": "oklch(56% 0.01 255)",
+    "lightMore": "oklch(22% 0.01 255)",
+    "darkMore": "oklch(94% 0.005 255)"
+  },
+  "--pr-color-accent": {
+    "group": "colour",
+    "value": "light-dark(oklch(50% 0.17 255), oklch(74% 0.12 255))",
+    "meaning": "Where something happens: links, the primary action, the current place, focus.",
+    "light": "oklch(50% 0.17 255)",
+    "dark": "oklch(74% 0.12 255)",
+    "lightMore": "oklch(36% 0.17 255)",
+    "darkMore": "oklch(86% 0.09 255)"
+  },
+  "--pr-color-on-accent": {
+    "group": "colour",
+    "value": "light-dark(oklch(100% 0 0), oklch(17% 0.005 255))",
+    "meaning": "Text and icons on an accent fill.",
+    "light": "oklch(100% 0 0)",
+    "dark": "oklch(17% 0.005 255)",
+    "lightMore": "oklch(100% 0 0)",
+    "darkMore": "oklch(0% 0 0)"
+  },
+  "--pr-color-danger": {
+    "group": "colour",
+    "value": "light-dark(oklch(52% 0.19 27), oklch(74% 0.14 27))",
+    "meaning": "Something failed, or an action cannot be undone.",
+    "light": "oklch(52% 0.19 27)",
+    "dark": "oklch(74% 0.14 27)",
+    "lightMore": "oklch(40% 0.17 27)",
+    "darkMore": "oklch(86% 0.09 27)"
+  },
+  "--pr-color-danger-surface": {
+    "group": "colour",
+    "value": "light-dark(oklch(96% 0.025 27), oklch(24% 0.05 27))",
+    "meaning": "The quiet ground behind a danger message.",
+    "light": "oklch(96% 0.025 27)",
+    "dark": "oklch(24% 0.05 27)"
+  },
+  "--pr-color-warning": {
+    "group": "colour",
+    "value": "light-dark(oklch(50% 0.11 65), oklch(80% 0.12 80))",
+    "meaning": "Something needs attention soon, but nothing has failed.",
+    "light": "oklch(50% 0.11 65)",
+    "dark": "oklch(80% 0.12 80)",
+    "lightMore": "oklch(38% 0.09 65)",
+    "darkMore": "oklch(90% 0.09 85)"
+  },
+  "--pr-color-warning-surface": {
+    "group": "colour",
+    "value": "light-dark(oklch(96.5% 0.04 85), oklch(25% 0.04 75))",
+    "meaning": "The quiet ground behind a warning message.",
+    "light": "oklch(96.5% 0.04 85)",
+    "dark": "oklch(25% 0.04 75)"
+  },
+  "--pr-color-success": {
+    "group": "colour",
+    "value": "light-dark(oklch(48% 0.12 150), oklch(76% 0.13 150))",
+    "meaning": "Done, resolved, safe.",
+    "light": "oklch(48% 0.12 150)",
+    "dark": "oklch(76% 0.13 150)",
+    "lightMore": "oklch(36% 0.1 150)",
+    "darkMore": "oklch(88% 0.1 150)"
+  },
+  "--pr-color-success-surface": {
+    "group": "colour",
+    "value": "light-dark(oklch(96% 0.03 150), oklch(24% 0.04 150))",
+    "meaning": "The quiet ground behind a success message.",
+    "light": "oklch(96% 0.03 150)",
+    "dark": "oklch(24% 0.04 150)"
+  },
+  "--pr-color-selection": {
+    "group": "colour",
+    "value": "light-dark(oklch(88% 0.06 255), oklch(36% 0.08 255))",
+    "meaning": "Text the person has selected.",
+    "light": "oklch(88% 0.06 255)",
+    "dark": "oklch(36% 0.08 255)"
+  },
+  "--pr-color-backdrop": {
+    "group": "colour",
+    "value": "light-dark(oklch(20% 0.01 255 / 0.4), oklch(0% 0 0 / 0.6))",
+    "meaning": "Covers the page behind something that interrupts (a modal dialog).",
+    "light": "oklch(20% 0.01 255 / 0.4)",
+    "dark": "oklch(0% 0 0 / 0.6)"
+  },
+  "--pr-font-sans": {
+    "group": "type",
+    "value": "system-ui, -apple-system, \"Segoe UI\", Roboto, \"Noto Sans\", \"Helvetica Neue\", Arial, sans-serif",
+    "meaning": "All interface and reading text. The system font, so Primal carries no typeface of its own."
+  },
+  "--pr-font-mono": {
+    "group": "type",
+    "value": "ui-monospace, \"SF Mono\", Menlo, Consolas, \"Liberation Mono\", monospace",
+    "meaning": "Code, keys and sample output."
+  },
+  "--pr-text-small": {
+    "group": "type",
+    "value": "clamp(0.8125rem, 0.7946rem + 0.0893vw, 0.875rem)",
+    "meaning": "Fine print, captions, metadata.",
+    "px": [
+      13,
+      14
+    ]
+  },
+  "--pr-text-body": {
+    "group": "type",
+    "value": "clamp(1rem, 0.9821rem + 0.0893vw, 1.0625rem)",
+    "meaning": "Body text and controls.",
+    "px": [
+      16,
+      17
+    ]
+  },
+  "--pr-text-large": {
+    "group": "type",
+    "value": "clamp(1.125rem, 1.0893rem + 0.1786vw, 1.25rem)",
+    "meaning": "Lead text and heading level 4.",
+    "px": [
+      18,
+      20
+    ]
+  },
+  "--pr-text-xl": {
+    "group": "type",
+    "value": "clamp(1.25rem, 1.1786rem + 0.3571vw, 1.5rem)",
+    "meaning": "Heading level 3.",
+    "px": [
+      20,
+      24
+    ]
+  },
+  "--pr-text-2xl": {
+    "group": "type",
+    "value": "clamp(1.5rem, 1.3929rem + 0.5357vw, 1.875rem)",
+    "meaning": "Heading level 2.",
+    "px": [
+      24,
+      30
+    ]
+  },
+  "--pr-text-3xl": {
+    "group": "type",
+    "value": "clamp(1.75rem, 1.5714rem + 0.8929vw, 2.375rem)",
+    "meaning": "Heading level 1.",
+    "px": [
+      28,
+      38
+    ]
+  },
+  "--pr-text-display": {
+    "group": "type",
+    "value": "clamp(2.125rem, 1.8393rem + 1.4286vw, 3.125rem)",
+    "meaning": "A display title, at most one per page.",
+    "px": [
+      34,
+      50
+    ]
+  },
+  "--pr-leading-body": {
+    "group": "type",
+    "value": "1.55",
+    "meaning": "Line height for reading text."
+  },
+  "--pr-leading-tight": {
+    "group": "type",
+    "value": "1.2",
+    "meaning": "Line height for headings and single-line controls."
+  },
+  "--pr-weight-regular": {
+    "group": "type",
+    "value": "400",
+    "meaning": "Body text."
+  },
+  "--pr-weight-strong": {
+    "group": "type",
+    "value": "600",
+    "meaning": "Headings and emphasis. One step, so weight keeps meaning rank."
+  },
+  "--pr-measure": {
+    "group": "type",
+    "value": "68ch",
+    "meaning": "The longest comfortable line for reading text."
+  },
+  "--pr-gap-component": {
+    "group": "space",
+    "value": "0.5rem",
+    "meaning": "Inside a component: icon to label, label to field.",
+    "dense": "0.25rem"
+  },
+  "--pr-gap-group": {
+    "group": "space",
+    "value": "1rem",
+    "meaning": "Between the elements of one group: fields in a form, items in a list.",
+    "dense": "0.5rem"
+  },
+  "--pr-gap-section": {
+    "group": "space",
+    "value": "clamp(2rem, 1.6rem + 2vw, 3rem)",
+    "meaning": "Between sections. Clearly larger than a group gap, so grouping reads.",
+    "dense": "1.5rem"
+  },
+  "--pr-gutter": {
+    "group": "space",
+    "value": "clamp(1rem, 0.6rem + 2vw, 2rem)",
+    "meaning": "The space between the viewport edge and content.",
+    "dense": "clamp(0.75rem, 0.5rem + 1.25vw, 1.25rem)"
+  },
+  "--pr-control-height": {
+    "group": "space",
+    "value": "2.5rem",
+    "meaning": "The height of a single-line control.",
+    "dense": "2rem"
+  },
+  "--pr-control-inset": {
+    "group": "space",
+    "value": "0.75rem",
+    "meaning": "Horizontal padding inside a control.",
+    "dense": "0.5rem"
+  },
+  "--pr-target-min": {
+    "group": "space",
+    "value": "1.5rem",
+    "meaning": "The smallest pointer target (WCAG 2.2 AA asks 24px).",
+    "dense": "1.5rem"
+  },
+  "--pr-container-reading": {
+    "group": "layout",
+    "value": "72rem",
+    "meaning": "The maximum width of reading pages and documentation."
+  },
+  "--pr-container-full": {
+    "group": "layout",
+    "value": "100%",
+    "meaning": "Full width, for app surfaces that use the whole screen."
+  },
+  "--pr-radius-control": {
+    "group": "shape",
+    "value": "0.375rem",
+    "meaning": "This is something you operate (a button, a field)."
+  },
+  "--pr-radius-layer": {
+    "group": "shape",
+    "value": "0.5rem",
+    "meaning": "This sits on top of the page (a popover, a dialog)."
+  },
+  "--pr-radius-round": {
+    "group": "shape",
+    "value": "999px",
+    "meaning": "This is a person or a single status (an avatar, a dot)."
+  },
+  "--pr-border-width": {
+    "group": "shape",
+    "value": "1px",
+    "meaning": "A line that separates or outlines."
+  },
+  "--pr-focus-width": {
+    "group": "shape",
+    "value": "2px",
+    "meaning": "The width of the focus ring: here is where the keyboard is."
+  },
+  "--pr-focus-offset": {
+    "group": "shape",
+    "value": "2px",
+    "meaning": "The gap between an element and its focus ring."
+  },
+  "--pr-elevation-0": {
+    "group": "elevation",
+    "value": "none",
+    "meaning": "Part of the page. No shadow."
+  },
+  "--pr-elevation-1": {
+    "group": "elevation",
+    "value": "0 1px 2px oklch(0% 0 0 / 0.08), 0 4px 12px oklch(0% 0 0 / 0.08)",
+    "meaning": "On top of the page but not interrupting it: a menu, a popover, a tooltip."
+  },
+  "--pr-elevation-2": {
+    "group": "elevation",
+    "value": "0 2px 4px oklch(0% 0 0 / 0.1), 0 12px 32px oklch(0% 0 0 / 0.16)",
+    "meaning": "Interrupts the page: a dialog. Only one at a time."
+  },
+  "--pr-layer-base": {
+    "group": "layer",
+    "value": "0",
+    "meaning": "The page."
+  },
+  "--pr-layer-sticky": {
+    "group": "layer",
+    "value": "100",
+    "meaning": "Something that stays while the page scrolls (a table header, a toolbar)."
+  },
+  "--pr-layer-overlay": {
+    "group": "layer",
+    "value": "1000",
+    "meaning": "A layer above the page that is not in the browser top layer."
+  },
+  "--pr-layer-toast": {
+    "group": "layer",
+    "value": "1100",
+    "meaning": "A message that must stay visible over everything else on the page."
+  },
+  "--pr-duration-fast": {
+    "group": "motion",
+    "value": "120ms",
+    "meaning": "Acknowledgement: hover, press, a state change."
+  },
+  "--pr-duration-base": {
+    "group": "motion",
+    "value": "200ms",
+    "meaning": "Something entering or leaving: a popover, a disclosure."
+  },
+  "--pr-duration-slow": {
+    "group": "motion",
+    "value": "280ms",
+    "meaning": "A large layer entering: a dialog, a panel."
+  },
+  "--pr-ease-standard": {
+    "group": "motion",
+    "value": "cubic-bezier(0.2, 0, 0, 1)",
+    "meaning": "A change in place."
+  },
+  "--pr-ease-enter": {
+    "group": "motion",
+    "value": "cubic-bezier(0, 0, 0, 1)",
+    "meaning": "Arriving: fast start, gentle stop."
+  },
+  "--pr-ease-exit": {
+    "group": "motion",
+    "value": "cubic-bezier(0.3, 0, 1, 1)",
+    "meaning": "Leaving: gentle start, fast end."
+  }
+}

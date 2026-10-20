@@ -50,8 +50,9 @@
               }
             ],
             "styles": [
-              "packages/tokens/src/tokens.css",
+              "packages/tokens/primal-tokens.css",
               "packages/css/src/primal.css",
+              "apps/showcase/src/themes/demo.css",
               "apps/showcase/src/styles.css"
             ]
           },

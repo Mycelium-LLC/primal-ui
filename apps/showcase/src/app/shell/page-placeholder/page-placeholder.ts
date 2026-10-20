@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     <h1>{{ title() }}</h1>
     <p class="pr-placeholder-note">
       Placeholder. Release {{ release() }} builds this page: {{ covers() }} Below are the plain native
-      HTML elements it covers, at browser defaults.
+      HTML elements it covers, with only Primal's base styles so far.
     </p>
     <section class="pr-specimen" aria-label="Native specimen">
       <ng-content />

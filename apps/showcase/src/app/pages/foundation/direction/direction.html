@@ -1,18 +1,30 @@
-<pr-page-placeholder title="Direction" release="0.1.0" covers="Left-to-right and right-to-left from logical properties.">
-<p dir="rtl" lang="he">שלום, <bdi>Niko Tsybulevsky</bdi> פתח את גרסה <bdi>0.1.0</bdi> היום.</p>
-<p>Isolated: user <bdi>إيان</bdi> scored 90 points.</p>
-<p>Override: <bdo dir="rtl">this text runs right to left</bdo>.</p>
-<p lang="ja"><ruby>漢<rp>(</rp><rt>kan</rt><rp>)</rp>字<rp>(</rp><rt>ji</rt><rp>)</rp></ruby></p>
-<ul>
-  <li>An unordered item</li>
-  <li>Another item
-    <ul><li>A nested item</li></ul>
-  </li>
-</ul>
-<ol>
-  <li>First step</li>
-  <li>Second step</li>
-  <li>Third step</li>
-</ol>
+<h1>Direction</h1>
+<p>
+  Every component is laid out with logical properties: start and end instead of left and right, block and inline instead of
+  top and side. That way the same styles work left to right and right to left. Switch Direction in the header and the whole
+  showcase mirrors, including the navigation, the tables and the spacing.
+</p>
+<p>
+  When there's no logical form (a translate, for example), the right-to-left rule is written out and documented with the
+  component that needs it.
+</p>
 
-</pr-page-placeholder>
+<h2>Both directions</h2>
+<div class="pr-pair">
+  <section class="pr-region" dir="ltr" lang="en" aria-label="Left to right sample">
+    <h3>Left to right</h3>
+    <p>Notifications <span class="pr-end">On</span></p>
+    <ul>
+      <li>Email me when a report is ready</li>
+      <li>Email me a weekly summary</li>
+    </ul>
+  </section>
+  <section class="pr-region" dir="rtl" lang="he" aria-label="Right to left sample">
+    <h3>מימין לשמאל</h3>
+    <p>התראות <span class="pr-end">פעיל</span></p>
+    <ul>
+      <li>שלחו לי מייל כשדוח מוכן</li>
+      <li>שלחו לי סיכום שבועי</li>
+    </ul>
+  </section>
+</div>

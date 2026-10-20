@@ -1,14 +1,25 @@
-<pr-page-placeholder title="Typography" release="0.1.0" covers="The fluid type scale and the readable measure.">
-<h1>Heading level 1</h1>
-<h2>Heading level 2</h2>
-<h3>Heading level 3</h3>
-<h4>Heading level 4</h4>
-<h5>Heading level 5</h5>
-<h6>Heading level 6</h6>
-<p>A paragraph of body text. Primal is a design system and the base every future Mycelium design system starts from, so its own look stays quiet. <a href="#">A link inside text</a>, then <strong>strong</strong>, <b>bold</b>, <em>emphasis</em>, <i>idiomatic</i>, <small>small print</small>, <mark>highlighted</mark>, <del>deleted</del>, <ins>inserted</ins>, <s>no longer accurate</s> and <u>an unarticulated annotation</u>.</p>
-<p>H<sub>2</sub>O and E = mc<sup>2</sup>. <abbr title="World Wide Web Consortium">W3C</abbr> writes the standards. A <dfn>primitive</dfn> is part of a promise. As the book puts it, <q>a treatment is a promise</q>, in <cite>Thoughts on Design and Humanity</cite>.</p>
-<p>Published <time datetime="2026-10-20">20 October 2026</time>; build <data value="210">210</data>.</p>
-<address>Mycelium, design&#64;example.com</address>
-<hr>
-<p>A line break<br>inside a paragraph, and a long word that may wrap: super<wbr>cali<wbr>fragilistic.</p>
-</pr-page-placeholder>
+<h1>Typography</h1>
+<p>
+  Primal uses the system font, so it brings no typeface of its own. Sizes are fluid: each step grows smoothly between phone and
+  desk widths with no jump at a breakpoint. Weight has two steps, regular and strong, so a heavier weight always means higher
+  rank. Body text stops at a readable line length.
+</p>
+
+<h2>The scale</h2>
+@for (size of sizes; track size.name) {
+  <div class="pr-step">
+    <p class="pr-sample" [style.font-size]="'var(' + size.name + ')'">Design from first principles</p>
+    <p class="pr-about">
+      <code>{{ size.name }}</code> · {{ size.px?.[0] }} to {{ size.px?.[1] }}px · {{ size.meaning }}
+    </p>
+  </div>
+}
+
+<h2>The measure</h2>
+<p>
+  This paragraph is as wide as body text ever gets: about 68 characters. Longer lines make the eye lose its place when it
+  jumps back to the start of the next one. Shorter lines break the reading rhythm. A wide screen gets more space around the
+  text, not longer lines.
+</p>
+
+<pr-token-table caption="Families, leading, weights and measure" [tokens]="rest" />

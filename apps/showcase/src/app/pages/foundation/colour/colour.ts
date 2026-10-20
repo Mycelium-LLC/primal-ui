@@ -1,11 +1,18 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { tokensIn } from '../../../shell/tokens';
 
-/** Placeholder until 0.1.0: the plain native elements this page will cover (decision 10). */
 @Component({
   selector: 'pr-foundation-colour-page',
-  imports: [PagePlaceholder],
   templateUrl: './colour.html',
+  styleUrl: './colour.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoundationColourPage {}
+export class FoundationColourPage {
+  protected readonly colours = tokensIn('colour');
+  protected readonly modes = [
+    { label: 'Light', theme: 'light', contrast: 'standard' },
+    { label: 'Dark', theme: 'dark', contrast: 'standard' },
+    { label: 'Light, more contrast', theme: 'light', contrast: 'more' },
+    { label: 'Dark, more contrast', theme: 'dark', contrast: 'more' },
+  ];
+}

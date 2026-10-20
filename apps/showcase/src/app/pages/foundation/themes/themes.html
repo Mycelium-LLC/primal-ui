@@ -1,22 +1,43 @@
-<pr-page-placeholder title="Themes" release="0.1.0" covers="Light, dark and high contrast, plus a demo theme made from tokens alone.">
-<h1>Heading level 1</h1>
-<h2>Heading level 2</h2>
-<p><button type="button">Save Changes</button> <button type="button" disabled>Disabled Action</button></p>
-<p><label>Text <input type="text" placeholder="Your name"></label></p>
-<table>
-  <caption>Releases planned for v1</caption>
-  <colgroup><col><col><col></colgroup>
-  <thead>
-    <tr><th scope="col">Release</th><th scope="col">Name</th><th scope="col">Requirements</th></tr>
-  </thead>
-  <tbody>
-    <!-- MOCK DATA: specimen rows -->
-    <tr><td>0.1.0</td><td>A base you can make your own</td><td>13</td></tr>
-    <tr><td>0.2.0</td><td>Plain HTML reads right</td><td>6</td></tr>
-    <tr><td>0.3.0</td><td>Fields that never leave you guessing</td><td>6</td></tr>
-  </tbody>
-  <tfoot>
-    <tr><th scope="row" colspan="2">Total</th><td>25</td></tr>
-  </tfoot>
-</table>
-</pr-page-placeholder>
+<h1>Themes</h1>
+<p>
+  Primal looks plain on purpose. It's the base that other design systems start from, so it carries no brand. A product gets its
+  own look by overriding tokens in one file of its own, and no component changes. The Look switch in the header shows this: the
+  demo theme is a single file of token overrides, and every page follows it.
+</p>
+
+<h2>The modes</h2>
+<dl>
+  <dt>Theme: light or dark</dt>
+  <dd>Follows the system, or is forced with <code>data-theme</code>.</dd>
+  <dt>Contrast: standard or more</dt>
+  <dd>Independent of the theme, so more contrast works in light and in dark. Follows the system, or is forced with <code>data-contrast</code>.</dd>
+  <dt>Density: comfortable or dense</dt>
+  <dd>The three gaps tighten, set with <code>data-density</code>.</dd>
+</dl>
+<p>Each mode can be set on the whole page or on one region of it, as in the regions below.</p>
+
+<h2>Regions</h2>
+<div class="pr-regions">
+  @for (r of regions; track r.label) {
+    <section
+      class="pr-region"
+      [attr.data-theme]="r.attrs.theme"
+      [attr.data-contrast]="r.attrs.contrast"
+      [attr.data-density]="r.attrs.density"
+      [attr.data-look]="r.attrs.look"
+      [attr.aria-label]="r.label + ' region'"
+    >
+      <h3>{{ r.label }}</h3>
+      <p>Body text with <a href="#">a link</a>.</p>
+      <p class="pr-muted">A description in muted text.</p>
+      <p class="pr-controls">
+        <label>Email <input type="email" /></label>
+        <button type="button">Save Changes</button>
+      </p>
+    </section>
+  }
+</div>
+
+<h2>Making a theme</h2>
+<p>Override any token in a file loaded after Primal's. Colours take a light and a dark value.</p>
+<pre><code>{{ example }}</code></pre>

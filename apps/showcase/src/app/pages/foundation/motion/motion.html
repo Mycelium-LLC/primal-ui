@@ -1,8 +1,28 @@
-<pr-page-placeholder title="Motion" release="0.1.0" covers="Durations, easing, and reduced motion.">
-<details>
-  <summary>What is a primitive?</summary>
-  <p>Part of a promise that isn't a whole job yet.</p>
-</details>
-<p><button type="button" popovertarget="pop-spec">Show Popover</button></p>
-<div id="pop-spec" popover><p>A native popover. Escape or a click outside closes it.</p></div>
-</pr-page-placeholder>
+<h1>Motion</h1>
+<p>
+  Motion in Primal is functional and quiet. It acknowledges a change, brings something in, or takes something away, and that
+  is all. It's short, with no springs and no loops, and nobody ever has to wait for an animation to finish. A product adds its
+  own character by changing these tokens.
+</p>
+<p>
+  If the system asks for reduced motion, every duration is zero and changes happen instantly. With reduced motion on, the demo
+  below jumps instead of sliding.
+</p>
+
+<h2>Durations</h2>
+<button type="button" class="pr-play" (click)="moved.set(!moved())">{{ moved() ? 'Move Back' : 'Play Motion' }}</button>
+<div class="pr-tracks">
+  @for (d of durations; track d.name) {
+    <div class="pr-track">
+      <span
+        class="pr-dot"
+        [class.pr-moved]="moved()"
+        [style.transition-duration]="'var(' + d.name + ')'"
+        aria-hidden="true"
+      ></span>
+      <p><code>{{ d.name }}</code>: {{ d.meaning }}</p>
+    </div>
+  }
+</div>
+
+<pr-token-table caption="Motion" [tokens]="motion" />

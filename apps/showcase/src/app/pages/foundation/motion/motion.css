@@ -1,0 +1,41 @@
+.pr-play {
+  min-block-size: var(--pr-control-height);
+  padding-inline: var(--pr-control-inset);
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface);
+  margin-block-end: var(--pr-gap-group);
+}
+
+.pr-tracks {
+  margin-block-end: var(--pr-gap-section);
+}
+
+.pr-track {
+  margin-block-end: var(--pr-gap-group);
+}
+
+.pr-track p {
+  margin: 0;
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+.pr-dot {
+  display: block;
+  inline-size: 1rem;
+  block-size: 1rem;
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-color-accent);
+  transition-property: translate;
+  transition-timing-function: var(--pr-ease-standard);
+}
+
+.pr-moved {
+  translate: 12rem 0;
+}
+
+/* translate has no logical form, so right-to-left is the one direction-specific rule here. */
+:host-context([dir='rtl']) .pr-moved {
+  translate: -12rem 0;
+}

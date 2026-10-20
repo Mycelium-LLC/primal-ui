@@ -17,5 +17,7 @@ jobs:
       - run: npm ci
       - name: Check the Folio ledger
         run: npm run check:folio
-      - name: Build the Angular adapter and the showcase
+      - name: Check the tokens are generated and meet WCAG 2.2 AA contrast
+        run: npm run check:tokens
+      - name: Build the tokens, the Angular adapter and the showcase
         run: npm run build

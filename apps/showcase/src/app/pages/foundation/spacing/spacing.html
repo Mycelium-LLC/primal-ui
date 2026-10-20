@@ -1,17 +1,40 @@
-<pr-page-placeholder title="Spacing" release="0.1.0" covers="Three gaps (section, group, component) and the dense mode.">
-<h1>Heading level 1</h1>
-<h2>Heading level 2</h2>
-<h3>Heading level 3</h3>
-<ul>
-  <li>An unordered item</li>
-  <li>Another item
-    <ul><li>A nested item</li></ul>
-  </li>
-</ul>
-<ol>
-  <li>First step</li>
-  <li>Second step</li>
-  <li>Third step</li>
-</ol>
+<h1>Spacing</h1>
+<p>
+  Space shows how things are grouped. Primal has three gaps: a large one between sections, a medium one between the elements of
+  a group, and a small one inside a component. The gaps differ enough to see at a glance. Two things the same distance apart
+  read as equals, so every gap is chosen on purpose.
+</p>
+<p>
+  Dense mode tightens all three, for screens people use all day. Switch Density in the header to see it here and everywhere
+  else.
+</p>
 
-</pr-page-placeholder>
+<h2>The three gaps</h2>
+@for (gap of gaps; track gap.name) {
+  <div class="pr-gap">
+    <span class="pr-bar" [style.inline-size]="'var(' + gap.name + ')'" aria-hidden="true"></span>
+    <p><code>{{ gap.name }}</code>: {{ gap.meaning }}</p>
+  </div>
+}
+
+<h2>The gaps at work</h2>
+<p>Two sections, each a heading with a group of items. Each item is a label and a description.</p>
+<div class="pr-demo">
+  <section class="pr-demo-section" aria-label="Spacing demo, first section">
+    <h3>Notifications</h3>
+    <div class="pr-demo-group">
+      <div class="pr-demo-item"><strong>Email</strong><span>When a report is ready</span></div>
+      <div class="pr-demo-item"><strong>Phone</strong><span>Only when something fails</span></div>
+    </div>
+  </section>
+  <section class="pr-demo-section" aria-label="Spacing demo, second section">
+    <h3>Appearance</h3>
+    <div class="pr-demo-group">
+      <div class="pr-demo-item"><strong>Theme</strong><span>Follow the system</span></div>
+      <div class="pr-demo-item"><strong>Density</strong><span>Comfortable</span></div>
+    </div>
+  </section>
+</div>
+
+<pr-token-table caption="Space" [tokens]="space" />
+<pr-token-table caption="Layout" [tokens]="layout" />

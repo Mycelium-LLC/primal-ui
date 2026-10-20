@@ -1,0 +1,31 @@
+.pr-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--pr-gap-group);
+}
+
+/* A sample region, outlined so its edge reads against the page. */
+.pr-region {
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+}
+
+.pr-region h3 {
+  margin-block-start: 0;
+}
+
+.pr-region p {
+  display: flex;
+}
+
+/* The value sits at the end of its line in either direction. */
+.pr-end {
+  margin-inline-start: auto;
+  color: var(--pr-color-text-muted);
+}
+
+.pr-region ul {
+  padding-inline-start: var(--pr-gap-group);
+  margin: 0;
+}

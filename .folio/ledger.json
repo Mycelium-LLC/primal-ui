@@ -74,6 +74,31 @@
       "n": 10,
       "decision": "The shell first",
       "ruling": "0.1.0 starts with the Angular workspace, the showcase shell and the infrastructure, with every planned page present from the start. A page not yet built shows the plain native HTML elements it will cover, and each release replaces its pages with the real ones (Niko, 2026-10-20)."
+    },
+    {
+      "n": 11,
+      "decision": "Width",
+      "ruling": "Both, as tokens: a reading container (about 72rem) and full width, so Primal never forces one on a product. The showcase uses the reading container (Niko, 2026-10-20: 'yes both. again this is a base system to expand on')."
+    },
+    {
+      "n": 12,
+      "decision": "Minimum interruptions",
+      "ruling": "Primal's own defaults stay minimal and out of the way so products expand on it; Claude decides what is Claude's to decide and asks Niko less (Niko, 2026-10-20: 'minimum interruptions')."
+    },
+    {
+      "n": 13,
+      "decision": "Motion",
+      "ruling": "Functional and quiet: motion only acknowledges, enters and leaves; short durations, no springs, nothing decorative. Decided by Claude under decision 12; a project adds character through the motion tokens."
+    },
+    {
+      "n": 14,
+      "decision": "Theme modes",
+      "ruling": "Colour scheme (light, dark) and contrast (standard, more) are independent, so high contrast exists in both light and dark; each follows the system and can be forced per page or region. Decided by Claude under decision 12."
+    },
+    {
+      "n": 15,
+      "decision": "Token source",
+      "ruling": "Tokens are authored once in JavaScript data and emitted as CSS custom properties and JSON, so the contrast check reads the same values a product gets. Decided by Claude under decision 12."
     }
   ],
   "releases": [

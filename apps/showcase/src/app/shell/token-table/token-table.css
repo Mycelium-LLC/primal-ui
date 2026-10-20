@@ -1,0 +1,39 @@
+/* The showcase's reference tables. 0.2.0 replaces these with Primal's own table foundation. */
+.pr-table-scroll {
+  overflow-x: auto;
+  margin-block-end: var(--pr-gap-section);
+}
+
+table {
+  border-collapse: collapse;
+  inline-size: 100%;
+  font-size: var(--pr-text-small);
+}
+
+caption {
+  text-align: start;
+  font-weight: var(--pr-weight-strong);
+  padding-block-end: var(--pr-gap-component);
+}
+
+th,
+td {
+  text-align: start;
+  vertical-align: top;
+  padding: var(--pr-gap-component);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+thead th {
+  color: var(--pr-color-text-muted);
+  font-weight: var(--pr-weight-regular);
+}
+
+tbody th {
+  font-weight: var(--pr-weight-regular);
+  white-space: nowrap;
+}
+
+code {
+  overflow-wrap: anywhere;
+}

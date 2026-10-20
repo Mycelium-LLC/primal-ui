@@ -1,0 +1,62 @@
+.pr-regions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--pr-gap-group);
+  margin-block-end: var(--pr-gap-section);
+}
+
+/* A region forced into another mode, outlined so its edge reads against the page. */
+.pr-region {
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  /* Re-read the tokens here, so a region's own mode applies to it and not only to the page. */
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+  font-family: var(--pr-font-sans);
+}
+
+.pr-region h3 {
+  margin-block-start: 0;
+}
+
+.pr-muted {
+  color: var(--pr-color-text-muted);
+}
+
+.pr-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--pr-gap-component);
+}
+
+/* Native controls until 0.3.0 and 0.4.0: only their edge, size and accent come from tokens. */
+label {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--pr-gap-component) / 2);
+}
+
+input,
+button {
+  min-block-size: var(--pr-control-height);
+  padding-inline: var(--pr-control-inset);
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+}
+
+button {
+  background-color: var(--pr-color-accent);
+  border-color: var(--pr-color-accent);
+  color: var(--pr-color-on-accent);
+}
+
+pre {
+  background-color: var(--pr-color-surface-sunken);
+  padding: var(--pr-gap-group);
+  border-radius: var(--pr-radius-control);
+  overflow-x: auto;
+}

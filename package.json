@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "scripts": {
     "ng": "ng",
-    "build": "ng build primal-angular && ng build showcase",
+    "build": "node packages/tokens/build.mjs && ng build primal-angular && ng build showcase",
     "watch": "ng build showcase --watch --configuration development",
     "check:folio": "node .folio/check-ledger.mjs",
-    "test": "ng test"
+    "test": "ng test",
+    "check:tokens": "node packages/tokens/build.mjs --check && node packages/tokens/check-contrast.mjs"
   },
   "private": true,
   "packageManager": "npm@11.19.1",

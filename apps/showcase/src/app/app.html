@@ -1,10 +1,22 @@
 <a class="pr-skip" href="#main">Skip to Content</a>
 <header class="pr-header">
-  <a class="pr-brand" routerLink="/">Mycelium Primal</a>
-  <span class="pr-version">{{ version }}</span>
+  <div class="pr-header-row">
+    <a class="pr-brand" routerLink="/">Mycelium Primal</a>
+    <small class="pr-version">{{ version }}</small>
+    <button
+      type="button"
+      class="pr-menu-button"
+      aria-controls="pr-pages"
+      [attr.aria-expanded]="menuOpen()"
+      (click)="menuOpen.set(!menuOpen())"
+    >
+      {{ menuOpen() ? 'Close Pages' : 'Show Pages' }}
+    </button>
+  </div>
+  <pr-display-options />
 </header>
 <div class="pr-body">
-  <nav class="pr-nav" aria-label="Showcase">
+  <nav id="pr-pages" class="pr-nav" [class.pr-nav-open]="menuOpen()" aria-label="Showcase">
     @for (section of nav; track section.title) {
       <h2 class="pr-nav-section">{{ section.title }}</h2>
       <ul>

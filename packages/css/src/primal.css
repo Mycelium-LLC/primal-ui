@@ -1,5 +1,166 @@
 /*
- * Mycelium Primal core styles: reset, base typography and layout, in plain CSS.
- * Every value comes from primal-tokens. 0.1.0 adds the reset and base; 0.2.0 the
- * classless styles for every native element.
+ * Mycelium Primal core styles: reset and base typography, in plain CSS.
+ * Load after primal-tokens.css. Every value comes from a token; logical properties throughout.
+ * 0.2.0 extends this to every native element (the classless base).
  */
+
+/* ---------------------------------------------------------------- reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body {
+  margin: 0;
+  min-block-size: 100dvh;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+img,
+video {
+  block-size: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* The person asked for less motion: nothing moves that isn't needed to understand a change. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------- the page */
+
+:root,
+[data-theme],
+[data-contrast] {
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+}
+
+body {
+  font-family: var(--pr-font-sans);
+  font-size: var(--pr-text-body);
+  line-height: var(--pr-leading-body);
+  font-weight: var(--pr-weight-regular);
+}
+
+::selection {
+  background-color: var(--pr-color-selection);
+  color: var(--pr-color-text);
+}
+
+/* ---------------------------------------------------------------- base typography */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--pr-weight-strong);
+  line-height: var(--pr-leading-tight);
+  margin-block: var(--pr-gap-section) var(--pr-gap-group);
+  text-wrap: balance;
+}
+
+/* A heading belongs to what follows it: it sits closer to its content than to what came before. */
+h1 {
+  font-size: var(--pr-text-3xl);
+  margin-block-start: 0;
+}
+
+h2 {
+  font-size: var(--pr-text-2xl);
+}
+
+h3 {
+  font-size: var(--pr-text-xl);
+}
+
+h4 {
+  font-size: var(--pr-text-large);
+}
+
+h5,
+h6 {
+  font-size: var(--pr-text-body);
+}
+
+p {
+  margin-block: 0 var(--pr-gap-group);
+  max-inline-size: var(--pr-measure);
+  text-wrap: pretty;
+}
+
+small {
+  font-size: var(--pr-text-small);
+}
+
+strong,
+b {
+  font-weight: var(--pr-weight-strong);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--pr-font-mono);
+  font-size: 0.9em;
+}
+
+a {
+  color: var(--pr-color-accent);
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+
+/* ---------------------------------------------------------------- focus */
+
+/* The focus ring means one thing: this is where the keyboard is. */
+:focus-visible {
+  outline: var(--pr-focus-width) solid var(--pr-color-accent);
+  outline-offset: var(--pr-focus-offset);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}

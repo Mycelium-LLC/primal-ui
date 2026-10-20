@@ -1,15 +1,58 @@
-<pr-page-placeholder title="Colour" release="0.1.0" covers="Colour roles as semantic tokens, applied to text, links, actions and fields.">
-<h1>Heading level 1</h1>
-<h2>Heading level 2</h2>
-<h3>Heading level 3</h3>
-<h4>Heading level 4</h4>
-<h5>Heading level 5</h5>
-<h6>Heading level 6</h6>
-<p>A paragraph of body text. Primal is a design system and the base every future Mycelium design system starts from, so its own look stays quiet. <a href="#">A link inside text</a>, then <strong>strong</strong>, <b>bold</b>, <em>emphasis</em>, <i>idiomatic</i>, <small>small print</small>, <mark>highlighted</mark>, <del>deleted</del>, <ins>inserted</ins>, <s>no longer accurate</s> and <u>an unarticulated annotation</u>.</p>
-<p>H<sub>2</sub>O and E = mc<sup>2</sup>. <abbr title="World Wide Web Consortium">W3C</abbr> writes the standards. A <dfn>primitive</dfn> is part of a promise. As the book puts it, <q>a treatment is a promise</q>, in <cite>Thoughts on Design and Humanity</cite>.</p>
-<p>Published <time datetime="2026-10-20">20 October 2026</time>; build <data value="210">210</data>.</p>
-<address>Mycelium, design&#64;example.com</address>
+<h1>Colour</h1>
+<p>
+  Each colour is a role with one meaning. It is never picked for how it looks in one place. There is one accent, and it means
+  "something happens here". The other roles are quiet, so that whatever needs attention can lead.
+</p>
+<p>
+  Each role has a value for light and dark, and stronger values for more contrast. Every text and control pair is checked
+  against WCAG 2.2 AA on every build.
+</p>
 
-<p><button type="button">Save Changes</button> <button type="button" disabled>Disabled Action</button></p>
-<p><label>Text <input type="text" placeholder="Your name"></label></p>
-</pr-page-placeholder>
+<div class="pr-table-scroll">
+  <table class="pr-colours">
+    <caption>Colour roles in every mode</caption>
+    <thead>
+      <tr>
+        <th scope="col">Role</th>
+        @for (mode of modes; track mode.label) {
+          <th scope="col">{{ mode.label }}</th>
+        }
+        <th scope="col">Meaning</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (c of colours; track c.name) {
+        <tr>
+          <th scope="row"><code>{{ c.name }}</code></th>
+          @for (mode of modes; track mode.label) {
+            <td>
+              <span
+                class="pr-swatch"
+                [attr.data-theme]="mode.theme"
+                [attr.data-contrast]="mode.contrast"
+                [style.background-color]="'var(' + c.name + ')'"
+                role="img"
+                [attr.aria-label]="c.name + ' in ' + mode.label"
+              ></span>
+            </td>
+          }
+          <td>{{ c.meaning }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<h2>In use</h2>
+<p>The same few elements in each mode, so you can see how the roles work together.</p>
+<div class="pr-in-use">
+  @for (mode of modes; track mode.label) {
+    <section class="pr-region" [attr.data-theme]="mode.theme" [attr.data-contrast]="mode.contrast" [attr.aria-label]="mode.label">
+      <h3>{{ mode.label }}</h3>
+      <p>Body text with <a href="#">a link</a>.</p>
+      <p class="pr-muted">Muted text: a caption or description.</p>
+      <p class="pr-danger">Danger: the report could not be saved.</p>
+      <p class="pr-success">Success: 3 changes saved.</p>
+    </section>
+  }
+</div>

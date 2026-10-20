@@ -1,6 +1,8 @@
-/* The showcase shell, deliberately bare until 0.1.0's tokens and layout land. */
+/* The showcase shell. Every value is a Primal token, so it follows every mode and the demo theme. */
 :host {
   display: block;
+  max-inline-size: var(--pr-container-reading);
+  margin-inline: auto;
 }
 
 .pr-skip {
@@ -9,57 +11,129 @@
 }
 
 .pr-skip:focus {
-  inset-inline-start: 1rem;
-  inset-block-start: 1rem;
+  inset-inline-start: var(--pr-gutter);
+  inset-block-start: var(--pr-gutter);
+  background-color: var(--pr-color-surface-raised);
+  padding: var(--pr-gap-component);
 }
 
 .pr-header {
   display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--pr-gap-group);
+  padding: var(--pr-gutter);
+}
+
+.pr-header-row {
+  display: flex;
   align-items: baseline;
-  gap: 1rem;
-  padding: 1rem;
+  gap: var(--pr-gap-component);
+  inline-size: 100%;
+}
+
+@media (width >= 48rem) {
+  .pr-header-row {
+    inline-size: auto;
+  }
 }
 
 .pr-brand {
-  font-weight: bold;
+  font-weight: var(--pr-weight-strong);
+  font-size: var(--pr-text-large);
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.pr-version {
+  color: var(--pr-color-text-muted);
+}
+
+.pr-menu-button {
+  margin-inline-start: auto;
+  min-block-size: var(--pr-control-height);
+  padding-inline: var(--pr-control-inset);
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface);
 }
 
 .pr-body {
   display: grid;
-  grid-template-columns: minmax(14rem, 18rem) 1fr;
+  grid-template-columns: 1fr;
+  gap: var(--pr-gap-section);
+  padding-inline: var(--pr-gutter);
 }
 
 .pr-nav {
-  padding: 0 1rem 2rem;
+  display: none;
+}
+
+.pr-nav-open {
+  display: block;
+}
+
+@media (width >= 48rem) {
+  .pr-menu-button {
+    display: none;
+  }
+
+  .pr-body {
+    grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr);
+  }
+
+  .pr-nav {
+    display: block;
+    position: sticky;
+    inset-block-start: 0;
+    align-self: start;
+    max-block-size: 100dvh;
+    overflow-y: auto;
+    padding-block-end: var(--pr-gap-section);
+  }
 }
 
 .pr-nav ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .pr-nav li {
   display: flex;
   justify-content: space-between;
-  gap: 0.5rem;
+  align-items: baseline;
+  gap: var(--pr-gap-component);
+  min-block-size: var(--pr-target-min);
+}
+
+.pr-nav a {
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.pr-nav small {
+  color: var(--pr-color-text-muted);
+}
+
+/* The current place: the accent, because the accent means where something is happening. */
+.pr-nav a.pr-current {
+  color: var(--pr-color-accent);
+  font-weight: var(--pr-weight-strong);
 }
 
 .pr-nav-section {
-  font-size: 1rem;
-  margin-block: 1.5rem 0.5rem;
-}
-
-.pr-current {
-  font-weight: bold;
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+  margin-block: var(--pr-gap-group) var(--pr-gap-component);
 }
 
 .pr-main {
-  padding: 0 1rem 4rem;
   min-inline-size: 0;
+  padding-block-end: var(--pr-gap-section);
 }
 
-@media (width < 48rem) {
-  .pr-body {
-    grid-template-columns: 1fr;
-  }
+.pr-main:focus {
+  outline: none;
 }

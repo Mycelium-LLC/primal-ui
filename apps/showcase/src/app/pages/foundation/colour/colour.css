@@ -1,0 +1,71 @@
+.pr-table-scroll {
+  overflow-x: auto;
+  margin-block-end: var(--pr-gap-section);
+}
+
+table {
+  border-collapse: collapse;
+  font-size: var(--pr-text-small);
+}
+
+caption {
+  text-align: start;
+  font-weight: var(--pr-weight-strong);
+  padding-block-end: var(--pr-gap-component);
+}
+
+th,
+td {
+  text-align: start;
+  vertical-align: middle;
+  padding: var(--pr-gap-component);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+thead th {
+  color: var(--pr-color-text-muted);
+  font-weight: var(--pr-weight-regular);
+}
+
+tbody th {
+  font-weight: var(--pr-weight-regular);
+  white-space: nowrap;
+}
+
+/* A swatch is a sample of a colour, framed by the separating line so pale roles stay visible. */
+.pr-swatch {
+  display: block;
+  inline-size: 3rem;
+  block-size: 2rem;
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-control);
+}
+
+.pr-in-use {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--pr-gap-group);
+}
+
+/* A region forced into another mode, outlined so its edge reads against the page. */
+.pr-region {
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+}
+
+.pr-region h3 {
+  margin-block-start: 0;
+}
+
+.pr-muted {
+  color: var(--pr-color-text-muted);
+}
+
+.pr-danger {
+  color: var(--pr-color-danger);
+}
+
+.pr-success {
+  color: var(--pr-color-success);
+}

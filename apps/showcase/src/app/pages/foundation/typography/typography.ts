@@ -1,11 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { TokenTable } from '../../../shell/token-table/token-table';
+import { tokensIn } from '../../../shell/tokens';
 
-/** Placeholder until 0.1.0: the plain native elements this page will cover (decision 10). */
 @Component({
   selector: 'pr-foundation-typography-page',
-  imports: [PagePlaceholder],
+  imports: [TokenTable],
   templateUrl: './typography.html',
+  styleUrl: './typography.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FoundationTypographyPage {}
+export class FoundationTypographyPage {
+  private readonly type = tokensIn('type');
+  protected readonly sizes = this.type.filter((t) => t.name.startsWith('--pr-text-'));
+  protected readonly rest = this.type.filter((t) => !t.name.startsWith('--pr-text-'));
+}
