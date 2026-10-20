@@ -26,6 +26,12 @@
   /* How far round the wheel the tertiary sits from the primary (Complementary by default). */
   --pr-tertiary-angle: 30;
 
+  /* How much lighter (positive) or darker (negative) the companion is than the primary. */
+  --pr-companion-lightness: 0;
+
+  /* How much lighter (positive) or darker (negative) the tertiary is than the primary. */
+  --pr-tertiary-lightness: 0;
+
   /* All interface and reading text, in English and Hebrew: Google Sans, bundled with Primal, falling back to the system font. */
   --pr-font-sans: "Google Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Hebrew", Arial, sans-serif;
 
@@ -190,10 +196,10 @@
   --pr-color-on-primary: oklch(from var(--pr-color-primary) clamp(0, (0.64 - l) * 1000, 1) 0 0);
 
   /* Goes with the primary: a second emphasis, a highlight, a second series. Never an action. */
-  --pr-color-companion: oklch(from var(--pr-color-primary) l c calc(h + var(--pr-companion-angle)));
+  --pr-color-companion: oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle)));
 
   /* A third hue for decoration and a third series. Never an action. */
-  --pr-color-tertiary: oklch(from var(--pr-color-primary) l c calc(h + var(--pr-tertiary-angle)));
+  --pr-color-tertiary: oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle)));
 
   /* Text the person has selected. */
   --pr-color-selection: color-mix(in oklch, var(--pr-color-primary) 28%, var(--pr-color-surface));

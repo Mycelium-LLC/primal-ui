@@ -151,9 +151,7 @@
   white-space: nowrap;
 }
 
-/* Only the page cross-fades on a route change; the header and the menu hold still. */
 .pr-main {
-  view-transition-name: pr-page;
   min-inline-size: 0;
   padding-block-end: var(--pr-gap-section);
 }

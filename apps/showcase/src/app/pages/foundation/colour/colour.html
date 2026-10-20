@@ -42,7 +42,62 @@
   }
 </ul>
 
-<h2>Preview</h2>
+<div class="pr-adjust" role="group" aria-label="Adjust the harmony">
+  @for (which of tunables; track which) {
+    <fieldset>
+      <legend>{{ which === 'companion' ? 'Companion' : 'Tertiary' }}</legend>
+      <label>
+        <span>Hue <output>{{ adjust()[which].hue > 0 ? '+' : '' }}{{ adjust()[which].hue }}°</output></span>
+        <input
+          type="range"
+          [min]="limits.hue.min"
+          [max]="limits.hue.max"
+          [step]="limits.hue.step"
+          [value]="adjust()[which].hue"
+          (input)="nudge(which, 'hue', $any($event.target).value)"
+        />
+      </label>
+      <label>
+        <span>Lightness <output>{{ adjust()[which].lightness > 0 ? '+' : '' }}{{ adjust()[which].lightness }}</output></span>
+        <input
+          type="range"
+          [min]="limits.lightness.min"
+          [max]="limits.lightness.max"
+          [step]="limits.lightness.step"
+          [value]="adjust()[which].lightness"
+          (input)="nudge(which, 'lightness', $any($event.target).value)"
+        />
+      </label>
+    </fieldset>
+  }
+  <button type="button" [disabled]="!adjusted()" (click)="resetAdjust()">Reset Adjustments</button>
+</div>
+
+<h2>Your palette</h2>
+@for (row of final(); track row.mode) {
+  <section class="pr-palette" [attr.aria-label]="row.mode + ' palette'">
+    <h3>{{ row.mode === 'light' ? 'Light' : 'Dark' }}</h3>
+    <ul class="pr-strip">
+      @for (c of row.main; track c.role) {
+        <li>
+          <span class="pr-big" [style.background-color]="c.hex" aria-hidden="true"></span>
+          <strong>{{ c.label }}</strong>
+          <code>{{ c.hex }}</code>
+        </li>
+      }
+    </ul>
+    <ul class="pr-strip pr-strip-system">
+      @for (c of row.system; track c.role) {
+        <li>
+          <span class="pr-small" [style.background-color]="c.hex" aria-hidden="true"></span>
+          <span>{{ c.label }} <code>{{ c.hex }}</code></span>
+        </li>
+      }
+    </ul>
+  </section>
+}
+
+<h2>In use</h2>
 <div class="pr-previews">
   @for (mode of ['light', 'dark']; track mode) {
     <section class="pr-preview" data-palette [attr.data-theme]="mode" [style]="vars()" [attr.aria-label]="mode + ' preview'">
@@ -87,7 +142,8 @@
   <span role="status" class="pr-muted">{{ copied() ? 'Copied to the clipboard.' : '' }}</span>
 </p>
 
-<h2>The derived roles</h2>
+<details class="pr-more">
+<summary>Every derived role</summary>
 <div class="pr-table-scroll">
   <table>
     <caption>Every role, from your choices</caption>
@@ -110,29 +166,9 @@
   </table>
 </div>
 
-<h2>System colours</h2>
-<p>
+</details>
+
+<p class="pr-note">
   Danger, warning, info and success keep their hues in every project, outside the harmony, so they always read as what they
   are. Each has a quiet background (<code>--pr-color-danger-surface</code>, and so on) mixed with the page.
 </p>
-<div class="pr-table-scroll">
-  <table>
-    <caption>System colours</caption>
-    <thead>
-      <tr>
-        <th scope="col">Colour and meaning</th>
-        <th scope="col">Light</th>
-        <th scope="col">Dark</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (r of system(); track r.name) {
-        <tr>
-          <th scope="row"><code>--pr-color-{{ r.name }}</code><span class="pr-meaning">{{ r.meaning }}</span></th>
-          <td><span class="pr-swatch" [style.background-color]="r.light" role="img" [attr.aria-label]="r.name + ' in light'"></span></td>
-          <td><span class="pr-swatch" [style.background-color]="r.dark" role="img" [attr.aria-label]="r.name + ' in dark'"></span></td>
-        </tr>
-      }
-    </tbody>
-  </table>
-</div>

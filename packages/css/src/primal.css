@@ -325,13 +325,29 @@ label {
 }
 
 /* ---------------------------------------------------------------- page transitions */
-/* A page change is a cross-fade: something leaving, something arriving, nothing to wait out. */
+/*
+ * A page change cross-fades what is on screen: the old view steps out quickly, the new one comes
+ * in. The whole viewport is one image, so nothing slides and parts that didn't change hold still.
+ */
 
-::view-transition-group(*),
-::view-transition-old(*),
-::view-transition-new(*) {
-  animation-duration: var(--pr-duration-base);
-  animation-timing-function: var(--pr-ease-standard);
+::view-transition-old(root) {
+  animation: var(--pr-duration-fast) var(--pr-ease-exit) both pr-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: var(--pr-duration-base) var(--pr-ease-enter) both pr-fade-in;
+}
+
+@keyframes pr-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pr-fade-in {
+  from {
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

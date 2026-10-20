@@ -1,12 +1,16 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import {
+  ADJUST,
+  Adjust,
   DEFAULTS,
+  NO_ADJUST,
   ROLES,
   SCHEMES,
   SYSTEM,
   audit,
   css,
   fromHex,
+  harmony,
   palette,
   toHex,
 } from '../../../../../../../packages/tokens/src/colour-model.mjs';
@@ -26,6 +30,9 @@ export class FoundationColourPage {
   protected readonly white = signal<Oklch>(DEFAULTS.white);
   protected readonly primary = signal<Oklch>(DEFAULTS.primary);
   protected readonly scheme = signal<Scheme>(DEFAULTS.scheme as Scheme);
+  protected readonly adjust = signal<Adjust>(NO_ADJUST);
+  protected readonly limits = ADJUST;
+  protected readonly tunables = ['companion', 'tertiary'] as const;
 
   protected readonly schemes = Object.entries(SCHEMES).map(([key, s]) => ({ key: key as Scheme, ...s }));
   protected readonly toHex = toHex;
@@ -35,23 +42,26 @@ export class FoundationColourPage {
     white: this.white(),
     primary: this.primary(),
     scheme: this.scheme(),
+    adjust: this.adjust(),
   }));
 
   /** Custom properties that make a [data-palette] region derive from these choices. */
-  protected vars(scheme: Scheme = this.scheme()): Record<string, string> {
-    const s = SCHEMES[scheme];
+  protected readonly vars = computed<Record<string, string>>(() => {
+    const h = harmony(this.choices());
     return {
       '--pr-black': css(this.black()),
       '--pr-white': css(this.white()),
       '--pr-primary': css(this.primary()),
-      '--pr-companion-angle': `${s.companion}`,
-      '--pr-tertiary-angle': `${s.tertiary}`,
+      '--pr-companion-angle': `${h.companionAngle}`,
+      '--pr-tertiary-angle': `${h.tertiaryAngle}`,
+      '--pr-companion-lightness': `${h.companionLightness}`,
+      '--pr-tertiary-lightness': `${h.tertiaryLightness}`,
     };
-  }
+  });
 
   protected readonly harmonies = computed(() =>
     this.schemes.map((s) => {
-      const light = palette({ ...this.choices(), scheme: s.key }, 'light');
+      const light = palette({ ...this.choices(), scheme: s.key, adjust: s.key === this.scheme() ? this.adjust() : NO_ADJUST }, 'light');
       return { ...s, swatches: [light['primary'], light['companion'], light['tertiary']].map(toHex) };
     }),
   );
@@ -63,6 +73,25 @@ export class FoundationColourPage {
     Object.entries(ROLES)
       .filter(([name]) => !this.isSystem(name))
       .map(([name, role]) => ({ name: `--pr-color-${name}`, meaning: role.meaning, light: toHex(this.light()[name]), dark: toHex(this.dark()[name]) })),
+  );
+
+  /** The final palette, large: the five colours a project works with, then the system colours. */
+  protected readonly final = computed(() =>
+    (['light', 'dark'] as const).map((mode) => {
+      const p = mode === 'light' ? this.light() : this.dark();
+      const swatch = (name: string, label: string, role: string) => ({ label, role, hex: toHex(p[role]), oklch: css(p[role]) });
+      return {
+        mode,
+        main: [
+          swatch('black', mode === 'light' ? 'Black, as text' : 'Black, as the page', mode === 'light' ? 'text' : 'surface'),
+          swatch('white', mode === 'light' ? 'White, as the page' : 'White, as text', mode === 'light' ? 'surface' : 'text'),
+          swatch('primary', 'Primary', 'primary'),
+          swatch('companion', 'Companion', 'companion'),
+          swatch('tertiary', 'Tertiary', 'tertiary'),
+        ],
+        system: Object.keys(SYSTEM).map((name) => swatch(name, name[0].toUpperCase() + name.slice(1), name)),
+      };
+    }),
   );
 
   protected readonly system = computed(() =>
@@ -79,13 +108,18 @@ export class FoundationColourPage {
 
   protected readonly snippet = computed(() => {
     const s = SCHEMES[this.scheme()];
+    const h = harmony(this.choices());
+    const lightness = [
+      h.companionLightness ? `\n  --pr-companion-lightness: ${h.companionLightness};` : '',
+      h.tertiaryLightness ? `\n  --pr-tertiary-lightness: ${h.tertiaryLightness};` : '',
+    ].join('');
     return `/* my-theme.css, loaded after Primal */
 :root {
   --pr-black: ${css(this.black())};
   --pr-white: ${css(this.white())};
   --pr-primary: ${css(this.primary())};
-  --pr-companion-angle: ${s.companion}; /* ${s.label} */
-  --pr-tertiary-angle: ${s.tertiary};
+  --pr-companion-angle: ${h.companionAngle}; /* ${s.label} */
+  --pr-tertiary-angle: ${h.tertiaryAngle};${lightness}
 }`;
   });
 
@@ -98,14 +132,27 @@ export class FoundationColourPage {
 
   protected useScheme(key: Scheme): void {
     this.scheme.set(key);
+    this.adjust.set(NO_ADJUST);
     this.copied.set(false);
   }
+
+  protected nudge(which: 'companion' | 'tertiary', what: 'hue' | 'lightness', value: string): void {
+    this.adjust.update((a) => ({ ...a, [which]: { ...a[which], [what]: Number(value) } }));
+    this.copied.set(false);
+  }
+
+  protected resetAdjust(): void {
+    this.adjust.set(NO_ADJUST);
+  }
+
+  protected readonly adjusted = computed(() => JSON.stringify(this.adjust()) !== JSON.stringify(NO_ADJUST));
 
   protected reset(): void {
     this.black.set(DEFAULTS.black);
     this.white.set(DEFAULTS.white);
     this.primary.set(DEFAULTS.primary);
     this.scheme.set(DEFAULTS.scheme as Scheme);
+    this.adjust.set(NO_ADJUST);
     this.copied.set(false);
   }
 

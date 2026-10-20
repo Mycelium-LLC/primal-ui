@@ -44,7 +44,8 @@ input[type='color'] {
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  /* Four in a row when they fit, otherwise two by two: never three and an orphan. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
   gap: var(--pr-gap-group);
 }
 
@@ -235,4 +236,112 @@ tbody th {
   block-size: 2rem;
   border: var(--pr-border-width) solid var(--pr-color-border);
   border-radius: var(--pr-radius-control);
+}
+
+/* ---------------------------------------------------------------- adjust */
+
+.pr-adjust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--pr-gap-group) var(--pr-gap-section);
+  margin-block: var(--pr-gap-group) var(--pr-gap-section);
+}
+
+.pr-adjust fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-group);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.pr-adjust legend {
+  font-weight: var(--pr-weight-strong);
+  padding: 0;
+  margin-block-end: var(--pr-gap-component);
+}
+
+.pr-adjust label {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--pr-gap-component) / 2);
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+.pr-adjust output {
+  color: var(--pr-color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.pr-adjust input[type='range'] {
+  inline-size: 10rem;
+}
+
+/* ---------------------------------------------------------------- the final palette */
+
+.pr-palette h3 {
+  margin-block-start: var(--pr-gap-group);
+}
+
+.pr-strip {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--pr-gap-group);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: var(--pr-gap-group);
+}
+
+.pr-strip li {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--pr-gap-component) / 2);
+  font-size: var(--pr-text-small);
+}
+
+.pr-strip small {
+  color: var(--pr-color-text-muted);
+}
+
+/* A large sample of one colour; framed by the separating line so the page colour stays visible. */
+.pr-big {
+  display: block;
+  block-size: 6rem;
+  margin-block-end: var(--pr-gap-component);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+}
+
+.pr-strip-system li {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--pr-gap-component);
+}
+
+.pr-small {
+  flex: none;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border-radius: var(--pr-radius-round);
+}
+
+/* ---------------------------------------------------------------- the rest */
+
+.pr-more {
+  margin-block: var(--pr-gap-section) var(--pr-gap-group);
+}
+
+.pr-more summary {
+  cursor: pointer;
+  font-weight: var(--pr-weight-strong);
+  margin-block-end: var(--pr-gap-group);
+}
+
+.pr-note {
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
 }

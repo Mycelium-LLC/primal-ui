@@ -15,11 +15,17 @@ export interface Role {
   pairs?: Record<string, 'text' | 'ui'>;
 }
 
+export interface Adjust {
+  companion: { hue: number; lightness: number };
+  tertiary: { hue: number; lightness: number };
+}
+
 export interface Choices {
   black: Oklch;
   white: Oklch;
   primary: Oklch;
   scheme?: string;
+  adjust?: Adjust;
 }
 
 export interface Pair {
@@ -45,5 +51,13 @@ export function contrast(a: Oklch, b: Oklch): number;
 export function toHex(c: Oklch): string;
 export function fromHex(hex: string): Oklch;
 export function css(c: Oklch): string;
+export const ADJUST: Record<'hue' | 'lightness', { min: number; max: number; step: number; meaning: string }>;
+export const NO_ADJUST: Adjust;
+export function harmony(choices: Choices): {
+  companionAngle: number;
+  tertiaryAngle: number;
+  companionLightness: number;
+  tertiaryLightness: number;
+};
 export function palette(choices: Choices, mode: Mode): Record<string, Oklch>;
 export function audit(choices: Choices): Pair[];

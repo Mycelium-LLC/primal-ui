@@ -123,7 +123,7 @@
     {
       "n": 20,
       "decision": "Page transitions",
-      "ruling": "A page change is a short cross-fade of the page content, timed by the motion tokens; the shell holds still and nothing slides; instant under reduced motion (Niko, 2026-10-20: 'smoother page transitions please. it jumps')."
+      "ruling": "A page change cross-fades the whole viewport (the old view out quickly, the new one in), timed by the motion tokens; nothing slides, unchanged parts hold still, instant under reduced motion (Niko, 2026-10-20: 'smoother page transitions please. it jumps'; 'the page transitions are wanky and jumpy not proper')."
     },
     {
       "n": 21,
@@ -134,6 +134,11 @@
       "n": 22,
       "decision": "System colours",
       "ruling": "Danger, warning, info and success are their own group, outside the harmony, keeping their hues in every project; only their backgrounds mix with the page (Niko, 2026-10-20: 'in another contextual group the system ui colors: like warning | info | sucess? at minimum')."
+    },
+    {
+      "n": 23,
+      "decision": "Adjusting the harmony",
+      "ruling": "Each harmony colour (companion, tertiary) can be adjusted lightly: up to 20° round the wheel and 0.12 lighter or darker than the primary; the Colour page shows the final palette large, in light and dark (Niko, 2026-10-20: 'lets offer to adjust lightly each option. and see the final pallete properly')."
     }
   ],
   "releases": [

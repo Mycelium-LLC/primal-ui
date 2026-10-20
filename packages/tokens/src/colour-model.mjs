@@ -158,19 +158,19 @@ export const ROLES = {
   },
   companion: {
     meaning: 'Goes with the primary: a second emphasis, a highlight, a second series. Never an action.',
-    css: 'oklch(from var(--pr-color-primary) l c calc(h + var(--pr-companion-angle)))',
+    css: 'oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle)))',
     value: (x) => {
       const p = primaryRole(x);
-      return [p[0], p[1], wrap(p[2] + x.companionAngle)];
+      return [p[0] + x.companionLightness, p[1], wrap(p[2] + x.companionAngle)];
     },
     pairs: { surface: 'ui' },
   },
   tertiary: {
     meaning: 'A third hue for decoration and a third series. Never an action.',
-    css: 'oklch(from var(--pr-color-primary) l c calc(h + var(--pr-tertiary-angle)))',
+    css: 'oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle)))',
     value: (x) => {
       const p = primaryRole(x);
-      return [p[0], p[1], wrap(p[2] + x.tertiaryAngle)];
+      return [p[0] + x.tertiaryLightness, p[1], wrap(p[2] + x.tertiaryAngle)];
     },
     pairs: { surface: 'ui' },
   },
@@ -207,10 +207,31 @@ export const ROLES = {
   ),
 };
 
-/** Every role's colour for one set of choices, in one mode. */
-export function palette({ black, white, primary, scheme = DEFAULT_SCHEME }, mode) {
+/**
+ * A light adjustment of the harmony: the companion and the tertiary can each turn a little round
+ * the wheel from where the scheme puts them, and be a little lighter or darker than the primary.
+ */
+export const ADJUST = {
+  hue: { min: -20, max: 20, step: 1, meaning: 'Degrees round the wheel from where the harmony puts it.' },
+  lightness: { min: -0.12, max: 0.12, step: 0.01, meaning: 'Lighter or darker than the primary.' },
+};
+export const NO_ADJUST = { companion: { hue: 0, lightness: 0 }, tertiary: { hue: 0, lightness: 0 } };
+
+/** The four harmony values a set of choices resolves to: the scheme's angles plus any adjustment. */
+export function harmony({ scheme = DEFAULT_SCHEME, adjust = NO_ADJUST }) {
   const s = SCHEMES[scheme];
-  const x = { mode, black, white, primary, companionAngle: s.companion, tertiaryAngle: s.tertiary };
+  return {
+    companionAngle: s.companion + adjust.companion.hue,
+    tertiaryAngle: s.tertiary + adjust.tertiary.hue,
+    companionLightness: adjust.companion.lightness,
+    tertiaryLightness: adjust.tertiary.lightness,
+  };
+}
+
+/** Every role's colour for one set of choices, in one mode. */
+export function palette(choices, mode) {
+  const { black, white, primary } = choices;
+  const x = { mode, black, white, primary, ...harmony(choices) };
   return Object.fromEntries(Object.entries(ROLES).map(([name, r]) => [name, r.value(x)]));
 }
 
@@ -235,4 +256,5 @@ export const DEFAULTS = {
   white: INPUTS.white.value,
   primary: INPUTS.primary.value,
   scheme: DEFAULT_SCHEME,
+  adjust: NO_ADJUST,
 };

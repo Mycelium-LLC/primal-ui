@@ -38,6 +38,8 @@ for (const [name, input] of Object.entries(t.INPUTS)) add('choice', name, oklch(
 const scheme = t.SCHEMES[t.DEFAULT_SCHEME];
 add('choice', 'companion-angle', `${scheme.companion}`, `How far round the wheel the companion sits from the primary (${scheme.label} by default).`);
 add('choice', 'tertiary-angle', `${scheme.tertiary}`, `How far round the wheel the tertiary sits from the primary (${scheme.label} by default).`);
+add('choice', 'companion-lightness', '0', 'How much lighter (positive) or darker (negative) the companion is than the primary.');
+add('choice', 'tertiary-lightness', '0', 'How much lighter (positive) or darker (negative) the tertiary is than the primary.');
 const light = t.palette(t.DEFAULTS, 'light');
 const dark = t.palette(t.DEFAULTS, 'dark');
 const roles = [];
