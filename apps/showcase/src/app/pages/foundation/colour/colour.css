@@ -29,7 +29,12 @@ thead th {
 
 tbody th {
   font-weight: var(--pr-weight-regular);
-  white-space: nowrap;
+}
+
+.pr-meaning {
+  display: block;
+  color: var(--pr-color-text-muted);
+  margin-block-start: calc(var(--pr-gap-component) / 2);
 }
 
 /* A swatch is a sample of a colour, framed by the separating line so pale roles stay visible. */

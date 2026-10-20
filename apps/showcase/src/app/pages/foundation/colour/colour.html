@@ -12,17 +12,16 @@
     <caption>Colour roles in light and dark</caption>
     <thead>
       <tr>
-        <th scope="col">Role</th>
+        <th scope="col">Role and meaning</th>
         @for (mode of modes; track mode.label) {
           <th scope="col">{{ mode.label }}</th>
         }
-        <th scope="col">Meaning</th>
       </tr>
     </thead>
     <tbody>
       @for (c of colours; track c.name) {
         <tr>
-          <th scope="row"><code>{{ c.name }}</code></th>
+          <th scope="row"><code>{{ c.name }}</code><span class="pr-meaning">{{ c.meaning }}</span></th>
           @for (mode of modes; track mode.label) {
             <td>
               <span
@@ -34,7 +33,6 @@
               ></span>
             </td>
           }
-          <td>{{ c.meaning }}</td>
         </tr>
       }
     </tbody>

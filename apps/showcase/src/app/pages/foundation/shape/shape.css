@@ -48,5 +48,4 @@ figcaption {
 .pr-raised {
   background-color: var(--pr-color-surface-raised);
   border-radius: var(--pr-radius-layer);
-  border-color: transparent;
 }

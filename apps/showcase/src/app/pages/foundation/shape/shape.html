@@ -10,7 +10,7 @@
   @for (r of radii; track r.name) {
     <figure class="pr-sample">
       <span class="pr-shape" [style.border-radius]="'var(' + r.name + ')'" aria-hidden="true"></span>
-      <figcaption><code>{{ r.name }}</code><br />This style means: {{ r.meaning }}</figcaption>
+      <figcaption><code>{{ r.name }}</code><br />{{ r.meaning }}</figcaption>
     </figure>
   }
 </div>
@@ -19,15 +19,15 @@
 <div class="pr-samples">
   <figure class="pr-sample">
     <span class="pr-line" aria-hidden="true"></span>
-    <figcaption><code>--pr-color-border</code><br />This style means: a separation. It's faint because it's decoration.</figcaption>
+    <figcaption><code>--pr-color-border</code><br />A line that separates. Faint, because it's decoration.</figcaption>
   </figure>
   <figure class="pr-sample">
     <span class="pr-shape pr-control" aria-hidden="true"></span>
-    <figcaption><code>--pr-color-border-control</code><br />This style means: you can operate this. It meets 3:1.</figcaption>
+    <figcaption><code>--pr-color-border-control</code><br />The edge of something you operate. It meets 3:1.</figcaption>
   </figure>
   <figure class="pr-sample">
     <span class="pr-shape pr-focus" aria-hidden="true"></span>
-    <figcaption><code>--pr-focus-width</code><br />This style means: this is where the keyboard is. Press Tab on this page to see it on real elements.</figcaption>
+    <figcaption><code>--pr-focus-width</code><br />Here is where the keyboard is. Press Tab on this page to see it on real elements.</figcaption>
   </figure>
 </div>
 
@@ -37,7 +37,7 @@
   @for (e of elevation; track e.name) {
     <figure class="pr-sample">
       <span class="pr-shape pr-raised" [style.box-shadow]="'var(' + e.name + ')'" aria-hidden="true"></span>
-      <figcaption><code>{{ e.name }}</code><br />This style means: {{ e.meaning }}</figcaption>
+      <figcaption><code>{{ e.name }}</code><br />{{ e.meaning }}</figcaption>
     </figure>
   }
 </div>

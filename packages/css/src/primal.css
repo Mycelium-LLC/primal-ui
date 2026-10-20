@@ -146,6 +146,19 @@ pre {
   font-size: 0.9em;
 }
 
+/* Code reads left to right in a page of either direction, isolated from the text around it. */
+code,
+kbd,
+samp,
+pre {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+pre {
+  text-align: start;
+}
+
 a {
   color: var(--pr-color-accent);
   text-decoration-thickness: from-font;
