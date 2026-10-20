@@ -16,10 +16,11 @@ export class NativeMediaPage implements AfterViewInit {
     const el = this.canvas().nativeElement;
     const ctx = el.getContext('2d');
     if (!ctx) return;
-    const css = getComputedStyle(el);
+    // A canvas can't read a token; the element's own resolved colour can, so draw with that.
+    el.style.color = 'var(--pr-color-primary)';
     const bars = [3, 5, 4, 7, 6, 8, 5]; // MOCK DATA: builds per day
     const w = el.width / bars.length;
-    ctx.fillStyle = css.getPropertyValue('--pr-color-primary').trim() || 'gray';
+    ctx.fillStyle = getComputedStyle(el).color;
     bars.forEach((b, i) => ctx.fillRect(i * w + 4, el.height - b * 14, w - 8, b * 14));
   }
 }

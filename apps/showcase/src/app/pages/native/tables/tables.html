@@ -28,10 +28,11 @@
 
 <h2>A long table</h2>
 <p>
-  Wrap a table in <code>.pr-table</code>, a focusable region. It scrolls within itself: sideways on a narrow screen, and down with
-  its header kept in view.
+  Wrap a table in <code>.pr-table</code>, a focusable region, and it scrolls sideways within itself on a narrow screen. A long
+  one also gets <code>data-tall</code>: it stops short of the screen's height and scrolls down within itself, with its header kept
+  in view.
 </p>
-<div class="pr-table pr-long" role="region" aria-label="Builds in October" tabindex="0">
+<div class="pr-table pr-long" data-tall role="region" aria-label="Builds in October" tabindex="0">
   <table>
     <caption>Builds in October</caption>
     <thead>

@@ -29,9 +29,13 @@
         </tr>
       </thead>
       <tbody>
-        @for (row of g.rows; track row.element) {
+        @for (row of g.rows; track row.elements[0]) {
           <tr>
-            <th scope="row"><code>{{ row.element }}</code></th>
+            <th scope="row">
+              @for (el of row.elements; track el) {
+                <code>{{ el }}</code>{{ $last ? '' : ' ' }}
+              }
+            </th>
             <td>{{ label[row.outcome] }}</td>
             <td>{{ row.where === 'none' ? '' : row.where }}</td>
             <td>{{ row.reason }}</td>

@@ -467,21 +467,26 @@ td[data-empty] {
 }
 
 /*
- * .pr-table wraps a table so it scrolls within itself, never the page: sideways on a narrow
- * screen, and down with its header kept in view when it is long. It's a focusable region, so a
- * keyboard can scroll it: <div class="pr-table" role="region" aria-label="…" tabindex="0">.
+ * .pr-table wraps a table so it scrolls sideways within itself on a narrow screen, never the
+ * page. Add data-tall to a long one: it then stops at most of the screen's height and scrolls
+ * down within itself too, with its header kept in view. It's a focusable region, so a keyboard
+ * can scroll it: <div class="pr-table" role="region" aria-label="…" tabindex="0">.
  */
 .pr-table {
-  overflow: auto;
-  max-block-size: 70dvh;
+  overflow-x: auto;
   margin-block-end: var(--pr-gap-group);
+}
+
+.pr-table[data-tall] {
+  overflow-y: auto;
+  max-block-size: 70dvh;
 }
 
 .pr-table > table {
   margin-block-end: 0;
 }
 
-.pr-table thead th {
+.pr-table[data-tall] thead th {
   position: sticky;
   inset-block-start: 0;
   z-index: var(--pr-layer-sticky);

@@ -545,56 +545,56 @@
       "group": "Tables",
       "outcome": "styled",
       "where": "0.2.0",
-      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table sideways within itself, and data-tall keeps a long one's header in view."
     },
     {
       "element": "caption",
       "group": "Tables",
       "outcome": "styled",
       "where": "0.2.0",
-      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table sideways within itself, and data-tall keeps a long one's header in view."
     },
     {
       "element": "thead",
       "group": "Tables",
       "outcome": "styled",
       "where": "0.2.0",
-      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table sideways within itself, and data-tall keeps a long one's header in view."
     },
     {
       "element": "tbody",
       "group": "Tables",
       "outcome": "styled",
       "where": "0.2.0",
-      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table sideways within itself, and data-tall keeps a long one's header in view."
     },
     {
       "element": "tfoot",
       "group": "Tables",
       "outcome": "styled",
       "where": "0.2.0",
-      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table sideways within itself, and data-tall keeps a long one's header in view."
     },
     {
       "element": "tr",
       "group": "Tables",
       "outcome": "styled",
       "where": "0.2.0",
-      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table sideways within itself, and data-tall keeps a long one's header in view."
     },
     {
       "element": "th",
       "group": "Tables",
       "outcome": "styled",
       "where": "0.2.0",
-      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table sideways within itself, and data-tall keeps a long one's header in view."
     },
     {
       "element": "td",
       "group": "Tables",
       "outcome": "styled",
       "where": "0.2.0",
-      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table within itself with its header in view."
+      "reason": "Rules between rows, a muted header, numbers aligned on data-numeric, and an empty state on data-empty; .pr-table scrolls a table sideways within itself, and data-tall keeps a long one's header in view."
     },
     {
       "element": "colgroup",

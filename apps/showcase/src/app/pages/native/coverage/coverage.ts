@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { COVERAGE, Coverage, OUTCOME_LABEL } from '../../../shell/coverage-table/coverage-table';
+import { COVERAGE, Coverage, OUTCOME_LABEL, mergeRows } from '../../../shell/coverage-table/coverage-table';
 
 type Filter = Coverage['outcome'] | 'all';
 
@@ -22,6 +22,6 @@ export class NativeCoveragePage {
   ];
   protected readonly groups = computed(() => {
     const rows = COVERAGE.filter((r) => this.filter() === 'all' || r.outcome === this.filter());
-    return [...new Set(rows.map((r) => r.group))].map((group) => ({ group, rows: rows.filter((r) => r.group === group) }));
+    return [...new Set(rows.map((r) => r.group))].map((group) => ({ group, rows: mergeRows(rows.filter((r) => r.group === group)) }));
   });
 }

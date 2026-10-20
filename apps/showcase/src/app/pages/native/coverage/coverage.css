@@ -17,10 +17,24 @@
 }
 
 table {
+  table-layout: fixed;
+  min-inline-size: 36rem;
   font-size: var(--pr-text-small);
+}
+
+/* Fixed columns, so every table in the list lines up with the next. */
+th:nth-child(1) {
+  inline-size: 26%;
+}
+
+th:nth-child(2) {
+  inline-size: 18%;
+}
+
+th:nth-child(3) {
+  inline-size: 9%;
 }
 
 tbody th {
   font-weight: var(--pr-weight-regular);
-  white-space: nowrap;
 }
