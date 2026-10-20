@@ -1,0 +1,30 @@
+/*
+ * Reference tables lean on Primal's base table. Fixed columns keep every table on a page
+ * aligned the same way; on a narrow screen the table scrolls sideways inside itself.
+ */
+.pr-table-scroll {
+  overflow-x: auto;
+  margin-block-end: var(--pr-gap-section);
+}
+
+table {
+  table-layout: fixed;
+  min-inline-size: 36rem;
+  font-size: var(--pr-text-small);
+}
+
+th:nth-child(1) {
+  inline-size: 30%;
+}
+
+th:nth-child(2) {
+  inline-size: 30%;
+}
+
+tbody th {
+  font-weight: var(--pr-weight-regular);
+}
+
+code {
+  overflow-wrap: anywhere;
+}

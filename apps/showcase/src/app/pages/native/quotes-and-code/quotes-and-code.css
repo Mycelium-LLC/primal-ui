@@ -1,0 +1,10 @@
+/* A specimen sits in the page as plain content, marked off only by a line at its start. */
+.pr-specimen {
+  margin-block-end: var(--pr-gap-section);
+  padding-inline-start: var(--pr-gap-group);
+  border-inline-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-specimen > :first-child {
+  margin-block-start: 0;
+}

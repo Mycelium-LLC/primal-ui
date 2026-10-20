@@ -1,0 +1,84 @@
+<h1>Text</h1>
+<p>
+  Write plain HTML or Markdown and it reads well, with no classes. Headings step down the scale, each one sitting closer to the
+  text it introduces than to what came before. Inline elements each keep their meaning, and text in the other direction keeps
+  its order.
+</p>
+
+<h2>Headings</h2>
+<p>The page title is the one <code>h1</code>. Below it:</p>
+<div class="pr-specimen">
+  <h2>Heading level 2</h2>
+  <p>A section of the page.</p>
+  <h3>Heading level 3</h3>
+  <p>A part of that section.</p>
+  <h4>Heading level 4</h4>
+  <p>A detail within it.</p>
+  <h5>Heading level 5</h5>
+  <h6>Heading level 6</h6>
+</div>
+
+<h2>Inline meaning</h2>
+<div class="pr-table" role="region" aria-label="Inline elements" tabindex="0">
+  <table class="pr-inline">
+    <caption>Each inline element and what it says</caption>
+    <thead>
+      <tr><th scope="col">Element</th><th scope="col">Rendered</th><th scope="col">Says</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row"><code>a</code></th><td>Read <a href="#">the release notes</a> first.</td><td>Go somewhere.</td></tr>
+      <tr><th scope="row"><code>strong</code>, <code>b</code></th><td>This can <strong>not be undone</strong>.</td><td>Important; or set apart.</td></tr>
+      <tr><th scope="row"><code>em</code>, <code>i</code></th><td>I said <em>tomorrow</em>, not today.</td><td>Stress; or another voice.</td></tr>
+      <tr><th scope="row"><code>small</code></th><td><small>Prices include VAT.</small></td><td>Fine print.</td></tr>
+      <tr><th scope="row"><code>mark</code></th><td>Search for <mark>tokens</mark> in the docs.</td><td>Look here.</td></tr>
+      <tr><th scope="row"><code>del</code>, <code>ins</code></th><td>Ships on <del>Monday</del>&nbsp;<ins>Wednesday</ins>.</td><td>Removed, added.</td></tr>
+      <tr><th scope="row"><code>s</code></th><td>Free shipping <s>on all orders</s>.</td><td>No longer accurate.</td></tr>
+      <tr><th scope="row"><code>u</code></th><td>A <u>mispeled</u> word.</td><td>An annotation, never a link.</td></tr>
+      <tr><th scope="row"><code>abbr</code></th><td><abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.2</td><td>An abbreviation with its expansion.</td></tr>
+      <tr><th scope="row"><code>dfn</code></th><td>A <dfn>primitive</dfn> is part of a promise.</td><td>The term being defined.</td></tr>
+      <tr><th scope="row"><code>cite</code></th><td>From <cite>Thoughts on Design and Humanity</cite>.</td><td>The title of a work.</td></tr>
+      <tr><th scope="row"><code>q</code></th><td>She said <q>ship it</q>.</td><td>A short quotation.</td></tr>
+      <tr><th scope="row"><code>sub</code>, <code>sup</code></th><td>H<sub>2</sub>O and E = mc<sup>2</sup></td><td>Below, above the line.</td></tr>
+      <tr><th scope="row"><code>time</code>, <code>data</code></th><td>Released <time datetime="2026-10-20">20 October 2026</time>, build <data value="210">210</data>.</td><td>A machine-readable value.</td></tr>
+      <tr><th scope="row"><code>code</code>, <code>kbd</code>, <code>samp</code>, <code>var</code></th><td>Run <code>ng build</code>, press <kbd>Enter</kbd>, see <samp>Build complete</samp>, for <var>n</var> files.</td><td>Code, a key, output, a variable.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Both directions</h2>
+<p>A run in the other direction is isolated, so names and numbers never reorder the words around them.</p>
+<div class="pr-specimen">
+  <p dir="rtl" lang="he">שלום, <bdi>Niko Tsybulevsky</bdi> פתח את גרסה <bdi>0.2.0</bdi> היום, והיא <q>מוכנה</q>.</p>
+  <p>The winner is <bdi lang="he">ניקו</bdi> with 90 points.</p>
+  <p lang="ja">Ruby sets a reading above its text: <ruby>漢<rp>(</rp><rt>kan</rt><rp>)</rp>字<rp>(</rp><rt>ji</rt><rp>)</rp></ruby>.</p>
+</div>
+
+<h2>A whole article</h2>
+<p>The same base, as an article written in plain HTML would read:</p>
+<article class="pr-specimen">
+  <hgroup>
+    <h2>Release notes, 0.2.0</h2>
+    <p>Plain HTML reads right</p>
+  </hgroup>
+  <p>
+    Published <time datetime="2026-10-20">20 October 2026</time>. This release gives every native element an outcome. Most are
+    <strong>styled</strong> by the classless base; a few are <em>left to the browser</em>, each with a reason.
+  </p>
+  <h3>What changed</h3>
+  <ul>
+    <li>Lists, quotes, code and tables read well with no classes.</li>
+    <li>Tables scroll within themselves and keep their header in view.</li>
+    <li>Media holds its place while it loads.</li>
+  </ul>
+  <blockquote>
+    <p>A design system is a promise about how a product behaves, not only how it looks.</p>
+    <footer>From <cite>Thoughts on Design and Humanity</cite></footer>
+  </blockquote>
+  <p>To try it, run <code>npm run build</code> and open the showcase.</p>
+  <address>Mycelium, Tel Aviv</address>
+</article>
+
+<h2>Coverage</h2>
+<pr-coverage-table
+  elements="h1 h2 h3 h4 h5 h6 p a strong b em i small mark del ins s u abbr dfn cite q sub sup time data code kbd samp var bdi bdo ruby rt rp address span br wbr"
+/>

@@ -1,0 +1,32 @@
+<h1>Quotes and code</h1>
+<p>
+  Someone else's words are set in from the text, with a line at their start. Code is monospace, always left to right, and sits
+  in a quiet well. Inline it stays part of the sentence, and a block scrolls sideways within itself.
+</p>
+
+<h2>Quotations</h2>
+<div class="pr-specimen">
+  <blockquote>
+    <p>
+      A design system is a promise about how a product behaves, not only how it looks, and the behaving is the part we keep
+      leaving out.
+    </p>
+    <footer>From <cite>Thoughts on Design and Humanity</cite></footer>
+  </blockquote>
+  <p>Inline, a short quotation takes the language's own marks: <q>ship it</q>, and in Hebrew, <q lang="he" dir="rtl">שלחו את זה</q>.</p>
+</div>
+
+<h2>Code</h2>
+<div class="pr-specimen">
+  <p>Run <code>npm run build</code>, then press <kbd>Ctrl</kbd> + <kbd>C</kbd> to stop. The output ends with <samp>Application bundle generation complete</samp>.</p>
+  <pre><code>{{ snippet }}</code></pre>
+  <p>Area is <var>w</var> × <var>h</var>.</p>
+</div>
+
+<h2>Code in a right-to-left page</h2>
+<div class="pr-specimen" dir="rtl" lang="he">
+  <p>הריצו את <code>npm run build</code> ולחצו <kbd>Enter</kbd>.</p>
+</div>
+
+<h2>Coverage</h2>
+<pr-coverage-table elements="blockquote q cite pre code kbd samp var" />

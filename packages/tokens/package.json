@@ -1,0 +1,16 @@
+{
+  "name": "primal-tokens",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Mycelium Primal's design tokens, framework-independent.",
+  "style": "primal-tokens.css",
+  "files": [
+    "primal-tokens.css",
+    "primal-tokens.json",
+    "src"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "check": "node build.mjs --check && node check-contrast.mjs"
+  }
+}

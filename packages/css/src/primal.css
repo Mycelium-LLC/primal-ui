@@ -1,0 +1,617 @@
+/*
+ * Mycelium Primal core styles, in plain CSS: the reset, and a classless base for every native
+ * element, so plain HTML and Markdown read well with no classes at all. Load after
+ * primal-tokens.css. Every value comes from a token; logical properties throughout.
+ * Where an element is left to the browser, packages/css/coverage.json says so and why.
+ */
+
+@import './fonts/google-sans.css';
+
+/* ---------------------------------------------------------------- reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body {
+  margin: 0;
+  min-block-size: 100dvh;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+img,
+video {
+  block-size: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* The person asked for less motion: nothing moves that isn't needed to understand a change. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------- the page */
+
+:root,
+[data-theme] {
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+}
+
+body {
+  font-family: var(--pr-font-sans);
+  font-size: var(--pr-text-body);
+  line-height: var(--pr-leading-body);
+  font-weight: var(--pr-weight-regular);
+}
+
+::selection {
+  background-color: var(--pr-color-selection);
+  color: var(--pr-color-text);
+}
+
+/* ---------------------------------------------------------------- base typography */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--pr-weight-strong);
+  line-height: var(--pr-leading-tight);
+  margin-block: var(--pr-gap-section) var(--pr-gap-group);
+  text-wrap: balance;
+}
+
+/* A heading belongs to what follows it: it sits closer to its content than to what came before. */
+h1 {
+  font-size: var(--pr-text-3xl);
+  margin-block-start: 0;
+}
+
+h2 {
+  font-size: var(--pr-text-2xl);
+}
+
+h3 {
+  font-size: var(--pr-text-xl);
+}
+
+h4 {
+  font-size: var(--pr-text-large);
+}
+
+h5,
+h6 {
+  font-size: var(--pr-text-body);
+}
+
+p {
+  margin-block: 0 var(--pr-gap-group);
+  max-inline-size: var(--pr-measure);
+  text-wrap: pretty;
+}
+
+small {
+  font-size: var(--pr-text-small);
+}
+
+strong,
+b {
+  font-weight: var(--pr-weight-strong);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--pr-font-mono);
+  font-size: 0.9em;
+}
+
+/* Code reads left to right in a page of either direction, isolated from the text around it. */
+code,
+kbd,
+samp,
+pre {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+pre {
+  text-align: start;
+}
+
+a {
+  color: var(--pr-color-primary);
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+
+/* ---------------------------------------------------------------- inline text */
+
+em,
+i,
+cite,
+dfn,
+var {
+  font-style: italic;
+}
+
+/* A defined term is the word being defined: emphasis plus weight, once, where it is defined. */
+dfn {
+  font-weight: var(--pr-weight-strong);
+}
+
+/* A highlight is the selection colour: "this part, look here". */
+mark {
+  background-color: var(--pr-color-selection);
+  color: inherit;
+  padding-inline: 0.1em;
+  border-radius: var(--pr-radius-well);
+}
+
+/* An edit shows what changed: what was removed is struck and muted, what was added is underlined. */
+del,
+s {
+  text-decoration-line: line-through;
+  text-decoration-thickness: from-font;
+  color: var(--pr-color-text-muted);
+}
+
+ins {
+  text-decoration-line: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+
+/* u marks an unarticulated annotation (a misspelling, a proper name in Chinese): a wavy line, never a link's line. */
+u {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--pr-color-danger);
+  text-decoration-thickness: from-font;
+}
+
+abbr[title] {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.15em;
+  cursor: help;
+}
+
+q {
+  quotes: '\201C' '\201D' '\2018' '\2019';
+}
+
+:lang(he) q {
+  quotes: '\201D' '\201D' '\2019' '\2019';
+}
+
+/* Sub and sup sit on the line without stretching it. */
+sub,
+sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  inset-block-start: -0.5em;
+}
+
+sub {
+  inset-block-end: -0.25em;
+}
+
+time,
+data {
+  font-variant-numeric: tabular-nums;
+}
+
+address {
+  font-style: normal;
+  margin-block: 0 var(--pr-gap-group);
+}
+
+/* Isolate runs of the other direction so names and numbers never reorder their neighbours. */
+bdi {
+  unicode-bidi: isolate;
+}
+
+ruby {
+  ruby-position: over;
+}
+
+rt {
+  font-size: 0.5em;
+  color: var(--pr-color-text-muted);
+}
+
+/* ---------------------------------------------------------------- quotes */
+
+/* A quotation is someone else's words: set in from the text by a line at its start. */
+blockquote {
+  margin: 0 0 var(--pr-gap-group);
+  padding-inline-start: var(--pr-gap-group);
+  border-inline-start: var(--pr-focus-width) solid var(--pr-color-border);
+}
+
+blockquote > :last-child {
+  margin-block-end: 0;
+}
+
+blockquote footer {
+  margin-block-start: var(--pr-gap-component);
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+/* ---------------------------------------------------------------- page structure */
+
+main,
+article,
+section,
+aside,
+nav,
+header,
+footer,
+search,
+hgroup {
+  display: block;
+}
+
+/* A heading group: the subtitle belongs to its heading, close under it and muted. */
+hgroup > :is(h1, h2, h3, h4, h5, h6) {
+  margin-block-end: var(--pr-gap-component);
+}
+
+hgroup > p {
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-large);
+}
+
+/* ---------------------------------------------------------------- media */
+
+/* Media holds its place: width and height attributes reserve the box before it loads. */
+img,
+video,
+canvas,
+svg,
+iframe,
+embed,
+object {
+  max-inline-size: 100%;
+}
+
+iframe {
+  border: 0;
+}
+
+/* An embed given width and height keeps that shape as it shrinks. */
+iframe[width][height] {
+  block-size: auto;
+  aspect-ratio: attr(width type(<number>)) / attr(height type(<number>));
+}
+
+video {
+  background-color: var(--pr-color-surface-sunken);
+}
+
+audio {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--pr-measure);
+}
+
+figure {
+  margin-block: 0 var(--pr-gap-group);
+}
+
+figure > img,
+figure > picture,
+figure > video,
+figure > svg {
+  border-radius: var(--pr-radius-well);
+}
+
+figcaption {
+  margin-block-start: var(--pr-gap-component);
+}
+
+/* ---------------------------------------------------------------- focus */
+
+/* The focus ring means one thing: this is where the keyboard is. */
+:focus-visible {
+  outline: var(--pr-focus-width) solid var(--pr-color-primary);
+  outline-offset: var(--pr-focus-offset);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ---------------------------------------------------------------- lists */
+ul,
+ol {
+  margin-block: 0 var(--pr-gap-group);
+  padding-inline-start: 1.5em;
+}
+
+li + li {
+  margin-block-start: calc(var(--pr-gap-component) / 2);
+}
+
+li > :is(ul, ol) {
+  margin-block: calc(var(--pr-gap-component) / 2) 0;
+}
+
+li::marker {
+  color: var(--pr-color-text-muted);
+}
+
+/* A menu is a list of commands: no bullets, the commands in a row. */
+menu {
+  list-style: none;
+  padding: 0;
+  margin-block: 0 var(--pr-gap-group);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+}
+
+menu > li + li {
+  margin-block-start: 0;
+}
+
+dl {
+  margin-block: 0 var(--pr-gap-group);
+}
+
+dt {
+  font-weight: var(--pr-weight-strong);
+}
+
+/* A definition belongs to its term: close to it, then a group gap before the next term. */
+dd {
+  margin-inline-start: 0;
+  margin-block: calc(var(--pr-gap-component) / 2) var(--pr-gap-group);
+  max-inline-size: var(--pr-measure);
+}
+
+/* ---------------------------------------------------------------- tables */
+
+table {
+  border-collapse: collapse;
+  inline-size: 100%;
+  font-variant-numeric: tabular-nums;
+  margin-block-end: var(--pr-gap-group);
+}
+
+caption {
+  text-align: start;
+  font-weight: var(--pr-weight-strong);
+  padding-block-end: var(--pr-gap-component);
+}
+
+th,
+td {
+  text-align: start;
+  vertical-align: top;
+  padding: var(--pr-gap-component);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+thead th {
+  font-weight: var(--pr-weight-regular);
+  color: var(--pr-color-text-muted);
+  border-block-end-color: var(--pr-color-border-control);
+}
+
+tfoot :is(th, td) {
+  font-weight: var(--pr-weight-strong);
+  border-block-end: 0;
+}
+
+/* Numbers align on their end, so digits line up down a column: mark the cells (or a <col>) with data-numeric. */
+:is(th, td)[data-numeric] {
+  text-align: end;
+}
+
+/* An empty table says why it is empty, in place of its rows. */
+td[data-empty] {
+  padding-block: var(--pr-gap-section);
+  text-align: center;
+  color: var(--pr-color-text-muted);
+}
+
+/*
+ * .pr-table wraps a table so it scrolls sideways within itself on a narrow screen, never the
+ * page. Add data-tall to a long one: it then stops at most of the screen's height and scrolls
+ * down within itself too, with its header kept in view. It's a focusable region, so a keyboard
+ * can scroll it: <div class="pr-table" role="region" aria-label="…" tabindex="0">.
+ */
+.pr-table {
+  overflow-x: auto;
+  margin-block-end: var(--pr-gap-group);
+}
+
+.pr-table[data-tall] {
+  overflow-y: auto;
+  max-block-size: 70dvh;
+}
+
+.pr-table > table {
+  margin-block-end: 0;
+}
+
+.pr-table[data-tall] thead th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--pr-layer-sticky);
+  background-color: var(--pr-color-surface);
+}
+
+/* ---------------------------------------------------------------- code */
+
+pre {
+  margin-block: 0 var(--pr-gap-group);
+  padding: var(--pr-gap-group);
+  background-color: var(--pr-color-surface-sunken);
+  border-radius: var(--pr-radius-well);
+  overflow-x: auto;
+  line-height: var(--pr-leading-body);
+}
+
+pre code {
+  font-size: inherit;
+}
+
+:not(pre) > code {
+  padding: 0.05em 0.25em;
+  background-color: var(--pr-color-surface-sunken);
+  border-radius: var(--pr-radius-well);
+}
+
+kbd {
+  padding: 0.1em 0.4em;
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-well);
+}
+
+hr {
+  border: 0;
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+  margin-block: var(--pr-gap-section);
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+/* ---------------------------------------------------------------- native controls */
+/* Early base (0.3.0 and 0.4.0 build the field and action primitives on it). */
+
+:root {
+  accent-color: var(--pr-color-primary);
+}
+
+button,
+select,
+textarea,
+input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file'], [type='image'], [type='hidden']) {
+  min-block-size: var(--pr-control-height);
+  padding-inline: var(--pr-control-inset);
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+  line-height: var(--pr-leading-tight);
+}
+
+textarea {
+  padding-block: var(--pr-gap-component);
+  line-height: var(--pr-leading-body);
+}
+
+button {
+  cursor: pointer;
+  transition: background-color var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+button:hover {
+  background-color: var(--pr-color-surface-sunken);
+}
+
+button:disabled,
+select:disabled,
+textarea:disabled,
+input:disabled {
+  cursor: not-allowed;
+  border-color: var(--pr-color-border);
+  color: var(--pr-color-text-muted);
+}
+
+label {
+  cursor: default;
+}
+
+/* ---------------------------------------------------------------- page transitions */
+/*
+ * A page change cross-fades what is on screen: the old view steps out quickly, the new one comes
+ * in. The whole viewport is one image, so nothing slides and parts that didn't change hold still.
+ */
+
+::view-transition-old(root) {
+  animation: var(--pr-duration-fast) var(--pr-ease-exit) both pr-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: var(--pr-duration-base) var(--pr-ease-enter) both pr-fade-in;
+}
+
+@keyframes pr-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pr-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

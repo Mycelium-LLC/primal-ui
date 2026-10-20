@@ -1,0 +1,9 @@
+/* The note about the page reads as context, not content: muted text, nothing more. */
+.pr-placeholder-note {
+  color: var(--pr-color-text-muted);
+}
+
+.pr-specimen {
+  display: block;
+  margin-block-start: var(--pr-gap-section);
+}

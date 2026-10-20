@@ -1,0 +1,39 @@
+<h1>Page structure</h1>
+<p>
+  Landmarks tell assistive technology where things are: the header, the navigation, the main content, the footer. Primal keeps
+  their roles and sets only the spacing between them. A landmark never gets a box: space and alignment group the page.
+</p>
+
+<h2>The skeleton</h2>
+<pre><code>{{ skeleton }}</code></pre>
+
+<h2>What each landmark is for</h2>
+<dl>
+  <dt><code>header</code></dt>
+  <dd>The introduction of the page or of a section: its name, and often its navigation.</dd>
+  <dt><code>nav</code></dt>
+  <dd>A set of links that moves the person. It never filters, toggles or creates anything.</dd>
+  <dt><code>search</code></dt>
+  <dd>Where searching or filtering happens.</dd>
+  <dt><code>main</code></dt>
+  <dd>The content the page is for. Exactly one per page.</dd>
+  <dt><code>article</code></dt>
+  <dd>A composition that stands on its own: a post, a release note, a message.</dd>
+  <dt><code>section</code></dt>
+  <dd>A part of something, with its own heading.</dd>
+  <dt><code>aside</code></dt>
+  <dd>Related, but not the point: a note, a tip, a list of further reading.</dd>
+  <dt><code>footer</code></dt>
+  <dd>The closing of the page or a section: who, when, and the fine print.</dd>
+  <dt><code>hgroup</code></dt>
+  <dd>A heading with its subtitle, which sits close under it and steps back.</dd>
+</dl>
+
+<h2>This page</h2>
+<p>
+  The showcase follows it: a <code>header</code> with the name and the display switches, a <code>nav</code> with every page, one
+  <code>main</code> with this content, and a <code>footer</code>. A "Skip to Content" link comes first for keyboard users.
+</p>
+
+<h2>Coverage</h2>
+<pr-coverage-table elements="html body header nav search main article section aside footer hgroup address hr div" />

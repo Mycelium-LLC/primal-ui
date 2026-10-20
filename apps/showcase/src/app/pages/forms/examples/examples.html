@@ -1,0 +1,14 @@
+<pr-page-placeholder title="Example forms" release="0.3.0" covers="Sign-in, profile and settings forms from Primal alone.">
+<form (submit)="$event.preventDefault()" aria-label="Sign in specimen">
+  <h2>Sign in</h2>
+  <p><label>Email <input type="email" autocomplete="username"></label></p>
+  <p><label>Password <input type="password" autocomplete="current-password"></label></p>
+  <p><button type="submit">Sign In</button></p>
+</form>
+<form (submit)="$event.preventDefault()" aria-label="Profile specimen">
+  <h2>Profile</h2>
+  <p><label>Display name <input type="text" value="Niko"></label></p>
+  <p><label>Bio <textarea rows="2"></textarea></label></p>
+  <p><button type="submit">Save Profile</button></p>
+</form>
+</pr-page-placeholder>
