@@ -1,0 +1,1251 @@
+{
+  "schema": "mycelium-folio-ledger/v1",
+  "product": "mycelium/primal",
+  "folioPrefix": "primal",
+  "baseline": {
+    "version": "0.0.0",
+    "source": ".folio/prd.json",
+    "note": "The seed: the repository was created on 2026-10-20 with a README only (main @ ab3d82fe). Nothing is built, so the baseline holds the nine chapters and no requirements; every requirement arrives through a release below. Not yet loaded into Folio."
+  },
+  "today": null,
+  "conventions": {
+    "kind": "release = Niko sees a change; slice = invisible or foundational.",
+    "statements": "No screen, route, field, file or product name; one claim; testable.",
+    "numbering": "One repository, one version line: Mycelium-LLC/primal-ui. Packages (tokens, css, angular) share the repository's version.",
+    "layers": "Primitive, cell and surface are classified by the promise kept, never by size or markup (Niko's brief §3; the book).",
+    "surfaces": "Packages tokens, css and angular; the showcase app."
+  },
+  "sequencing": {
+    "scheme": "major*10000 + minor*100 + patch",
+    "status": "the estate's approved scheme (Meeny, 2026-09-17)"
+  },
+  "approval": {
+    "by": null,
+    "at": null,
+    "what": "Merging the ledger PR approves the plan as written; every release stays draft until Niko approves it to start."
+  },
+  "decisions": [
+    {
+      "n": 1,
+      "decision": "The name",
+      "ruling": "Mycelium Primal is the full name, Primal the short one; tagline 'Design from first principles'; repository Mycelium-LLC/primal-ui (Niko, 2026-10-20). The trademark check is still open."
+    },
+    {
+      "n": 2,
+      "decision": "Two purposes",
+      "ruling": "A plug-and-play design system, and the base every future Mycelium design system is built on; so its look is basic and minimal, made for easy configuration (Niko, 2026-10-20)."
+    },
+    {
+      "n": 3,
+      "decision": "Frameworks",
+      "ruling": "One adapter set per framework over a framework-independent core. Only Angular now, 22 and up (22.2.3 is current; 21 is in long-term support). Mac, mobile and others only when Mycelium needs them (Niko, 2026-10-20)."
+    },
+    {
+      "n": 4,
+      "decision": "The architecture",
+      "ruling": "Primitive → cell → surface is the contract, classified by the promise kept: a button is a primitive though interactive; a newsletter signup is a cell (Niko's brief §3)."
+    },
+    {
+      "n": 5,
+      "decision": "Visibility",
+      "ruling": "The repository is private until 1.0.0, then public (Niko, 2026-10-20)."
+    },
+    {
+      "n": 6,
+      "decision": "Level",
+      "ruling": "L2, rung 2: Folio from day one (Niko, 2026-10-20)."
+    },
+    {
+      "n": 7,
+      "decision": "Out of v1",
+      "ruling": "Rich text editors, advanced data grids, charts, drag-and-drop builders, complex calendars, maps, file managers, application dashboards (Niko's brief §8)."
+    }
+  ],
+  "releases": [
+    {
+      "kind": "release",
+      "state": "draft",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "The base exists: a second theme is made from tokens alone.",
+      "version": "0.1.0",
+      "name": "A base you can make your own",
+      "track": "Foundation",
+      "status": "Draft; waits for Niko's approval of the plan.",
+      "dependsOn": [],
+      "goal": "Primal exists as a neutral foundation whose whole look is set by tokens, so it works as it is and any future Mycelium design system starts from it.",
+      "usersSee": "A live showcase of every token in the light, dark and high-contrast themes, with a theme switch, a direction switch (left-to-right and right-to-left) and a second, deliberately different demo theme made from tokens alone.",
+      "size": "L",
+      "items": [
+        {
+          "text": "Repository layout: npm workspaces. packages/tokens (framework-independent tokens, emitted as CSS custom properties and JSON), packages/css (reset, base typography, layout primitives in plain CSS), packages/angular (the first adapter, Angular 22+, standalone and zoneless, signals-first), apps/showcase (the live showcase, Angular)."
+        },
+        {
+          "text": "Semantic tokens: colour roles, type scale (fluid), the three gaps plus a dense mode, radius, borders, elevation levels with written meanings, layers, motion durations and easing, density."
+        },
+        {
+          "text": "Themes: light, dark and high-contrast, following the system preference, forced per page or per region; a demo theme that changes colour, type, radius and density from a token file alone."
+        },
+        {
+          "text": "Modern reset and base typography; logical properties throughout; reduced motion honoured."
+        },
+        {
+          "text": "Contrast check in CI: every text and control pair in every shipped theme against WCAG 2.2 AA."
+        },
+        {
+          "text": "Showcase deployed (hosting to be confirmed by Niko); it states the version it shows."
+        },
+        {
+          "text": "Release chain: release/0.1.0, docs/qa/0.1.0.md, version bump, tag after merge."
+        }
+      ],
+      "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
+      "doneWhen": "The showcase, opened by Niko, shows every token in all three themes and both directions; the demo theme looks clearly different with no component changed; the contrast check passes in CI; the QA table is ✓ by eye.",
+      "mutations": [
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "tokens",
+          "chapter": "foundation",
+          "title": "Semantic tokens",
+          "intent": "Every value a component uses has a name and a meaning.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/tokens/every-colour-type-size-gap-radius-border-elevation-layer",
+          "requirementKind": "invariant",
+          "statement": "Every colour, type size, gap, radius, border, elevation, layer, duration and density value a component uses comes from a named semantic token, and no component carries a raw value.",
+          "success": "A search of every component's styles finds no literal colour, length or duration outside the token definitions.",
+          "disqualifier": "Any component hardcodes a value that a theme cannot reach.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/tokens/spacing-is-three-gaps-that-clearly-contrast-between-sections",
+          "requirementKind": "invariant",
+          "statement": "Spacing is three gaps that clearly contrast (between sections, between elements of a group, inside a component), with a denser two-gap mode for screens people live in all day.",
+          "success": "Every gap in every component maps to one of the three gap tokens or the dense pair, and the three are visibly different at a glance.",
+          "disqualifier": "A gap is chosen by eye, or two of the three gaps read as the same size.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.3"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/tokens/every-elevation-level-border-and-fill-treatment-has-a",
+          "requirementKind": "invariant",
+          "statement": "Every elevation level, border and fill treatment has a written meaning, and none is used only for decoration.",
+          "success": "The token reference completes 'this style means: …' for each treatment, and each use in a component matches its sentence.",
+          "disqualifier": "A treatment exists without its sentence, or a box is drawn only because the page felt unfinished.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.4–1.5"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/tokens/the-type-scale-is-fluid-between-phone-and-desk-widths-and",
+          "requirementKind": "invariant",
+          "statement": "The type scale is fluid between phone and desk widths and keeps body text within a readable line length.",
+          "success": "From 320 to 1920 pixels wide, headings and body scale without a jump, and body lines stay between about 45 and 80 characters.",
+          "disqualifier": "Text sizes jump at breakpoints, or body text runs edge to edge on a wide screen.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "themes",
+          "chapter": "foundation",
+          "title": "Themes and configuration",
+          "intent": "One structure, any look.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/themes/a-designer-creates-a-complete-new-theme-for-a-project-by",
+          "requirementKind": "user",
+          "statement": "A designer creates a complete new theme for a project by overriding tokens only, without forking or editing any component.",
+          "success": "A second theme, clearly different in colour, type, radius and density, is built from one token file, and every showcase page renders correctly in it.",
+          "disqualifier": "Any part of the new look needs a component change, a copied component or a style that targets a component's internals.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)",
+          "role": "a designer starting a new Mycelium design system",
+          "action": "start the project's design system from Primal",
+          "outcome": "I get my own look with all of Primal's behaviour, without maintaining a fork"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/themes/light-dark-and-high-contrast-themes-ship-follow-the-system",
+          "requirementKind": "invariant",
+          "statement": "Light, dark and high-contrast themes ship, follow the system preference by default, and can be forced for a page or a region of it.",
+          "success": "With the system preference set to each mode, the matching theme shows; a forced region keeps its theme inside a page in another.",
+          "disqualifier": "A theme ignores the system preference, or forcing a region changes the whole page.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/themes/primal-s-own-look-is-minimal-and-carries-no-brand-so-its",
+          "requirementKind": "invariant",
+          "statement": "Primal's own look is minimal and carries no brand, so its default is a quiet starting point rather than a finished identity.",
+          "success": "The default theme uses no Mycelium colour, mark or typeface, and its components read as finished but plain.",
+          "disqualifier": "The default look is recognisably a Mycelium product, or a project has to remove styling before adding its own.",
+          "evidence": "Niko, 2026-10-20: 'basic and minimal design to allow for easy configuration'; the base for any future Mycelium design system."
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "direction-and-motion",
+          "chapter": "reach",
+          "title": "Both directions, quiet motion",
+          "intent": "Right-to-left and reduced motion are not afterthoughts.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/direction-and-motion/every-component-is-laid-out-with-logical-properties-so-it",
+          "requirementKind": "invariant",
+          "statement": "Every component is laid out with logical properties, so it works right-to-left and left-to-right without separate styles.",
+          "success": "Every showcase page switched to right-to-left mirrors correctly, and any direction-specific style is listed with why logical properties could not do it.",
+          "disqualifier": "A component breaks or keeps left-to-right order when the direction is right-to-left.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Niko's standing rule on logical CSS properties (~/.claude/CLAUDE.md)."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/direction-and-motion/when-the-person-asks-for-reduced-motion-nothing-moves-except",
+          "requirementKind": "invariant",
+          "statement": "When the person asks for reduced motion, nothing moves except what is needed to understand a change.",
+          "success": "With reduced motion on, every showcase transition is instant or a cross-fade, and nothing loops.",
+          "disqualifier": "Any slide, bounce, parallax or loop plays with reduced motion on.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/direction-and-motion/all-text-and-controls-meet-wcag-2-2-aa-contrast-in-every",
+          "requirementKind": "invariant",
+          "statement": "All text and controls meet WCAG 2.2 AA contrast in every shipped theme, checked automatically.",
+          "success": "The contrast check covers every foreground and background pair in every theme and fails the build on any miss.",
+          "disqualifier": "A pair below AA ships, or the check is run by hand only.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "framework-independent",
+          "chapter": "distribution",
+          "title": "One core, an adapter per framework",
+          "intent": "The look and the contracts belong to no framework.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/framework-independent/tokens-styles-and-contracts-work-with-no-framework-at-all",
+          "requirementKind": "invariant",
+          "statement": "Tokens, styles and contracts work with no framework at all, and each framework gets its own adapter set that adds behaviour without redefining the look.",
+          "success": "A plain HTML page using only the core styles renders the foundation the same way the first adapter's showcase does.",
+          "disqualifier": "A visual rule exists only inside an adapter, or the core needs a framework to render.",
+          "evidence": "Niko, 2026-10-20: 'a set per framework. currently supporting only angular 22+… later for all the mac apps and mobile… when we would need it'."
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "showcase",
+          "chapter": "distribution",
+          "title": "The live showcase",
+          "intent": "See it working, not described.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/showcase/a-person-opens-the-live-showcase-sees-every-foundation-token",
+          "requirementKind": "user",
+          "statement": "A person opens the live showcase, sees every foundation token and theme, and switches theme and text direction in place.",
+          "success": "From the showcase, every token is visible with its name and meaning, and switching theme or direction changes the whole page at once without a reload.",
+          "disqualifier": "A token is missing, a switch needs a reload, or the showcase shows anything not built.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)",
+          "role": "a designer or developer at Mycelium",
+          "action": "look at Primal before using it",
+          "outcome": "I know what I get and how it changes"
+        }
+      ]
+    },
+    {
+      "kind": "release",
+      "state": "draft",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "Plain content needs no styling work.",
+      "version": "0.2.0",
+      "name": "Plain HTML reads right",
+      "track": "Native HTML",
+      "status": "Draft; waits for Niko's approval of the plan.",
+      "dependsOn": [
+        "0.1.0"
+      ],
+      "goal": "Anything written as plain HTML or Markdown is readable, well spaced and accessible with no classes, and every element of the standard has a decided outcome.",
+      "usersSee": "A showcase section rendering every rendering HTML element unstyled-by-author (text, lists, quotes, code, tables, media, landmarks, bidirectional text), and the coverage inventory with each element's outcome and reason.",
+      "size": "M",
+      "items": [
+        {
+          "text": "The coverage inventory: every rendering element of the HTML living standard, each marked styled, enhanced by a component, or left native, with why. Infrastructure elements (script, style, meta, link, head, title) and deprecated ones are listed as excluded."
+        },
+        {
+          "text": "Classless base for text and document semantics, lists and definitions, quotes, technical content (code, pre, kbd, samp, var), revisions and highlights, metadata (time, data, address), bidirectional and ruby text."
+        },
+        {
+          "text": "Page structure: landmarks (header, main, nav, aside, footer, section, article, search, hgroup) documented with their accessibility roles."
+        },
+        {
+          "text": "Table foundation: caption, regions, numeric alignment, sticky header, overflow inside the table, empty state."
+        },
+        {
+          "text": "Media: responsive images and picture, figure with caption, audio and video with native controls and tracks, responsive iframe embeds, svg and canvas sizing and labelling."
+        },
+        {
+          "text": "Release chain for 0.2.0."
+        }
+      ],
+      "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
+      "doneWhen": "A Markdown document and a long plain-HTML article render well in all three themes and both directions with no classes; the inventory has no unaccounted element; QA ✓ by eye.",
+      "mutations": [
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "coverage",
+          "chapter": "native",
+          "title": "Every element accounted for",
+          "intent": "The standard is the audit.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/coverage/every-rendering-element-of-the-html-standard-has-a-recorded",
+          "requirementKind": "invariant",
+          "statement": "Every rendering element of the HTML standard has a recorded outcome (styled, enhanced by a component, or deliberately left native) with its reason.",
+          "success": "The coverage inventory lists every rendering element of the living standard, and none is unaccounted for.",
+          "disqualifier": "An element renders with unreviewed browser defaults, or is missing from the inventory.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/coverage/native-behaviour-is-kept-wherever-it-serves-the-person",
+          "requirementKind": "invariant",
+          "statement": "Native behaviour is kept wherever it serves the person better than a custom replacement, and a custom control replaces a native one only with a written reason.",
+          "success": "Every component that replaces a native control names, in its contract, what the native one could not do.",
+          "disqualifier": "A native control is replaced only to look branded (for example a custom calendar where the native date input serves).",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "classless",
+          "chapter": "native",
+          "title": "Plain HTML reads right",
+          "intent": "Content with no classes is already good.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/classless/content-written-as-plain-html-or-markdown-with-no-classes-is",
+          "requirementKind": "invariant",
+          "statement": "Content written as plain HTML or Markdown, with no classes, is readable, well spaced and accessible: headings, text, lists, quotes, code, media and page landmarks.",
+          "success": "A long Markdown document rendered with only Primal's core styles has a clear heading hierarchy, readable spacing and no element at browser defaults.",
+          "disqualifier": "Any common element needs a class to look right.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/classless/mixed-direction-and-language-specific-text-isolated-runs",
+          "requirementKind": "invariant",
+          "statement": "Mixed-direction and language-specific text (isolated runs, ruby annotations) renders correctly inside content of either direction.",
+          "success": "A right-to-left paragraph with embedded left-to-right names and numbers, and a ruby annotation, render in the right order.",
+          "disqualifier": "Embedded opposite-direction text reorders its neighbours, or ruby text overlaps.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "tables",
+          "chapter": "native",
+          "title": "Tables",
+          "intent": "Data you can read down and across.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/tables/tables-align-numbers-on-a-common-edge-keep-their-header-in",
+          "requirementKind": "invariant",
+          "statement": "Tables align numbers on a common edge, keep their header in view while scrolling, scroll sideways within themselves on narrow widths, and say so when they are empty.",
+          "success": "A 40-row numeric table at phone and desk widths keeps its header visible, its numbers aligned, scrolls only inside itself, and its empty version says why it is empty.",
+          "disqualifier": "The page scrolls sideways because of a table, numbers are ragged, or an empty table shows only headers.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "media",
+          "chapter": "native",
+          "title": "Media",
+          "intent": "Media holds its place and says what it is.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/media/media-keeps-its-aspect-ratio-while-loading-never-overflows",
+          "requirementKind": "invariant",
+          "statement": "Media keeps its aspect ratio while loading, never overflows its container, and has a text alternative or is marked decorative.",
+          "success": "Images, video and embeds reserve their space before loading (no layout shift), fit their container at every width, and each has alternative text or an explicit decorative mark.",
+          "disqualifier": "Content jumps when media loads, media overflows, or an image has no alternative and no decorative mark.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        }
+      ]
+    },
+    {
+      "kind": "release",
+      "state": "draft",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "Forms need no custom field work.",
+      "version": "0.3.0",
+      "name": "Fields that never leave you guessing",
+      "track": "Forms",
+      "status": "Draft; waits for Niko's approval of the plan.",
+      "dependsOn": [
+        "0.2.0"
+      ],
+      "goal": "Every native form element is covered by a field primitive with one contract: label, description, required or optional, disabled, read-only, error, keyboard.",
+      "usersSee": "A showcase of every field in every state, three example forms (sign-in, profile edit, settings) built only from Primal, and their validation in action.",
+      "size": "L",
+      "items": [
+        {
+          "text": "Field primitives: TextField (text, email, password, tel, url, search), NumberField, date and time fields (native inputs), Checkbox, Radio and RadioGroup, Switch, Slider, ColorField, FileField, TextArea, Select, OutputValue, Progress and Meter as display."
+        },
+        {
+          "text": "Composition: FieldLabel, FormField (label, description, control, message), FieldGroup (fieldset and legend), ValidationMessage."
+        },
+        {
+          "text": "Validation contract: when errors appear (on leaving a field, on submit), where, how they are announced, how they clear."
+        },
+        {
+          "text": "Angular adapter: the field primitives as standalone components working with Angular forms, plus the same markup documented for plain HTML."
+        },
+        {
+          "text": "Release chain for 0.3.0."
+        }
+      ],
+      "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
+      "doneWhen": "The three example forms work by keyboard alone and with a screen reader, every field shows every state, and QA ✓ by eye in all themes and both directions.",
+      "mutations": [
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "fields",
+          "chapter": "primitives",
+          "title": "Fields",
+          "intent": "Each native input, one contract.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/every-field-has-a-visible-label-an-optional-description-a",
+          "requirementKind": "invariant",
+          "statement": "Every field has a visible label, an optional description, a required or optional state, disabled and read-only states, and an error state, all exposed to assistive technology.",
+          "success": "For every field primitive, each state is visible and announced by a screen reader with the label and description.",
+          "disqualifier": "A field without a visible label exists, or a state is shown only visually.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/each-native-field-type-the-text-kinds-number-date-and-time",
+          "requirementKind": "invariant",
+          "statement": "Each native field type (the text kinds, number, date and time, checkbox, radio, range, colour, file, select and text area) is covered by a field primitive that keeps the browser's own input behaviour.",
+          "success": "Every native type has its primitive, and its native keyboard, picker and autofill behaviour still work.",
+          "disqualifier": "A native type has no primitive, or a primitive breaks native autofill, pickers or keyboard input.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/related-fields-group-under-a-shared-legend-and-a-radio-group",
+          "requirementKind": "invariant",
+          "statement": "Related fields group under a shared legend, and a radio group is one stop in the tab order that moves by arrow keys.",
+          "success": "Tabbing reaches a radio group once, arrows move the choice, and the group's legend is announced.",
+          "disqualifier": "Each radio is its own tab stop, or a group has no announced name.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/a-switch-or-toggle-says-what-it-changes-in-words-rather-than",
+          "requirementKind": "invariant",
+          "statement": "A switch or toggle says what it changes, in words, rather than only on or off.",
+          "success": "Every switch example in the showcase is labelled with its consequence ('Email me when a report is ready'), and the pattern is in its contract.",
+          "disqualifier": "A switch is labelled 'Enabled', or its effect is only implied.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §0.6 (configuration forms show the consequence)."
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "validation",
+          "chapter": "behaviour",
+          "title": "Validation",
+          "intent": "An error tells you what to type.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/validation/a-field-s-error-says-what-happened-and-what-to-type-sits",
+          "requirementKind": "invariant",
+          "statement": "A field's error says what happened and what to type, sits directly under its field, and is announced when it appears.",
+          "success": "In the example forms, every error is under its field, readable as an instruction, announced once, and gone when fixed.",
+          "disqualifier": "An error shows in a banner or toast, says only 'invalid', or is not announced.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §2.2, §3.2"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "forms",
+          "chapter": "cells",
+          "title": "Forms from Primal alone",
+          "intent": "A whole form without inventing a field.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/forms/a-developer-builds-a-sign-in-a-profile-edit-and-a-settings",
+          "requirementKind": "user",
+          "statement": "A developer builds a sign-in, a profile edit and a settings form using only Primal's field primitives and form composition, with no custom field styling.",
+          "success": "The three example forms exist in the showcase with no style written outside Primal.",
+          "disqualifier": "Any of the three needs a custom style or a field that Primal does not provide.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)",
+          "role": "a developer on a Mycelium project",
+          "action": "build a form",
+          "outcome": "it is consistent and accessible without my own field code"
+        }
+      ]
+    },
+    {
+      "kind": "release",
+      "state": "draft",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "Feedback is decided, not defaulted.",
+      "version": "0.4.0",
+      "name": "Every action answers",
+      "track": "Actions and feedback",
+      "status": "Draft; waits for Niko's approval of the plan.",
+      "dependsOn": [
+        "0.3.0"
+      ],
+      "goal": "Actions and their feedback follow one written behaviour model, so every action is acknowledged, its outcome is specific, and its weight matches what it did.",
+      "usersSee": "Buttons, links and button groups in every state; alerts, toasts, spinners, progress and skeletons; and a page that walks through each action kind with its gate, sequence, weight and undo.",
+      "size": "M",
+      "items": [
+        {
+          "text": "Actions: Button, IconButton, Link (internal, external, download), ButtonGroup."
+        },
+        {
+          "text": "Feedback: Alert, Toast, Spinner, Progress, Skeleton."
+        },
+        {
+          "text": "The behaviour model written once: the three facts (what it is, who says it, what it wants), the fixed set of places, and what each place means."
+        },
+        {
+          "text": "Action kinds written once (destructive, constructive, mutative, navigational, background, confirmatory; reversible or not), each with gate, sequence, weight, reversibility window and error contract."
+        },
+        {
+          "text": "Release chain for 0.4.0."
+        }
+      ],
+      "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
+      "doneWhen": "Every action in the showcase acknowledges within 100 ms and shows its outcome where the eye is; a destructive example has distance and undo; QA ✓ by eye.",
+      "mutations": [
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "actions",
+          "chapter": "primitives",
+          "title": "Actions",
+          "intent": "Something happens, and you know what.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/actions/a-button-s-label-names-the-action-with-the-person-s-verb-and",
+          "requirementKind": "invariant",
+          "statement": "A button's label names the action with the person's verb and an object, and a pending button cannot be activated twice.",
+          "success": "Every button in the showcase reads verb plus object ('Save Changes'), and a pending button ignores a second activation while showing that it is working.",
+          "disqualifier": "A label reads 'Submit' or 'OK', or a double activation sends twice.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Niko's standing rule on button labels (~/.claude/CLAUDE.md)."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/actions/a-destructive-action-never-sits-as-a-peer-of-safe-ones-it",
+          "requirementKind": "invariant",
+          "statement": "A destructive action never sits as a peer of safe ones: it has its own distance and treatment.",
+          "success": "In every example with a destructive action, it is separated from Save and Cancel by the section gap and has the destructive treatment.",
+          "disqualifier": "A delete sits in the same group, at the same weight, as a safe action.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "feedback",
+          "chapter": "primitives",
+          "title": "Feedback",
+          "intent": "Waiting and results, shown honestly.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/feedback/loading-shows-the-shape-of-what-is-coming-when-the-shape-is",
+          "requirementKind": "invariant",
+          "statement": "Loading shows the shape of what is coming when the shape is known, and a progress value when the length is known.",
+          "success": "Lists load as skeletons of their rows, measurable work shows a percentage, and a spinner appears only when neither is known.",
+          "disqualifier": "A spinner hides a known shape or length, or progress is faked.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "feedback-contract",
+          "chapter": "behaviour",
+          "title": "The feedback contract",
+          "intent": "Silence is a message.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/feedback-contract/every-action-is-acknowledged-within-100-ms-then-states-its",
+          "requirementKind": "invariant",
+          "statement": "Every action is acknowledged within 100 ms, then states its specific outcome where the person's eyes already are.",
+          "success": "Every interactive example responds visibly within 100 ms, and its outcome names what happened at the place of the action.",
+          "disqualifier": "An action shows nothing at first, or its outcome is generic ('Success') or shown far from the action.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/feedback-contract/feedback-weight-follows-one-ladder-irreversible-actions-are",
+          "requirementKind": "invariant",
+          "statement": "Feedback weight follows one ladder: irreversible actions are impossible to miss, constructive ones are clear without interrupting, background ones are glance-sized and fade, and routine ones only acknowledge.",
+          "success": "Each showcase example's feedback matches its rung, and no routine action raises a toast.",
+          "disqualifier": "A routine action shouts, or an irreversible one passes quietly.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/feedback-contract/where-a-message-goes-is-decided-by-what-it-is-who-is-saying",
+          "requirementKind": "invariant",
+          "statement": "Where a message goes is decided by what it is, who is saying it and what it wants from the person, from a small fixed set of places, each with one meaning.",
+          "success": "The behaviour model lists the places and their meanings, and every feedback component documents which place it is.",
+          "disqualifier": "A component picks a toast or banner by taste.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "action-kinds",
+          "chapter": "behaviour",
+          "title": "Action kinds",
+          "intent": "Decided once, in plain words.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/action-kinds/each-action-kind-destructive-constructive-mutative",
+          "requirementKind": "invariant",
+          "statement": "Each action kind (destructive, constructive, mutative, navigational, background, confirmatory) has a written gate, sequence, weight, reversibility window and error contract that every component follows.",
+          "success": "The action-kind page states all five for each kind in plain words, and every action component names its kind.",
+          "disqualifier": "An action behaves differently from its kind's written contract.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        }
+      ]
+    },
+    {
+      "kind": "release",
+      "state": "draft",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "Nobody gets lost or stuck in a layer.",
+      "version": "0.5.0",
+      "name": "You always know where you are",
+      "track": "Navigation and top layers",
+      "status": "Draft; waits for Niko's approval of the plan.",
+      "dependsOn": [
+        "0.4.0"
+      ],
+      "goal": "Moving around and opening things on top follow written rules: navigation only moves, each top layer keeps its claim, and focus is never lost.",
+      "usersSee": "Tabs, breadcrumbs, pagination, menus and navigation items; dialogs, popovers, tooltips and accordions; keyboard paths through each, with focus visible and returning where it should.",
+      "size": "M",
+      "items": [
+        {
+          "text": "Navigation: Tabs, Breadcrumbs, Pagination, Menu, NavigationItem."
+        },
+        {
+          "text": "Disclosure and top layers on the native foundations (dialog, popover, details): Dialog (including confirmation), Popover, Tooltip, Accordion."
+        },
+        {
+          "text": "The seven top-layer answers written once: what earns a modal, beside versus over, what is a place, which layers get addresses, stacking, what returns on close, what each becomes on a phone."
+        },
+        {
+          "text": "Physics: visible focus, reading-order focus, defined return targets, Escape for the topmost layer, keyboard path for every component."
+        },
+        {
+          "text": "Release chain for 0.5.0."
+        }
+      ],
+      "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
+      "doneWhen": "Every navigation and top-layer example works by keyboard alone with focus always visible and returning correctly; QA ✓ by eye.",
+      "mutations": [
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "navigation",
+          "chapter": "primitives",
+          "title": "Navigation",
+          "intent": "Navigation moves you; actions do something.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/navigation/navigation-only-moves-the-person-and-never-filters-toggles",
+          "requirementKind": "invariant",
+          "statement": "Navigation only moves the person and never filters, toggles or creates: tabs switch faces of the same thing, breadcrumbs go up a real hierarchy, and back follows the step actually taken.",
+          "success": "No navigation component in Primal performs an action, and each documents which of the three moves it is.",
+          "disqualifier": "A navigation item filters, toggles or creates, or tabs hold unrelated places.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.7"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "top-layers",
+          "chapter": "behaviour",
+          "title": "Top layers",
+          "intent": "Each layer keeps its claim.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/top-layers/a-dialog-interrupts-returns-the-page-exactly-as-it-was-left",
+          "requirementKind": "invariant",
+          "statement": "A dialog interrupts, returns the page exactly as it was left, always has a way out that isn't the answer, and is not a place.",
+          "success": "Closing a dialog restores scroll, selection and focus; every dialog has a dismiss that is not its confirm; browser back never lands inside one.",
+          "disqualifier": "A dialog changes the page under it, has no way out but the answer, or traps back navigation.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.9"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/top-layers/a-panel-popover-or-tooltip-leaves-the-page-the-person-s-own",
+          "requirementKind": "invariant",
+          "statement": "A panel, popover or tooltip leaves the page the person's own, and closing it returns focus to what opened it.",
+          "success": "With a popover open the page still scrolls and reads; on close, focus is back on its trigger.",
+          "disqualifier": "A popover blocks the page, or closing it drops focus to the top of the document.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/top-layers/a-disclosure-keeps-its-open-state-where-it-is-shown-and",
+          "requirementKind": "invariant",
+          "statement": "A disclosure keeps its open state where it is shown, and opening one never moves what the person is reading.",
+          "success": "Opening an accordion section above the reading position keeps the reading position in place.",
+          "disqualifier": "Opening a section scrolls or shifts the content being read.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "physics",
+          "chapter": "behaviour",
+          "title": "Physics",
+          "intent": "Keys and focus you can trust.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/physics/focus-is-always-visible-moves-in-reading-order-and-has-a",
+          "requirementKind": "invariant",
+          "statement": "Focus is always visible, moves in reading order, and has a defined destination when any layer closes, and Escape closes the topmost layer.",
+          "success": "Tabbing through every showcase page shows focus on every stop, in reading order, and Escape closes only the topmost layer.",
+          "disqualifier": "Focus is invisible anywhere, jumps out of order, or Escape closes more than one layer.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/physics/every-component-s-journey-works-from-the-keyboard-alone",
+          "requirementKind": "invariant",
+          "statement": "Every component's journey works from the keyboard alone.",
+          "success": "Each component's contract lists its keys, and each works with the keyboard alone in the showcase.",
+          "disqualifier": "Any component needs a pointer to complete its job.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        }
+      ]
+    },
+    {
+      "kind": "release",
+      "state": "draft",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "Screens say what things are at a glance.",
+      "version": "0.6.0",
+      "name": "Things look like what they are",
+      "track": "Content, information and cells",
+      "status": "Draft; waits for Niko's approval of the plan.",
+      "dependsOn": [
+        "0.5.0"
+      ],
+      "goal": "Content, information and layout components say what things are and how they stand, and the first cells do whole jobs end to end.",
+      "usersSee": "Cards as list items, list items, description lists, the full table, code blocks, badges, avatars, status indicators, empty states, layout helpers; and cells such as subscribe, search with results and an issue tile.",
+      "size": "L",
+      "items": [
+        {
+          "text": "Content: Card (as a list item), ListItem, DescriptionList, Table (on the 0.2.0 foundation), CodeBlock."
+        },
+        {
+          "text": "Information: Badge, Avatar, StatusIndicator, EmptyState."
+        },
+        {
+          "text": "Layout: Stack, Inline, Grid, Container (max-width and full-width), Divider, ScrollArea."
+        },
+        {
+          "text": "Composition: Toolbar, SearchField."
+        },
+        {
+          "text": "First cells: newsletter subscribe, search with results and feedback, an item tile with its payload named."
+        },
+        {
+          "text": "Release chain for 0.6.0."
+        }
+      ],
+      "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
+      "doneWhen": "Every component passes the blur test and the strip test in the showcase with real-length data at phone and desk widths; QA ✓ by eye.",
+      "mutations": [
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "information",
+          "chapter": "primitives",
+          "title": "Information",
+          "intent": "Nature and state before words.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/information/a-card-is-a-list-item-it-appears-only-as-one-of-several",
+          "requirementKind": "invariant",
+          "statement": "A card is a list item: it appears only as one of several siblings that are each something you open or act on, never as a single child or a page container.",
+          "success": "Every card example in Primal is one of at least two siblings and is openable or actionable; the contract forbids the single-card and card-as-page uses.",
+          "disqualifier": "A card wraps a whole page, a section, or a lone piece of content.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); UI Design Course ch. 01 (the card contract) and ch. 00 (minimum siblings)."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/information/status-badges-and-indicators-carry-their-meaning-in-shape-or",
+          "requirementKind": "invariant",
+          "statement": "Status, badges and indicators carry their meaning in shape or text as well as colour, and no fact appears twice in one item.",
+          "success": "With colour removed, every status in the showcase still reads; no item shows the same status as both a dot and a word.",
+          "disqualifier": "A status is colour only, or an item repeats a fact.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/information/an-empty-state-says-why-it-is-empty-and-offers-the-next-step",
+          "requirementKind": "invariant",
+          "statement": "An empty state says why it is empty and offers the next step, in the place the content would be.",
+          "success": "Every list, table and search example has an empty version that names the reason and the next action in place.",
+          "disqualifier": "An empty state is a blank area, a generic illustration, or appears somewhere other than where the content goes.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "layout",
+          "chapter": "primitives",
+          "title": "Layout",
+          "intent": "Group by space and alignment.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/layout/layout-helpers-stack-inline-grid-container-divider-scroll",
+          "requirementKind": "invariant",
+          "statement": "Layout helpers (stack, inline, grid, container, divider, scroll area) group by space and alignment, and draw a line only where a written treatment says so.",
+          "success": "With borders, fills and shadows removed, every showcase layout still reads its grouping and rank.",
+          "disqualifier": "Grouping depends on boxes, or a line has no written meaning.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.4 (strip test)."
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "payload",
+          "chapter": "cells",
+          "title": "Cells keep their payload",
+          "intent": "The one thing a cell exists to show stays.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/payload/every-cell-names-its-payload-and-when-room-runs-out-the",
+          "requirementKind": "invariant",
+          "statement": "Every cell names its payload, and when room runs out the payload stays while labels, chips and metadata give way.",
+          "success": "At 320 pixels wide with real-length data, every cell still shows its payload in full or with a deliberate truncation.",
+          "disqualifier": "Metadata survives while the payload is cut, or a cell has no named payload.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.2"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/payload/each-cell-shipped-with-primal-fulfils-one-complete-job-end",
+          "requirementKind": "invariant",
+          "statement": "Each cell shipped with Primal fulfils one complete job end to end, including its feedback.",
+          "success": "Each cell's contract names its job and its demo completes that job with its feedback (for example, subscribe ends in a confirmed subscription or a fixable error).",
+          "disqualifier": "A cell stops before its job is done, or leaves feedback to the page around it.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        }
+      ]
+    },
+    {
+      "kind": "release",
+      "state": "draft",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "A project starts from places, not parts.",
+      "version": "0.7.0",
+      "name": "Whole places to work in",
+      "track": "Surfaces",
+      "status": "Draft; waits for Niko's approval of the plan.",
+      "dependsOn": [
+        "0.6.0"
+      ],
+      "goal": "Reference surfaces show how cells combine into complete journeys, so a new project starts from working places rather than parts.",
+      "usersSee": "Reference surfaces: sign-in and sign-up, an app shell with navigation, a settings area, a list with detail, a multi-step form, each working at phone and desk widths.",
+      "size": "M",
+      "items": [
+        {
+          "text": "Reference surfaces: authentication (sign-in, sign-up, reset), app shell (global and local navigation, phone collapse), settings, list with detail, multi-step form."
+        },
+        {
+          "text": "Each surface's journey written as 3–5 steps with its next two moves, and checked by the blur test."
+        },
+        {
+          "text": "Release chain for 0.7.0."
+        }
+      ],
+      "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
+      "doneWhen": "Each reference surface completes its journey at phone and desk widths with keyboard and touch, its addresses restore cold, and QA ✓ by eye.",
+      "mutations": [
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "reference",
+          "chapter": "surfaces",
+          "title": "Reference surfaces",
+          "intent": "Start from places that work.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/reference/a-developer-starts-a-project-from-reference-surfaces-for",
+          "requirementKind": "user",
+          "statement": "A developer starts a project from reference surfaces for authentication, an app shell, settings, a list with detail and a multi-step form, and each journey's next two moves are already within reach.",
+          "success": "Each reference surface completes its journey, and its next two moves are placed where the hand and eye already are.",
+          "disqualifier": "A surface stops a step early (no edit after create, no delete after add), or a needed move is hidden.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)",
+          "role": "a developer starting a Mycelium product",
+          "action": "start the first screens",
+          "outcome": "I begin from working journeys, not a blank page"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/reference/every-reference-surface-works-at-phone-and-desk-widths-says",
+          "requirementKind": "invariant",
+          "statement": "Every reference surface works at phone and desk widths, says honestly what doesn't exist on a medium rather than hiding it, and has touch targets of at least 24 by 24 pixels.",
+          "success": "Each surface passes at 320 and 1440 pixels wide, with no missing feature unexplained and no target under 24 by 24.",
+          "disqualifier": "A surface breaks at phone width, hides a feature silently, or has a target too small.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/reference/every-durable-place-in-a-reference-surface-has-a-readable",
+          "requirementKind": "invariant",
+          "statement": "Every durable place in a reference surface has a readable address that restores the place when opened cold.",
+          "success": "Pasting each surface's address into a fresh tab lands in the same place, with no bare identifiers in the path.",
+          "disqualifier": "A place has no address, or a cold link lands somewhere else.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.8"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/reference/each-reference-surface-makes-clear-where-the-person-s",
+          "requirementKind": "invariant",
+          "statement": "Each reference surface makes clear where the person's attention belongs: normal reads quiet, what needs action leads, and a real problem interrupts.",
+          "success": "Blurred, each surface still shows what is what and then what needs attention.",
+          "disqualifier": "Everything has the same weight, or decoration competes with what needs action.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.6; Niko's 'design what it is' rule (blur test)."
+        }
+      ]
+    },
+    {
+      "kind": "release",
+      "state": "draft",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "Behaviour is written down, not tribal.",
+      "version": "0.8.0",
+      "name": "Every element keeps its promise",
+      "track": "Contracts",
+      "status": "Draft; waits for Niko's approval of the plan.",
+      "dependsOn": [
+        "0.7.0"
+      ],
+      "goal": "Every primitive, cell and surface documents its contract, kept as framework-independent data next to the code, with the documentation generated from it.",
+      "usersSee": "In the showcase, each component's page: its promise, behaviour, context, relationships, states, accessibility, failure conditions, live examples and do and don't.",
+      "size": "M",
+      "items": [
+        {
+          "text": "Contract schema (framework-independent data) and a contract for every component shipped by 0.7.0."
+        },
+        {
+          "text": "Documentation pages generated from the contracts, with live examples, do and don't, accessibility notes and API."
+        },
+        {
+          "text": "A check that fails the build when a component has no contract or its contract is incomplete."
+        },
+        {
+          "text": "Release chain for 0.8.0."
+        }
+      ],
+      "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
+      "doneWhen": "Every component has a complete contract and a generated page; the contract check passes; QA ✓ by eye on a sample of pages across all three layers.",
+      "mutations": [
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "catalog",
+          "chapter": "contracts",
+          "title": "The contract catalog",
+          "intent": "What am I promising, and did I keep it?",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/catalog/every-primitive-cell-and-surface-documents-its-contract",
+          "requirementKind": "invariant",
+          "statement": "Every primitive, cell and surface documents its contract: promise, behaviour, context, relationships, states, accessibility and failure conditions.",
+          "success": "The build fails if any component lacks a contract or any of its seven parts.",
+          "disqualifier": "A component ships without a complete contract.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/catalog/each-component-is-classified-as-primitive-cell-or-surface-by",
+          "requirementKind": "invariant",
+          "statement": "Each component is classified as primitive, cell or surface by the promise it keeps, not by its size or markup, and the reason is written.",
+          "success": "Every contract states its layer and why, and a button, for example, is a primitive although it is interactive.",
+          "disqualifier": "A component is classified by how big or how nested it is.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation) (§3, the architectural correction); Thoughts on Design and Humanity, via ~/.claude/guides/design-system-guides/01-design-system.md §1.1"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/catalog/contracts-are-kept-as-framework-independent-data-next-to-the",
+          "requirementKind": "invariant",
+          "statement": "Contracts are kept as framework-independent data next to the components, and the documentation is generated from them, so the two cannot drift.",
+          "success": "Changing a contract changes its documentation page on the next build, with nothing written by hand in between.",
+          "disqualifier": "Documentation is written separately from the contract, or a contract lives inside one framework's code.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/catalog/every-contract-answers-three-questions-what-it-promises-what",
+          "requirementKind": "invariant",
+          "statement": "Every contract answers three questions: what it promises, what its presence makes someone expect, and how it shows whether it kept the promise.",
+          "success": "The three answers are present and specific in every contract.",
+          "disqualifier": "Any answer is missing or generic.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        }
+      ]
+    },
+    {
+      "kind": "release",
+      "state": "draft",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "Anyone can build on Primal.",
+      "version": "1.0.0",
+      "name": "Open to everyone",
+      "track": "Distribution",
+      "status": "Draft; waits for Niko's approval of the plan.",
+      "dependsOn": [
+        "0.8.0"
+      ],
+      "goal": "Mycelium Primal goes public as an open-source, versioned set of packages with a starter app, and passes its acceptance test.",
+      "usersSee": "The public repository, the published packages, the starter app and the public showcase, each stating 1.0.0.",
+      "size": "M",
+      "items": [
+        {
+          "text": "Trademark and existing-use check of 'Mycelium Primal' and 'Primal' done, and Niko's go (see questionsForNiko)."
+        },
+        {
+          "text": "License file, contributing guide, code of conduct and changelog."
+        },
+        {
+          "text": "Packages published: tokens, css and angular (names and registry decided by Niko)."
+        },
+        {
+          "text": "Starter app: a new project using Primal, from install to a first screen."
+        },
+        {
+          "text": "Acceptance test: a complete responsive app (authentication, forms, settings, navigation, tables, dialogs, empty states, feedback) built from Primal without new foundational behaviour."
+        },
+        {
+          "text": "Repository made public (Niko's own yes)."
+        },
+        {
+          "text": "Release chain for 1.0.0."
+        }
+      ],
+      "rollout": "Niko makes the repository public and publishes the packages; the showcase moves to its public address.",
+      "doneWhen": "The acceptance app is built from Primal with no new foundational behaviour; a fresh install from the published packages works from the documented steps; Niko has made the repository public.",
+      "mutations": [
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "open-source",
+          "chapter": "distribution",
+          "title": "Open source",
+          "intent": "Clone it, install it, build anything.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/open-source/a-developer-installs-primal-and-builds-a-complete-responsive",
+          "requirementKind": "user",
+          "statement": "A developer installs Primal and builds a complete responsive app (authentication, forms, settings, navigation, tables, dialogs, empty states and feedback) without inventing new foundational interface behaviour.",
+          "success": "The acceptance app is built from the published packages, and every foundational behaviour in it comes from Primal.",
+          "disqualifier": "The acceptance app needed a new field, action, feedback, navigation or top-layer behaviour that Primal lacks.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation) (§9, the acceptance test).",
+          "role": "a developer outside Mycelium",
+          "action": "build an app on Primal",
+          "outcome": "I don't reinvent buttons, forms, typography, navigation, accessibility or responsive behaviour"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/open-source/a-developer-installs-primal-into-a-new-project-and-has-the",
+          "requirementKind": "user",
+          "statement": "A developer installs Primal into a new project and has the foundation working from the documented steps in under ten minutes.",
+          "success": "Following only the documentation, a fresh project shows Primal's foundation in under ten minutes.",
+          "disqualifier": "Installing needs a step that is not documented, or takes longer.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)",
+          "role": "a developer new to Primal",
+          "action": "install it",
+          "outcome": "I'm building in minutes"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/open-source/primal-is-published-under-a-permissive-open-source-license",
+          "requirementKind": "invariant",
+          "statement": "Primal is published under a permissive open-source license as versioned packages, and every release states its version in the packages, the showcase and the changelog.",
+          "success": "The license is in the repository, the packages are on the registry at the release's version, and the showcase and changelog state the same version.",
+          "disqualifier": "The license is missing or restrictive, or any of the three states a different version.",
+          "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        }
+      ]
+    }
+  ],
+  "shipped": [],
+  "awaitingNiko": [],
+  "questionsForNiko": [
+    {
+      "question": "Is 'Mycelium Primal' clear of existing use and trademarks?",
+      "why": "Needed before the repository goes public at 1.0.0; Niko named it the one step left before committing to the name.",
+      "from": "Niko's naming note, 2026-10-20"
+    },
+    {
+      "question": "Which npm scope publishes the packages: @mycelium (not known to be ours) or @mycelium-llc (the estate's), and on npm or GitHub Packages?",
+      "why": "The brief suggests @mycelium/primal; npm shows no such packages and this Mac cannot tell who owns the @mycelium scope.",
+      "from": "Session 7F, 2026-10-20"
+    },
+    {
+      "question": "Which license: MIT (recommended) or Apache-2.0?",
+      "why": "The brief asks for a permissive license; MIT is the simplest, Apache-2.0 adds a patent grant.",
+      "from": "Niko's brief §6"
+    },
+    {
+      "question": "Where is the showcase hosted while the repository is private?",
+      "why": "0.1.0's done-when needs a live showcase Niko can open; Firebase Hosting in an existing Mycelium project is the usual path.",
+      "from": "Session 7F, 2026-10-20"
+    }
+  ],
+  "notPlanned": [
+    {
+      "features": [],
+      "reason": "Excluded from v1 (Niko's brief §8): rich text editors, advanced data grids, charts, drag-and-drop builders, complex calendars, maps, file managers and application dashboards. They should be possible on Primal later, but they are not part of the foundation."
+    },
+    {
+      "features": [],
+      "reason": "Adapters beyond Angular (Mac, mobile, other web frameworks): when a Mycelium product needs one (Niko, 2026-10-20)."
+    }
+  ],
+  "verifyAtBaseline": []
+}

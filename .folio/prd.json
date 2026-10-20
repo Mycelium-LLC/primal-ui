@@ -1,0 +1,76 @@
+{
+  "schema": "dreamatorium-prd/v1",
+  "spec_version": "1.0.0",
+  "type": "prd",
+  "state": "draft",
+  "title": "Mycelium Primal",
+  "what_this_is": "Mycelium Primal (Primal for short): the open-source design system by Mycelium, design from first principles. Two things at once: a design system you install and use as it is, and the base every future Mycelium design system starts from, so its own look is minimal and set through tokens. Its architecture is the book's scale (primitive, cell, surface), classified by the promise each element keeps. Framework-independent core, one adapter set per framework, Angular first. Statements name no screen, store or file. This baseline is the seed (0.0.0): nothing is built, every chapter is declared empty here and filled by the ledger.",
+  "note": "Drafted by Claude (session 7F-primal-foundation) on 2026-10-20 from Niko's v1 brief and his decisions in that session, and from his book through ~/.claude/guides/design-system-guides/01-design-system.md. Every requirement is 'proposed' until Niko approves the plan by merge; each is unverified until verified with evidence.",
+  "generated": {
+    "by": "Claude (session 7F-primal-foundation)",
+    "at": "2026-10-20",
+    "from": "Niko's v1 brief, 2026-10-20"
+  },
+  "questions": [],
+  "domains": [
+    {
+      "name": "foundation",
+      "title": "The foundation",
+      "intent": "Tokens and themes: a minimal, neutral base that any project re-themes without touching a component.",
+      "features": []
+    },
+    {
+      "name": "native",
+      "title": "Native HTML",
+      "intent": "Every element of the HTML standard has a decided outcome, and plain HTML reads well on its own.",
+      "features": []
+    },
+    {
+      "name": "primitives",
+      "title": "Primitives",
+      "intent": "Parts of a promise that are not yet a whole job: fields, actions, feedback, navigation, information, layout.",
+      "features": []
+    },
+    {
+      "name": "cells",
+      "title": "Cells",
+      "intent": "One complete, predictable job each, built from primitives.",
+      "features": []
+    },
+    {
+      "name": "surfaces",
+      "title": "Surfaces",
+      "intent": "Reference places where cells serve a journey.",
+      "features": []
+    },
+    {
+      "name": "behaviour",
+      "title": "Behaviour",
+      "intent": "What the system does every time, written once above the components: feedback, action kinds, top layers, physics.",
+      "features": []
+    },
+    {
+      "name": "contracts",
+      "title": "Contracts",
+      "intent": "Every element says what it promises, what its presence makes someone expect, and how it shows it kept the promise.",
+      "features": []
+    },
+    {
+      "name": "reach",
+      "title": "Everyone, everywhere",
+      "intent": "Accessible by default, both text directions, every width and input.",
+      "features": []
+    },
+    {
+      "name": "distribution",
+      "title": "Getting it",
+      "intent": "Framework-independent core, one adapter set per framework, a live showcase, open source at v1.",
+      "features": []
+    }
+  ],
+  "counts": {
+    "domains": 9,
+    "features": 0,
+    "requirements": 0
+  }
+}
