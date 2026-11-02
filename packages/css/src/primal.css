@@ -2110,6 +2110,488 @@ progress:indeterminate::-moz-progress-bar {
   }
 }
 
+/* ---------------------------------------------------------------- navigation */
+/*
+ * Navigation only moves you: it never filters, toggles or creates. Tabs switch between faces of
+ * one thing, breadcrumbs go up a real hierarchy, pagination moves through one list, and a
+ * navigation item says where it goes and whether you are there.
+ */
+
+/* Breadcrumbs: the way up, each step a link, the place you are in its own words and not a link. */
+.pr-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+}
+
+.pr-breadcrumbs li + li::before {
+  content: '/' / '';
+  color: var(--pr-color-text-muted);
+}
+
+.pr-breadcrumbs a {
+  color: var(--pr-color-text-muted);
+}
+
+.pr-breadcrumbs a:hover {
+  color: var(--pr-color-text);
+}
+
+.pr-breadcrumbs [aria-current='page'] {
+  color: var(--pr-color-text);
+  font-weight: var(--pr-weight-strong);
+}
+
+/* Tabs: faces of one thing. The chosen face is underlined in the primary; the line beneath holds them together. */
+.pr-tablist {
+  display: flex;
+  gap: var(--pr-gap-group);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pr-tablist > [role='tab'] {
+  position: relative;
+  flex: none;
+  min-block-size: var(--pr-control-height);
+  padding-inline: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--pr-color-text-muted);
+}
+
+.pr-tablist > [role='tab']:hover:not(:disabled) {
+  background: none;
+  color: var(--pr-color-text);
+}
+
+.pr-tablist > [role='tab']:active:not(:disabled) {
+  background: none;
+  scale: none;
+}
+
+.pr-tablist > [role='tab']:focus-visible {
+  outline-offset: calc(var(--pr-focus-offset) * -1);
+}
+
+.pr-tablist > [role='tab'][aria-selected='true'] {
+  color: var(--pr-color-text);
+}
+
+.pr-tablist > [role='tab'][aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: var(--pr-focus-width);
+  background-color: var(--pr-color-primary);
+}
+
+[role='tabpanel'] {
+  display: block;
+  padding-block-start: var(--pr-gap-group);
+}
+
+[role='tabpanel'][hidden] {
+  display: none;
+}
+
+/* Pagination: one list, page by page. The page you are on sits in the primary's quiet fill. */
+.pr-pagination ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--pr-gap-component) / 2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-pagination :where(button, a) {
+  min-inline-size: var(--pr-control-height);
+  padding-inline: var(--pr-control-inset);
+  background-color: transparent;
+  font-variant-numeric: tabular-nums;
+}
+
+.pr-pagination :where(button, a):hover:not(:disabled) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+}
+
+.pr-pagination [aria-current='page'] {
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+}
+
+.pr-pagination [aria-current='page']:hover {
+  background-color: var(--pr-color-primary-surface);
+}
+
+.pr-pagination-gap {
+  min-inline-size: var(--pr-control-height);
+  color: var(--pr-color-text-muted);
+  text-align: center;
+}
+
+/* Navigation items: where each goes; the one you are on is marked, in words for a screen reader (aria-current) and by its fill. */
+.pr-nav-list {
+  display: grid;
+  gap: calc(var(--pr-gap-component) / 4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-nav-list a {
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  min-block-size: var(--pr-control-height);
+  padding-inline: var(--pr-control-inset);
+  border-radius: var(--pr-radius-control);
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.pr-nav-list a:hover {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+}
+
+.pr-nav-list a[aria-current='page'] {
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-nav-list a svg {
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  flex: none;
+}
+
+/* ---------------------------------------------------------------- top layers */
+/*
+ * Every layer is native: a dialog is a <dialog>, a popover, menu and tooltip are popovers, a
+ * disclosure is <details>. The browser keeps the stacking, Escape and focus return; Primal sets
+ * what each looks like and what it promises.
+ */
+
+/* A layer beside the page (a popover, a menu): raised, and the page stays the person's own. */
+.pr-layer,
+.pr-menu {
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  max-inline-size: calc(100vw - 2 * var(--pr-gutter));
+  max-block-size: calc(100vh - 2 * var(--pr-gutter));
+  margin: 0;
+  overflow: auto;
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-raised);
+  color: var(--pr-color-text);
+  box-shadow: var(--pr-elevation-1);
+  opacity: 1;
+  transition:
+    opacity var(--pr-duration-fast) var(--pr-ease-standard),
+    display var(--pr-duration-fast) allow-discrete,
+    overlay var(--pr-duration-fast) allow-discrete;
+}
+
+.pr-layer {
+  padding: var(--pr-gap-group);
+}
+
+.pr-layer > :first-child {
+  margin-block-start: 0;
+}
+
+.pr-layer > :last-child {
+  margin-block-end: 0;
+}
+
+@starting-style {
+  .pr-layer:popover-open,
+  .pr-menu:popover-open {
+    opacity: 0;
+  }
+}
+
+:where(.pr-layer, .pr-menu, .pr-tooltip):not(:popover-open) {
+  opacity: 0;
+}
+
+/* A menu: commands, one per row. The one under the keyboard or pointer is shaded. */
+.pr-menu {
+  min-inline-size: var(--pr-menu-width);
+  padding: calc(var(--pr-gap-component) / 2);
+}
+
+.pr-menu [role='menuitem'] {
+  display: flex;
+  justify-content: flex-start;
+  inline-size: 100%;
+  border-radius: var(--pr-radius-well);
+  background-color: transparent;
+  font-weight: var(--pr-weight-regular);
+  text-align: start;
+}
+
+.pr-menu [role='menuitem']:is(:hover, :focus-visible):not(:disabled, [aria-disabled='true']) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface-raised));
+}
+
+.pr-menu [role='menuitem']:focus-visible {
+  outline-offset: calc(var(--pr-focus-offset) * -1);
+}
+
+.pr-menu [role='menuitem'][data-kind='destructive']:not([aria-disabled='true']) {
+  color: var(--pr-color-danger);
+}
+
+.pr-menu [role='menuitem'][aria-disabled='true'] {
+  background-color: transparent;
+  color: var(--pr-color-text-muted);
+}
+
+.pr-menu hr {
+  margin: calc(var(--pr-gap-component) / 2) 0;
+}
+
+/* A tooltip: a short phrase about the thing you are pointing at or focused on. Never something to press. */
+.pr-tooltip {
+  position: fixed;
+  inset: auto;
+  max-inline-size: min(var(--pr-tooltip-width), 100vw - 2 * var(--pr-gutter));
+  margin: 0;
+  padding: calc(var(--pr-gap-component) / 2) var(--pr-gap-component);
+  border: 0;
+  border-radius: var(--pr-radius-well);
+  background-color: var(--pr-color-text);
+  color: var(--pr-color-surface);
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-regular);
+  line-height: var(--pr-leading-tight);
+  pointer-events: none;
+  opacity: 1;
+  transition:
+    opacity var(--pr-duration-fast) var(--pr-ease-standard),
+    display var(--pr-duration-fast) allow-discrete,
+    overlay var(--pr-duration-fast) allow-discrete;
+}
+
+@starting-style {
+  .pr-tooltip:popover-open {
+    opacity: 0;
+  }
+}
+
+/*
+ * A dialog interrupts: the page behind it is covered and holds still, and the dialog is the one
+ * thing to answer. Raised the most (elevation 2), only one at a time. On a phone it rises from
+ * the bottom edge, where the thumb is.
+ */
+.pr-dialog {
+  box-sizing: border-box;
+  inline-size: min(var(--pr-dialog-width), 100% - 2 * var(--pr-gutter));
+  max-inline-size: none;
+  max-block-size: calc(100% - 2 * var(--pr-gutter));
+  padding: 0;
+  border: 0;
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-raised);
+  color: var(--pr-color-text);
+  box-shadow: var(--pr-elevation-2);
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity var(--pr-duration-slow) var(--pr-ease-enter),
+    scale var(--pr-duration-slow) var(--pr-ease-enter),
+    translate var(--pr-duration-slow) var(--pr-ease-enter),
+    display var(--pr-duration-slow) allow-discrete,
+    overlay var(--pr-duration-slow) allow-discrete;
+}
+
+.pr-dialog:not([open]) {
+  opacity: 0;
+  scale: 0.98;
+}
+
+@starting-style {
+  .pr-dialog[open] {
+    opacity: 0;
+    scale: 0.98;
+  }
+}
+
+.pr-dialog::backdrop {
+  background-color: var(--pr-color-backdrop);
+  opacity: 1;
+  transition:
+    opacity var(--pr-duration-slow) var(--pr-ease-enter),
+    display var(--pr-duration-slow) allow-discrete,
+    overlay var(--pr-duration-slow) allow-discrete;
+}
+
+.pr-dialog:not([open])::backdrop {
+  opacity: 0;
+}
+
+@starting-style {
+  .pr-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+.pr-dialog:focus-visible {
+  outline: none;
+}
+
+/* While a dialog is open, the page under it holds still. */
+html:has(.pr-dialog[open]:modal) {
+  overflow: hidden;
+}
+
+.pr-dialog-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: var(--pr-gap-component);
+  padding: var(--pr-gap-group) var(--pr-gap-group) 0;
+}
+
+.pr-dialog-title {
+  margin: 0;
+  padding-block-start: calc((var(--pr-control-height) - 1lh) / 2);
+  font-size: var(--pr-text-large);
+}
+
+.pr-dialog-close {
+  margin-block-start: calc(var(--pr-gap-component) / -2);
+  margin-inline-end: calc(var(--pr-gap-component) / -2);
+}
+
+.pr-dialog-body {
+  padding: var(--pr-gap-component) var(--pr-gap-group) var(--pr-gap-group);
+}
+
+.pr-dialog-body > :first-child {
+  margin-block-start: 0;
+}
+
+.pr-dialog-body > :last-child {
+  margin-block-end: 0;
+}
+
+/* The answers: at the end, the main one last; a destructive one apart (.pr-actions does it). */
+.pr-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--pr-gap-component);
+  padding: 0 var(--pr-gap-group) var(--pr-gap-group);
+}
+
+@media (max-width: 40rem) /* allow-literal: a media query can't read a custom property */ {
+  .pr-dialog {
+    inline-size: 100%;
+    max-block-size: calc(100% - var(--pr-gutter));
+    margin-block-end: 0;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  .pr-dialog:not([open]) {
+    scale: 1;
+    translate: 0 var(--pr-gap-section);
+  }
+
+  @starting-style {
+    .pr-dialog[open] {
+      scale: 1;
+      translate: 0 var(--pr-gap-section);
+    }
+  }
+
+  .pr-dialog-actions {
+    flex-direction: column-reverse;
+  }
+
+  .pr-dialog-actions > * {
+    inline-size: 100%;
+  }
+}
+
+/*
+ * Disclosure: a summary you open for the detail. An accordion is several, one under the other;
+ * give them the same name and only one stays open. Opening one never moves what you are reading.
+ */
+summary {
+  cursor: pointer;
+}
+
+.pr-accordion {
+  max-inline-size: var(--pr-measure);
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-accordion > details {
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pr-gap-group);
+  min-block-size: var(--pr-control-height);
+  padding-block: var(--pr-gap-component);
+  font-weight: var(--pr-weight-strong);
+  list-style: none;
+}
+
+.pr-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.pr-accordion summary::after {
+  content: '';
+  flex: none;
+  inline-size: 0.5em;
+  block-size: 0.5em;
+  margin-inline-end: 0.25em;
+  border-block-end: var(--pr-focus-width) solid currentColor;
+  border-inline-end: var(--pr-focus-width) solid currentColor;
+  rotate: 45deg;
+  translate: 0 -0.15em;
+  transition: rotate var(--pr-duration-base) var(--pr-ease-standard);
+}
+
+.pr-accordion details[open] > summary::after {
+  rotate: 225deg;
+  translate: 0 0.15em;
+}
+
+.pr-accordion summary:focus-visible {
+  outline-offset: calc(var(--pr-focus-offset) * -1);
+}
+
+.pr-accordion details > :not(summary) {
+  margin-block: 0 var(--pr-gap-group);
+}
+
 /* ---------------------------------------------------------------- utilities */
 
 /* Read by assistive technology, not shown: a label for an icon, "Error:" before a message. */
