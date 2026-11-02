@@ -3178,6 +3178,250 @@ summary {
   font-size: var(--pr-text-small);
 }
 
+/* ---------------------------------------------------------------- surfaces */
+/*
+ * Reference surfaces: whole places built from cells. Each lays itself out by its own width
+ * (container queries), so the same surface works in a phone, a panel or a desk.
+ */
+
+/*
+ * An app shell: the bar across the top (where you are in the product, search, your account),
+ * the side navigation between the product's places, and the place itself. When the shell is
+ * narrow, the side navigation folds behind a Show Menu button in the bar.
+ */
+.pr-shell {
+  display: grid;
+  grid-template-columns: var(--pr-nav-width) 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'bar bar'
+    'nav main';
+  min-block-size: 100%;
+  container-type: inline-size;
+  background-color: var(--pr-color-surface);
+}
+
+.pr-shell-bar {
+  grid-area: bar;
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-group);
+  min-block-size: calc(var(--pr-control-height) + var(--pr-gap-group));
+  padding-inline: var(--pr-gap-group);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-shell-brand {
+  font-weight: var(--pr-weight-strong);
+  color: var(--pr-color-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pr-shell-bar .pr-search-field {
+  max-inline-size: var(--pr-field-width);
+  margin-inline-start: auto;
+}
+
+.pr-shell-nav {
+  grid-area: nav;
+  padding: var(--pr-gap-group) var(--pr-gap-component);
+  border-inline-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-shell-main {
+  grid-area: main;
+  min-inline-size: 0;
+  padding: var(--pr-gap-group) var(--pr-gutter) var(--pr-gap-section);
+}
+
+.pr-shell-menu,
+.pr-shell-nav-search {
+  display: none;
+}
+
+/* The account sits at the end of the bar, where the hand looks for it. */
+.pr-shell-account {
+  margin-inline-start: auto;
+}
+
+.pr-shell-bar .pr-search-field + .pr-shell-account {
+  margin-inline-start: 0;
+}
+
+/* A container query styles what is inside the shell, never the shell itself: so each part takes the full width. */
+@container (max-width: 44rem) /* allow-literal: a container query can't read a custom property */ {
+  .pr-shell > * {
+    grid-column: 1 / -1;
+  }
+
+  .pr-shell-main,
+  .pr-shell-nav[data-open] {
+    grid-row: 2;
+  }
+
+  .pr-shell-menu {
+    display: inline-flex;
+  }
+
+  .pr-shell-nav {
+    display: none;
+  }
+
+  .pr-shell-nav[data-open] {
+    display: block;
+    z-index: var(--pr-layer-overlay);
+    border-inline-end: 0;
+    background-color: var(--pr-color-surface);
+  }
+
+  /* Search moves into the menu, so it is put away, never lost. */
+  .pr-shell-bar .pr-search-field {
+    display: none;
+  }
+
+  .pr-shell-nav-search {
+    display: inline-flex;
+    margin-block-end: var(--pr-gap-group);
+  }
+
+  .pr-shell-bar .pr-search-field + .pr-shell-account {
+    margin-inline-start: auto;
+  }
+}
+
+/*
+ * A list beside its detail: the list keeps its place while you read one item. When there is no
+ * room for both, each is its own page: the list, or the item with a way back to the list.
+ */
+.pr-split {
+  display: grid;
+  grid-template-columns: var(--pr-list-pane-width) 1fr;
+  gap: var(--pr-gap-section);
+  container-type: inline-size;
+}
+
+.pr-split > * {
+  min-inline-size: 0;
+}
+
+.pr-split-back {
+  display: none;
+}
+
+@container (max-width: 44rem) /* allow-literal: a container query can't read a custom property */ {
+  .pr-split > * {
+    grid-column: 1 / -1;
+  }
+
+  .pr-split[data-showing='detail'] > .pr-split-list,
+  .pr-split[data-showing='list'] > .pr-split-detail {
+    display: none;
+  }
+
+  .pr-split-back {
+    display: inline-flex;
+  }
+}
+
+/* The item the detail shows, marked in the list. */
+.pr-list-items > li[aria-current='true'] {
+  background-color: var(--pr-color-primary-surface);
+}
+
+.pr-list-items > li[aria-current='true'] .pr-item-title a {
+  color: var(--pr-color-primary-text);
+}
+
+/*
+ * Steps: where you are in a task of several steps. Done steps are marked with a check and can be
+ * revisited; the current one is in the primary; the ones ahead wait, muted.
+ */
+.pr-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-group);
+  margin: 0 0 var(--pr-gap-section);
+  padding: 0;
+  list-style: none;
+  counter-reset: pr-step;
+}
+
+.pr-steps > li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  color: var(--pr-color-text-muted);
+  counter-increment: pr-step;
+}
+
+.pr-steps > li::before {
+  content: counter(pr-step);
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.75em;
+  block-size: 1.75em;
+  border: var(--pr-border-width-choice) solid currentColor;
+  border-radius: var(--pr-radius-round);
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.pr-steps > li[aria-current='step'] {
+  color: var(--pr-color-text);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-steps > li[aria-current='step']::before {
+  border-color: var(--pr-color-primary);
+  background-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
+}
+
+.pr-steps > li[data-done] {
+  color: var(--pr-color-text);
+}
+
+.pr-steps > li[data-done]::before {
+  content: '✓';
+  border-color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
+}
+
+/*
+ * Authentication: a gate, not a page of content. One narrow column with the product's name above
+ * it, one question at a time; no card around it, because a lone card is not a list item.
+ */
+.pr-auth {
+  display: grid;
+  gap: var(--pr-gap-group);
+  inline-size: 100%;
+  max-inline-size: var(--pr-field-width);
+  margin-inline: auto;
+  padding-block: var(--pr-gap-section);
+}
+
+.pr-auth > * {
+  margin: 0;
+}
+
+.pr-auth-brand {
+  font-size: var(--pr-text-large);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-auth form > button[type='submit'],
+.pr-auth form > .pr-auth-submit {
+  inline-size: 100%;
+  margin-block-start: var(--pr-gap-group);
+}
+
+.pr-auth-switch {
+  color: var(--pr-color-text-muted);
+  text-align: center;
+}
+
 /* ---------------------------------------------------------------- utilities */
 
 /* Read by assistive technology, not shown: a label for an icon, "Error:" before a message. */

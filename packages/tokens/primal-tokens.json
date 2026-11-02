@@ -488,6 +488,16 @@
     "value": "2.5rem",
     "meaning": "An avatar beside a name: the height of a control."
   },
+  "--pr-nav-width": {
+    "group": "layout",
+    "value": "15rem",
+    "meaning": "The width of a side navigation: room for a place name of a few words."
+  },
+  "--pr-list-pane-width": {
+    "group": "layout",
+    "value": "22rem",
+    "meaning": "The width of the list beside its detail: an item's name and a line about it."
+  },
   "--pr-toast-width": {
     "group": "layout",
     "value": "24rem",

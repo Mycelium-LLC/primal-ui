@@ -73,6 +73,8 @@ export const layout = {
   'dialog-width': { meaning: 'The widest a dialog grows: one question and its answers, read at a glance.', value: '32rem' },
   'card-min': { meaning: 'The narrowest a card gets before a collection of cards wraps to fewer columns.', value: '16rem' },
   'avatar-size': { meaning: 'An avatar beside a name: the height of a control.', value: '2.5rem' },
+  'nav-width': { meaning: 'The width of a side navigation: room for a place name of a few words.', value: '15rem' },
+  'list-pane-width': { meaning: 'The width of the list beside its detail: an item\'s name and a line about it.', value: '22rem' },
   'toast-width': { meaning: 'The widest a toast grows: one short sentence and its action.', value: '24rem' },
   'list-height': { meaning: 'The tallest an open list of options grows before it scrolls: about eight options.', value: '20rem' },
   'container-full': { meaning: 'Full width, for app surfaces that use the whole screen.', value: '100%' },

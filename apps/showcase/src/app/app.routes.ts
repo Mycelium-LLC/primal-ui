@@ -1,4 +1,12 @@
-import { Routes } from '@angular/router';
+import { Routes, UrlMatcher, UrlSegment } from '@angular/router';
+
+/** /surfaces/list-detail and /surfaces/list-detail/<slug> are one route, so the list keeps its state while items open. */
+const listDetail: UrlMatcher = (segments: UrlSegment[]) => {
+  const [a, b, slug, ...rest] = segments.map((s) => s.path);
+  if (a !== 'surfaces' || b !== 'list-detail' || rest.length) return null;
+  const posParams: Record<string, UrlSegment> = slug ? { slug: segments[2] } : {};
+  return { consumed: segments, posParams };
+};
 
 export const routes: Routes = [
   { path: '', title: 'Primal', loadComponent: () => import('./pages/overview/overview').then((m) => m.OverviewPage) },
@@ -37,10 +45,12 @@ export const routes: Routes = [
   { path: 'content/information', title: 'Information · Primal', loadComponent: () => import('./pages/content/information/information').then((m) => m.ContentInformationPage) },
   { path: 'content/layout', title: 'Layout · Primal', loadComponent: () => import('./pages/content/layout/layout').then((m) => m.ContentLayoutPage) },
   { path: 'content/cells', title: 'Cells · Primal', loadComponent: () => import('./pages/content/cells/cells').then((m) => m.ContentCellsPage) },
-  { path: 'surfaces/authentication', title: 'Authentication · Primal', loadComponent: () => import('./pages/surfaces/authentication/authentication').then((m) => m.SurfacesAuthenticationPage) },
+  { path: 'surfaces/authentication', pathMatch: 'full', redirectTo: 'surfaces/authentication/sign-in' },
+  { path: 'surfaces/authentication/:mode', title: 'Authentication · Primal', loadComponent: () => import('./pages/surfaces/authentication/authentication').then((m) => m.SurfacesAuthenticationPage) },
   { path: 'surfaces/app-shell', title: 'App shell · Primal', loadComponent: () => import('./pages/surfaces/app-shell/app-shell').then((m) => m.SurfacesAppShellPage) },
-  { path: 'surfaces/settings', title: 'Settings · Primal', loadComponent: () => import('./pages/surfaces/settings/settings').then((m) => m.SurfacesSettingsPage) },
-  { path: 'surfaces/list-detail', title: 'List and detail · Primal', loadComponent: () => import('./pages/surfaces/list-detail/list-detail').then((m) => m.SurfacesListDetailPage) },
+  { path: 'surfaces/settings', pathMatch: 'full', redirectTo: 'surfaces/settings/profile' },
+  { path: 'surfaces/settings/:section', title: 'Settings · Primal', loadComponent: () => import('./pages/surfaces/settings/settings').then((m) => m.SurfacesSettingsPage) },
+  { matcher: listDetail, title: 'List and detail · Primal', loadComponent: () => import('./pages/surfaces/list-detail/list-detail').then((m) => m.SurfacesListDetailPage) },
   { path: 'surfaces/multi-step-form', title: 'Multi-step form · Primal', loadComponent: () => import('./pages/surfaces/multi-step-form/multi-step-form').then((m) => m.SurfacesMultiStepFormPage) },
   { path: 'contracts/catalog', title: 'Contract catalog · Primal', loadComponent: () => import('./pages/contracts/catalog/catalog').then((m) => m.ContractsCatalogPage) },
   { path: '**', title: 'Not found · Primal', loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFoundPage) },

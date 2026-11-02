@@ -1,10 +1,99 @@
-<pr-page-placeholder title="List and detail" release="0.8.0" covers="A list with its detail.">
-<ul>
-  <!-- MOCK DATA: specimen list items -->
-  <li><article><h3><a href="#">Release 0.1.0</a></h3><p>A base you can make your own.</p></article></li>
-  <li><article><h3><a href="#">Release 0.2.0</a></h3><p>Plain HTML reads right.</p></article></li>
-</ul>
-<dl><dt>Repository</dt><dd>Mycelium-LLC/primal-ui</dd><dt>Level</dt><dd>L2</dd></dl>
-<pre><code>&lt;button type="button"&gt;Save Changes&lt;/button&gt;</code></pre>
-<article aria-label="Detail specimen"><h2>Release 0.1.0</h2><dl><dt>State</dt><dd>Approved</dd><dt>Requirements</dt><dd>13</dd></dl></article>
-</pr-page-placeholder>
+<h1>List and detail</h1>
+<p>
+  A list of things, and one of them in full beside it. The list keeps its place while you read; each item has its own readable
+  address, so it can be sent to someone and opened cold. Without room for both, each is its own page, with a way back.
+</p>
+
+<h2>The journey</h2>
+<ol class="pr-journey">
+  <li><strong>Find</strong> a report in the list, narrowed by typing.</li>
+  <li><strong>Open</strong> it: the detail shows beside the list, and the address names it.</li>
+  <li><strong>Change</strong> it: rename it in place; the list follows.</li>
+  <li><strong>Delete</strong> it: it goes at once, with Undo; or <strong>create</strong> one, and it opens.</li>
+</ol>
+<p class="pr-moves">Next two moves, within reach from every item: rename it and delete it, beside its title; New Report sits above the list.</p>
+
+<div class="pr-surface-frame">
+  <p class="pr-surface-address">/surfaces/list-detail{{ slug() ? '/' + slug() : '' }}</p>
+  <div class="pr-surface-body">
+    <div class="pr-split" [attr.data-showing]="slug() ? 'detail' : 'list'">
+      <section class="pr-split-list pr-stack" data-gap="component" aria-labelledby="reports-title">
+        <div class="pr-inline" data-gap="component">
+          <h2 id="reports-title" class="pr-surface-heading">Reports <span class="pr-badge">{{ reports.count() }}</span></h2>
+          <button primalButton type="button" emphasis="primary" kind="constructive" class="pr-push" (click)="newName.set(''); creating.set(true)">New Report</button>
+        </div>
+        <label for="report-filter" class="pr-visually-hidden">Find a report</label>
+        <span class="pr-search-field"><input id="report-filter" type="search" placeholder="Find a report" [value]="filter()" (input)="filter.set($any($event.target).value)" /></span>
+        @if (shown().length) {
+          <ul class="pr-list-items">
+            @for (r of shown(); track r.slug) {
+              <li [attr.aria-current]="r.slug === slug() ? 'true' : null">
+                <span class="pr-item-body">
+                  <span class="pr-item-title"><a [routerLink]="['/surfaces/list-detail', r.slug]">{{ r.name }}</a></span>
+                  <span class="pr-item-line">{{ r.owner }} · updated {{ r.updated }}</span>
+                </span>
+                <span class="pr-item-end"><span class="pr-status" [attr.data-state]="r.state">{{ r.stateLabel }}</span></span>
+              </li>
+            }
+          </ul>
+        } @else if (filter()) {
+          <primal-empty [title]="'No report matches “' + filter() + '”'" reason="Check the spelling, or make a report with that name.">
+            <button primalButton type="button" (click)="filter.set('')">Clear Search</button>
+          </primal-empty>
+        } @else {
+          <primal-empty title="No reports" reason="Reports you make, or that are shared with you, are listed here.">
+            <button primalButton type="button" emphasis="primary" kind="constructive" (click)="newName.set(''); creating.set(true)">New Report</button>
+          </primal-empty>
+        }
+      </section>
+
+      <section class="pr-split-detail" aria-live="polite">
+        @if (report(); as r) {
+          <a class="pr-split-back" routerLink="/surfaces/list-detail">← All reports</a>
+          <h2 class="pr-surface-heading">{{ r.name }}</h2>
+          <div class="pr-actions">
+            <button primalButton type="button" kind="destructive" (click)="remove(r)">Delete Report</button>
+            <div class="pr-actions-group">
+              <button primalButton type="button" (click)="newName.set(r.name); renaming.set(true)">Rename Report</button>
+            </div>
+          </div>
+          <p>{{ r.summary }}</p>
+          <dl class="pr-details">
+            <dt>Status</dt>
+            <dd><span class="pr-status" [attr.data-state]="r.state">{{ r.stateLabel }}</span></dd>
+            <dt>Owner</dt>
+            <dd>{{ r.owner }}</dd>
+            <dt>Updated</dt>
+            <dd>{{ r.updated }}</dd>
+          </dl>
+        } @else if (slug()) {
+          <primal-empty title="This report isn't here" reason="It may have been deleted, or the link has a typo.">
+            <a primalButton routerLink="/surfaces/list-detail" kind="navigational">Show All Reports</a>
+          </primal-empty>
+        } @else {
+          <primal-empty title="Choose a report" [reason]="'Pick one of the ' + reports.count() + ' reports to read it here.'" />
+        }
+      </section>
+    </div>
+  </div>
+</div>
+
+<primal-dialog title="New report" [(open)]="creating">
+  <form id="create-form" primalForm>
+    <primal-field label="Report name"><input primalControl name="name" required [value]="newName()" (input)="newName.set($any($event.target).value)" /></primal-field>
+  </form>
+  <div class="pr-dialog-actions" dialog-actions>
+    <button primalButton type="button" emphasis="quiet" (click)="creating.set(false)">Keep Browsing</button>
+    <button primalButton type="submit" form="create-form" emphasis="primary" kind="constructive" [run]="create">Create Report</button>
+  </div>
+</primal-dialog>
+
+<primal-dialog title="Rename report" [(open)]="renaming">
+  <form id="rename-form" primalForm>
+    <primal-field label="Report name"><input primalControl name="name" required [value]="newName()" (input)="newName.set($any($event.target).value)" /></primal-field>
+  </form>
+  <div class="pr-dialog-actions" dialog-actions>
+    <button primalButton type="button" emphasis="quiet" (click)="renaming.set(false)">Keep Name</button>
+    <button primalButton type="submit" form="rename-form" emphasis="primary" [run]="rename">Rename Report</button>
+  </div>
+</primal-dialog>
