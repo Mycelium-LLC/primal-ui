@@ -10,11 +10,13 @@ import { PrimalControl } from './control';
  *     <primal-field label="Light"><input primalControl type="radio" name="theme" value="light" required /></primal-field>
  *     …
  *   </primal-field-group>
+ *
+ * With [cards]="true", each choice is a card: <primal-field-group legend="Plan" [cards]="true">.
  */
 @Component({
   selector: 'primal-field-group',
   template: `
-    <fieldset class="pr-group" [attr.aria-describedby]="describedBy()" (change)="recheck()" (focusout)="recheck()">
+    <fieldset class="pr-group" [class.pr-choice-cards]="cards()" [attr.aria-describedby]="describedBy()" (change)="recheck()" (focusout)="recheck()">
       <legend>{{ legend() }}</legend>
       @if (description()) {
         <p class="pr-field-description" [id]="descriptionId">{{ description() }}</p>
@@ -30,6 +32,11 @@ import { PrimalControl } from './control';
 export class PrimalFieldGroup {
   readonly legend = input.required<string>();
   readonly description = input<string>();
+  /**
+   * Its choices as cards: each a whole target, side by side as the width allows, the chosen one in
+   * the primary's quiet fill. For a few options that each need a few words (a plan, a delivery speed).
+   */
+  readonly cards = input(false);
 
   private readonly controls = contentChildren(PrimalControl, { descendants: true });
 

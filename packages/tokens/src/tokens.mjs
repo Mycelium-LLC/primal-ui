@@ -66,6 +66,8 @@ export const space = {
 export const layout = {
   'container-reading': { meaning: 'The maximum width of reading pages and documentation.', value: '72rem' },
   'field-width': { meaning: 'The widest a single-line field grows: as wide as the answer it asks for.', value: '28rem' },
+  'choice-card-min': { meaning: 'The narrowest a choice card gets before the cards wrap to fewer columns.', value: '14rem' },
+  'drop-zone-height': { meaning: 'The least height of a drop zone: a target big enough to aim a dragged file at.', value: '9rem' },
   'toast-width': { meaning: 'The widest a toast grows: one short sentence and its action.', value: '24rem' },
   'list-height': { meaning: 'The tallest an open list of options grows before it scrolls: about eight options.', value: '20rem' },
   'container-full': { meaning: 'Full width, for app surfaces that use the whole screen.', value: '100%' },

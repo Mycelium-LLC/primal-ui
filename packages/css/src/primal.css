@@ -1394,6 +1394,194 @@ input[type='number'] {
   font-variant-numeric: tabular-nums;
 }
 
+/*
+ * Choice cards: a few options that each need a few words, each a whole target. The mark stays,
+ * so a card still says "one of these" (a radio) or "any of these" (a checkbox); the chosen card
+ * takes the primary's edge and its quiet fill, and the keyboard's ring goes round the card.
+ */
+.pr-group.pr-choice-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--pr-choice-card-min)), 1fr));
+  gap: var(--pr-gap-component);
+}
+
+.pr-choice-cards > :not(.pr-choice) {
+  grid-column: 1 / -1;
+}
+
+.pr-choice-cards .pr-choice {
+  position: relative;
+  align-items: start;
+  align-content: start;
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface);
+  transition:
+    border-color var(--pr-duration-fast) var(--pr-ease-standard),
+    background-color var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+/* The label covers the card, so the whole card is the target. */
+.pr-choice-cards .pr-choice > label {
+  font-weight: var(--pr-weight-strong);
+  cursor: pointer;
+}
+
+.pr-choice-cards .pr-choice > label::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.pr-choice-cards .pr-choice > input {
+  margin-block-start: 0.15em;
+}
+
+.pr-choice-cards .pr-choice:hover:not(:has(:disabled)) {
+  border-color: var(--pr-color-text-muted);
+}
+
+.pr-choice-cards .pr-choice:has(:checked) {
+  border-color: var(--pr-color-primary);
+  background-color: var(--pr-color-primary-surface);
+}
+
+.pr-choice-cards .pr-choice:has(:focus-visible) {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+.pr-choice-cards .pr-choice > input:focus-visible {
+  outline: none;
+}
+
+.pr-choice-cards .pr-choice:has(:user-invalid, [aria-invalid='true']) {
+  border-color: var(--pr-color-danger);
+}
+
+.pr-choice-cards .pr-choice:has(:disabled) {
+  border-color: var(--pr-color-border);
+  background-color: var(--pr-color-surface-sunken);
+}
+
+.pr-choice-cards .pr-choice:has(:disabled) > label {
+  cursor: not-allowed;
+}
+
+/*
+ * A drop zone: a file field with a target big enough to drop files on. The native input covers
+ * the zone, unseen, so clicking anywhere opens the picker, dropping works as the browser does it,
+ * and the keyboard reaches it. While a file is dragged over it, the zone takes the primary.
+ */
+.pr-drop-zone {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: var(--pr-gap-component);
+  min-block-size: var(--pr-drop-zone-height);
+  max-inline-size: var(--pr-measure);
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width-choice) dashed var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface-sunken);
+  color: var(--pr-color-text-muted);
+  text-align: center;
+  transition:
+    border-color var(--pr-duration-fast) var(--pr-ease-standard),
+    background-color var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+.pr-drop-zone > input[type='file'] {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pr-drop-zone:hover:not(:has(:disabled)) {
+  border-color: var(--pr-color-text-muted);
+}
+
+.pr-drop-zone:has(:focus-visible) {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+.pr-drop-zone[data-dragging] {
+  border-color: var(--pr-color-primary);
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-text);
+}
+
+.pr-drop-zone:has(:user-invalid, [aria-invalid='true']) {
+  border-color: var(--pr-color-danger);
+}
+
+.pr-drop-zone:has(:disabled) {
+  border-color: var(--pr-color-border);
+  opacity: 0.6;
+}
+
+.pr-drop-zone-icon {
+  inline-size: 2em;
+  block-size: 2em;
+  color: var(--pr-color-primary);
+}
+
+.pr-drop-zone-words {
+  margin: 0;
+  color: var(--pr-color-text);
+}
+
+.pr-drop-zone-choose {
+  color: var(--pr-color-primary-text);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.pr-drop-zone-hint {
+  margin: 0;
+  font-size: var(--pr-text-small);
+}
+
+/* The files chosen: each with its size, and a way to take it back out. */
+.pr-file-list {
+  display: grid;
+  gap: var(--pr-gap-component);
+  max-inline-size: var(--pr-measure);
+  margin: var(--pr-gap-component) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-file-list > li {
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  padding-inline-start: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-control);
+}
+
+.pr-file-name {
+  flex: 1;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pr-file-size {
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+  font-variant-numeric: tabular-nums;
+}
+
 /* A form: fields a group gap apart, its actions a section gap below the last field. */
 .pr-form-actions {
   display: flex;

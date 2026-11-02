@@ -453,6 +453,16 @@
     "value": "28rem",
     "meaning": "The widest a single-line field grows: as wide as the answer it asks for."
   },
+  "--pr-choice-card-min": {
+    "group": "layout",
+    "value": "14rem",
+    "meaning": "The narrowest a choice card gets before the cards wrap to fewer columns."
+  },
+  "--pr-drop-zone-height": {
+    "group": "layout",
+    "value": "9rem",
+    "meaning": "The least height of a drop zone: a target big enough to aim a dragged file at."
+  },
   "--pr-toast-width": {
     "group": "layout",
     "value": "24rem",

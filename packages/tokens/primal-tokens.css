@@ -108,6 +108,12 @@
   /* The widest a single-line field grows: as wide as the answer it asks for. */
   --pr-field-width: 28rem;
 
+  /* The narrowest a choice card gets before the cards wrap to fewer columns. */
+  --pr-choice-card-min: 14rem;
+
+  /* The least height of a drop zone: a target big enough to aim a dragged file at. */
+  --pr-drop-zone-height: 9rem;
+
   /* The widest a toast grows: one short sentence and its action. */
   --pr-toast-width: 24rem;
 

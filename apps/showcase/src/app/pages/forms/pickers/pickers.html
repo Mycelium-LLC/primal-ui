@@ -37,3 +37,15 @@
   <input primalControl type="file" accept=".pdf,image/*" multiple (change)="pickFiles($any($event.target))" />
 </primal-field>
 <p class="pr-picked" role="status">{{ files() ? 'Chosen: ' + files() : '' }}</p>
+
+<h3>With a drop zone</h3>
+<p>
+  When files are the point of the form (attachments, an import), give them a drop zone: a target big enough to drop files on, or to
+  click. The chosen files are listed with their sizes, each with a way to take it back out, and a file the field doesn't take is
+  turned away with its name.
+</p>
+<primal-field label="Attachments" description="PDFs or images, up to 10 MB each.">
+  <primal-file-drop>
+    <input primalControl type="file" accept=".pdf,image/*" multiple />
+  </primal-file-drop>
+</primal-field>
