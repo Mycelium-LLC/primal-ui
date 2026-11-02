@@ -24,7 +24,6 @@ const SAID_FOR = 2000;
   selector: 'button[primalButton], a[primalButton]',
   host: {
     '[attr.aria-busy]': "working() ? 'true' : null",
-    '[attr.aria-disabled]': "working() ? 'true' : null",
   },
   template: `
     <span class="pr-button-face">

@@ -1,7 +1,108 @@
-<pr-page-placeholder title="The behaviour model" release="0.5.0" covers="What it is, who says it, what it wants, and where it goes.">
-<p role="alert">An alert: the report could not be saved. Check your connection and try again.</p>
-<p role="status">A status message: 3 changes saved.</p>
-<p><label>Working <progress></progress></label></p>
-<p><label>Uploading <progress value="70" max="100">70%</progress></label></p>
-<p><button type="button">Save Changes</button> <button type="button" disabled>Disabled Action</button></p>
-</pr-page-placeholder>
+<h1>The behaviour model</h1>
+<p>
+  Behaviour is the design you can't see. Every message Primal gives is placed by three facts, and the facts pick the place:
+  nobody picks a toast by taste. This page is the model in words; every feedback part says which place it speaks from.
+</p>
+
+<h2>Three facts</h2>
+<dl class="pr-demo-meanings">
+  <dt>What is it?</dt>
+  <dd>An acknowledgement, an outcome, a failure, a fact that stays true, a question.</dd>
+  <dt>Who is saying it?</dt>
+  <dd>The person (their own action answering), the system, an agent working for them, or the outside world.</dd>
+  <dt>What does it want?</dt>
+  <dd>Nothing, a glance, a decision, or everything: the person cannot go on until they answer.</dd>
+</dl>
+
+<h2>Six places, each with one meaning</h2>
+<p>From the quietest to the loudest. A small product may need only the first two.</p>
+<div class="pr-table">
+  <table>
+    <caption>The places a message can go</caption>
+    <thead>
+      <tr>
+        <th scope="col">Place</th>
+        <th scope="col">It means</th>
+        <th scope="col">It asks for</th>
+        <th scope="col">It stays</th>
+        <th scope="col">In Primal</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (p of places; track p.name) {
+        <tr>
+          <th scope="row">{{ p.title }}</th>
+          <td>{{ p.means }}</td>
+          <td>{{ p.asks }}</td>
+          <td>{{ p.stays }}</td>
+          <td>{{ p.parts }}@if (p.release) { <span class="pr-demo-note">(built in {{ p.release }})</span>}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<h2>What each place is for, and never for</h2>
+<dl class="pr-demo-places">
+  @for (p of places; track p.name) {
+    <dt>{{ p.title }}</dt>
+    <dd>
+      <p><strong>For:</strong> {{ p.forWhat }}</p>
+      <p><strong>Never:</strong> {{ p.never }}</p>
+    </dd>
+  }
+</dl>
+
+<h2>The feedback contract</h2>
+<p>Silence is a message. Every action answers in three layers:</p>
+<ol>
+  <li><strong>Acknowledgement</strong>, within 100 ms, before any work: the button is busy, the toggle is pressed.</li>
+  <li><strong>Outcome</strong>, specific: "Saved", "Deleted “Q3 revenue”", never "Success". A pause of about half a second between them reads as intentional.</li>
+  <li><strong>Channel</strong>, where the eyes already are: on the button, under the field, at the row. Only what happened out of sight goes to the corner.</li>
+</ol>
+
+<h3>The weight ladder</h3>
+<p>How loud an answer is follows what the action did. Shouting at routine things kills the important answer.</p>
+<div class="pr-table">
+  <table>
+    <caption>From the loudest to the quietest</caption>
+    <thead>
+      <tr>
+        <th scope="col">What it did</th>
+        <th scope="col">Its answer</th>
+        <th scope="col">Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Cannot be undone</th>
+        <td>Impossible to miss: a gate before, the danger fill on its last step, and its outcome said in words.</td>
+        <td>Delete Workspace</td>
+      </tr>
+      <tr>
+        <th scope="row">Made or took away something</th>
+        <td>Clear, not interrupting: the thing appears or goes; a toast with Undo when it went out of sight.</td>
+        <td>Create Report, Delete Report</td>
+      </tr>
+      <tr>
+        <th scope="row">Runs in the background</th>
+        <td>Glance-sized, and it fades: "Started", its progress where it lives, a toast when it ends.</td>
+        <td>Export Reports</td>
+      </tr>
+      <tr>
+        <th scope="row">Routine</th>
+        <td>Acknowledgement only. No toast.</td>
+        <td>Save Changes, a switch, a sort</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Rules that hold everywhere</h2>
+<ul>
+  <li>A failure shows on the thing that failed, never in a corner far from it.</li>
+  <li>A real question is asked once, then waits. Something that can be undone is never asked: it is undone.</li>
+  <li>An incident switches the whole vocabulary: a banner, and every action that can't work says why.</li>
+  <li>The last signal of a task gets the most care: it is what the person remembers.</li>
+  <li>Optimistic answers only for what almost never fails, never for money; if the bet fails, the correction is as clear as the premature success.</li>
+</ul>
