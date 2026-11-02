@@ -8,16 +8,19 @@
   which is private for now.
 </p>
 
-<h2>1. Get the files</h2>
-<p>Clone the repository and build it. This needs Node 24.</p>
+<h2>1. Get the packages</h2>
+<p>
+  Until Primal is published, its three packages come from the repository as package files. Clone it, pack it (Node 24), and
+  install the three files into your project:
+</p>
 <pre><code>{{ build }}</code></pre>
 <dl>
-  <dt><code>packages/tokens/primal-tokens.css</code></dt>
-  <dd>Every token as a CSS custom property, with its light and dark values.</dd>
-  <dt><code>packages/css/src/</code></dt>
-  <dd>The core styles (<code>primal.css</code>) and the Google Sans font files they load. Keep the folder together.</dd>
-  <dt><code>dist/primal-angular</code></dt>
-  <dd>The Angular adapter, produced by the build.</dd>
+  <dt><code>primal-tokens</code></dt>
+  <dd>Every token as a CSS custom property, with its light and dark values (<code>primal-tokens.css</code>).</dd>
+  <dt><code>primal-css</code></dt>
+  <dd>The core styles (<code>src/primal.css</code>) and the Google Sans font files they load.</dd>
+  <dt><code>primal-angular</code></dt>
+  <dd>The Angular adapter, for Angular 22 or later.</dd>
 </dl>
 
 <h2>2. Load Primal</h2>
@@ -29,7 +32,8 @@
 <pre><code>{{ angularJson }}</code></pre>
 <p>
   So that moving to a new page starts at its top, add <code>providePrimalRouteScroll()</code> next to your router. Back and
-  forward still return the person to where they were.
+  forward still return the person to where they were. If your pages scroll inside a box rather than the window (an app shell
+  whose main area scrolls on its own), give it that box: <code>providePrimalRouteScroll(&#123; scroller: () =&gt; document.getElementById('main') &#125;)</code>.
 </p>
 <pre><code>{{ config }}</code></pre>
 <p>

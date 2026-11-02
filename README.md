@@ -27,6 +27,7 @@ npm run build          # the Angular adapter, then the showcase
 npx ng serve showcase  # http://localhost:6840
 npm run check:folio    # checks the ledger
 npm run check:contracts # every component has a complete contract
+npm run pack           # the three packages as dist/packs/*.tgz, to install in another project
 ```
 
 ## Status
