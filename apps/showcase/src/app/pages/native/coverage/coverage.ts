@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { PRIMAL_TABLES } from 'primal-angular';
 import { COVERAGE, Coverage, OUTCOME_LABEL, mergeRows } from '../../../shell/coverage-table/coverage-table';
 
 type Filter = Coverage['outcome'] | 'all';
 
 @Component({
   selector: 'pr-native-coverage-page',
+  imports: [PRIMAL_TABLES],
   templateUrl: './coverage.html',
   styleUrl: './coverage.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

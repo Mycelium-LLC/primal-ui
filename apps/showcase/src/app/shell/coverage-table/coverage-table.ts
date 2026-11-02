@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { PRIMAL_TABLES } from 'primal-angular';
 import coverage from '../../../../../../packages/css/coverage.json';
 
 export interface Coverage {
@@ -35,6 +36,7 @@ export function mergeRows(rows: Coverage[]): CoverageRow[] {
 /** The coverage inventory for some elements: each one's outcome and why. */
 @Component({
   selector: 'pr-coverage-table',
+  imports: [PRIMAL_TABLES],
   template: `
     <div class="pr-table" role="region" [attr.aria-label]="caption()" tabindex="0">
       <table>

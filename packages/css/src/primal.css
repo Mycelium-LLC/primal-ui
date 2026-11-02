@@ -452,6 +452,61 @@ tfoot :is(th, td) {
   border-block-end: 0;
 }
 
+/*
+ * A sortable column's header is a button that fills the header: its words, then where it is
+ * sorted. Unsorted, a faint double arrow says it can be; sorted, one arrow in the text colour.
+ */
+.pr-sort {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--pr-gap-component);
+  inline-size: 100%;
+  min-block-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.pr-sort:hover:not(:disabled) {
+  background: none;
+  color: var(--pr-color-text);
+}
+
+.pr-sort:active:not(:disabled) {
+  background: none;
+  scale: none;
+}
+
+.pr-sort::after {
+  content: '↕' / '';
+  opacity: 0.45;
+}
+
+:is(th, td)[data-numeric] > .pr-sort {
+  flex-direction: row-reverse;
+}
+
+th[aria-sort] {
+  color: var(--pr-color-text);
+}
+
+th[aria-sort='ascending'] > .pr-sort::after {
+  content: '↑' / '';
+  opacity: 1;
+}
+
+th[aria-sort='descending'] > .pr-sort::after {
+  content: '↓' / '';
+  opacity: 1;
+}
+
 /* Numbers align on their end, so digits line up down a column: mark the cells (or a <col>) with data-numeric. */
 :is(th, td)[data-numeric] {
   text-align: end;

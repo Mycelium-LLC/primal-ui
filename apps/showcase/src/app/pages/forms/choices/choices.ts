@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { PRIMAL_FORMS } from 'primal-angular';
+import { PRIMAL_FORMS, PRIMAL_TABLES } from 'primal-angular';
 import { PlainHtml } from '../../../shell/plain-html/plain-html';
 
 @Component({
   selector: 'pr-forms-choices-page',
-  imports: [PRIMAL_FORMS, PlainHtml],
+  imports: [PRIMAL_TABLES, PRIMAL_FORMS, PlainHtml],
   templateUrl: './choices.html',
   styleUrl: './choices.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -10,3 +10,4 @@ export * from './lib/forms';
 export * from './lib/behaviour';
 export * from './lib/actions';
 export * from './lib/feedback';
+export * from './lib/tables';

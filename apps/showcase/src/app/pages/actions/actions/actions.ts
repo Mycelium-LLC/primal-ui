@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_TABLES } from 'primal-angular';
 import { PlainHtml } from '../../../shell/plain-html/plain-html';
 
 // The work behind the demo buttons is pretend: a wait (mock).
@@ -8,7 +8,7 @@ const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 @Component({
   selector: 'pr-actions-actions-page',
-  imports: [PRIMAL_ACTIONS, PlainHtml, RouterLink],
+  imports: [PRIMAL_TABLES, PRIMAL_ACTIONS, PlainHtml, RouterLink],
   templateUrl: './actions.html',
   styleUrl: '../actions-pages.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

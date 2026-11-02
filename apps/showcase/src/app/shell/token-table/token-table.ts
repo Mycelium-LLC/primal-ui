@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { PRIMAL_TABLES } from 'primal-angular';
 import { Token } from '../tokens';
 
 /** A plain reference table of tokens: name, value and meaning, straight from the token source. */
 @Component({
   selector: 'pr-token-table',
+  imports: [PRIMAL_TABLES],
   template: `
     <div class="pr-table-scroll">
       <table>
