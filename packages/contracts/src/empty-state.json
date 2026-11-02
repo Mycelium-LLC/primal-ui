@@ -12,7 +12,8 @@
   ],
   "context": "Empty lists, tables and searches.",
   "relationships": [
-    "Its button is the next step."
+    "Its button is the next step.",
+    "It is one of the few places a product may show its character: an illustration in empty-art, never instead of the words."
   ],
   "states": [
     "Nothing yet",
@@ -36,14 +37,16 @@
     "css": [
       ".pr-empty",
       ".pr-empty-title",
-      ".pr-empty-actions"
+      ".pr-empty-actions",
+      "[empty-art]"
     ],
     "angular": [
       "primal-empty"
     ],
     "inputs": [
       "title (required)",
-      "reason (required)"
+      "reason (required)",
+      "[empty-art]: the product's illustration, above the words (Primal ships none)"
     ]
   },
   "example": "/content/information"

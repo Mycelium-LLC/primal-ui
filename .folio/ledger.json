@@ -189,6 +189,11 @@
       "n": 33,
       "decision": "0.9.0 starts before the 0.8.0 review",
       "ruling": "Niko chose 'Continue to 0.9.0' on 2026-11-02 while 0.3.0 to 0.8.0 wait for his review; decision 9 gives way again, as in decisions 28 and 30 to 32."
+    },
+    {
+      "n": 34,
+      "decision": "A bit of character, in the showcase only",
+      "ruling": "Niko, 2026-11-02, after the review: 'Add character', 'a bit', 'its still a base template we build from'. Primal's components stay neutral; the showcase carries Mycelium's character from its brand book (the Mischief chapter's rules): the watering mushroom and a handwritten note on the welcome, a mushroom in two empty states, the high-five on one success. One surprise per screen, never in a table, form, error or anything about money; nothing moves. The library gains only a neutral hook: an empty state's empty-art slot, which a product fills with its own illustration."
     }
   ],
   "releases": [
@@ -1503,6 +1508,10 @@
         },
         {
           "text": "*Done 2026-11-02:* check:contracts fails the build and CI when an Angular part has no contract, a contract misses a part or is too thin to say anything, or its example is not a showcase page.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-02 (decision 34):* a bit of Mycelium's character in the showcase only, and the empty state's empty-art slot for a product's own illustration.",
           "state": "done"
         },
         {

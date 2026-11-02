@@ -3003,6 +3003,15 @@ summary {
   max-inline-size: var(--pr-measure);
 }
 
+/* A product's illustration, above the words: decoration, so it is never the only way the reason is said. */
+.pr-empty > [empty-art],
+.pr-empty > .pr-empty-art {
+  inline-size: auto;
+  max-inline-size: var(--pr-empty-art-size, calc(var(--pr-control-height) * 3));
+  block-size: auto;
+  margin-block-end: var(--pr-gap-component);
+}
+
 .pr-empty-title {
   color: var(--pr-color-text);
   font-size: var(--pr-text-large);
