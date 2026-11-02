@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, contentChildren, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, input, booleanAttribute } from '@angular/core';
 import { PrimalControl } from './control';
 
 /**
@@ -36,7 +36,7 @@ export class PrimalFieldGroup {
    * Its choices as cards: each a whole target, side by side as the width allows, the chosen one in
    * the primary's quiet fill. For a few options that each need a few words (a plan, a delivery speed).
    */
-  readonly cards = input(false);
+  readonly cards = input(false, { transform: booleanAttribute });
 
   private readonly controls = contentChildren(PrimalControl, { descendants: true });
 

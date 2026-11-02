@@ -38,5 +38,8 @@
       "[aria-current=\"page\"]"
     ]
   },
+  "usage": {
+    "markup": "<nav aria-label=\"Settings\">\n  <ul class=\"pr-nav-list\">\n    <li><a href=\"/settings/profile\" aria-current=\"page\">Profile</a></li>\n    <li><a href=\"/settings/billing\">Billing</a></li>\n  </ul>\n</nav>"
+  },
   "example": "/navigation/navigation"
 }

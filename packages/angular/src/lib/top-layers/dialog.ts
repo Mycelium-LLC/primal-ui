@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, effect, input, model, output, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, effect, input, model, output, viewChild, booleanAttribute } from '@angular/core';
 import { primalLayerId } from './place';
 
 /**
@@ -51,7 +51,7 @@ export class PrimalDialog {
   readonly description = input<string>();
   readonly open = model(false);
   /** Close, Escape and the backdrop close it. Turn off only while it is working on the answer. */
-  readonly dismissible = input(true);
+  readonly dismissible = input(true, { transform: booleanAttribute });
   readonly closeLabel = input('Close Dialog');
   /** It closed, by any way out. */
   readonly dismissed = output<void>();

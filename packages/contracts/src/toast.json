@@ -51,5 +51,9 @@
       "PrimalToaster.show(message, { action, duration })"
     ]
   },
+  "usage": {
+    "import": "import { PrimalToaster } from 'primal-angular';",
+    "markup": "inject(PrimalToaster).show('Deleted “Q3 revenue”.', {\n  action: { label: 'Undo', run: () => restore() },\n});"
+  },
   "example": "/actions/feedback"
 }

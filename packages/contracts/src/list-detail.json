@@ -43,5 +43,8 @@
       ".pr-split-back"
     ]
   },
+  "usage": {
+    "markup": "<div class=\"pr-split\" [attr.data-showing]=\"slug() ? 'detail' : 'list'\">\n  <section class=\"pr-split-list\"><ul class=\"pr-list-items\">…</ul></section>\n  <section class=\"pr-split-detail\"><a class=\"pr-split-back\" href=\"/reports\">← All reports</a>…</section>\n</div>"
+  },
   "example": "/surfaces/list-detail"
 }

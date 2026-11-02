@@ -45,5 +45,9 @@
       "shape: line | text | circle | block"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+    "markup": "<ul aria-busy=\"true\">\n  <li><primal-skeleton shape=\"circle\" /><primal-skeleton shape=\"text\" /></li>\n</ul>"
+  },
   "example": "/actions/feedback"
 }

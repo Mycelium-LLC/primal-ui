@@ -36,5 +36,8 @@
       ".pr-divider"
     ]
   },
+  "usage": {
+    "markup": "<hr class=\"pr-divider\" />"
+  },
   "example": "/content/layout"
 }

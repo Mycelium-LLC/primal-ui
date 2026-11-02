@@ -37,5 +37,8 @@
       ".pr-accordion"
     ]
   },
+  "usage": {
+    "markup": "<div class=\"pr-accordion\">\n  <details name=\"plan\" open><summary>Free</summary><p>One person.</p></details>\n  <details name=\"plan\"><summary>Team</summary><p>Up to 20 people.</p></details>\n</div>"
+  },
   "example": "/navigation/disclosure"
 }

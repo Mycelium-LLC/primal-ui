@@ -36,5 +36,8 @@
       "[data-width=\"full\"]"
     ]
   },
+  "usage": {
+    "markup": "<main class=\"pr-container\">…</main>"
+  },
   "example": "/content/layout"
 }

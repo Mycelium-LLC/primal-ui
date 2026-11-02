@@ -598,7 +598,7 @@
       "version": "0.3.0",
       "name": "Fields that never leave you guessing",
       "track": "Forms",
-      "status": "Built; ready for QA 2026-11-02 as part of release/0.9.0 (head d449b78), which holds 0.3.0 to 0.9.0 and ships once when QA passes.",
+      "status": "Built; QA'd 2026-11-02 at e15e3e4 (grade C), every finding fixed after it in release/0.9.0; a new QA on the new head is next. Ships with 0.3.0 to 0.9.0 together.",
       "dependsOn": [
         "0.2.0"
       ],
@@ -786,7 +786,7 @@
       "version": "0.4.0",
       "name": "Magma by default",
       "track": "Foundation",
-      "status": "Built; ready for QA 2026-11-02 as part of release/0.9.0 (head d449b78), which holds 0.3.0 to 0.9.0 and ships once when QA passes.",
+      "status": "Built; QA'd 2026-11-02 at e15e3e4 (grade C), every finding fixed after it in release/0.9.0; a new QA on the new head is next. Ships with 0.3.0 to 0.9.0 together.",
       "dependsOn": [
         "0.3.0"
       ],
@@ -898,7 +898,7 @@
       "version": "0.5.0",
       "name": "Every action answers",
       "track": "Actions and feedback",
-      "status": "Built; ready for QA 2026-11-02 as part of release/0.9.0 (head d449b78), which holds 0.3.0 to 0.9.0 and ships once when QA passes.",
+      "status": "Built; QA'd 2026-11-02 at e15e3e4 (grade C), every finding fixed after it in release/0.9.0; a new QA on the new head is next. Ships with 0.3.0 to 0.9.0 together.",
       "dependsOn": [
         "0.4.0"
       ],
@@ -1119,7 +1119,7 @@
       "version": "0.6.0",
       "name": "You always know where you are",
       "track": "Navigation and top layers",
-      "status": "Built; ready for QA 2026-11-02 as part of release/0.9.0 (head d449b78), which holds 0.3.0 to 0.9.0 and ships once when QA passes.",
+      "status": "Built; QA'd 2026-11-02 at e15e3e4 (grade C), every finding fixed after it in release/0.9.0; a new QA on the new head is next. Ships with 0.3.0 to 0.9.0 together.",
       "dependsOn": [
         "0.5.0"
       ],
@@ -1257,7 +1257,7 @@
       "version": "0.7.0",
       "name": "Things look like what they are",
       "track": "Content, information and cells",
-      "status": "Built; ready for QA 2026-11-02 as part of release/0.9.0 (head d449b78), which holds 0.3.0 to 0.9.0 and ships once when QA passes.",
+      "status": "Built; QA'd 2026-11-02 at e15e3e4 (grade C), every finding fixed after it in release/0.9.0; a new QA on the new head is next. Ships with 0.3.0 to 0.9.0 together.",
       "dependsOn": [
         "0.6.0"
       ],
@@ -1397,7 +1397,7 @@
       "version": "0.8.0",
       "name": "Whole places to work in",
       "track": "Surfaces",
-      "status": "Built; ready for QA 2026-11-02 as part of release/0.9.0 (head d449b78), which holds 0.3.0 to 0.9.0 and ships once when QA passes.",
+      "status": "Built; QA'd 2026-11-02 at e15e3e4 (grade C), every finding fixed after it in release/0.9.0; a new QA on the new head is next. Ships with 0.3.0 to 0.9.0 together.",
       "dependsOn": [
         "0.7.0"
       ],
@@ -1490,7 +1490,7 @@
       "version": "0.9.0",
       "name": "Every element keeps its promise",
       "track": "Contracts",
-      "status": "Built; ready for QA 2026-11-02 as part of release/0.9.0 (head d449b78), which holds 0.3.0 to 0.9.0 and ships once when QA passes.",
+      "status": "Built; QA'd 2026-11-02 at e15e3e4 (grade C), every finding fixed after it in release/0.9.0; a new QA on the new head is next. Ships with 0.3.0 to 0.9.0 together.",
       "dependsOn": [
         "0.8.0"
       ],
@@ -1660,6 +1660,17 @@
           "success": "The license is in the repository, the packages are on the registry at the release's version, and the showcase and changelog state the same version.",
           "disqualifier": "The license is missing or restrictive, or any of the three states a different version.",
           "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/palette/every-colour-pair-reads-for-any-black-and-white-a-project-chooses",
+          "requirementKind": "invariant",
+          "statement": "Every colour pair reads for any black and white a project chooses, not only for a near-black and a near-white.",
+          "success": "The contrast check sweeps blacks and whites as well as primaries, and every pair passes.",
+          "disqualifier": "A theme with a lighter black or a warmer white misses a pair the Colour page has to warn about.",
+          "evidence": "QA of 0.9.0, 2026-11-02, finding D-03 (session QP-primal-0-9-0-qa).",
+          "pending": "proposed"
         }
       ]
     }

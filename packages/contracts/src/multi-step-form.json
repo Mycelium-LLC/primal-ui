@@ -42,5 +42,8 @@
       "[data-done]"
     ]
   },
+  "usage": {
+    "markup": "<ol class=\"pr-steps\" aria-label=\"Steps\">\n  <li data-done>Workspace</li>\n  <li aria-current=\"step\">Team</li>\n  <li>Review</li>\n</ol>"
+  },
   "example": "/surfaces/multi-step-form"
 }

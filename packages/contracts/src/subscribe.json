@@ -53,5 +53,9 @@
       "anotherLabel"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_CELLS } from 'primal-angular';",
+    "markup": "<primal-subscribe title=\"Get the newsletter\" promise=\"One email per release.\" [subscribe]=\"subscribe\" />"
+  },
   "example": "/content/cells"
 }

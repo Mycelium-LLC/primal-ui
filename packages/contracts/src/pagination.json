@@ -49,5 +49,9 @@
       "next"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_NAVIGATION } from 'primal-angular';",
+    "markup": "<primal-pagination label=\"Invoices, pages\" [pages]=\"12\" [(page)]=\"page\" />"
+  },
   "example": "/navigation/navigation"
 }

@@ -19,6 +19,12 @@
   </dl>
   <p><a primalButton [routerLink]="exampleLink()" [queryParams]="exampleQuery()" emphasis="primary" kind="navigational">See It Live</a></p>
 
+  <h2>Use it</h2>
+  @if (c.usage.import) {
+    <primal-code-block language="TypeScript" [code]="c.usage.import" />
+  }
+  <primal-code-block [language]="c.usage.import ? 'Template' : 'HTML'" [code]="c.usage.markup" />
+
   <h2>Behaviour</h2>
   <ul>
     @for (l of c.behaviour; track l) {

@@ -36,5 +36,8 @@
       "input[type=\"search\"]"
     ]
   },
+  "usage": {
+    "markup": "<label for=\"find\" class=\"pr-visually-hidden\">Search members</label>\n<span class=\"pr-search-field\"><input id=\"find\" type=\"search\" placeholder=\"Search members\" /></span>"
+  },
   "example": "/content/layout"
 }

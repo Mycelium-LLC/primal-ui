@@ -41,5 +41,8 @@
       "[data-tone]"
     ]
   },
+  "usage": {
+    "markup": "<span class=\"pr-badge\" data-tone=\"danger\">Overdue</span>"
+  },
   "example": "/content/information"
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Builds Primal and packs its three packages as tarballs into dist/packs, so a project outside
+ * Builds Primal and packs its four packages as tarballs into dist/packs, so a project outside
  * this repository can install them before Primal is published:
  *
  *   npm run pack
@@ -20,7 +20,8 @@ rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 
 run('node packages/tokens/build.mjs');
+run('node packages/contracts/build.mjs');
 run('npx ng build primal-angular');
-for (const dir of ['packages/tokens', 'packages/css', 'dist/primal-angular']) run(`npm pack --pack-destination ${out}`, join(root, dir));
+for (const dir of ['packages/tokens', 'packages/css', 'packages/contracts', 'dist/primal-angular']) run(`npm pack --pack-destination ${out}`, join(root, dir));
 
 console.log(`\n✔ packed into dist/packs:\n${readdirSync(out).map((f) => `  ${f}`).join('\n')}`);

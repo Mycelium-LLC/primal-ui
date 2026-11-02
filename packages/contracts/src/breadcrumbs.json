@@ -36,5 +36,8 @@
       "[aria-current=\"page\"]"
     ]
   },
+  "usage": {
+    "markup": "<nav class=\"pr-breadcrumbs\" aria-label=\"Breadcrumb\">\n  <ol>\n    <li><a href=\"/reports\">Reports</a></li>\n    <li><span aria-current=\"page\">Q3 revenue</span></li>\n  </ol>\n</nav>"
+  },
   "example": "/navigation/navigation"
 }

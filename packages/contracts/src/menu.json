@@ -52,5 +52,9 @@
       "primalMenuItem: kind"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_NAVIGATION, PRIMAL_ACTIONS } from 'primal-angular';",
+    "markup": "<primal-menu label=\"Report actions\">\n  <button primalMenuTrigger primalIconButton type=\"button\" label=\"Show Report Actions\">…</button>\n  <button primalMenuItem type=\"button\" (click)=\"rename()\">Rename Report</button>\n  <hr />\n  <button primalMenuItem type=\"button\" kind=\"destructive\" (click)=\"remove()\">Delete Report</button>\n</primal-menu>"
+  },
   "example": "/navigation/navigation"
 }

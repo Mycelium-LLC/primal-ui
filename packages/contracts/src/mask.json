@@ -48,5 +48,9 @@
       "phonePattern"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "markup": "<input primalControl primalMask=\"phone\" type=\"tel\" autocomplete=\"tel\" />"
+  },
   "example": "/forms/text-fields"
 }

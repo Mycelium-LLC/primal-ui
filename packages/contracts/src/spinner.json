@@ -41,5 +41,9 @@
       "label"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+    "markup": "<primal-spinner label=\"Checking the address\" />"
+  },
   "example": "/actions/feedback"
 }

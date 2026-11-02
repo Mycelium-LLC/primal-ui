@@ -38,5 +38,8 @@
       ".pr-actions-group"
     ]
   },
+  "usage": {
+    "markup": "<div class=\"pr-actions\">\n  <button type=\"button\" class=\"pr-button-danger\">Delete Report</button>\n  <div class=\"pr-actions-group\">\n    <button type=\"button\" class=\"pr-button-quiet\">Cancel Changes</button>\n    <button type=\"submit\" class=\"pr-button-primary\">Save Changes</button>\n  </div>\n</div>"
+  },
   "example": "/actions/actions"
 }

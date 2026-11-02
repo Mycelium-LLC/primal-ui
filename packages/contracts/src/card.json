@@ -44,5 +44,8 @@
       "[data-gives-way]"
     ]
   },
+  "usage": {
+    "markup": "<ul class=\"pr-cards\">\n  <li class=\"pr-card\">\n    <h3 class=\"pr-card-title\"><a href=\"/reports/q3\">Q3 revenue</a></h3>\n    <p>Revenue rose 12% over Q2.</p>\n    <p class=\"pr-card-meta\"><span data-gives-way>Updated 2 hours ago</span></p>\n  </li>\n</ul>"
+  },
   "example": "/content/content"
 }

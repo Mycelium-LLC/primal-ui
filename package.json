@@ -6,7 +6,7 @@
     "build": "node packages/tokens/build.mjs && node packages/contracts/build.mjs && node packages/contracts/check-contracts.mjs && ng build primal-angular && ng build showcase",
     "watch": "ng build showcase --watch --configuration development",
     "check:folio": "node .folio/check-ledger.mjs",
-    "test": "ng test",
+    "test": "ng test primal-angular --watch=false",
     "check:tokens": "node packages/tokens/build.mjs --check && node packages/tokens/check-contrast.mjs && node packages/tokens/check-literals.mjs",
     "check:contracts": "node packages/contracts/build.mjs --check && node packages/contracts/check-contracts.mjs",
     "pack": "node scripts/pack.mjs"

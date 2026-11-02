@@ -13,7 +13,7 @@ Primal is meant to be two things. It's a design system you install and use as it
 | `packages/tokens` | The design tokens and the colour model, framework-independent, built to CSS and JSON |
 | `packages/css` | The reset and the classless base for every native element, Google Sans, and the coverage inventory |
 | `packages/angular` | The Angular adapter (Angular 22+) |
-| `packages/contracts` | Every component's contract as framework-independent JSON; the catalog is generated from it |
+| `packages/contracts` | Every component's contract as framework-independent JSON, the schema, and `primal-contracts-check` for your own; the catalog is generated from it |
 | `apps/showcase` | The live showcase: every planned page, each showing the native HTML it covers until its release builds it |
 | `.folio/` | The plan in Folio: the baseline, the ledger of releases 0.1.0 to 1.0.0, and Niko's decisions |
 
@@ -27,9 +27,10 @@ npm run build          # the Angular adapter, then the showcase
 npx ng serve showcase  # http://localhost:6840
 npm run check:folio    # checks the ledger
 npm run check:contracts # every component has a complete contract
-npm run pack           # the three packages as dist/packs/*.tgz, to install in another project
+npm run pack           # the four packages as dist/packs/*.tgz, to install in another project
+npm test               # the Angular adapter's unit tests
 ```
 
 ## Status
 
-Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are shipped; 0.3.0 (forms) and 0.4.0 (Magma by default) are ready for QA; 0.5.0 (actions, feedback and the behaviour model) is built; 0.6.0 (navigation, top layers, focus and keys) is built; 0.7.0 (content, information, layout and the first cells) is built; 0.8.0 (reference surfaces) is built; 0.9.0 (the contract catalog) is being built. The plan to 1.0.0 is in `.folio/`.
+Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are shipped. 0.3.0 to 0.9.0 (forms, Magma, actions and feedback, navigation and top layers, content and cells, reference surfaces, the contract catalog) are built in `release/0.9.0`, QA'd once (grade C) and fixed after it; they ship together. 1.0.0 (open to everyone) waits on four questions in `.folio/`: the name's trademark check, the npm scope, the license and where the showcase is hosted.

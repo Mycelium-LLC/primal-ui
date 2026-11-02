@@ -39,6 +39,9 @@
           ".pr-accordion"
         ]
       },
+      "usage": {
+        "markup": "<div class=\"pr-accordion\">\n  <details name=\"plan\" open><summary>Free</summary><p>One person.</p></details>\n  <details name=\"plan\"><summary>Team</summary><p>Up to 20 people.</p></details>\n</div>"
+      },
       "example": "/navigation/disclosure"
     },
     {
@@ -98,6 +101,10 @@
           "live"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+        "markup": "<primal-alert tone=\"warning\" title=\"Your plan ends in 3 days\">\n  <p>Renew it to keep your reports.</p>\n</primal-alert>"
+      },
       "example": "/actions/feedback"
     },
     {
@@ -154,6 +161,10 @@
           "strictMessage"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+        "markup": "<primal-field label=\"City\">\n  <primal-autocomplete [options]=\"cities\">\n    <input primalControl type=\"text\" />\n  </primal-autocomplete>\n</primal-field>"
+      },
       "example": "/forms/text-fields"
     },
     {
@@ -205,6 +216,10 @@
           "size"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_CONTENT } from 'primal-angular';",
+        "markup": "<primal-avatar name=\"Ada Shapiro\" src=\"/people/ada.jpg\" />"
+      },
       "example": "/content/information"
     },
     {
@@ -249,6 +264,9 @@
           "[data-tone]"
         ]
       },
+      "usage": {
+        "markup": "<span class=\"pr-badge\" data-tone=\"danger\">Overdue</span>"
+      },
       "example": "/content/information"
     },
     {
@@ -287,6 +305,9 @@
           ".pr-breadcrumbs",
           "[aria-current=\"page\"]"
         ]
+      },
+      "usage": {
+        "markup": "<nav class=\"pr-breadcrumbs\" aria-label=\"Breadcrumb\">\n  <ol>\n    <li><a href=\"/reports\">Reports</a></li>\n    <li><span aria-current=\"page\">Q3 revenue</span></li>\n  </ol>\n</nav>"
       },
       "example": "/navigation/navigation"
     },
@@ -365,6 +386,10 @@
           "(failed): the work threw"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+        "markup": "<button primalButton type=\"button\" emphasis=\"primary\" [run]=\"save\">Save Changes</button>"
+      },
       "example": "/actions/actions"
     },
     {
@@ -418,6 +443,10 @@
           "label: the group's name (required)"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+        "markup": "<primal-button-group label=\"Text alignment\">\n  <button type=\"button\" [attr.aria-pressed]=\"align() === 'start'\" (click)=\"align.set('start')\">Start</button>\n  <button type=\"button\" [attr.aria-pressed]=\"align() === 'end'\" (click)=\"align.set('end')\">End</button>\n</primal-button-group>"
+      },
       "example": "/actions/actions"
     },
     {
@@ -464,6 +493,9 @@
           ".pr-card-media",
           "[data-gives-way]"
         ]
+      },
+      "usage": {
+        "markup": "<ul class=\"pr-cards\">\n  <li class=\"pr-card\">\n    <h3 class=\"pr-card-title\"><a href=\"/reports/q3\">Q3 revenue</a></h3>\n    <p>Revenue rose 12% over Q2.</p>\n    <p class=\"pr-card-meta\"><span data-gives-way>Updated 2 hours ago</span></p>\n  </li>\n</ul>"
       },
       "example": "/content/content"
     },
@@ -512,6 +544,10 @@
           "copyLabel"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_CONTENT } from 'primal-angular';",
+        "markup": "<primal-code-block language=\"HTML\" [code]=\"snippet\" />"
+      },
       "example": "/content/content"
     },
     {
@@ -558,6 +594,10 @@
           "PrimalConfirm.ask({ title, body, confirm, cancel, kind })"
         ]
       },
+      "usage": {
+        "import": "import { PrimalConfirm } from 'primal-angular';",
+        "markup": "const yes = await inject(PrimalConfirm).ask({\n  title: 'Delete “Acme Studio” for good?',\n  confirm: 'Delete Workspace',\n  cancel: 'Keep Workspace',\n  kind: 'destructive',\n});"
+      },
       "example": "/navigation/dialogs"
     },
     {
@@ -597,6 +637,9 @@
           "[data-width=\"full\"]"
         ]
       },
+      "usage": {
+        "markup": "<main class=\"pr-container\">…</main>"
+      },
       "example": "/content/layout"
     },
     {
@@ -634,6 +677,9 @@
         "css": [
           ".pr-details"
         ]
+      },
+      "usage": {
+        "markup": "<dl class=\"pr-details\">\n  <dt>Plan</dt><dd>Team</dd>\n  <dt>Seats</dt><dd>8 of 20</dd>\n</dl>"
       },
       "example": "/content/content"
     },
@@ -695,6 +741,10 @@
           "(dismissed)"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_TOP_LAYERS, PRIMAL_ACTIONS } from 'primal-angular';",
+        "markup": "<primal-dialog title=\"Rename report\" [(open)]=\"renaming\">\n  …fields…\n  <div class=\"pr-dialog-actions\" dialog-actions>\n    <button primalButton type=\"button\" emphasis=\"quiet\" (click)=\"renaming.set(false)\">Keep Name</button>\n    <button primalButton type=\"button\" emphasis=\"primary\" [run]=\"rename\">Rename Report</button>\n  </div>\n</primal-dialog>"
+      },
       "example": "/navigation/dialogs"
     },
     {
@@ -733,6 +783,9 @@
           "hr",
           ".pr-divider"
         ]
+      },
+      "usage": {
+        "markup": "<hr class=\"pr-divider\" />"
       },
       "example": "/content/layout"
     },
@@ -785,6 +838,10 @@
           "reason (required)",
           "[empty-art]: the product's illustration, above the words (Primal ships none)"
         ]
+      },
+      "usage": {
+        "import": "import { PRIMAL_CONTENT, PRIMAL_ACTIONS } from 'primal-angular';",
+        "markup": "<primal-empty title=\"No reports yet\" reason=\"Reports appear here once the first month closes.\">\n  <img empty-art src=\"/art/empty.png\" alt=\"\" />\n  <button primalButton type=\"button\" emphasis=\"primary\">Create Report</button>\n</primal-empty>"
       },
       "example": "/content/information"
     },
@@ -853,6 +910,10 @@
           "[primalControl]: an error from outside, worded"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+        "markup": "<primal-field label=\"Email\" description=\"We only use it to send receipts.\">\n  <input primalControl type=\"email\" autocomplete=\"email\" required />\n</primal-field>"
+      },
       "example": "/forms/text-fields"
     },
     {
@@ -905,6 +966,10 @@
           "description",
           "cards"
         ]
+      },
+      "usage": {
+        "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+        "markup": "<primal-field-group legend=\"Plan\" cards>\n  <primal-field label=\"Free\" description=\"One person.\"><input primalControl type=\"radio\" name=\"plan\" value=\"free\" required /></primal-field>\n  <primal-field label=\"Team\" description=\"Up to 20 people.\"><input primalControl type=\"radio\" name=\"plan\" value=\"team\" /></primal-field>\n</primal-field-group>"
       },
       "example": "/forms/choices"
     },
@@ -959,6 +1024,10 @@
           "dropWords"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+        "markup": "<primal-field label=\"Attachments\" description=\"PDFs or images, up to 10 MB each.\">\n  <primal-file-drop>\n    <input primalControl type=\"file\" accept=\".pdf,image/*\" multiple />\n  </primal-file-drop>\n</primal-field>"
+      },
       "example": "/forms/pickers"
     },
     {
@@ -1010,6 +1079,10 @@
           "resets"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+        "markup": "<form primalForm (validSubmit)=\"send()\">\n  …fields…\n  <div class=\"pr-form-actions\"><button primalButton type=\"submit\" emphasis=\"primary\">Send Invoice</button></div>\n</form>"
+      },
       "example": "/forms/validation"
     },
     {
@@ -1048,6 +1121,9 @@
           ".pr-grid",
           "--pr-grid-min"
         ]
+      },
+      "usage": {
+        "markup": "<div class=\"pr-grid\" style=\"--pr-grid-min: 12rem\">…</div>"
       },
       "example": "/content/layout"
     },
@@ -1108,6 +1184,10 @@
           "kind"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+        "markup": "<button primalIconButton type=\"button\" label=\"Close Panel\">\n  <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\">…</svg>\n</button>"
+      },
       "example": "/actions/actions"
     },
     {
@@ -1147,6 +1227,9 @@
           ".pr-push",
           "[data-gap]"
         ]
+      },
+      "usage": {
+        "markup": "<div class=\"pr-inline\" data-gap=\"component\">\n  <strong>Ada Shapiro</strong>\n  <span class=\"pr-badge\">Owner</span>\n  <button type=\"button\" class=\"pr-button-quiet pr-push\">Message Ada</button>\n</div>"
       },
       "example": "/content/layout"
     },
@@ -1208,6 +1291,10 @@
           "file: what a download is (\"PDF, 2 MB\")"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+        "markup": "<a primalLink href=\"/report.pdf\" download file=\"PDF, 2 MB\">Download Report</a>"
+      },
       "example": "/actions/actions"
     },
     {
@@ -1250,6 +1337,9 @@
           ".pr-item-line",
           ".pr-item-end"
         ]
+      },
+      "usage": {
+        "markup": "<ul class=\"pr-list-items\">\n  <li>\n    <span class=\"pr-item-body\">\n      <span class=\"pr-item-title\"><a href=\"/people/ada\">Ada Shapiro</a></span>\n      <span class=\"pr-item-line\">ada@example.com</span>\n    </span>\n    <span class=\"pr-item-end\"><span class=\"pr-status\" data-state=\"positive\">Active</span></span>\n  </li>\n</ul>"
       },
       "example": "/content/content"
     },
@@ -1306,6 +1396,10 @@
           "primalMenuItem: kind"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_NAVIGATION, PRIMAL_ACTIONS } from 'primal-angular';",
+        "markup": "<primal-menu label=\"Report actions\">\n  <button primalMenuTrigger primalIconButton type=\"button\" label=\"Show Report Actions\">…</button>\n  <button primalMenuItem type=\"button\" (click)=\"rename()\">Rename Report</button>\n  <hr />\n  <button primalMenuItem type=\"button\" kind=\"destructive\" (click)=\"remove()\">Delete Report</button>\n</primal-menu>"
+      },
       "example": "/navigation/navigation"
     },
     {
@@ -1346,6 +1440,9 @@
           ".pr-nav-list",
           "[aria-current=\"page\"]"
         ]
+      },
+      "usage": {
+        "markup": "<nav aria-label=\"Settings\">\n  <ul class=\"pr-nav-list\">\n    <li><a href=\"/settings/profile\" aria-current=\"page\">Profile</a></li>\n    <li><a href=\"/settings/billing\">Billing</a></li>\n  </ul>\n</nav>"
       },
       "example": "/navigation/navigation"
     },
@@ -1397,6 +1494,10 @@
         "inputs": [
           "unit"
         ]
+      },
+      "usage": {
+        "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+        "markup": "<primal-field label=\"Seats\">\n  <primal-number unit=\"seats\">\n    <input primalControl type=\"number\" min=\"1\" max=\"50\" step=\"1\" value=\"5\" />\n  </primal-number>\n</primal-field>"
       },
       "example": "/forms/text-fields"
     },
@@ -1450,6 +1551,10 @@
           "next"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_NAVIGATION } from 'primal-angular';",
+        "markup": "<primal-pagination label=\"Invoices, pages\" [pages]=\"12\" [(page)]=\"page\" />"
+      },
       "example": "/navigation/navigation"
     },
     {
@@ -1498,6 +1603,10 @@
           "label (required)",
           "side"
         ]
+      },
+      "usage": {
+        "import": "import { PRIMAL_TOP_LAYERS } from 'primal-angular';",
+        "markup": "<primal-popover label=\"Share link\">\n  <button primalPopoverTrigger primalButton type=\"button\">Copy Share Link</button>\n  …what it holds…\n</primal-popover>"
       },
       "example": "/navigation/popovers"
     },
@@ -1549,6 +1658,10 @@
           "max"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+        "markup": "<primal-progress label=\"Uploading 12 photos\" [value]=\"sent()\" [max]=\"12\" />"
+      },
       "example": "/actions/feedback"
     },
     {
@@ -1590,6 +1703,9 @@
           ".pr-actions-group"
         ]
       },
+      "usage": {
+        "markup": "<div class=\"pr-actions\">\n  <button type=\"button\" class=\"pr-button-danger\">Delete Report</button>\n  <div class=\"pr-actions-group\">\n    <button type=\"button\" class=\"pr-button-quiet\">Cancel Changes</button>\n    <button type=\"submit\" class=\"pr-button-primary\">Save Changes</button>\n  </div>\n</div>"
+      },
       "example": "/actions/actions"
     },
     {
@@ -1630,6 +1746,9 @@
           "--pr-scroll-height"
         ]
       },
+      "usage": {
+        "markup": "<div class=\"pr-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Activity\" style=\"--pr-scroll-height: 12rem\">…</div>"
+      },
       "example": "/content/layout"
     },
     {
@@ -1668,6 +1787,9 @@
           ".pr-search-field",
           "input[type=\"search\"]"
         ]
+      },
+      "usage": {
+        "markup": "<label for=\"find\" class=\"pr-visually-hidden\">Search members</label>\n<span class=\"pr-search-field\"><input id=\"find\" type=\"search\" placeholder=\"Search members\" /></span>"
       },
       "example": "/content/layout"
     },
@@ -1722,6 +1844,10 @@
           "options"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+        "markup": "<primal-field label=\"Country\">\n  <primal-select>\n    <select primalControl required>\n      <option value=\"\">Choose a country</option>\n      <option value=\"il\">Israel</option>\n    </select>\n  </primal-select>\n</primal-field>"
+      },
       "example": "/forms/select"
     },
     {
@@ -1773,6 +1899,10 @@
           "phonePattern"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+        "markup": "<input primalControl primalMask=\"phone\" type=\"tel\" autocomplete=\"tel\" />"
+      },
       "example": "/forms/text-fields"
     },
     {
@@ -1821,6 +1951,10 @@
           "shape: line | text | circle | block"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+        "markup": "<ul aria-busy=\"true\">\n  <li><primal-skeleton shape=\"circle\" /><primal-skeleton shape=\"text\" /></li>\n</ul>"
+      },
       "example": "/actions/feedback"
     },
     {
@@ -1865,6 +1999,10 @@
           "label"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+        "markup": "<primal-spinner label=\"Checking the address\" />"
+      },
       "example": "/actions/feedback"
     },
     {
@@ -1905,6 +2043,9 @@
           ".pr-stack",
           "[data-gap]"
         ]
+      },
+      "usage": {
+        "markup": "<div class=\"pr-stack\" data-gap=\"component\">…</div>"
       },
       "example": "/content/layout"
     },
@@ -1947,6 +2088,9 @@
           ".pr-status",
           "[data-state]"
         ]
+      },
+      "usage": {
+        "markup": "<span class=\"pr-status\" data-state=\"warning\">Payment due in 3 days</span>"
       },
       "example": "/content/information"
     },
@@ -2004,6 +2148,10 @@
           "(sorted)"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_TABLES } from 'primal-angular';",
+        "markup": "<div class=\"pr-table\">\n  <table>\n    <caption>Invoices</caption>\n    <thead><tr><th scope=\"col\">Customer</th><th scope=\"col\" data-numeric>Amount</th></tr></thead>\n    <tbody>…</tbody>\n  </table>\n</div>"
+      },
       "example": "/native/tables"
     },
     {
@@ -2059,6 +2207,10 @@
           "primal-tab: label, disabled"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_NAVIGATION } from 'primal-angular';",
+        "markup": "<primal-tabs label=\"Report\" [(selected)]=\"tab\">\n  <primal-tab label=\"Summary\">…</primal-tab>\n  <primal-tab label=\"Data\">…</primal-tab>\n</primal-tabs>"
+      },
       "example": "/navigation/navigation"
     },
     {
@@ -2113,6 +2265,10 @@
           "PrimalToaster.show(message, { action, duration })"
         ]
       },
+      "usage": {
+        "import": "import { PrimalToaster } from 'primal-angular';",
+        "markup": "inject(PrimalToaster).show('Deleted “Q3 revenue”.', {\n  action: { label: 'Undo', run: () => restore() },\n});"
+      },
       "example": "/actions/feedback"
     },
     {
@@ -2158,6 +2314,10 @@
         "inputs": [
           "label (required)"
         ]
+      },
+      "usage": {
+        "import": "import { PRIMAL_CONTENT, PRIMAL_ACTIONS } from 'primal-angular';",
+        "markup": "<primal-toolbar label=\"Text formatting\">\n  <button primalIconButton type=\"button\" label=\"Bold\">…</button>\n  <hr class=\"pr-divider\" />\n  <button primalButton type=\"button\" emphasis=\"quiet\">Insert Link</button>\n</primal-toolbar>"
       },
       "example": "/content/layout"
     },
@@ -2206,6 +2366,10 @@
           "tooltipSide"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_TOP_LAYERS } from 'primal-angular';",
+        "markup": "<button primalIconButton type=\"button\" label=\"Copy Address\" primalTooltip=\"Copy address, ⌘C\">…</button>"
+      },
       "example": "/navigation/popovers"
     },
     {
@@ -2245,6 +2409,9 @@
           ".pr-card",
           "[data-gives-way]"
         ]
+      },
+      "usage": {
+        "markup": "<ul class=\"pr-cards\">\n  <li class=\"pr-card\">\n    <p class=\"pr-card-meta\"><span class=\"pr-status\" data-state=\"negative\">Bug</span><span data-gives-way>#214</span></p>\n    <h3 class=\"pr-card-title\"><a href=\"/issues/214\">Export drops the last row</a></h3>\n  </li>\n</ul>"
       },
       "example": "/content/cells"
     },
@@ -2299,6 +2466,10 @@
           "blank",
           "blankTitle"
         ]
+      },
+      "usage": {
+        "import": "import { PRIMAL_CELLS } from 'primal-angular';",
+        "markup": "<primal-search label=\"Search the docs\" [search]=\"searchDocs\" [blank]=\"popular\" />"
       },
       "example": "/content/cells"
     },
@@ -2356,6 +2527,10 @@
           "anotherLabel"
         ]
       },
+      "usage": {
+        "import": "import { PRIMAL_CELLS } from 'primal-angular';",
+        "markup": "<primal-subscribe title=\"Get the newsletter\" promise=\"One email per release.\" [subscribe]=\"subscribe\" />"
+      },
       "example": "/content/cells"
     },
     {
@@ -2400,6 +2575,9 @@
           ".pr-shell-menu",
           ".pr-shell-account"
         ]
+      },
+      "usage": {
+        "markup": "<div class=\"pr-shell\">\n  <div class=\"pr-shell-bar\">\n    <button class=\"pr-shell-menu pr-icon-button\" aria-label=\"Show Menu\">…</button>\n    <a class=\"pr-shell-brand\" href=\"/\">Your product</a>\n  </div>\n  <nav class=\"pr-shell-nav\" aria-label=\"Places\"><ul class=\"pr-nav-list\">…</ul></nav>\n  <main class=\"pr-shell-main\">…</main>\n</div>"
       },
       "example": "/surfaces/app-shell"
     },
@@ -2448,6 +2626,9 @@
           ".pr-auth-switch"
         ]
       },
+      "usage": {
+        "markup": "<div class=\"pr-auth\">\n  <p class=\"pr-auth-brand\">Your product</p>\n  <h2>Sign in</h2>\n  <form primalForm>…fields… <button primalButton type=\"submit\" emphasis=\"primary\">Sign In</button></form>\n  <p class=\"pr-auth-switch\">New here? <a href=\"/sign-up\">Create an account</a></p>\n</div>"
+      },
       "example": "/surfaces/authentication/sign-in"
     },
     {
@@ -2494,6 +2675,9 @@
           ".pr-split-back"
         ]
       },
+      "usage": {
+        "markup": "<div class=\"pr-split\" [attr.data-showing]=\"slug() ? 'detail' : 'list'\">\n  <section class=\"pr-split-list\"><ul class=\"pr-list-items\">…</ul></section>\n  <section class=\"pr-split-detail\"><a class=\"pr-split-back\" href=\"/reports\">← All reports</a>…</section>\n</div>"
+      },
       "example": "/surfaces/list-detail"
     },
     {
@@ -2539,6 +2723,9 @@
           "[data-done]"
         ]
       },
+      "usage": {
+        "markup": "<ol class=\"pr-steps\" aria-label=\"Steps\">\n  <li data-done>Workspace</li>\n  <li aria-current=\"step\">Team</li>\n  <li>Review</li>\n</ol>"
+      },
       "example": "/surfaces/multi-step-form"
     },
     {
@@ -2580,6 +2767,9 @@
           ".pr-nav-list",
           ".pr-details"
         ]
+      },
+      "usage": {
+        "markup": "<div class=\"pr-split\">\n  <nav class=\"pr-split-list\" aria-label=\"Settings\"><ul class=\"pr-nav-list\">…sections…</ul></nav>\n  <section class=\"pr-split-detail\">…the section's settings…</section>\n</div>"
       },
       "example": "/surfaces/settings"
     }

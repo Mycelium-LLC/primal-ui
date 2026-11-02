@@ -35,5 +35,8 @@
       ".pr-details"
     ]
   },
+  "usage": {
+    "markup": "<dl class=\"pr-details\">\n  <dt>Plan</dt><dd>Team</dd>\n  <dt>Seats</dt><dd>8 of 20</dd>\n</dl>"
+  },
   "example": "/content/content"
 }

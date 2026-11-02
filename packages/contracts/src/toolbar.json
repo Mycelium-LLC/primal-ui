@@ -43,5 +43,9 @@
       "label (required)"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_CONTENT, PRIMAL_ACTIONS } from 'primal-angular';",
+    "markup": "<primal-toolbar label=\"Text formatting\">\n  <button primalIconButton type=\"button\" label=\"Bold\">…</button>\n  <hr class=\"pr-divider\" />\n  <button primalButton type=\"button\" emphasis=\"quiet\">Insert Link</button>\n</primal-toolbar>"
+  },
   "example": "/content/layout"
 }

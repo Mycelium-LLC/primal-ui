@@ -39,5 +39,8 @@
       ".pr-details"
     ]
   },
+  "usage": {
+    "markup": "<div class=\"pr-split\">\n  <nav class=\"pr-split-list\" aria-label=\"Settings\"><ul class=\"pr-nav-list\">…sections…</ul></nav>\n  <section class=\"pr-split-detail\">…the section's settings…</section>\n</div>"
+  },
   "example": "/surfaces/settings"
 }

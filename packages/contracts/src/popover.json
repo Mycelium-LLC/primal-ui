@@ -46,5 +46,9 @@
       "side"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_TOP_LAYERS } from 'primal-angular';",
+    "markup": "<primal-popover label=\"Share link\">\n  <button primalPopoverTrigger primalButton type=\"button\">Copy Share Link</button>\n  …what it holds…\n</primal-popover>"
+  },
   "example": "/navigation/popovers"
 }

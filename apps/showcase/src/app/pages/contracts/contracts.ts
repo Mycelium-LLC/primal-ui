@@ -18,6 +18,7 @@ export interface Contract {
   do: string[];
   dont: string[];
   api: { css: string[]; angular?: string[]; inputs?: string[] };
+  usage: { import?: string; markup: string };
   example: string;
 }
 

@@ -48,5 +48,9 @@
       "size"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_CONTENT } from 'primal-angular';",
+    "markup": "<primal-avatar name=\"Ada Shapiro\" src=\"/people/ada.jpg\" />"
+  },
   "example": "/content/information"
 }

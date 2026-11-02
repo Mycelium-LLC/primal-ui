@@ -48,5 +48,9 @@
       "resets"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "markup": "<form primalForm (validSubmit)=\"send()\">\n  …fields…\n  <div class=\"pr-form-actions\"><button primalButton type=\"submit\" emphasis=\"primary\">Send Invoice</button></div>\n</form>"
+  },
   "example": "/forms/validation"
 }

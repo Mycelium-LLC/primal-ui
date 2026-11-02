@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, computed, contentChildren, effect, inject, input, model, viewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, computed, contentChildren, effect, inject, input, model, viewChildren, booleanAttribute } from '@angular/core';
 import { primalLayerId } from '../top-layers/place';
 
 /**
@@ -19,7 +19,7 @@ import { primalLayerId } from '../top-layers/place';
 })
 export class PrimalTab {
   readonly label = input.required<string>();
-  readonly disabled = input(false);
+  readonly disabled = input(false, { transform: booleanAttribute });
 
   readonly panelId = primalLayerId('tabpanel');
   readonly tabId = primalLayerId('tab');
