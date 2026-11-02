@@ -53,7 +53,8 @@ export class SurfacesListDetailPage {
 
   protected remove(r: Report): void {
     const undo = this.reports.remove(r.slug);
-    void this.router.navigate(['/surfaces/list-detail']);
+    // The item is gone, so focus goes to the list it was in, never to the top of the page.
+    void this.router.navigate(['/surfaces/list-detail']).then(() => setTimeout(() => document.getElementById('reports-title')?.focus()));
     this.toaster.show(`Deleted “${r.name}”.`, {
       action: {
         label: 'Undo',

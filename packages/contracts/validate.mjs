@@ -7,7 +7,7 @@
  *   npx primal-contracts-check path/to/contracts      (a folder of <id>.json files)
  */
 
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, realpathSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -39,7 +39,8 @@ export function validateFolder(dir) {
   return { contracts, problems: contracts.flatMap(({ file, c }) => validateContract(c, file)) };
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Run as a command (npx links to it, so compare real paths), not when imported by another script.
+if (process.argv[1] && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))) {
   const dir = resolve(process.argv[2] ?? '.');
   const { contracts, problems } = validateFolder(dir);
   if (problems.length) {

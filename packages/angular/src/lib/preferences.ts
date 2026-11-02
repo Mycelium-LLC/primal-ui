@@ -1,4 +1,4 @@
-import { DOCUMENT, Injectable, effect, inject, signal } from '@angular/core';
+import { DOCUMENT, Injectable, computed, effect, inject, signal } from '@angular/core';
 
 export type PrimalTheme = 'system' | 'light' | 'dark';
 export type PrimalDirection = 'ltr' | 'rtl';
@@ -17,7 +17,16 @@ export class PrimalPreferences {
   /** Moving to a new page scrolls to its top (with providePrimalRouteScroll). On by default. */
   readonly scrollToTop = signal(true);
 
+  private readonly systemDark = signal(false);
+  /** The theme that applies now: 'system' resolved to light or dark by the operating system, kept up to date. */
+  readonly resolvedTheme = computed<'light' | 'dark'>(() => (this.theme() === 'system' ? (this.systemDark() ? 'dark' : 'light') : this.theme() === 'dark' ? 'dark' : 'light'));
+
   constructor() {
+    const query = this.root.ownerDocument.defaultView?.matchMedia?.('(prefers-color-scheme: dark)');
+    if (query) {
+      this.systemDark.set(query.matches);
+      query.addEventListener('change', (e) => this.systemDark.set(e.matches));
+    }
     effect(() => this.write('data-theme', this.theme() === 'system' ? null : this.theme()));
     effect(() => this.write('dir', this.direction()));
   }

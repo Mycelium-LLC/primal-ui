@@ -25,6 +25,13 @@ export class ActionsFeedbackPage {
   protected readonly reports = signal(REPORTS);
 
   protected remove(report: (typeof REPORTS)[number]): void {
+    // Focus moves to the next row's Delete (or the list's way back), never to the top of the page.
+    const rows = [...document.querySelectorAll<HTMLElement>('.pr-demo-reports li')];
+    const at = rows.findIndex((li) => li.contains(document.activeElement));
+    setTimeout(() => {
+      const left = [...document.querySelectorAll<HTMLElement>('.pr-demo-reports li button')];
+      (left[Math.min(Math.max(at, 0), left.length - 1)] ?? null)?.focus();
+    });
     const before = this.reports();
     this.reports.update((list) => list.filter((r) => r.id !== report.id));
     this.toaster.show(`Deleted “${report.name}”.`, {
