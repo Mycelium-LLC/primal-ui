@@ -20,7 +20,7 @@ import { PrimalFieldGroup } from './group';
   // One projection slot, always rendered: the control must never sit inside a branch, or Angular
   // drops it when the branch changes. Choices are laid out by .pr-choice's grid instead.
   template: `
-    <label [id]="labelId" [attr.for]="control()?.id()">{{ label() }}@if (showOptional()) {&#32;<span class="pr-optional">Optional</span>}</label>
+    <label [id]="labelId" [attr.for]="control()?.id()">{{ label() }}@if (showOptional()) {&ngsp;<span class="pr-optional">Optional</span>}</label>
     @if (description()) {
       <p class="pr-field-description" [id]="descriptionId">{{ description() }}</p>
     }

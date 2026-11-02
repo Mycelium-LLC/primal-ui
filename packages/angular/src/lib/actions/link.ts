@@ -15,7 +15,7 @@ import { ChangeDetectionStrategy, Component, HostAttributeToken, computed, injec
     '[attr.target]': "isExternal() ? '_blank' : null",
     '[attr.rel]': "isExternal() ? 'noopener noreferrer external' : null",
   },
-  template: `<ng-content />@if (isExternal()) {<span class="pr-visually-hidden"> (opens in a new tab)</span>}@if (file()) {&#32;<span class="pr-link-file">({{ file() }})</span>}`,
+  template: `<ng-content />@if (isExternal()) {<span class="pr-visually-hidden"> (opens in a new tab)</span>}@if (file()) {&ngsp;<span class="pr-link-file">({{ file() }})</span>}`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrimalLink {

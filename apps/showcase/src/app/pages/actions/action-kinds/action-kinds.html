@@ -81,7 +81,7 @@
           } @else {
             <primal-alert tone="danger" title="Delete “Acme Studio” for good?">
               <p>Its 12 reports and 4 members go with it. This can't be undone.</p>
-              <primal-field label="Type the workspace name to confirm">
+              <primal-field label="Type the workspace name to confirm" description="Acme Studio" [optional]="false">
                 <input primalControl [(ngModel)]="typedName" name="typedName" autocomplete="off" />
               </primal-field>
               <div class="pr-alert-actions">

@@ -56,7 +56,8 @@ export class PrimalButton extends PrimalActionTreatment {
     super();
     // Capture, so the guard runs before any (click) on the same button.
     const guard = (event: Event) => {
-      if (this.working()) {
+      // Busy, or not available now (aria-disabled keeps it focusable, so it must be stopped here).
+      if (this.working() || this.element.getAttribute('aria-disabled') === 'true') {
         event.preventDefault();
         event.stopImmediatePropagation();
         return;
