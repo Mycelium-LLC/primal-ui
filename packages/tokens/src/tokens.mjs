@@ -71,6 +71,8 @@ export const layout = {
   'menu-width': { meaning: 'The narrowest a menu gets: room for a command of a few words.', value: '12rem' },
   'tooltip-width': { meaning: 'The widest a tooltip grows: a short phrase, never a paragraph.', value: '20rem' },
   'dialog-width': { meaning: 'The widest a dialog grows: one question and its answers, read at a glance.', value: '32rem' },
+  'card-min': { meaning: 'The narrowest a card gets before a collection of cards wraps to fewer columns.', value: '16rem' },
+  'avatar-size': { meaning: 'An avatar beside a name: the height of a control.', value: '2.5rem' },
   'toast-width': { meaning: 'The widest a toast grows: one short sentence and its action.', value: '24rem' },
   'list-height': { meaning: 'The tallest an open list of options grows before it scrolls: about eight options.', value: '20rem' },
   'container-full': { meaning: 'Full width, for app surfaces that use the whole screen.', value: '100%' },

@@ -117,3 +117,31 @@
 .pr-demo-people li {
   grid-template-columns: 1fr auto;
 }
+
+/* The strip tests: without colour, and without boxes. */
+.pr-demo-grey {
+  filter: grayscale(1);
+}
+
+.pr-demo-stripped .pr-demo-frame {
+  border-color: transparent;
+}
+
+.pr-demo-flush {
+  padding: 0;
+}
+
+.pr-demo-container {
+  display: block;
+  padding-block: var(--pr-gap-group);
+  background-color: var(--pr-color-surface-sunken);
+}
+
+.pr-demo-metric {
+  font-size: var(--pr-text-xl);
+  font-variant-numeric: tabular-nums;
+}
+
+.pr-demo-spaced {
+  margin-block-start: var(--pr-gap-group);
+}

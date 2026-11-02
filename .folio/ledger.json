@@ -174,6 +174,11 @@
       "n": 30,
       "decision": "0.6.0 starts before the 0.5.0 review",
       "ruling": "Niko asked to continue with the next release on 2026-11-02 ('continue with the next') while 0.3.0, 0.4.0 and 0.5.0 wait for his review, so decision 9 gives way again; he watches the showcase live and comments as he goes (decision 28), and QA waits for his ask (decision 29)."
+    },
+    {
+      "n": 31,
+      "decision": "0.7.0 starts before the 0.6.0 review",
+      "ruling": "Niko chose 'Continue to 0.7.0' on 2026-11-02 while 0.3.0 to 0.6.0 wait for his review; decision 9 gives way again, as in decisions 28 and 30."
     }
   ],
   "releases": [
@@ -1221,16 +1226,23 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
-      "makesTrue": [],
+      "makesTrue": [
+        "primal/information/a-card-is-a-list-item-it-appears-only-as-one-of-several",
+        "primal/information/status-badges-and-indicators-carry-their-meaning-in-shape-or",
+        "primal/information/an-empty-state-says-why-it-is-empty-and-offers-the-next-step",
+        "primal/layout/layout-helpers-stack-inline-grid-container-divider-scroll",
+        "primal/payload/every-cell-names-its-payload-and-when-room-runs-out-the",
+        "primal/payload/each-cell-shipped-with-primal-fulfils-one-complete-job-end"
+      ],
       "globalOrIrreversible": false,
       "businessMeasure": "Screens say what things are at a glance.",
       "version": "0.7.0",
       "name": "Things look like what they are",
       "track": "Content, information and cells",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Being built 2026-11-02 in session F0-folio-things-look, on release/0.7.0 (cut from release/0.6.0); Niko watches it live and comments. Not ready for QA until he asks (decision 29).",
       "dependsOn": [
         "0.6.0"
       ],
@@ -1239,19 +1251,24 @@
       "size": "L",
       "items": [
         {
-          "text": "Content: Card (as a list item), ListItem, DescriptionList, Table (on the 0.2.0 foundation), CodeBlock."
+          "text": "*Done 2026-11-02:* Content: Card only as a list item (.pr-cards > .pr-card, the whole card the target), list items (.pr-list-items), details (.pr-details), the table with its empty row, CodeBlock (primal-code-block with Copy Code).",
+          "state": "done"
         },
         {
-          "text": "Information: Badge, Avatar, StatusIndicator, EmptyState."
+          "text": "*Done 2026-11-02:* Information: Badge (.pr-badge, words or a number, tones), Avatar (primal-avatar, initials when the picture is missing or fails), status (.pr-status: shape, word and colour), EmptyState (primal-empty: why, and the next step).",
+          "state": "done"
         },
         {
-          "text": "Layout: Stack, Inline, Grid, Container (max-width and full-width), Divider, ScrollArea."
+          "text": "*Done 2026-11-02:* Layout: stack, inline (with .pr-push), grid, container (reading and full width), divider (also upright between controls), scroll area; the three gaps by data-gap.",
+          "state": "done"
         },
         {
-          "text": "Composition: Toolbar, SearchField."
+          "text": "*Done 2026-11-02:* Composition: Toolbar (primal-toolbar, one tab stop, arrow keys), search field (.pr-search-field).",
+          "state": "done"
         },
         {
-          "text": "First cells: newsletter subscribe, search with results and feedback, an item tile with its payload named."
+          "text": "*Done 2026-11-02:* First cells: subscribe (primal-subscribe, ends in a subscription said in place or a fixable error), search with results (primal-search: skeletons, a count, marked matches, an empty state with a way out, Try Again), an item tile whose payload stays while its metadata gives way.",
+          "state": "done"
         },
         {
           "text": "Release chain for 0.7.0."

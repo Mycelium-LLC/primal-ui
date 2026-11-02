@@ -1,7 +1,79 @@
-<pr-page-placeholder title="Layout" release="0.7.0" covers="Stack, Inline, Grid, Container, Divider, ScrollArea.">
-<div><p>Block one in a plain div</p><p>Block two</p></div>
-<hr>
-<div><span>Inline one</span> <span>Inline two</span> <span>Inline three</span></div>
-<hr>
-<div style="max-block-size: 6rem; overflow: auto"><p>A scroll area made with overflow.</p><p>Line</p><p>Line</p><p>Line</p><p>Line</p><p>Line</p></div>
-</pr-page-placeholder>
+<h1>Layout</h1>
+<p>
+  Layout groups by space and alignment, never by boxes. There are three gaps: inside a component, between the parts of a group, and
+  between sections. The frames below only show the edges; strip them and the grouping still reads.
+</p>
+<primal-field label="Strip the boxes">
+  <input primalControl type="checkbox" role="switch" [checked]="stripped()" (change)="stripped.set($any($event.target).checked)" />
+</primal-field>
+
+<div [class.pr-demo-stripped]="stripped()">
+  <h2>Stack</h2>
+  <p>One under the other, a group gap apart (<code>data-gap</code> picks the gap).</p>
+  <div class="pr-stack pr-demo-frame">
+    <p><strong>Ada Shapiro</strong></p>
+    <p>Owner since 2024. Approves every release.</p>
+    <p class="pr-demo-note">Last seen today</p>
+  </div>
+
+  <h2>Inline</h2>
+  <p>Side by side, wrapping when room runs out, lined up on their middles. <code>.pr-push</code> sends one to the end.</p>
+  <div class="pr-inline pr-demo-frame" data-gap="component">
+    <primal-avatar name="Ada Shapiro" size="small" />
+    <strong>Ada Shapiro</strong>
+    <span class="pr-badge">Owner</span>
+    <button primalButton type="button" emphasis="quiet" class="pr-push">Message Ada</button>
+  </div>
+
+  <h2>Grid</h2>
+  <p>Equal columns, as many as fit; it falls to one column on a phone.</p>
+  <div class="pr-grid pr-demo-frame" style="--pr-grid-min: 12rem">
+    @for (m of metrics; track m.label) {
+      <div class="pr-stack" data-gap="component">
+        <span class="pr-demo-note">{{ m.label }}</span>
+        <strong class="pr-demo-metric">{{ m.value }}</strong>
+      </div>
+    }
+  </div>
+
+  <h2>Divider</h2>
+  <p>A line means one thing: what is before it and what is after it are different sections. Between controls in a row, it stands up.</p>
+  <div class="pr-inline pr-demo-frame" data-gap="component">
+    <span>Q3 revenue</span>
+    <hr class="pr-divider" />
+    <span>Published</span>
+    <hr class="pr-divider" />
+    <span>Updated 2 hours ago</span>
+  </div>
+
+  <h2>Container</h2>
+  <p>The reading width by default, about 72rem; <code>data-width="full"</code> for app surfaces that use the whole screen (decision 11).</p>
+  <div class="pr-demo-frame pr-demo-flush">
+    <div class="pr-container pr-demo-container"><span>.pr-container: the reading width, centred, with the gutter</span></div>
+  </div>
+
+  <h2>Scroll area</h2>
+  <p>A region that scrolls within itself and never moves the page. It's focusable, so the keyboard scrolls it too.</p>
+  <div class="pr-scroll pr-demo-frame" style="--pr-scroll-height: 12rem" tabindex="0" role="region" aria-label="Activity">
+    <ol class="pr-stack" data-gap="component">
+      @for (a of activity; track $index) {
+        <li>{{ a }}</li>
+      }
+    </ol>
+  </div>
+</div>
+
+<h2>Toolbar</h2>
+<p>Controls for one thing in a row: one tab stop, and the arrow keys move between them.</p>
+<primal-toolbar label="Text formatting">
+  <button primalIconButton type="button" label="Bold" [attr.aria-pressed]="bold()" (click)="bold.set(!bold())"><strong aria-hidden="true">B</strong></button>
+  <button primalIconButton type="button" label="Italic" [attr.aria-pressed]="italic()" (click)="italic.set(!italic())"><em aria-hidden="true">I</em></button>
+  <hr class="pr-divider" />
+  <button primalButton type="button" emphasis="quiet">Insert Link</button>
+  <button primalButton type="button" emphasis="quiet">Insert Image</button>
+</primal-toolbar>
+
+<h2>Search field</h2>
+<p>A magnifier at its start says what it is before a word is read.</p>
+<label for="layout-search" class="pr-visually-hidden">Search members</label>
+<span class="pr-search-field"><input id="layout-search" type="search" placeholder="Search members" /></span>
