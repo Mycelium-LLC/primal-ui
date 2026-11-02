@@ -63,6 +63,8 @@ export class PrimalField {
     // and a select only can be left empty if it offers an empty option.
     const el = c.element;
     if (el instanceof HTMLInputElement && (el.type === 'range' || el.type === 'color')) return false;
+    // A search box is a way in, not a question: nobody is asked to fill it.
+    if (el instanceof HTMLInputElement && el.type === 'search') return false;
     if (el instanceof HTMLSelectElement && !el.multiple) return [...el.options].some((o) => o.value === '');
     return true;
   });

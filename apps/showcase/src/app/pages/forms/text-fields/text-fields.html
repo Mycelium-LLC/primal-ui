@@ -14,25 +14,63 @@
   <input primalControl type="text" autocomplete="name" required />
 </primal-field>
 <primal-field label="Email" description="We only use it to send receipts.">
-  <input primalControl type="email" autocomplete="email" required />
+  <input primalControl primalMask="email" type="email" autocomplete="email" required />
 </primal-field>
 <primal-field label="Password" description="At least 12 characters. A sentence works well.">
   <input primalControl type="password" autocomplete="new-password" minlength="12" required />
 </primal-field>
-<primal-field label="Phone">
-  <input primalControl type="tel" autocomplete="tel" />
+<primal-field label="Phone" description="050-123-4567, or +972 for another country.">
+  <input primalControl primalMask="phone" type="tel" autocomplete="tel" />
 </primal-field>
-<primal-field label="Website" description="Starting with https://">
-  <input primalControl type="url" autocomplete="url" />
+<primal-field label="Website">
+  <input primalControl primalMask="url" type="url" autocomplete="url" />
 </primal-field>
 <primal-field label="Search the docs">
-  <input primalControl type="search" />
+  <primal-autocomplete [options]="pages" [blank]="popular" [openOnFocus]="true" emptyMessage="No page matches “{text}”.">
+    <input primalControl type="search" />
+  </primal-autocomplete>
 </primal-field>
 <primal-field label="Seats" description="Between 1 and 50.">
-  <input primalControl type="number" inputmode="numeric" min="1" max="50" step="1" value="5" required />
+  <primal-number unit="seats">
+    <input primalControl type="number" inputmode="numeric" min="1" max="50" step="1" value="5" required />
+  </primal-number>
 </primal-field>
 <primal-field label="What should we improve?" description="A sentence or two is plenty.">
   <textarea primalControl rows="4" maxlength="500"></textarea>
+</primal-field>
+
+<h2>Shaped as you type</h2>
+<p>
+  Email, phone and website are shaped while they are typed, and when they are pasted: an email keeps no spaces and one @, with its
+  domain in lower case; a phone number takes its separators from a pattern (<code>primalMask="(000) 000-0000"</code> for any other);
+  a website starts with <code>https://</code>, written in for you. The caret stays where you are typing.
+</p>
+
+<h2>Search</h2>
+<p>
+  A search box opens its list as soon as it has focus: empty, it shows what is popular; typing narrows it to what matches. Give the
+  empty list its own options with <code>[blank]</code>, and open it on focus with <code>[openOnFocus]="true"</code>.
+</p>
+
+<h2>Numbers</h2>
+<p>
+  A number is typed or stepped. − and + step by the field's step and stop at its min and max, faster while held; the arrow keys
+  work as they do in any number field, and the unit sits after the value.
+</p>
+<primal-field label="Discount" description="Percent off the first invoice.">
+  <primal-number unit="%">
+    <input primalControl type="number" min="0" max="100" step="5" value="10" />
+  </primal-number>
+</primal-field>
+<primal-field label="Weight">
+  <primal-number unit="kg">
+    <input primalControl type="number" min="0" step="0.1" value="2.5" style="--pr-number-digits: 5" />
+  </primal-number>
+</primal-field>
+<primal-field label="Licences" description="Disabled: your plan sets this.">
+  <primal-number>
+    <input primalControl type="number" value="12" disabled />
+  </primal-number>
 </primal-field>
 
 <h2>States</h2>

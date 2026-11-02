@@ -77,6 +77,13 @@ export class PrimalAutocomplete {
   readonly emptyMessage = input('Nothing matches “{text}”.');
   /** The message when `strict` and the text is not one of the options. */
   readonly strictMessage = input('Choose one of the options in the list.');
+  /**
+   * What the list shows while the field is empty, in place of every option: recent searches,
+   * popular pages. Give each a group ("Recent") so the list says what they are.
+   */
+  readonly blank = input<(string | PrimalOption)[]>();
+  /** Open the list as soon as the field has focus, empty or not: a search box. */
+  readonly openOnFocus = input(false);
 
   protected readonly control = contentChild(PrimalControl);
   private readonly list = viewChild.required<ElementRef<HTMLElement>>('list');
@@ -104,11 +111,16 @@ export class PrimalAutocomplete {
     ),
   );
 
+  private readonly blankItems = computed(() => {
+    const blank = this.blank();
+    return blank ? toItems(blank.map((o) => (typeof o === 'string' ? { value: o, label: o } : o)), `${this.key}-blank`) : null;
+  });
+
   protected readonly shown = computed<Shown[]>(() => {
     const q = fold(this.query().trim());
     const out: Shown[] = [];
     let group: string | undefined;
-    for (const item of this.all()) {
+    for (const item of (!q && this.blankItems()) || this.all()) {
       const at = q ? fold(item.label).indexOf(q) : -1;
       if (q && at < 0) continue;
       // A group's heading goes before the first option of it that is still shown.
@@ -191,7 +203,18 @@ export class PrimalAutocomplete {
       el.addEventListener(type, fn);
       this.destroyRef.onDestroy(() => el.removeEventListener(type, fn));
     };
-    on('click', () => (this.popup.open() ? this.close() : this.openFull()));
+    // A click that gave the field focus already opened it (openOnFocus): it must not close it again.
+    let focusedAt = 0;
+    on('focus', () => {
+      if (!this.openOnFocus() || this.popup.open()) return;
+      focusedAt = Date.now();
+      this.openFull();
+    });
+    on('click', () => {
+      if (Date.now() - focusedAt < 400) return;
+      if (this.popup.open()) this.close();
+      else this.openFull();
+    });
     on('input', () => {
       this.value.set(el.value);
       this.validate();
@@ -213,7 +236,8 @@ export class PrimalAutocomplete {
     const el = this.element();
     if (!el || el.matches(':disabled') || el.readOnly) return;
     const exact = this.all().find((i) => i.value === el.value);
-    this.query.set(exact || !el.value ? '' : el.value);
+    // A search box keeps what was typed: opening it again shows the same results.
+    this.query.set((exact && !this.openOnFocus()) || !el.value ? '' : el.value);
     const at = exact ? this.shown().findIndex((i) => i.id === exact.id) : -1;
     this.active.set(at);
     this.popup.show();
