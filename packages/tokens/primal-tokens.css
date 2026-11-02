@@ -123,6 +123,12 @@
   /* The widest a dialog grows: one question and its answers, read at a glance. */
   --pr-dialog-width: 32rem;
 
+  /* The narrowest a card gets before a collection of cards wraps to fewer columns. */
+  --pr-card-min: 16rem;
+
+  /* An avatar beside a name: the height of a control. */
+  --pr-avatar-size: 2.5rem;
+
   /* The widest a toast grows: one short sentence and its action. */
   --pr-toast-width: 24rem;
 

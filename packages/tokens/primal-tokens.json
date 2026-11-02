@@ -478,6 +478,16 @@
     "value": "32rem",
     "meaning": "The widest a dialog grows: one question and its answers, read at a glance."
   },
+  "--pr-card-min": {
+    "group": "layout",
+    "value": "16rem",
+    "meaning": "The narrowest a card gets before a collection of cards wraps to fewer columns."
+  },
+  "--pr-avatar-size": {
+    "group": "layout",
+    "value": "2.5rem",
+    "meaning": "An avatar beside a name: the height of a control."
+  },
   "--pr-toast-width": {
     "group": "layout",
     "value": "24rem",

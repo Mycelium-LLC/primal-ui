@@ -1,10 +1,40 @@
-<pr-page-placeholder title="Cells" release="0.7.0" covers="Whole jobs: subscribe, search with results, an item tile.">
-<form (submit)="$event.preventDefault()" aria-label="Newsletter specimen">
-  <h3>Get the Primal newsletter</h3>
-  <p>One email per release. No other mail.</p>
-  <p><label>Email <input type="email" autocomplete="email" required></label> <button type="submit">Subscribe to Newsletter</button></p>
-</form>
-<search>
-  <form (submit)="$event.preventDefault()"><label>Search the docs <input type="search"></label> <button type="submit">Search Docs</button></form>
-</search>
-</pr-page-placeholder>
+<h1>Cells</h1>
+<p>
+  A cell does one whole job, end to end, feedback included, built only from primitives. Each names its payload: the one thing it
+  exists to show. When room runs out, the payload stays and everything else gives way.
+</p>
+
+<h2>Subscribe</h2>
+<p>
+  Payload: the promise (what arrives, how often). The job ends in a subscription said in place, or an error under the field that
+  says what to do. Try <code>bounce&#64;example.com</code> to see the error.
+</p>
+<primal-subscribe title="Get the Primal newsletter" promise="One email when a release ships. Nothing else." [subscribe]="subscribe" />
+
+<h2>Search with results</h2>
+<p>
+  Payload: the results. While it waits it shows their shape, then how many and each with the match marked; with none it offers a
+  way out; if search fails it says so in place. Search for <code>field</code>, <code>zzz</code>, or <code>break</code>.
+</p>
+<primal-search label="Search the docs" [search]="searchDocs" [blank]="popular" />
+
+<h2>An item tile</h2>
+<p>
+  Payload: the issue's title. In a narrow tile (under 15rem) its number, labels and assignee give way; the title stays and wraps,
+  never cut. These tiles are narrow on a desk, so only the state and title show; on a phone each is full width and the rest comes
+  back.
+</p>
+<ul class="pr-cards" style="--pr-card-min: 10rem">
+  @for (i of issues; track i.n) {
+    <li class="pr-card">
+      <p class="pr-card-meta"><span class="pr-status" [attr.data-state]="i.state">{{ i.stateLabel }}</span><span data-gives-way>#{{ i.n }}</span></p>
+      <h3 class="pr-card-title"><a href="#" (click)="$event.preventDefault()">{{ i.title }}</a></h3>
+      <p class="pr-card-meta">
+        @for (l of i.labels; track l) {
+          <span class="pr-badge" data-gives-way>{{ l }}</span>
+        }
+        <primal-avatar [name]="i.assignee" size="small" data-gives-way />
+      </p>
+    </li>
+  }
+</ul>

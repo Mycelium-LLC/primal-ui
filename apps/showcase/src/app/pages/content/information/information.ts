@@ -1,11 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { PRIMAL_ACTIONS, PRIMAL_CONTENT, PRIMAL_FORMS } from 'primal-angular';
 
-/** Placeholder until 0.7.0: the plain native elements this page will cover (decision 10). */
 @Component({
   selector: 'pr-content-information-page',
-  imports: [PagePlaceholder],
+  imports: [PRIMAL_CONTENT, PRIMAL_ACTIONS, PRIMAL_FORMS],
   templateUrl: './information.html',
+  styleUrl: '../../actions/actions-pages.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContentInformationPage {}
+export class ContentInformationPage {
+  /** The strip test for colour: everything above should still read in grey. */
+  protected readonly grey = signal(false);
+}

@@ -13,3 +13,5 @@ export * from './lib/feedback';
 export * from './lib/tables';
 export * from './lib/navigation';
 export * from './lib/top-layers';
+export * from './lib/content';
+export * from './lib/cells';
