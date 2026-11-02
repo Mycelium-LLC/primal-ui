@@ -71,9 +71,12 @@ export class PrimalAvatar {
 
 /**
  * Where content would be, when there is none: why it is empty, and the next step. Put the next
- * step's button inside it; it sits under the words.
+ * step's button inside it; it sits under the words. An empty state is one of the few places a
+ * product may show its character: give it an illustration with empty-art, above the words.
+ * Primal ships none; it is the product's.
  *
  *   <primal-empty title="No reports yet" reason="Reports appear here once the first month closes.">
+ *     <img empty-art src="/art/hammock.png" alt="" />
  *     <button primalButton emphasis="primary">Create Report</button>
  *   </primal-empty>
  */
@@ -81,6 +84,7 @@ export class PrimalAvatar {
   selector: 'primal-empty',
   host: { class: 'pr-empty', role: 'status' },
   template: `
+    <ng-content select="[empty-art]" />
     <p class="pr-empty-title">{{ title() }}</p>
     <p>{{ reason() }}</p>
     <div class="pr-empty-actions"><ng-content /></div>

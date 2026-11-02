@@ -1,1 +1,62 @@
 /* The showcase loads Primal's core the same way any project would: tokens, then core styles (angular.json). */
+
+/*
+ * The showcase's character: Mycelium's, in a few places only (public/character/README.md). None of it is part of Primal.
+ * A note is the brand book's handwritten aside: six words or fewer, never information, tilted, in the primary.
+ */
+@font-face {
+  font-family: 'Square Peg';
+  src: url('/character/square-peg.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+.pr-showcase-note {
+  display: block;
+  inline-size: fit-content;
+  margin: 0;
+  font-family: 'Square Peg', 'Bradley Hand', cursive;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--pr-color-primary-text);
+  rotate: -4deg;
+}
+
+/* An illustration: a sticker, slightly tilted, never in the way of anything to read or press. */
+.pr-showcase-art {
+  display: block;
+  inline-size: 7.5rem;
+  block-size: auto;
+  rotate: 3deg;
+  user-select: none;
+}
+
+/* The welcome: the words, and beside them the mushroom with its note. */
+.pr-showcase-welcome {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--pr-gap-section);
+}
+
+.pr-showcase-welcome-art {
+  display: grid;
+  justify-items: center;
+  gap: var(--pr-gap-component);
+}
+
+@media (max-width: 40rem) {
+  .pr-showcase-welcome {
+    grid-template-columns: 1fr;
+  }
+
+  .pr-showcase-welcome-art {
+    justify-items: start;
+  }
+}
+
+.pr-showcase-success {
+  justify-items: start;
+  margin-block-end: var(--pr-gap-group);
+}
