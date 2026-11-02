@@ -1,8 +1,74 @@
-<pr-page-placeholder title="Dialogs" release="0.6.0" covers="Dialog and confirmation dialog on the native dialog.">
-<p><button type="button" (click)="specDialog.showModal()">Open Dialog</button>
-<dialog #specDialog aria-labelledby="dlg-title">
-  <h2 id="dlg-title">Native dialog</h2>
-  <p>Escape closes it. Focus returns to the button that opened it.</p>
-  <form method="dialog"><button>Close Dialog</button></form>
-</dialog></p>
-</pr-page-placeholder>
+<h1>Dialogs</h1>
+<p>
+  A dialog interrupts. The page behind it is covered and holds still, and the one thing to do is answer it. So it is kept for what
+  earns it: a question the work cannot go on without. It always has a way out that isn't the answer (Close, Escape, a press on the
+  backdrop), returns the page exactly as it was, and is not a place: it has no address, and Back never lands in it. On a phone it
+  rises from the bottom edge.
+</p>
+
+<h2>A short task</h2>
+<p>A task that must finish before the page makes sense again. Focus goes to the dialog, then Tab reaches its field.</p>
+<div class="pr-demo-row">
+  <span>Report: <strong>{{ name() }}</strong></span>
+  <button primalButton type="button" (click)="draft.set(name()); renaming.set(true)">Rename Report</button>
+</div>
+<primal-dialog title="Rename report" [(open)]="renaming">
+  <form id="rename-form" (submit)="$event.preventDefault()">
+    <primal-field label="Report name">
+      <input primalControl name="name" required [value]="draft()" (input)="draft.set($any($event.target).value)" />
+    </primal-field>
+  </form>
+  <div class="pr-dialog-actions" dialog-actions>
+    <button primalButton type="button" emphasis="quiet" (click)="renaming.set(false)">Keep Name</button>
+    <button primalButton type="submit" form="rename-form" emphasis="primary" [run]="rename">Rename Report</button>
+  </div>
+</primal-dialog>
+
+<h2>A confirmation</h2>
+<p>
+  Asked once, only for something that cannot be undone. Its answers repeat the action ("Delete Workspace", never "OK"), and focus
+  starts on the way out, so a stray Enter costs nothing.
+</p>
+<div class="pr-demo-row">
+  <button primalButton type="button" kind="destructive" (click)="deleteWorkspace()">Delete Workspace</button>
+  <span class="pr-demo-note" aria-live="polite">{{ answer() }}</span>
+</div>
+
+<h2>Layers on layers</h2>
+<p>
+  A menu can open from a dialog, above it. Escape closes the topmost layer only: open the menu, press Escape, and the dialog is
+  still there.
+</p>
+<div class="pr-demo-row">
+  <button primalButton type="button" (click)="sharing.set(true)">Share Report</button>
+</div>
+<primal-dialog title="Share “Q3 revenue”" description="People you add can see it; only editors can change it." [(open)]="sharing">
+  <ul class="pr-demo-list pr-demo-people">
+    @for (p of people; track p.name) {
+      <li>
+        <span>{{ p.name }}</span>
+        <primal-menu [label]="'Access for ' + p.name">
+          <button primalMenuTrigger primalButton type="button" emphasis="quiet">{{ p.access }}</button>
+          <button primalMenuItem type="button" (click)="p.access = 'Viewer'">Make Viewer</button>
+          <button primalMenuItem type="button" (click)="p.access = 'Editor'">Make Editor</button>
+          <hr />
+          <button primalMenuItem type="button" kind="destructive">Remove Access</button>
+        </primal-menu>
+      </li>
+    }
+  </ul>
+  <div class="pr-dialog-actions" dialog-actions>
+    <button primalButton type="button" emphasis="primary" (click)="sharing.set(false)">Close Sharing</button>
+  </div>
+</primal-dialog>
+
+<h2>Every layer, answered once</h2>
+<p>Seven questions every layer on top of the page answers, decided once for every product built on Primal.</p>
+<dl class="pr-demo-places">
+  @for (a of answers; track a.question) {
+    <dt>{{ a.question }}</dt>
+    <dd>{{ a.answer }}</dd>
+  }
+</dl>
+
+<pr-plain-html [code]="plain" />

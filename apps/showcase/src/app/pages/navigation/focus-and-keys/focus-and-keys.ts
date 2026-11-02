@@ -1,11 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { RouterLink } from '@angular/router';
+import { PRIMAL_ACTIONS, PRIMAL_KEYS, PRIMAL_NAVIGATION, PRIMAL_TABLES, PRIMAL_TOP_LAYERS } from 'primal-angular';
 
-/** Placeholder until 0.6.0: the plain native elements this page will cover (decision 10). */
+/** The keys, read from the same words the library exports. */
 @Component({
   selector: 'pr-navigation-focus-and-keys-page',
-  imports: [PagePlaceholder],
+  imports: [PRIMAL_ACTIONS, PRIMAL_NAVIGATION, PRIMAL_TOP_LAYERS, PRIMAL_TABLES, RouterLink],
   templateUrl: './focus-and-keys.html',
+  styleUrl: '../../actions/actions-pages.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavigationFocusAndKeysPage {}
+export class NavigationFocusAndKeysPage {
+  protected readonly keys = PRIMAL_KEYS;
+}

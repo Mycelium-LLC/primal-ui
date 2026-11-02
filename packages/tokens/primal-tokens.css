@@ -114,6 +114,15 @@
   /* The least height of a drop zone: a target big enough to aim a dragged file at. */
   --pr-drop-zone-height: 9rem;
 
+  /* The narrowest a menu gets: room for a command of a few words. */
+  --pr-menu-width: 12rem;
+
+  /* The widest a tooltip grows: a short phrase, never a paragraph. */
+  --pr-tooltip-width: 20rem;
+
+  /* The widest a dialog grows: one question and its answers, read at a glance. */
+  --pr-dialog-width: 32rem;
+
   /* The widest a toast grows: one short sentence and its action. */
   --pr-toast-width: 24rem;
 

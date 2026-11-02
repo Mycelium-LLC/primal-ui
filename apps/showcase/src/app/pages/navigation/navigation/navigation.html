@@ -1,6 +1,94 @@
-<pr-page-placeholder title="Navigation" release="0.6.0" covers="Tabs, Breadcrumbs, Pagination, Menu, NavigationItem.">
-<nav aria-label="Breadcrumb specimen"><ol><li><a href="#">Home</a></li><li><a href="#">Settings</a></li><li aria-current="page">Profile</li></ol></nav>
-<nav aria-label="Pagination specimen"><a href="#">Previous</a> <a href="#">1</a> <a href="#" aria-current="page">2</a> <a href="#">3</a> <a href="#">Next</a></nav>
-<div role="tablist" aria-label="Tabs specimen"><button role="tab" aria-selected="true">Overview</button><button role="tab" aria-selected="false">Activity</button></div>
-<ul><li><a href="#" aria-current="page">A navigation item (current)</a></li><li><a href="#">Another navigation item</a></li></ul>
-</pr-page-placeholder>
+<h1>Navigation</h1>
+<p>
+  Navigation only moves you. It never filters, toggles or creates: that is an action. Each part here is one of three moves: tabs
+  switch between faces of one thing, breadcrumbs and navigation items go to a place, and pagination moves through one list.
+</p>
+
+<h2>Breadcrumbs</h2>
+<p>The way up a real hierarchy, each step a link. Where you are is said in words, not linked.</p>
+<nav class="pr-breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a routerLink="/">Primal</a></li>
+    <li><a routerLink="/navigation/navigation">Navigation</a></li>
+    <li><span aria-current="page">Breadcrumbs</span></li>
+  </ol>
+</nav>
+
+<h2>Tabs</h2>
+<p>
+  Faces of one thing: a report's summary, its data, its history. A face keeps what you did in it while you look at another: type a
+  note, switch tabs, come back. Tab reaches the chosen tab; the arrow keys move between tabs and show each.
+</p>
+<primal-tabs label="Q3 revenue report" [(selected)]="tab">
+  <primal-tab label="Summary">
+    <p>Revenue rose 12% over Q2, led by the Team plan.</p>
+    <primal-field label="A note for the team">
+      <textarea primalControl rows="2"></textarea>
+    </primal-field>
+  </primal-tab>
+  <primal-tab label="Data">
+    <table>
+      <caption>Revenue by plan</caption>
+      <thead>
+        <tr><th scope="col">Plan</th><th scope="col" data-numeric>Revenue</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Free</td><td data-numeric>0</td></tr>
+        <tr><td>Team</td><td data-numeric>84,200</td></tr>
+        <tr><td>Enterprise</td><td data-numeric>51,900</td></tr>
+      </tbody>
+    </table>
+  </primal-tab>
+  <primal-tab label="History">
+    <ol>
+      <li>Created by Ada Shapiro, 1 October</li>
+      <li>Shared with the team, 3 October</li>
+    </ol>
+  </primal-tab>
+  <primal-tab label="Forecast" [disabled]="true"><p>Not reached.</p></primal-tab>
+</primal-tabs>
+<p class="pr-demo-note">The fourth tab can't be chosen yet, so the arrow keys pass over it.</p>
+
+<h2>Pagination</h2>
+<p>
+  One list, page by page. The first and last pages and the ones around yours are always there; the rest fold into a gap. Keep the
+  page in the address so it can be shared and Back returns to it.
+</p>
+<p aria-live="polite">Invoices {{ (page() - 1) * 10 + 1 }}–{{ page() * 10 }} of 120</p>
+<primal-pagination label="Invoices, pages" [pages]="12" [(page)]="page" />
+
+<h2>Menu</h2>
+<p>
+  A button that opens a short list of commands. The commands are actions; the menu only holds them. It sits beside the page, and
+  pressing outside closes it.
+</p>
+<div class="pr-demo-row">
+  <span>Q3 revenue</span>
+  <primal-menu label="Report actions">
+    <button primalMenuTrigger primalIconButton type="button" label="Show Report Actions" emphasis="default">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.75" /><circle cx="12" cy="12" r="1.75" /><circle cx="19" cy="12" r="1.75" /></svg>
+    </button>
+    <button primalMenuItem type="button" (click)="did('Renamed')">Rename Report</button>
+    <button primalMenuItem type="button" (click)="did('Duplicated')">Duplicate Report</button>
+    <button primalMenuItem type="button" (click)="did('Downloaded')">Download Report</button>
+    <button primalMenuItem type="button" aria-disabled="true">Publish Report</button>
+    <hr />
+    <button primalMenuItem type="button" kind="destructive" (click)="did('Deleted')">Delete Report</button>
+  </primal-menu>
+  <span class="pr-demo-note" aria-live="polite">{{ last() }}</span>
+</div>
+<p class="pr-demo-note">Publish Report can't be done yet: it is reachable and read aloud, and does nothing.</p>
+
+<h2>Navigation items</h2>
+<p>Where each goes; the one you are on is marked by its fill and, for a screen reader, by <code>aria-current</code>.</p>
+<nav aria-label="Settings">
+  <ul class="pr-nav-list pr-demo-nav">
+    @for (item of settings; track item.label) {
+      <li>
+        <a href="#" [attr.aria-current]="item.label === here() ? 'page' : null" (click)="$event.preventDefault(); here.set(item.label)">{{ item.label }}</a>
+      </li>
+    }
+  </ul>
+</nav>
+
+<pr-plain-html [code]="plain" />

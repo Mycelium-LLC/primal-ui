@@ -169,6 +169,11 @@
       "n": 29,
       "decision": "How a release is QA'd",
       "ruling": "No QA run until Niko asks for one, and no pushing for it. When he does, QA walks two journeys from nothing: (1) scaffold a new Angular project, install Primal, use it, and write down every bug on the way; (2) build your own design system with Primal as the base, and judge how easy it is (Niko, 2026-11-02)."
+    },
+    {
+      "n": 30,
+      "decision": "0.6.0 starts before the 0.5.0 review",
+      "ruling": "Niko asked to continue with the next release on 2026-11-02 ('continue with the next') while 0.3.0, 0.4.0 and 0.5.0 wait for his review, so decision 9 gives way again; he watches the showcase live and comments as he goes (decision 28), and QA waits for his ask (decision 29)."
     }
   ],
   "releases": [
@@ -1078,16 +1083,23 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
-      "makesTrue": [],
+      "makesTrue": [
+        "primal/navigation/navigation-only-moves-the-person-and-never-filters-toggles",
+        "primal/top-layers/a-dialog-interrupts-returns-the-page-exactly-as-it-was-left",
+        "primal/top-layers/a-panel-popover-or-tooltip-leaves-the-page-the-person-s-own",
+        "primal/top-layers/a-disclosure-keeps-its-open-state-where-it-is-shown-and",
+        "primal/physics/focus-is-always-visible-moves-in-reading-order-and-has-a",
+        "primal/physics/every-component-s-journey-works-from-the-keyboard-alone"
+      ],
       "globalOrIrreversible": false,
       "businessMeasure": "Nobody gets lost or stuck in a layer.",
       "version": "0.6.0",
       "name": "You always know where you are",
       "track": "Navigation and top layers",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Being built 2026-11-02 in session 87-folio-you-always, on release/0.6.0 (cut from release/0.5.0); Niko watches it live and comments. Not ready for QA until he asks (decision 29).",
       "dependsOn": [
         "0.5.0"
       ],
@@ -1096,16 +1108,20 @@
       "size": "M",
       "items": [
         {
-          "text": "Navigation: Tabs, Breadcrumbs, Pagination, Menu, NavigationItem."
+          "text": "*Done 2026-11-02:* Navigation: Tabs (primal-tabs: one tab stop, arrows follow the reading direction, Home and End, disabled tabs skipped, faces keep their state), Breadcrumbs (.pr-breadcrumbs), Pagination (primal-pagination, gaps that keep the row's length), Menu (primal-menu: button, arrows, type-ahead, Escape returns focus), navigation items (.pr-nav-list with aria-current).",
+          "state": "done"
         },
         {
-          "text": "Disclosure and top layers on the native foundations (dialog, popover, details): Dialog (including confirmation), Popover, Tooltip, Accordion."
+          "text": "*Done 2026-11-02:* Top layers on the native foundations: Dialog (primal-dialog on <dialog>: a way out that isn't the answer, the page held still, focus returned, a bottom sheet on a phone), confirmation (PrimalConfirm.ask, focus on the way out), Popover (primal-popover), Tooltip (primalTooltip, hover after a moment, focus at once), Accordion (.pr-accordion on <details>, exclusive by name).",
+          "state": "done"
         },
         {
-          "text": "The seven top-layer answers written once: what earns a modal, beside versus over, what is a place, which layers get addresses, stacking, what returns on close, what each becomes on a phone."
+          "text": "*Done 2026-11-02:* The seven top-layer answers written once (PRIMAL_TOP_LAYER_ANSWERS), read by the Dialogs page.",
+          "state": "done"
         },
         {
-          "text": "Physics: visible focus, reading-order focus, defined return targets, Escape for the topmost layer, keyboard path for every component."
+          "text": "*Done 2026-11-02:* Physics: the four rules, and every component's keys written once (PRIMAL_KEYS), read by the Focus and keys page.",
+          "state": "done"
         },
         {
           "text": "Release chain for 0.6.0."

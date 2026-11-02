@@ -463,6 +463,21 @@
     "value": "9rem",
     "meaning": "The least height of a drop zone: a target big enough to aim a dragged file at."
   },
+  "--pr-menu-width": {
+    "group": "layout",
+    "value": "12rem",
+    "meaning": "The narrowest a menu gets: room for a command of a few words."
+  },
+  "--pr-tooltip-width": {
+    "group": "layout",
+    "value": "20rem",
+    "meaning": "The widest a tooltip grows: a short phrase, never a paragraph."
+  },
+  "--pr-dialog-width": {
+    "group": "layout",
+    "value": "32rem",
+    "meaning": "The widest a dialog grows: one question and its answers, read at a glance."
+  },
   "--pr-toast-width": {
     "group": "layout",
     "value": "24rem",

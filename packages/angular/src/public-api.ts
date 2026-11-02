@@ -11,3 +11,5 @@ export * from './lib/behaviour';
 export * from './lib/actions';
 export * from './lib/feedback';
 export * from './lib/tables';
+export * from './lib/navigation';
+export * from './lib/top-layers';

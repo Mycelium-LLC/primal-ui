@@ -1,5 +1,50 @@
-<pr-page-placeholder title="Popovers and tooltips" release="0.6.0" covers="Popover and Tooltip on the native popover.">
-<p><button type="button" popovertarget="pop-spec">Show Popover</button></p>
-<div id="pop-spec" popover><p>A native popover. Escape or a click outside closes it.</p></div>
-<p><abbr title="A native title attribute is the plainest tooltip">Hover for a native title</abbr></p>
-</pr-page-placeholder>
+<h1>Popovers and tooltips</h1>
+<p>
+  Both sit beside the page, not over it: the page stays yours, it scrolls and reads, and pressing outside closes them. A popover
+  holds something: details, a choice, a small form. A tooltip is a short phrase about what you're pointing at, and never holds
+  anything to press.
+</p>
+
+<h2>A popover</h2>
+<p>
+  Opened by its button. If it holds something to press or type, focus moves into it; Escape or a press outside closes it, and focus
+  goes back to the button.
+</p>
+<div class="pr-demo-row">
+  <primal-popover label="Share link">
+    <button primalPopoverTrigger primalButton type="button">Copy Share Link</button>
+    <primal-field label="Anyone with this link can view the report">
+      <input primalControl type="text" readonly value="https://primal.example/r/q3-revenue" />
+    </primal-field>
+    <div class="pr-demo-row">
+      <button primalButton type="button" emphasis="primary" [run]="copy">Copy Link</button>
+    </div>
+  </primal-popover>
+
+  <primal-popover label="What revenue counts">
+    <button primalPopoverTrigger primalButton type="button" emphasis="quiet">How Revenue Is Counted</button>
+    <p>Revenue counts paid invoices in the quarter, after refunds and before tax.</p>
+    <p>Trials and credits are left out.</p>
+  </primal-popover>
+</div>
+
+<h2>Tooltips</h2>
+<p>
+  On hover after a moment, and at once on keyboard focus. Escape hides one and leaves focus where it is. Tab to these, or point at
+  them.
+</p>
+<div class="pr-demo-row">
+  <button primalIconButton type="button" label="Edit Name" primalTooltip="Edit name">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 20 4-1 11-11-3-3L5 16z" /></svg>
+  </button>
+  <button primalIconButton type="button" label="Copy Address" primalTooltip="Copy address, ⌘C">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" /><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3" /></svg>
+  </button>
+  <button primalButton type="button" primalTooltip="Sends the report to everyone it's shared with" tooltipSide="below">Send Report</button>
+</div>
+<p class="pr-demo-note">
+  Nothing is ever only in a tooltip: on a phone there is no hover. The icon button's name is read aloud and shown when you point at
+  it; the tooltip adds to it.
+</p>
+
+<pr-plain-html [code]="plain" />
