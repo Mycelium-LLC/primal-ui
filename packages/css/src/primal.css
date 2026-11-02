@@ -544,7 +544,7 @@ figcaption {
   accent-color: var(--pr-color-primary);
 }
 
-:where(button, select, textarea, input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file'], [type='image'], [type='hidden'])) {
+:where(button, .pr-button, select, textarea, input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file'], [type='image'], [type='hidden'])) {
   min-block-size: var(--pr-control-height);
   padding-inline: var(--pr-control-inset);
   border: var(--pr-border-width) solid var(--pr-color-border-control);
@@ -573,7 +573,7 @@ textarea {
  * a tonal fill in the text colour; the form's one main action, its submit, wears the primary.
  * Hover and pressed deepen the fill a step at a time, and a press answers at once.
  */
-:where(button, input[type='button'], input[type='reset'], input[type='submit']) {
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -590,16 +590,16 @@ textarea {
     scale var(--pr-duration-fast) var(--pr-ease-standard);
 }
 
-:where(button, input[type='button'], input[type='reset'], input[type='submit']):hover:not(:disabled) {
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']):hover:not(:disabled) {
   background-color: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
 }
 
-:where(button, input[type='button'], input[type='reset'], input[type='submit']):active:not(:disabled) {
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']):active:not(:disabled) {
   background-color: color-mix(in oklab, var(--pr-color-text) 18%, var(--pr-color-surface));
   scale: 0.98;
 }
 
-:where(button, input[type='button'], input[type='reset'], input[type='submit']):focus-visible {
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']):focus-visible {
   outline: var(--pr-focus-width) solid var(--pr-color-focus);
   outline-offset: var(--pr-focus-offset);
 }
@@ -642,7 +642,7 @@ textarea {
   color: var(--pr-color-text-muted);
 }
 
-:where(button, input[type='button'], input[type='reset'], input[type='submit']):disabled {
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']):disabled {
   border-color: transparent;
 }
 
@@ -1246,6 +1246,520 @@ label {
   flex-wrap: wrap;
   gap: var(--pr-gap-component);
   margin-block-start: var(--pr-gap-group);
+}
+
+/* ---------------------------------------------------------------- actions */
+/*
+ * An action's treatment says how much it matters, and what kind it is. Four, each a promise:
+ *
+ *   (no class)            the default: a tonal fill in the text colour. "You can do this."
+ *   .pr-button-primary    the primary: "this is what happens here". One per place.
+ *   .pr-button-quiet      no fill until you point at it: "also possible, less often".
+ *   .pr-button-danger     the danger edge and words: "this takes something away". Never a primary fill.
+ *   .pr-button-final      a danger fill: "this is the last step, and it cannot be undone". Only
+ *                         after a gate (a confirmation the person typed or chose).
+ *
+ * A link styled as a button (a.pr-button) still navigates: it is for moving to a place that
+ * starts a task ("Create Invoice" opening its page), never for doing something.
+ */
+
+a.pr-button {
+  text-decoration: none;
+}
+
+.pr-button-primary:not(:disabled, [aria-disabled='true']) {
+  background-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
+}
+
+.pr-button-primary:not(:disabled, [aria-disabled='true']):hover {
+  background-color: var(--pr-color-primary-hover);
+}
+
+.pr-button-primary:not(:disabled, [aria-disabled='true']):active {
+  background-color: var(--pr-color-primary-pressed);
+}
+
+/* Quiet: a button by its weight and its target, not by a fill. A submit can be quiet too. */
+.pr-button-quiet:not(:disabled, [aria-disabled='true']) {
+  background-color: transparent;
+  color: var(--pr-color-text);
+}
+
+.pr-button-quiet:not(:disabled, [aria-disabled='true']):hover {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+}
+
+.pr-button-quiet:not(:disabled, [aria-disabled='true']):active {
+  background-color: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
+}
+
+/* Danger: the edge and the words in the danger colour, on the page. It reads as a warning, not as the main thing to do. */
+.pr-button-danger:not(:disabled, [aria-disabled='true']) {
+  border-color: var(--pr-color-danger);
+  background-color: transparent;
+  color: var(--pr-color-danger);
+}
+
+.pr-button-danger:not(:disabled, [aria-disabled='true']):hover {
+  background-color: var(--pr-color-danger-surface);
+}
+
+.pr-button-danger:not(:disabled, [aria-disabled='true']):active {
+  background-color: color-mix(in oklab, var(--pr-color-danger) 20%, var(--pr-color-surface));
+}
+
+.pr-button-danger:focus-visible,
+.pr-button-final:focus-visible {
+  outline-color: var(--pr-color-danger);
+}
+
+/* Final: the one danger fill, on the last step of something that cannot be undone. */
+.pr-button-final:not(:disabled, [aria-disabled='true']) {
+  border-color: transparent;
+  background-color: var(--pr-color-danger);
+  color: var(--pr-color-on-danger);
+}
+
+.pr-button-final:not(:disabled, [aria-disabled='true']):hover {
+  background-color: color-mix(in oklab, var(--pr-color-danger) 88%, var(--pr-color-text));
+}
+
+.pr-button-final:not(:disabled, [aria-disabled='true']):active {
+  background-color: color-mix(in oklab, var(--pr-color-danger) 76%, var(--pr-color-text));
+}
+
+/*
+ * Not available now, though it can still be reached and explained: aria-disabled keeps a button in
+ * the tab order, so its description can say why. It looks like a disabled button.
+ */
+:where(button, .pr-button)[aria-disabled='true'] {
+  cursor: not-allowed;
+  border-color: transparent;
+  background-color: var(--pr-color-surface-sunken);
+  color: var(--pr-color-text-muted);
+  scale: none;
+}
+
+/*
+ * Working: the button says it heard you at once, keeps its size and words, and a spinner turns
+ * before them. A second press does nothing until it is done (the Angular button guards it;
+ * in plain HTML, check aria-busy before you act).
+ */
+:where(button, .pr-button)[aria-busy='true'] {
+  cursor: progress;
+  scale: none;
+}
+
+:where(button, .pr-button)[aria-busy='true']::before {
+  content: '';
+  flex: none;
+  inline-size: 1em;
+  block-size: 1em;
+  border: 0.14em solid color-mix(in oklab, currentColor 30%, transparent);
+  border-block-start-color: currentColor;
+  border-radius: var(--pr-radius-round);
+  animation: pr-spin var(--pr-loop-spin) linear infinite;
+}
+
+/* The words a button says when it is done stand where its label was, so nothing moves. */
+.pr-button-face {
+  display: inline-grid;
+}
+
+.pr-button-face > * {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pr-gap-component);
+}
+
+.pr-button-face > .pr-button-label[hidden] {
+  display: inline-flex;
+  visibility: hidden;
+}
+
+.pr-button-said {
+  animation: var(--pr-duration-base) var(--pr-ease-enter) both pr-fade-in;
+}
+
+/* An icon button is square, a full target, and has a name you can't see: aria-label. */
+.pr-icon-button {
+  inline-size: var(--pr-control-height);
+  padding-inline: 0;
+  flex: none;
+}
+
+:where(button, .pr-button) svg {
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  flex: none;
+}
+
+/* A link says where it takes you: away from this site, or to a file. The words for it are read, not shown. */
+a[target='_blank']::after,
+a[rel~='external']::after,
+a[download]::after {
+  display: inline-block;
+  margin-inline-start: 0.2em;
+  font-size: 0.85em;
+  text-decoration: none;
+}
+
+a[target='_blank']::after,
+a[rel~='external']::after {
+  content: '↗' / '';
+}
+
+a[target='_blank']:dir(rtl)::after,
+a[rel~='external']:dir(rtl)::after {
+  content: '↖' / '';
+}
+
+a[download]::after {
+  content: '↓' / '';
+}
+
+a.pr-button::after {
+  font-size: 1em;
+}
+
+.pr-link-file {
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+}
+
+/*
+ * Actions in a row: safe ones together at the end, in reading order; a destructive one apart,
+ * at the start, a section gap from them (decision on distance). On a phone, they stack.
+ *
+ *   <div class="pr-actions">
+ *     <button class="pr-button-danger">Delete Report</button>
+ *     <div class="pr-actions-group"><button>Cancel Changes</button><button class="pr-button-primary">Save Changes</button></div>
+ *   </div>
+ */
+.pr-actions {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: var(--pr-gap-section);
+  row-gap: var(--pr-gap-group);
+}
+
+.pr-actions-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+  margin-inline-start: auto;
+}
+
+/*
+ * A button group: a few buttons that act on one thing, joined into one control. With
+ * aria-pressed, it is a set of toggles; the pressed one sits in the primary's quiet fill.
+ */
+.pr-button-group {
+  display: inline-flex;
+  gap: var(--pr-border-width);
+  border-radius: var(--pr-radius-control);
+}
+
+.pr-button-group > :where(button, .pr-button) {
+  border-radius: 0;
+}
+
+.pr-button-group > :where(button, .pr-button):first-child {
+  border-start-start-radius: var(--pr-radius-control);
+  border-end-start-radius: var(--pr-radius-control);
+}
+
+.pr-button-group > :where(button, .pr-button):last-child {
+  border-start-end-radius: var(--pr-radius-control);
+  border-end-end-radius: var(--pr-radius-control);
+}
+
+.pr-button-group > :where(button, .pr-button):focus-visible {
+  position: relative;
+}
+
+.pr-button-group > [aria-pressed='true']:not(:disabled) {
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+}
+
+/* ---------------------------------------------------------------- feedback */
+/*
+ * An alert speaks about the place it sits in, and stays until what it says stops being true.
+ * Its tone is said by its mark and its words as well as its colour.
+ *
+ *   <div class="pr-alert" data-tone="warning" role="status">
+ *     <p class="pr-alert-title">Your plan ends in 3 days</p>
+ *     <p>Renew it to keep your reports.</p>
+ *   </div>
+ */
+.pr-alert {
+  --pr-alert-tone: var(--pr-color-info);
+  --pr-alert-surface: var(--pr-color-info-surface);
+  --pr-alert-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 11v5M12 8h.01'/%3E%3C/svg%3E");
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--pr-gap-component);
+  row-gap: calc(var(--pr-gap-component) / 2);
+  max-inline-size: var(--pr-measure);
+  padding: var(--pr-gap-group);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-alert-surface);
+  color: var(--pr-color-text);
+}
+
+.pr-alert::before {
+  content: '';
+  grid-row: 1 / span 9;
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  margin-block-start: 0.1em;
+  background-color: var(--pr-alert-tone);
+  mask: var(--pr-alert-mark) center / contain no-repeat;
+}
+
+.pr-alert > * {
+  grid-column: 2;
+  margin: 0;
+}
+
+.pr-alert-title {
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-alert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+  margin-block-start: var(--pr-gap-component);
+}
+
+.pr-alert[data-tone='success'] {
+  --pr-alert-tone: var(--pr-color-success);
+  --pr-alert-surface: var(--pr-color-success-surface);
+  --pr-alert-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m8 12.5 2.5 2.5L16 9.5'/%3E%3C/svg%3E");
+}
+
+.pr-alert[data-tone='warning'] {
+  --pr-alert-tone: var(--pr-color-warning);
+  --pr-alert-surface: var(--pr-color-warning-surface);
+  --pr-alert-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 2.5 20h19z'/%3E%3Cpath d='M12 10v4M12 17h.01'/%3E%3C/svg%3E");
+}
+
+.pr-alert[data-tone='danger'] {
+  --pr-alert-tone: var(--pr-color-danger);
+  --pr-alert-surface: var(--pr-color-danger-surface);
+  --pr-alert-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m9 9 6 6M15 9l-6 6'/%3E%3C/svg%3E");
+}
+
+/* A banner is an alert about the whole product (offline, maintenance): edge to edge, above everything it is about. */
+.pr-alert.pr-banner {
+  max-inline-size: none;
+  border-radius: 0;
+  padding-inline: var(--pr-gutter);
+  border-block-end: var(--pr-border-width) solid var(--pr-alert-tone);
+}
+
+/*
+ * Toasts: the corner, the one raised voice. A toast reports what just happened where the person
+ * can no longer see it (the row is gone, the job finished elsewhere), holds the undo, and fades.
+ * The toaster is a manual popover, so it sits over dialogs too.
+ */
+.pr-toaster {
+  position: fixed;
+  inset: auto var(--pr-gutter) var(--pr-gutter) auto;
+  inset-inline: auto var(--pr-gutter);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--pr-gap-component);
+  inline-size: min(var(--pr-toast-width), 100% - 2 * var(--pr-gutter));
+  z-index: var(--pr-layer-toast);
+}
+
+.pr-toaster:not(:popover-open) {
+  display: none;
+}
+
+.pr-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-group);
+  inline-size: 100%;
+  min-block-size: var(--pr-control-height);
+  padding-block: var(--pr-gap-component);
+  padding-inline: var(--pr-gap-group) var(--pr-gap-component);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-text);
+  color: var(--pr-color-surface);
+  box-shadow: var(--pr-elevation-1);
+  animation: var(--pr-duration-base) var(--pr-ease-enter) both pr-toast-in;
+}
+
+.pr-toast[data-leaving] {
+  animation: var(--pr-duration-fast) var(--pr-ease-exit) both pr-fade-out;
+}
+
+.pr-toast-message {
+  flex: 1;
+  margin: 0;
+}
+
+/* On the toast's ink, its buttons are drawn in the page colour. */
+.pr-toast :where(button) {
+  min-block-size: calc(var(--pr-control-height) - var(--pr-gap-component));
+  background-color: transparent;
+  color: var(--pr-color-surface);
+}
+
+.pr-toast :where(button):hover {
+  background-color: color-mix(in oklab, var(--pr-color-surface) 16%, var(--pr-color-text));
+}
+
+.pr-toast :where(button):focus-visible {
+  outline-color: var(--pr-color-surface);
+}
+
+.pr-toast-close {
+  inline-size: calc(var(--pr-control-height) - var(--pr-gap-component));
+  padding-inline: 0;
+}
+
+@keyframes pr-toast-in {
+  from {
+    opacity: 0;
+    translate: 0 var(--pr-gap-group);
+  }
+}
+
+/* A spinner: work is happening, and nobody knows how long it takes. Only when neither the shape nor the length is known. */
+.pr-spinner {
+  display: inline-block;
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  vertical-align: middle;
+  border: 0.15em solid color-mix(in oklab, currentColor 25%, transparent);
+  border-block-start-color: var(--pr-color-primary);
+  border-radius: var(--pr-radius-round);
+  animation: pr-spin var(--pr-loop-spin) linear infinite;
+}
+
+/* A progress bar with its words: what is happening, and how far along it is. */
+.pr-progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--pr-gap-component);
+  max-inline-size: var(--pr-measure);
+}
+
+.pr-progress > progress {
+  grid-column: 1 / -1;
+}
+
+.pr-progress-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--pr-color-text-muted);
+}
+
+/* No value yet: a band travels the track, so it is clearly moving and clearly not a number. */
+progress:indeterminate {
+  background-image: linear-gradient(to right, transparent 0 35%, var(--pr-color-primary) 35% 65%, transparent 65%);
+  background-size: 250% 100%;
+  animation: pr-travel var(--pr-loop-shimmer) linear infinite;
+}
+
+progress:indeterminate::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+progress:indeterminate::-moz-progress-bar {
+  background-color: transparent;
+}
+
+/*
+ * A skeleton is the shape of what is coming: a line of text, a picture, a round avatar. The
+ * container says it is busy (aria-busy="true"), and the skeletons are hidden from assistive
+ * technology, which hears the busy state instead.
+ */
+.pr-skeleton {
+  display: block;
+  block-size: 1lh;
+  max-inline-size: var(--pr-measure);
+  border-radius: var(--pr-radius-well);
+  background-color: var(--pr-color-surface-sunken);
+  background-image: linear-gradient(
+    to right,
+    transparent 30%,
+    color-mix(in oklab, var(--pr-color-text) 5%, var(--pr-color-surface-sunken)) 50%,
+    transparent 70%
+  );
+  background-size: 250% 100%;
+  animation: pr-travel var(--pr-loop-shimmer) linear infinite;
+}
+
+.pr-skeleton[data-shape='text'] {
+  block-size: 0.8lh;
+  margin-block: 0.1lh;
+}
+
+.pr-skeleton[data-shape='circle'] {
+  inline-size: 2.5em;
+  block-size: 2.5em;
+  border-radius: var(--pr-radius-round);
+}
+
+.pr-skeleton[data-shape='block'] {
+  block-size: auto;
+  aspect-ratio: 16 / 9;
+}
+
+@keyframes pr-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@keyframes pr-travel {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes pr-breathe {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Less motion: a spinner breathes instead of turning, and skeletons hold still. */
+@media (prefers-reduced-motion: reduce) {
+  .pr-spinner,
+  :where(button, .pr-button)[aria-busy='true']::before {
+    animation: pr-breathe var(--pr-loop-shimmer) ease-in-out infinite;
+  }
+
+  .pr-skeleton,
+  progress:indeterminate {
+    animation: none;
+  }
+
+  progress:indeterminate {
+    background-position: 50% 0;
+  }
 }
 
 /* ---------------------------------------------------------------- utilities */

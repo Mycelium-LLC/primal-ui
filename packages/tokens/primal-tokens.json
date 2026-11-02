@@ -216,6 +216,13 @@
     "light": "oklch(93.76% 0.0144 150)",
     "dark": "oklch(22.36% 0.0132 161.24)"
   },
+  "--pr-color-on-danger": {
+    "group": "colour",
+    "value": "light-dark(var(--pr-white), var(--pr-black))",
+    "meaning": "Text on a danger fill, the last step of an action that cannot be undone: the page colour, white in light and ink in dark.",
+    "light": "oklch(100% 0 0)",
+    "dark": "oklch(15.05% 0.0042 285.88)"
+  },
   "--pr-primary-50": {
     "group": "scale",
     "value": "color-mix(in oklab, var(--pr-primary) 8%, var(--pr-white))",
@@ -446,6 +453,11 @@
     "value": "28rem",
     "meaning": "The widest a single-line field grows: as wide as the answer it asks for."
   },
+  "--pr-toast-width": {
+    "group": "layout",
+    "value": "24rem",
+    "meaning": "The widest a toast grows: one short sentence and its action."
+  },
   "--pr-list-height": {
     "group": "layout",
     "value": "20rem",
@@ -560,5 +572,15 @@
     "group": "motion",
     "value": "cubic-bezier(0.3, 0, 1, 1)",
     "meaning": "Leaving: gentle start, fast end."
+  },
+  "--pr-loop-spin": {
+    "group": "motion",
+    "value": "800ms",
+    "meaning": "One turn of a spinner: steady, never urgent. A loop, so reduced motion swaps it for a slow fade rather than stopping it."
+  },
+  "--pr-loop-shimmer": {
+    "group": "motion",
+    "value": "1600ms",
+    "meaning": "One pass of the light across a skeleton: slow, so waiting never looks frantic."
   }
 }

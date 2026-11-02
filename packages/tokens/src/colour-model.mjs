@@ -289,6 +289,12 @@ export const ROLES = {
       ],
     ]),
   ),
+  'on-danger': {
+    meaning: 'Text on a danger fill, the last step of an action that cannot be undone: the page colour, white in light and ink in dark.',
+    css: 'light-dark(var(--pr-white), var(--pr-black))',
+    value: paper,
+    pairs: { danger: 'text' },
+  },
 };
 
 /**

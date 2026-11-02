@@ -108,6 +108,9 @@
   /* The widest a single-line field grows: as wide as the answer it asks for. */
   --pr-field-width: 28rem;
 
+  /* The widest a toast grows: one short sentence and its action. */
+  --pr-toast-width: 24rem;
+
   /* The tallest an open list of options grows before it scrolls: about eight options. */
   --pr-list-height: 20rem;
 
@@ -176,6 +179,12 @@
 
   /* Leaving: gentle start, fast end. */
   --pr-ease-exit: cubic-bezier(0.3, 0, 1, 1);
+
+  /* One turn of a spinner: steady, never urgent. A loop, so reduced motion swaps it for a slow fade rather than stopping it. */
+  --pr-loop-spin: 800ms;
+
+  /* One pass of the light across a skeleton: slow, so waiting never looks frantic. */
+  --pr-loop-shimmer: 1600ms;
 }
 
 /*
@@ -261,6 +270,9 @@
 
   /* The quiet background behind a success message. */
   --pr-color-success-surface: color-mix(in oklab, var(--pr-color-success) 12%, var(--pr-color-surface));
+
+  /* Text on a danger fill, the last step of an action that cannot be undone: the page colour, white in light and ink in dark. */
+  --pr-color-on-danger: light-dark(var(--pr-white), var(--pr-black));
 
   /* Step 50: 8% primary, the rest the project's white. */
   --pr-primary-50: color-mix(in oklab, var(--pr-primary) 8%, var(--pr-white));
