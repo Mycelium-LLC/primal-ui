@@ -139,6 +139,26 @@
       "n": 23,
       "decision": "Adjusting the harmony",
       "ruling": "Each harmony colour (companion, tertiary) can be adjusted lightly: up to 20° round the wheel and 0.12 lighter or darker than the primary; the Colour page shows the final palette large, in light and dark (Niko, 2026-10-20: 'lets offer to adjust lightly each option. and see the final pallete properly')."
+    },
+    {
+      "n": 24,
+      "decision": "Fields are native",
+      "ruling": "0.3.0 builds one field around the native control instead of a component per field type (TextField, NumberField…): the browser keeps autofill, pickers, the phone keyboard and arrow keys, any Angular forms API works, and plain HTML gets the same markup. Primal marks what is optional, never what is required, and only on controls that can be left empty. Decided by Claude under decision 12 and the requirement primal/coverage/native-behaviour-is-kept-wherever-it-serves-the-person."
+    },
+    {
+      "n": 25,
+      "decision": "Lists are drawn by Primal",
+      "ruling": "A select's list and an autocomplete's list are Primal's own, drawn and designed, never the system popup (Niko, 2026-10-20, QA of 0.3.0: 'fully designed select please. and auto complete one please with full options on click'). This narrows decision 24 for lists only: the native select stays inside as the value, so forms, validity and reset still work as native. A multiple select stays a native list box; plain HTML without the Angular adapter keeps the browser's popup."
+    },
+    {
+      "n": 26,
+      "decision": "Magma by default",
+      "ruling": "Primal's default primary is Mycelium Magma (#E61924), on the brand's ink (#0B0B0D) and white (#FFFFFF), reversing the earlier rule that the base carries no brand (decision 2's base, and the retired requirement primal/themes/primal-s-own-look-is-minimal-and-carries-no-brand-so-its). The model stays as it was: one primary, every role derived, so any project still replaces it with one token (Niko, 2026-10-20, through TL: 'set mycelium magma as the primary color as default. with proper color pallete'). Decision 16 stands: there is still one base and no second theme."
+    },
+    {
+      "n": 27,
+      "decision": "Exact Magma in dark",
+      "ruling": "In dark the primary fill stays exactly the primary, with white text, as in light (Niko, 2026-10-20: 'keep exact magma'): Magma is #E61924 with white text at 4.64:1 in both modes, and its hover and pressed deepen in both. A fill is lifted towards white in dark only if it would sink into the page (under 3:1 against the dark surfaces). Text in the primary (links) is still lightened in dark so it reads on the page."
     }
   ],
   "releases": [
@@ -534,7 +554,7 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
       "makesTrue": [],
@@ -543,7 +563,7 @@
       "version": "0.3.0",
       "name": "Fields that never leave you guessing",
       "track": "Forms",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Built 2026-10-20; reworked after Niko's QA the same day; release/0.3.0 ready for QA again.",
       "dependsOn": [
         "0.2.0"
       ],
@@ -552,19 +572,40 @@
       "size": "L",
       "items": [
         {
-          "text": "Field primitives: TextField (text, email, password, tel, url, search), NumberField, date and time fields (native inputs), Checkbox, Radio and RadioGroup, Switch, Slider, ColorField, FileField, TextArea, Select, OutputValue, Progress and Meter as display."
+          "text": "*Done 2026-10-20:* Field primitives, native-first: one primal-field around any native control (text kinds, number, date and time kinds, checkbox, radio, switch, range, colour, file, text area, select), marked with primalControl, so the browser keeps autofill, pickers and the phone keyboard. Output, progress and meter styled in the core.",
+          "state": "done"
         },
         {
-          "text": "Composition: FieldLabel, FormField (label, description, control, message), FieldGroup (fieldset and legend), ValidationMessage."
+          "text": "*Done 2026-10-20:* Composition: primal-field (label, description, Optional, control, message), primal-field-group (fieldset and legend, one message for a radio group), form[primalForm]; plain-HTML classes .pr-field, .pr-choice, .pr-group, .pr-field-description, .pr-field-message, .pr-optional, .pr-form-actions.",
+          "state": "done"
         },
         {
-          "text": "Validation contract: when errors appear (on leaving a field, on submit), where, how they are announced, how they clear."
+          "text": "*Done 2026-10-20:* Validation contract: errors appear on leaving a field or on submit, sit under the field, are announced (polite live region, aria-invalid, aria-describedby), clear as soon as the answer is right; messages from the browser's own validity in the person's words (PRIMAL_MESSAGES to change them); focus moves to the first field to fix; reset starts over.",
+          "state": "done"
         },
         {
-          "text": "Angular adapter: the field primitives as standalone components working with Angular forms, plus the same markup documented for plain HTML."
+          "text": "*Done 2026-10-20:* Angular adapter: PRIMAL_FORMS (PrimalForm, PrimalField, PrimalFieldGroup, PrimalControl), working with any Angular forms API because the control stays native; an outside error (a forms library, a server) wins over the browser's. The same markup documented for plain HTML on each page.",
+          "state": "done"
         },
         {
-          "text": "Release chain for 0.3.0."
+          "text": "*Done 2026-10-20:* The seven Forms pages: Text fields, Choices, Pickers, Select, Form structure, Validation (live), Example forms (sign-in, profile, settings).",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20 (Niko's QA):* Select drawn by Primal: primal-select opens Primal's own list (never the system's popup), keyboard as the native one (arrows, Home, End, type to jump, Enter, Escape), with selected, active, disabled, grouped, invalid, dark and right-to-left states. The native select stays inside as the value, so forms, validity and reset work unchanged.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20 (Niko's QA):* Autocomplete: primal-autocomplete on a text field opens every option on click, then narrows them as the person types, matched text marked; arrow keys and Enter choose; it can require one of its options.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20 (Niko's QA):* Checkbox, radio and buttons designed by Primal in every state: rest, hover, focus, checked, mixed, pressed, disabled, invalid; buttons filled (a field is outlined, an action is filled).",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20:* Release chain for 0.3.0: release/0.3.0, docs/qa/0.3.0.md, version 0.3.0.",
+          "state": "done"
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
@@ -659,6 +700,141 @@
           "role": "a developer on a Mycelium project",
           "action": "build a form",
           "outcome": "it is consistent and accessible without my own field code"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/a-list-of-options-opens-as-primal-s-own-designed-list-with",
+          "requirementKind": "invariant",
+          "statement": "A list of options opens as Primal's own designed list, with the keyboard, focus and states of the native one, in light, dark and both directions.",
+          "success": "Opening a select or an autocomplete shows Primal's list, never the system's popup; arrows, Home, End, typing, Enter and Escape work as in the native select; selected, active, disabled and invalid each look distinct.",
+          "disqualifier": "The system's popup appears, a key the native select answers does nothing, or a state can't be told from another.",
+          "evidence": "Niko's QA of 0.3.0, 2026-10-20: 'fully designed select please'."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/an-autocomplete-shows-every-option-when-opened-and-narrows",
+          "requirementKind": "user",
+          "statement": "An autocomplete shows every option when opened and narrows them as the person types.",
+          "success": "Clicking the empty field lists every option; typing leaves only the options that contain the text, with the match marked; choosing one fills the field.",
+          "disqualifier": "Clicking shows nothing until the person types, or the list keeps options that do not match.",
+          "evidence": "Niko's QA of 0.3.0, 2026-10-20: 'auto complete one please with full options on click'.",
+          "role": "a person filling a form",
+          "action": "pick a known answer from a long list",
+          "outcome": "I see what I can choose before typing, and get there in a few letters"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/checkboxes-radios-and-buttons-are-drawn-by-primal-in-every",
+          "requirementKind": "invariant",
+          "statement": "Checkboxes, radios and buttons are drawn by Primal in every state, never left at the browser default.",
+          "success": "Rest, hover, focus, checked or pressed, mixed, disabled and invalid each have a designed look from tokens, in light and dark.",
+          "disqualifier": "Any of them shows the browser's default look in some state.",
+          "evidence": "Niko's QA of 0.3.0, 2026-10-20 (screenshot of radio, checkbox and buttons)."
+        }
+      ]
+    },
+    {
+      "kind": "release",
+      "state": "approved",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [
+        "primal/themes/primal-s-default-look-is-mycelium-s-magma-on-the-brand-s-ink",
+        "primal/palette/the-primary-keeps-its-chosen-colour-wherever-it-already-reads",
+        "primal/palette/the-primary-s-hover-pressed-focus-and-quiet-fill-and-a-scale"
+      ],
+      "globalOrIrreversible": false,
+      "businessMeasure": "A Mycelium project starts from Primal already looking like Mycelium, and any other project changes one token.",
+      "version": "0.4.0",
+      "name": "Magma by default",
+      "track": "Foundation",
+      "status": "Built 2026-10-20; release/0.4.0 cut, ready for Niko's review and QA.",
+      "dependsOn": [
+        "0.3.0"
+      ],
+      "goal": "Primal's default primary is Mycelium Magma (#E61924) on the brand's ink and white, with a full palette derived from that one colour.",
+      "usersSee": "Every page in Magma, ink and white; on the Colour page a primary scale from 50 to 950, the states of the primary (hover, pressed, focus, a quiet fill), and the dark mapping, all re-derived when the primary changes.",
+      "size": "S",
+      "items": [
+        {
+          "text": "*Done 2026-10-20:* Defaults from the Mycelium brand book: the primary is Magma #E61924, the black is ink #0B0B0D, the white is #FFFFFF.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20:* The primary role moves by luminance, in linear light, never by hue, and only as far as reading needs: Magma is exactly Magma as a fill on white; primary-text (links, the current place) goes a shade further so it reads on every surface.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20:* The primary's states from the one token: primary-hover, primary-pressed (Magma pressed is the brand's magma-deep #C0121C), focus and primary-surface. The fill is exact Magma with white text in light and dark (decision 27); on-primary meets AA on every state.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20:* A primary scale, --pr-primary-50 to --pr-primary-950, mixed in OKLab towards the project's white and black. Every role mix moved to OKLab, so tints keep the primary's hue instead of swinging towards ink's faint violet.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20:* The Colour page shows the states in light and dark and the scale; the Themes, Getting started and Overview pages say Primal starts from Magma on ink and white.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20 (found in QA):* The reset's colour rule for controls had element specificity and beat Primal's :where() control rules, so a submit button showed text-coloured text instead of on-primary since 0.1.0; the reset is now :where() too.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-10-20:* Release chain for 0.4.0: release/0.4.0, docs/qa/0.4.0.md, version 0.4.0.",
+          "state": "done"
+        }
+      ],
+      "rollout": "Merged to main by a release session; no hosting yet. The repository stays private until 1.0.0.",
+      "doneWhen": "Every page shows Magma in light and dark, the contrast check passes for the new defaults and every primary round the wheel, and QA ✓ by eye with light and dark screenshots of every component.",
+      "mutations": [
+        {
+          "op": "retire",
+          "kind": "requirement",
+          "address": "primal/themes/primal-s-own-look-is-minimal-and-carries-no-brand-so-its",
+          "why": "Niko, 2026-10-20: 'set mycelium magma as the primary color as default. with proper color pallete'. Decision 26."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/themes/primal-s-default-look-is-mycelium-s-magma-on-the-brand-s-ink",
+          "requirementKind": "invariant",
+          "statement": "Primal's default look is Mycelium's Magma on the brand's ink and white, and a project replaces it by setting its own primary, black and white.",
+          "success": "With no overrides every primary role shows Magma #E61924 on white in light; overriding the primary token alone re-derives every primary role, state and step.",
+          "disqualifier": "Magma is darkened or shifted where it already reads, a primary colour is written anywhere but the one token, or changing the primary leaves a Magma-coloured role behind.",
+          "evidence": "Niko, 2026-10-20 (through TL): 'set mycelium magma as the primary color as default. with proper color pallete'. Brand book tokens, mycelium-brand src/styles.scss."
+        },
+        {
+          "op": "add",
+          "kind": "feature",
+          "address": "palette",
+          "chapter": "foundation",
+          "title": "The palette",
+          "intent": "One colour, every shade it needs.",
+          "lifecycle": "active"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/palette/the-primary-keeps-its-chosen-colour-wherever-it-already-reads",
+          "requirementKind": "invariant",
+          "statement": "The primary keeps its chosen colour wherever it already reads against the page, and is darkened or lightened only as far as reading needs.",
+          "success": "A primary that meets 4.5:1 on the page shows unchanged; one that does not is moved in luminance until it does, keeping its hue.",
+          "disqualifier": "A readable primary is changed, or an unreadable one ships as is.",
+          "evidence": "Session 7F, 2026-10-20: the earlier rule turned Magma #E61924 into #C50000."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/palette/the-primary-s-hover-pressed-focus-and-quiet-fill-and-a-scale",
+          "requirementKind": "invariant",
+          "statement": "The primary's hover, pressed, focus and quiet fill, and a scale of steps from 50 to 950, are all derived from the one primary token in light and dark.",
+          "success": "Changing the primary token changes every state and step; text on every primary state meets 4.5:1; the steps run evenly from near the white to near the black.",
+          "disqualifier": "A state or step holds its own colour value, or text on a state misses AA.",
+          "evidence": "Niko, 2026-10-20 (through TL): 'with proper color pallete'."
         }
       ]
     },
@@ -670,12 +846,12 @@
       "makesTrue": [],
       "globalOrIrreversible": false,
       "businessMeasure": "Feedback is decided, not defaulted.",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "name": "Every action answers",
       "track": "Actions and feedback",
       "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
-        "0.3.0"
+        "0.4.0"
       ],
       "goal": "Actions and their feedback follow one written behaviour model, so every action is acknowledged, its outcome is specific, and its weight matches what it did.",
       "usersSee": "Buttons, links and button groups in every state; alerts, toasts, spinners, progress and skeletons; and a page that walks through each action kind with its gate, sequence, weight and undo.",
@@ -694,7 +870,7 @@
           "text": "Action kinds written once (destructive, constructive, mutative, navigational, background, confirmatory; reversible or not), each with gate, sequence, weight, reversibility window and error contract."
         },
         {
-          "text": "Release chain for 0.4.0."
+          "text": "Release chain for 0.5.0."
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
@@ -816,12 +992,12 @@
       "makesTrue": [],
       "globalOrIrreversible": false,
       "businessMeasure": "Nobody gets lost or stuck in a layer.",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "name": "You always know where you are",
       "track": "Navigation and top layers",
       "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
-        "0.4.0"
+        "0.5.0"
       ],
       "goal": "Moving around and opening things on top follow written rules: navigation only moves, each top layer keeps its claim, and focus is never lost.",
       "usersSee": "Tabs, breadcrumbs, pagination, menus and navigation items; dialogs, popovers, tooltips and accordions; keyboard paths through each, with focus visible and returning where it should.",
@@ -840,7 +1016,7 @@
           "text": "Physics: visible focus, reading-order focus, defined return targets, Escape for the topmost layer, keyboard path for every component."
         },
         {
-          "text": "Release chain for 0.5.0."
+          "text": "Release chain for 0.6.0."
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
@@ -943,12 +1119,12 @@
       "makesTrue": [],
       "globalOrIrreversible": false,
       "businessMeasure": "Screens say what things are at a glance.",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "name": "Things look like what they are",
       "track": "Content, information and cells",
       "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
-        "0.5.0"
+        "0.6.0"
       ],
       "goal": "Content, information and layout components say what things are and how they stand, and the first cells do whole jobs end to end.",
       "usersSee": "Cards as list items, list items, description lists, the full table, code blocks, badges, avatars, status indicators, empty states, layout helpers; and cells such as subscribe, search with results and an issue tile.",
@@ -970,7 +1146,7 @@
           "text": "First cells: newsletter subscribe, search with results and feedback, an item tile with its payload named."
         },
         {
-          "text": "Release chain for 0.6.0."
+          "text": "Release chain for 0.7.0."
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
@@ -1073,12 +1249,12 @@
       "makesTrue": [],
       "globalOrIrreversible": false,
       "businessMeasure": "A project starts from places, not parts.",
-      "version": "0.7.0",
+      "version": "0.8.0",
       "name": "Whole places to work in",
       "track": "Surfaces",
       "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
-        "0.6.0"
+        "0.7.0"
       ],
       "goal": "Reference surfaces show how cells combine into complete journeys, so a new project starts from working places rather than parts.",
       "usersSee": "Reference surfaces: sign-in and sign-up, an app shell with navigation, a settings area, a list with detail, a multi-step form, each working at phone and desk widths.",
@@ -1091,7 +1267,7 @@
           "text": "Each surface's journey written as 3–5 steps with its next two moves, and checked by the blur test."
         },
         {
-          "text": "Release chain for 0.7.0."
+          "text": "Release chain for 0.8.0."
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
@@ -1159,19 +1335,19 @@
       "makesTrue": [],
       "globalOrIrreversible": false,
       "businessMeasure": "Behaviour is written down, not tribal.",
-      "version": "0.8.0",
+      "version": "0.9.0",
       "name": "Every element keeps its promise",
       "track": "Contracts",
       "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
-        "0.7.0"
+        "0.8.0"
       ],
       "goal": "Every primitive, cell and surface documents its contract, kept as framework-independent data next to the code, with the documentation generated from it.",
       "usersSee": "In the showcase, each component's page: its promise, behaviour, context, relationships, states, accessibility, failure conditions, live examples and do and don't.",
       "size": "M",
       "items": [
         {
-          "text": "Contract schema (framework-independent data) and a contract for every component shipped by 0.7.0."
+          "text": "Contract schema (framework-independent data) and a contract for every component shipped by 0.8.0."
         },
         {
           "text": "Documentation pages generated from the contracts, with live examples, do and don't, accessibility notes and API."
@@ -1180,7 +1356,7 @@
           "text": "A check that fails the build when a component has no contract or its contract is incomplete."
         },
         {
-          "text": "Release chain for 0.8.0."
+          "text": "Release chain for 0.9.0."
         }
       ],
       "rollout": "Merged to main by Niko; the showcase is redeployed from main. The repository stays private until 1.0.0, so nobody outside Mycelium sees it.",
@@ -1250,7 +1426,7 @@
       "track": "Distribution",
       "status": "Draft; starts after Niko's review of the release before it.",
       "dependsOn": [
-        "0.8.0"
+        "0.9.0"
       ],
       "goal": "Mycelium Primal goes public as an open-source, versioned set of packages with a starter app, and passes its acceptance test.",
       "usersSee": "The public repository, the published packages, the starter app and the public showcase, each stating 1.0.0.",

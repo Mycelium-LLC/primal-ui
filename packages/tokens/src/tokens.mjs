@@ -58,11 +58,15 @@ export const space = {
   gutter: { meaning: 'The space between the viewport edge and content.', value: 'clamp(1rem, 0.6rem + 2vw, 2rem)' },
   'control-height': { meaning: 'The height of a single-line control.', value: '2.5rem' },
   'control-inset': { meaning: 'Horizontal padding inside a control.', value: '0.75rem' },
+  'track-thickness': { meaning: 'The thickness of a progress or meter track.', value: '0.5rem' },
   'target-min': { meaning: 'The smallest pointer target (WCAG 2.2 AA asks 24px).', value: '1.5rem' },
+  'choice-size': { meaning: 'The box of a checkbox or a radio: the size of a capital letter and a little more.', value: '1.25rem' },
 };
 
 export const layout = {
   'container-reading': { meaning: 'The maximum width of reading pages and documentation.', value: '72rem' },
+  'field-width': { meaning: 'The widest a single-line field grows: as wide as the answer it asks for.', value: '28rem' },
+  'list-height': { meaning: 'The tallest an open list of options grows before it scrolls: about eight options.', value: '20rem' },
   'container-full': { meaning: 'Full width, for app surfaces that use the whole screen.', value: '100%' },
 };
 
@@ -73,6 +77,7 @@ export const shape = {
   'radius-layer': { meaning: 'This sits on top of the page (a popover, a dialog).', value: '0.5rem' },
   'radius-round': { meaning: 'This is a person or a single status (an avatar, a dot).', value: '999px' },
   'border-width': { meaning: 'A line that separates or outlines.', value: '1px' },
+  'border-width-choice': { meaning: 'The edge of a checkbox or radio: thicker than a line, so a small control still reads.', value: '1.5px' },
   'focus-width': { meaning: 'The width of the focus ring: here is where the keyboard is.', value: '2px' },
   'focus-offset': { meaning: 'The gap between an element and its focus ring.', value: '2px' },
 };

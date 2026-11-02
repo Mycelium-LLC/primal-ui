@@ -41,7 +41,7 @@ figcaption {
 .pr-focus {
   border-radius: var(--pr-radius-control);
   background-color: var(--pr-color-surface);
-  outline: var(--pr-focus-width) solid var(--pr-color-primary);
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
   outline-offset: var(--pr-focus-offset);
 }
 

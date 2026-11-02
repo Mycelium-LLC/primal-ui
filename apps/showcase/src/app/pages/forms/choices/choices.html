@@ -1,14 +1,100 @@
-<pr-page-placeholder title="Choices" release="0.3.0" covers="Checkbox, Radio and RadioGroup, Switch.">
-<fieldset>
-  <legend>Checkboxes</legend>
-  <label><input type="checkbox" checked> Email me when a report is ready</label><br>
-  <label><input type="checkbox"> Email me a weekly summary</label><br>
-  <label><input type="checkbox" disabled> Disabled choice</label>
-</fieldset>
-<fieldset>
-  <legend>Radio group</legend>
-  <label><input type="radio" name="density" checked> Comfortable</label><br>
-  <label><input type="radio" name="density"> Compact</label>
-</fieldset>
-<p><label><input type="checkbox" role="switch"> Switch (a checkbox with the switch role)</label></p>
-</pr-page-placeholder>
+<h1>Choices</h1>
+<p>
+  A choice is answered by pointing, not typing: a checkbox, a radio or a switch. The control comes first, then its label, and
+  the whole label is the target, so the click lands anywhere on the words.
+</p>
+
+<h2>Checkboxes</h2>
+<p>Each checkbox is its own yes or no.</p>
+<primal-field-group legend="Notifications" description="Choose any, or none.">
+  <primal-field label="When a report is ready"><input primalControl type="checkbox" checked /></primal-field>
+  <primal-field label="When someone comments" description="Only on reports you own."><input primalControl type="checkbox" /></primal-field>
+  <primal-field label="A weekly summary"><input primalControl type="checkbox" disabled /></primal-field>
+</primal-field-group>
+<primal-field label="I agree to the terms of service">
+  <input primalControl type="checkbox" required />
+</primal-field>
+
+<h3>Some of a group</h3>
+<p>A checkbox that stands for a group shows a dash while only some of it is chosen.</p>
+<primal-field-group legend="Export">
+  <primal-field label="Every column">
+    <input primalControl type="checkbox" [checked]="allColumns()" [indeterminate]="someColumns()" (change)="setAll($any($event.target).checked)" />
+  </primal-field>
+  <div class="pr-nested">
+    @for (c of columns; track c.name) {
+      <primal-field [label]="c.name">
+        <input primalControl type="checkbox" [checked]="chosen().has(c.name)" (change)="toggle(c.name, $any($event.target).checked)" />
+      </primal-field>
+    }
+  </div>
+</primal-field-group>
+
+<h2>A radio group</h2>
+<p>
+  One answer from a few. The group is a single stop in the tab order, and the arrow keys move between its options, the way the
+  browser does it. The group asks the question, and it holds the one message.
+</p>
+<primal-field-group legend="Plan" description="You can change it later.">
+  <primal-field label="Free"><input primalControl type="radio" name="plan" value="free" required /></primal-field>
+  <primal-field label="Team" description="Up to 20 people."><input primalControl type="radio" name="plan" value="team" /></primal-field>
+  <primal-field label="Enterprise" description="Talk to us first."><input primalControl type="radio" name="plan" value="enterprise" disabled /></primal-field>
+</primal-field-group>
+
+<h2>Every state</h2>
+<p>Hover and press any of them; tab to see the focus ring.</p>
+<div class="pr-table">
+  <table class="pr-states-table">
+    <caption>Checkboxes and radios in each state</caption>
+    <thead>
+      <tr>
+        <th scope="col">State</th>
+        <th scope="col">Checkbox</th>
+        <th scope="col">Radio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Not chosen</th>
+        <td><input type="checkbox" aria-label="Checkbox, not chosen" /></td>
+        <td><input type="radio" name="s1" aria-label="Radio, not chosen" /></td>
+      </tr>
+      <tr>
+        <th scope="row">Chosen</th>
+        <td><input type="checkbox" checked aria-label="Checkbox, chosen" /></td>
+        <td><input type="radio" name="s2" checked aria-label="Radio, chosen" /></td>
+      </tr>
+      <tr>
+        <th scope="row">Some of a group</th>
+        <td><input type="checkbox" [indeterminate]="true" aria-label="Checkbox, some of a group" /></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">Not available</th>
+        <td><input type="checkbox" disabled aria-label="Checkbox, not available" /></td>
+        <td><input type="radio" name="s3" disabled aria-label="Radio, not available" /></td>
+      </tr>
+      <tr>
+        <th scope="row">Chosen, not available</th>
+        <td><input type="checkbox" checked disabled aria-label="Checkbox, chosen, not available" /></td>
+        <td><input type="radio" name="s4" checked disabled aria-label="Radio, chosen, not available" /></td>
+      </tr>
+      <tr>
+        <th scope="row">Needs an answer</th>
+        <td><input type="checkbox" aria-invalid="true" aria-label="Checkbox, needs an answer" /></td>
+        <td><input type="radio" name="s5" aria-invalid="true" aria-label="Radio, needs an answer" /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Switches</h2>
+<p>
+  A switch changes a setting at once, with no Save. Its label says what it changes, never just "On" or "Enabled", so the person
+  knows what happens before they flip it.
+</p>
+<primal-field label="Email me a weekly summary"><input primalControl type="checkbox" role="switch" checked /></primal-field>
+<primal-field label="Show finished tasks in the list" description="Finished tasks move to the end."><input primalControl type="checkbox" role="switch" /></primal-field>
+<primal-field label="Use two-step sign-in" description="Your organisation requires it."><input primalControl type="checkbox" role="switch" checked disabled /></primal-field>
+
+<pr-plain-html [code]="plain" />

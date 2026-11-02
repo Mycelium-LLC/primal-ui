@@ -1,14 +1,69 @@
-<pr-page-placeholder title="Example forms" release="0.3.0" covers="Sign-in, profile and settings forms from Primal alone.">
-<form (submit)="$event.preventDefault()" aria-label="Sign in specimen">
-  <h2>Sign in</h2>
-  <p><label>Email <input type="email" autocomplete="username"></label></p>
-  <p><label>Password <input type="password" autocomplete="current-password"></label></p>
-  <p><button type="submit">Sign In</button></p>
-</form>
-<form (submit)="$event.preventDefault()" aria-label="Profile specimen">
-  <h2>Profile</h2>
-  <p><label>Display name <input type="text" value="Niko"></label></p>
-  <p><label>Bio <textarea rows="2"></textarea></label></p>
-  <p><button type="submit">Save Profile</button></p>
-</form>
-</pr-page-placeholder>
+<h1>Example forms</h1>
+<p>
+  Three forms built only from Primal's fields and form, with no styles of their own: a sign-in, a profile edit and a settings
+  area. Each one shows a different end. Signing in is a submission, the profile builds a record, and settings take effect as
+  they change. They're live. Nothing is sent anywhere.
+</p>
+
+<section class="pr-example" aria-labelledby="ex-sign-in">
+  <h2 id="ex-sign-in">Sign in</h2>
+  <form primalForm #signInForm (validSubmit)="signIn(signInForm)">
+    <primal-field label="Email">
+      <input primalControl name="email" type="email" autocomplete="username" required />
+    </primal-field>
+    <primal-field label="Password">
+      <input primalControl name="password" type="password" autocomplete="current-password" required />
+    </primal-field>
+    <primal-field label="Keep me signed in on this device">
+      <input primalControl type="checkbox" />
+    </primal-field>
+    <div class="pr-form-actions">
+      <button type="submit">Sign In</button>
+    </div>
+    <p role="status">{{ signedIn() }}</p>
+  </form>
+</section>
+
+<section class="pr-example" aria-labelledby="ex-profile">
+  <h2 id="ex-profile">Edit your profile</h2>
+  <form primalForm (validSubmit)="profileSaved.set(true)" (input)="profileSaved.set(false)">
+    <primal-field label="Display name" description="Shown on your comments and reports.">
+      <input primalControl type="text" autocomplete="nickname" value="Niko" required maxlength="40" />
+    </primal-field>
+    <primal-field label="Job title">
+      <input primalControl type="text" autocomplete="organization-title" value="Designer" />
+    </primal-field>
+    <primal-field label="About you" description="A sentence or two for your team.">
+      <textarea primalControl rows="3" maxlength="280"></textarea>
+    </primal-field>
+    <primal-field label="Time zone">
+      <select primalControl required>
+        <option>Asia/Jerusalem</option>
+        <option>Europe/Lisbon</option>
+        <option>Europe/London</option>
+      </select>
+    </primal-field>
+    <div class="pr-form-actions">
+      <button type="submit">Save Profile</button>
+    </div>
+    <p role="status">{{ profileSaved() ? 'Profile saved.' : '' }}</p>
+  </form>
+</section>
+
+<section class="pr-example" aria-labelledby="ex-settings">
+  <h2 id="ex-settings">Settings</h2>
+  <p>These take effect as they change. There's no Save.</p>
+  <primal-field-group legend="Email me">
+    <primal-field label="When a report is ready">
+      <input primalControl type="checkbox" role="switch" checked (change)="changed('Report emails', $any($event.target).checked)" />
+    </primal-field>
+    <primal-field label="A weekly summary of what changed">
+      <input primalControl type="checkbox" role="switch" (change)="changed('The weekly summary', $any($event.target).checked)" />
+    </primal-field>
+  </primal-field-group>
+  <primal-field-group legend="Start each week on">
+    <primal-field label="Sunday"><input primalControl type="radio" name="week-start" value="sunday" checked (change)="changed('Weeks starting on Sunday', true)" /></primal-field>
+    <primal-field label="Monday"><input primalControl type="radio" name="week-start" value="monday" (change)="changed('Weeks starting on Monday', true)" /></primal-field>
+  </primal-field-group>
+  <p role="status">{{ settingsNote() }}</p>
+</section>

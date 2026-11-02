@@ -109,12 +109,6 @@ input[type='color'] {
   margin-block-start: 0;
 }
 
-.pr-preview button {
-  background-color: var(--pr-color-surface);
-  border-color: var(--pr-color-border-control);
-  color: var(--pr-color-text);
-}
-
 .pr-preview .pr-primary-action {
   background-color: var(--pr-color-primary);
   border-color: var(--pr-color-primary);
@@ -122,7 +116,7 @@ input[type='color'] {
 }
 
 .pr-preview a {
-  color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
 }
 
 .pr-row {
@@ -344,4 +338,132 @@ tbody th {
 .pr-note {
   color: var(--pr-color-text-muted);
   font-size: var(--pr-text-small);
+}
+
+/* The primary's states: each region derives its own roles from the choices, in its own mode. */
+.pr-states-pair {
+  display: grid;
+  gap: var(--pr-gap-group);
+  margin-block-end: var(--pr-gap-section);
+}
+
+.pr-states {
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+}
+
+.pr-states h3 {
+  margin-block: 0 var(--pr-gap-component);
+}
+
+.pr-states ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: var(--pr-gap-group);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-states li {
+  display: grid;
+  align-content: start;
+  gap: calc(var(--pr-gap-component) / 2);
+}
+
+.pr-states code {
+  font-size: var(--pr-text-small);
+  background: none;
+  padding: 0;
+  overflow-wrap: anywhere;
+}
+
+.pr-state {
+  display: grid;
+  place-items: center;
+  min-block-size: var(--pr-control-height);
+  border-radius: var(--pr-radius-control);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-state[data-state='primary'] {
+  background-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
+}
+
+.pr-state[data-state='primary-hover'] {
+  background-color: var(--pr-color-primary-hover);
+  color: var(--pr-color-on-primary);
+}
+
+.pr-state[data-state='primary-pressed'] {
+  background-color: var(--pr-color-primary-pressed);
+  color: var(--pr-color-on-primary);
+}
+
+.pr-state[data-state='primary-surface'] {
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+}
+
+.pr-state[data-state='primary-text'] {
+  color: var(--pr-color-primary-text);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  font-weight: var(--pr-weight-regular);
+}
+
+.pr-state[data-state='focus'] {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+  font-weight: var(--pr-weight-regular);
+}
+
+/* The scale: one band, step 500 marked as the primary itself. */
+.pr-scale {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  margin: 0 0 var(--pr-gap-component);
+  padding: 0;
+  list-style: none;
+  border-radius: var(--pr-radius-layer);
+  overflow: hidden;
+}
+
+.pr-scale li {
+  display: grid;
+  align-content: end;
+  gap: calc(var(--pr-gap-component) / 2);
+  min-block-size: 6rem;
+  padding: var(--pr-gap-component);
+}
+
+/* Step 500 is the primary itself: said in words under its number. */
+.pr-scale li.pr-base strong::after {
+  content: 'yours';
+  display: block;
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-regular);
+}
+
+.pr-scale code {
+  font-size: var(--pr-text-small);
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+@media (width < 48rem) {
+  .pr-scale {
+    grid-template-columns: 1fr;
+  }
+
+  .pr-scale li {
+    grid-template-columns: 4rem 1fr;
+    align-items: center;
+    min-block-size: var(--pr-control-height);
+  }
 }

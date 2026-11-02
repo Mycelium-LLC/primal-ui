@@ -39,10 +39,8 @@ video {
   block-size: auto;
 }
 
-input,
-button,
-textarea,
-select {
+/* Zero specificity, like every Primal rule on controls, so the control rules below can set colour. */
+:where(input, button, textarea, select) {
   font: inherit;
   color: inherit;
 }
@@ -163,7 +161,7 @@ pre {
 }
 
 a {
-  color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
   text-decoration-thickness: from-font;
   text-underline-offset: 0.15em;
 }
@@ -364,7 +362,7 @@ figcaption {
 
 /* The focus ring means one thing: this is where the keyboard is. */
 :focus-visible {
-  outline: var(--pr-focus-width) solid var(--pr-color-primary);
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
   outline-offset: var(--pr-focus-offset);
 }
 
@@ -536,16 +534,17 @@ figcaption {
 }
 
 /* ---------------------------------------------------------------- native controls */
-/* Early base (0.3.0 and 0.4.0 build the field and action primitives on it). */
+/*
+ * Every native control keeps the browser's own behaviour (autofill, pickers, the phone's
+ * keyboard, arrow keys in a radio group); Primal sets its edge, size and states. 0.5.0 builds
+ * the action primitives on the button.
+ */
 
 :root {
   accent-color: var(--pr-color-primary);
 }
 
-button,
-select,
-textarea,
-input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file'], [type='image'], [type='hidden']) {
+:where(button, select, textarea, input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file'], [type='image'], [type='hidden'])) {
   min-block-size: var(--pr-control-height);
   padding-inline: var(--pr-control-inset);
   border: var(--pr-border-width) solid var(--pr-color-border-control);
@@ -553,33 +552,712 @@ input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [ty
   background-color: var(--pr-color-surface);
   color: var(--pr-color-text);
   line-height: var(--pr-leading-tight);
+  transition:
+    border-color var(--pr-duration-fast) var(--pr-ease-standard),
+    background-color var(--pr-duration-fast) var(--pr-ease-standard);
 }
 
 textarea {
   padding-block: var(--pr-gap-component);
   line-height: var(--pr-leading-body);
+  resize: vertical;
 }
 
-button {
+::placeholder {
+  color: var(--pr-color-text-muted);
+  opacity: 1;
+}
+
+/*
+ * Buttons. A field is outlined (type here); an action is filled (press here). Every button is
+ * a tonal fill in the text colour; the form's one main action, its submit, wears the primary.
+ * Hover and pressed deepen the fill a step at a time, and a press answers at once.
+ */
+:where(button, input[type='button'], input[type='reset'], input[type='submit']) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pr-gap-component);
+  padding-inline: calc(var(--pr-control-inset) * 1.5);
+  border-color: transparent;
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+  color: var(--pr-color-text);
+  font-weight: var(--pr-weight-strong);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--pr-duration-fast) var(--pr-ease-standard),
+    scale var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+:where(button, input[type='button'], input[type='reset'], input[type='submit']):hover:not(:disabled) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
+}
+
+:where(button, input[type='button'], input[type='reset'], input[type='submit']):active:not(:disabled) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 18%, var(--pr-color-surface));
+  scale: 0.98;
+}
+
+:where(button, input[type='button'], input[type='reset'], input[type='submit']):focus-visible {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+/* Submitting is the form's one main action, so it wears the primary: "this is what happens here". */
+:where(button[type='submit'], input[type='submit']) {
+  background-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
+}
+
+:where(button[type='submit'], input[type='submit']):hover:not(:disabled) {
+  background-color: var(--pr-color-primary-hover);
+}
+
+:where(button[type='submit'], input[type='submit']):active:not(:disabled) {
+  background-color: var(--pr-color-primary-pressed);
+}
+
+:where(input, select, textarea):hover:not(:disabled, [readonly]) {
+  border-color: var(--pr-color-text-muted);
+}
+
+/* Focus on a field is where the typing goes: the ring, always, even from a pointer. */
+:where(input, select, textarea):focus {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+/* Read-only: you can read and copy it, not change it. Full-strength text behind a quiet edge. */
+:where(input, textarea)[readonly] {
+  background-color: transparent;
+  border-color: var(--pr-color-border);
+}
+
+/* Disabled: not available now. It steps back, and the reason belongs in its description. */
+:where(button, select, textarea, input):disabled {
+  cursor: not-allowed;
+  border-color: var(--pr-color-border);
+  background-color: var(--pr-color-surface-sunken);
+  color: var(--pr-color-text-muted);
+}
+
+:where(button, input[type='button'], input[type='reset'], input[type='submit']):disabled {
+  border-color: transparent;
+}
+
+/* Invalid, once the person has had their go (on leaving the field, or on submit): the danger edge. */
+:where(input, select, textarea):user-invalid,
+:where(input, select, textarea)[aria-invalid='true'] {
+  border-color: var(--pr-color-danger);
+}
+
+:where(input, select, textarea):user-invalid:focus,
+:where(input, select, textarea)[aria-invalid='true']:focus {
+  outline-color: var(--pr-color-danger);
+}
+
+select {
+  padding-inline-end: calc(var(--pr-control-inset) * 2.5);
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - var(--pr-control-inset) - 0.3em) 50%,
+    calc(100% - var(--pr-control-inset)) 50%;
+  background-size: 0.3em 0.3em;
+  background-repeat: no-repeat;
+}
+
+[dir='rtl'] select {
+  background-position:
+    calc(var(--pr-control-inset)) 50%,
+    calc(var(--pr-control-inset) + 0.3em) 50%;
+}
+
+select[multiple],
+select[size]:not([size='1']) {
+  padding-block: var(--pr-gap-component);
+  padding-inline-end: var(--pr-control-inset);
+  background-image: none;
+}
+
+/*
+ * Checkbox and radio, drawn by Primal. A checkbox is a square that fills with the primary and
+ * shows a check (or a dash, when some of a group are chosen); a radio is a circle whose centre
+ * fills. Both say "you can choose this" with the control's edge, which meets 3:1.
+ */
+input:is([type='checkbox']:not([role='switch']), [type='radio']) {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  inline-size: var(--pr-choice-size);
+  block-size: var(--pr-choice-size);
+  margin: 0;
+  flex: none;
+  border: var(--pr-border-width-choice) solid var(--pr-color-border-control);
+  background-color: var(--pr-color-surface);
+  cursor: pointer;
+  transition:
+    background-color var(--pr-duration-fast) var(--pr-ease-standard),
+    border-color var(--pr-duration-fast) var(--pr-ease-standard),
+    scale var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+input[type='checkbox']:not([role='switch']) {
+  border-radius: var(--pr-radius-well);
+}
+
+input[type='radio'] {
+  border-radius: var(--pr-radius-round);
+}
+
+/* The mark: a check, a dash or a dot, drawn in the colour that reads on the fill. */
+input:is([type='checkbox']:not([role='switch']), [type='radio'])::before {
+  content: '';
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  background-color: var(--pr-color-on-primary);
+  scale: 0;
+  transition: scale var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+input[type='checkbox']:not([role='switch'])::before {
+  clip-path: polygon(14% 44%, 0 58%, 38% 96%, 100% 22%, 86% 8%, 38% 68%);
+}
+
+input[type='checkbox']:not([role='switch']):indeterminate::before {
+  clip-path: inset(40% 6%);
+}
+
+input[type='radio']::before {
+  inline-size: 0.5em;
+  block-size: 0.5em;
+  border-radius: var(--pr-radius-round);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, [type='checkbox']:indeterminate) {
+  border-color: var(--pr-color-primary);
+  background-color: var(--pr-color-primary);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, [type='checkbox']:indeterminate)::before {
+  scale: 1;
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled, :checked, [type='checkbox']:indeterminate) {
+  border-color: var(--pr-color-text);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled):is(:checked, [type='checkbox']:indeterminate) {
+  border-color: var(--pr-color-primary-hover);
+  background-color: var(--pr-color-primary-hover);
+}
+
+input:is([type='checkbox'], [type='radio']):active:not(:disabled) {
+  scale: 0.9;
+}
+
+input:is([type='checkbox'], [type='radio']):focus-visible {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled {
+  border-color: var(--pr-color-border);
+  background-color: var(--pr-color-surface-sunken);
+  cursor: not-allowed;
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled:is(:checked, [type='checkbox']:indeterminate) {
+  background-color: var(--pr-color-border);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled::before {
+  background-color: var(--pr-color-text-muted);
+}
+
+/* Invalid once the person has had their go: the danger edge, as on a field. */
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:user-invalid, [aria-invalid='true']) {
+  border-color: var(--pr-color-danger);
+}
+
+/* A switch is a checkbox with role="switch": a track and a thumb. Its label says what it changes. */
+input[type='checkbox'][role='switch'] {
+  appearance: none;
+  position: relative;
+  inline-size: 2.25em;
+  block-size: 1.3em;
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-color-border-control);
   cursor: pointer;
   transition: background-color var(--pr-duration-fast) var(--pr-ease-standard);
 }
 
-button:hover {
+input[type='checkbox'][role='switch']::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0.15em;
+  inset-inline-start: 0.15em;
+  inline-size: 1em;
+  block-size: 1em;
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-color-surface);
+  transition: translate var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+input[type='checkbox'][role='switch']:checked {
+  background-color: var(--pr-color-primary);
+}
+
+input[type='checkbox'][role='switch']:checked::before {
+  translate: 0.95em 0;
+}
+
+[dir='rtl'] input[type='checkbox'][role='switch']:checked::before {
+  translate: -0.95em 0;
+}
+
+input[type='checkbox'][role='switch']:hover:not(:disabled, :checked) {
+  background-color: var(--pr-color-text-muted);
+}
+
+input[type='checkbox'][role='switch']:hover:not(:disabled):checked {
+  background-color: var(--pr-color-primary-hover);
+}
+
+input[type='checkbox'][role='switch']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input[type='range'] {
+  inline-size: 100%;
+  max-inline-size: var(--pr-measure);
+  margin: 0;
+}
+
+input[type='color'] {
+  inline-size: var(--pr-control-height);
+  block-size: var(--pr-control-height);
+  padding: 0;
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background: none;
+  cursor: pointer;
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0.25em;
+}
+
+input[type='color']::-webkit-color-swatch {
+  border: 0;
+  border-radius: var(--pr-radius-well);
+}
+
+input[type='file'] {
+  max-inline-size: 100%;
+  color: var(--pr-color-text-muted);
+}
+
+input[type='file']::file-selector-button {
+  min-block-size: var(--pr-control-height);
+  padding-inline: calc(var(--pr-control-inset) * 1.5);
+  margin-inline-end: var(--pr-gap-component);
+  border: 0;
+  border-radius: var(--pr-radius-control);
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+  color: var(--pr-color-text);
+  font: inherit;
+  font-weight: var(--pr-weight-strong);
+  cursor: pointer;
+}
+
+input[type='file']:hover::file-selector-button {
+  background-color: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
+}
+
+/*
+ * Lists Primal draws: the select's and the autocomplete's (decision 25). The closed select is
+ * a field, outlined, with a chevron; the open list sits on top of the page, raised, as wide as
+ * its field. The active option (under the pointer or the arrow keys) is shaded; the chosen one
+ * carries a check in the primary.
+ */
+.pr-select,
+.pr-autocomplete {
+  display: block;
+  max-inline-size: var(--pr-field-width);
+}
+
+.pr-autocomplete > input {
+  inline-size: 100%;
+}
+
+.pr-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pr-gap-component);
+  inline-size: 100%;
+  padding-inline: var(--pr-control-inset);
+  border-color: var(--pr-color-border-control);
+  background-color: var(--pr-color-surface);
+  font-weight: var(--pr-weight-regular);
+  text-align: start;
+}
+
+.pr-select-trigger:hover:not(:disabled) {
+  border-color: var(--pr-color-text-muted);
+  background-color: var(--pr-color-surface);
+}
+
+.pr-select-trigger:active:not(:disabled) {
+  background-color: var(--pr-color-surface);
+  scale: 1;
+}
+
+.pr-select-trigger:focus {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+.pr-select-trigger:disabled {
+  border-color: var(--pr-color-border);
+}
+
+.pr-select-trigger[aria-invalid='true'] {
+  border-color: var(--pr-color-danger);
+}
+
+.pr-select-trigger[aria-invalid='true']:focus {
+  outline-color: var(--pr-color-danger);
+}
+
+.pr-select-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pr-select-placeholder {
+  color: var(--pr-color-text-muted);
+}
+
+/* The chevron points to where the list opens, and turns over while it's open. */
+.pr-select-trigger::after {
+  content: '';
+  flex: none;
+  inline-size: 0.7em;
+  block-size: 0.45em;
+  background-color: currentColor;
+  clip-path: polygon(0 0, 50% 70%, 100% 0, 100% 30%, 50% 100%, 0 30%);
+  transition: rotate var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+.pr-select-trigger[aria-expanded='true']::after {
+  rotate: 180deg;
+}
+
+.pr-list {
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  max-block-size: var(--pr-list-height);
+  margin: calc(var(--pr-gap-component) / 2) 0;
+  padding: calc(var(--pr-gap-component) / 2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-raised);
+  color: var(--pr-color-text);
+  box-shadow: var(--pr-elevation-1);
+  opacity: 1;
+  transition:
+    opacity var(--pr-duration-fast) var(--pr-ease-standard),
+    display var(--pr-duration-fast) allow-discrete,
+    overlay var(--pr-duration-fast) allow-discrete;
+}
+
+@starting-style {
+  .pr-list:popover-open {
+    opacity: 0;
+  }
+}
+
+.pr-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  min-block-size: var(--pr-control-height);
+  padding-block: calc(var(--pr-gap-component) / 2);
+  padding-inline: calc(var(--pr-control-inset) + 1em + var(--pr-gap-component)) var(--pr-control-inset);
+  border-radius: var(--pr-radius-control);
+  cursor: pointer;
+}
+
+.pr-option + .pr-option,
+.pr-list-heading + .pr-option {
+  margin-block-start: 0;
+}
+
+.pr-option-active {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface-raised));
+}
+
+/* The chosen option: a check before it, in the primary. */
+.pr-option[aria-selected='true']::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: var(--pr-control-inset);
+  inline-size: 1em;
+  block-size: 0.8em;
+  background-color: var(--pr-color-primary);
+  clip-path: polygon(14% 44%, 0 58%, 38% 96%, 100% 22%, 86% 8%, 38% 68%);
+}
+
+.pr-option[aria-selected='true'] {
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-option[aria-disabled='true'] {
+  color: var(--pr-color-text-muted);
+  cursor: not-allowed;
+}
+
+.pr-list-heading {
+  padding: var(--pr-gap-component) var(--pr-control-inset) calc(var(--pr-gap-component) / 2);
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-list-heading:not(:first-child) {
+  margin-block-start: calc(var(--pr-gap-component) / 2);
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+/* The text the person typed, marked in each option it matches. */
+.pr-match {
+  padding: 0;
+  background: none;
+  color: inherit;
+  font-weight: var(--pr-weight-strong);
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+
+.pr-list-empty {
+  margin: 0;
+  padding: var(--pr-gap-component) var(--pr-control-inset);
+  color: var(--pr-color-text-muted);
+}
+
+/* Progress: how much of a known job is done. Meter: where a value sits in a known range. */
+progress,
+meter {
+  inline-size: 100%;
+  max-inline-size: var(--pr-measure);
+  block-size: var(--pr-track-thickness);
+  border: 0;
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-color-surface-sunken);
+  overflow: hidden;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
   background-color: var(--pr-color-surface-sunken);
 }
 
-button:disabled,
-select:disabled,
-textarea:disabled,
-input:disabled {
-  cursor: not-allowed;
-  border-color: var(--pr-color-border);
-  color: var(--pr-color-text-muted);
+progress::-webkit-progress-value {
+  background-color: var(--pr-color-primary);
+}
+
+progress::-moz-progress-bar {
+  background-color: var(--pr-color-primary);
+}
+
+meter::-webkit-meter-bar {
+  background: var(--pr-color-surface-sunken);
+  border: 0;
+  border-radius: var(--pr-radius-round);
+  block-size: var(--pr-track-thickness);
+}
+
+meter::-webkit-meter-optimum-value {
+  background: var(--pr-color-success);
+}
+
+meter::-webkit-meter-suboptimum-value {
+  background: var(--pr-color-warning);
+}
+
+meter::-webkit-meter-even-less-good-value {
+  background: var(--pr-color-danger);
+}
+
+output {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--pr-weight-strong);
 }
 
 label {
   cursor: default;
+}
+
+/* ---------------------------------------------------------------- fields */
+/*
+ * A field is one question: its label, an optional description, the control, and the message
+ * that says what's wrong. Plain HTML:
+ *
+ *   <div class="pr-field">
+ *     <label for="email">Email <span class="pr-optional">Optional</span></label>
+ *     <p class="pr-field-description" id="email-hint">We only use it to send receipts.</p>
+ *     <input id="email" type="email" aria-describedby="email-hint email-message" />
+ *     <p class="pr-field-message" id="email-message" aria-live="polite"></p>
+ *   </div>
+ *
+ * Mark what's optional, not what's required: most of a good form is required.
+ */
+
+.pr-field {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--pr-gap-component) / 1.5);
+  margin-block-end: var(--pr-gap-group);
+}
+
+.pr-field > label,
+.pr-group > legend {
+  font-weight: var(--pr-weight-strong);
+}
+
+/* Separated from the label by a real space, so the gap holds in either direction. */
+.pr-optional {
+  font-weight: var(--pr-weight-regular);
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+}
+
+.pr-field-description {
+  margin: 0;
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+/* The message sits directly under its control, in the danger colour, and only takes room when it speaks. */
+.pr-field-message {
+  margin: 0;
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-danger);
+}
+
+/* An empty message takes no room but stays in place, so it is announced the moment it speaks. */
+.pr-field-message:empty {
+  block-size: 0;
+  margin-block-start: calc(var(--pr-gap-component) / -1.5);
+  overflow: hidden;
+}
+
+.pr-group > .pr-field-message:empty {
+  margin-block-start: calc(var(--pr-gap-component) * -1);
+}
+
+/* A text control in a field is as wide as what it asks for, never wider than the text measure. */
+.pr-field > :is(input, select, textarea):not([type='checkbox'], [type='radio'], [type='range'], [type='color']) {
+  inline-size: 100%;
+  max-inline-size: var(--pr-field-width);
+}
+
+/*
+ * A choice (checkbox, radio, switch): the control, then its label, then its description under
+ * the label. Placed by the grid, so the markup can come in either order.
+ */
+.pr-choice {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: var(--pr-gap-component);
+  row-gap: calc(var(--pr-gap-component) / 2);
+}
+
+.pr-choice > input {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.pr-choice > label {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: var(--pr-weight-regular);
+  cursor: pointer;
+}
+
+.pr-choice > :is(.pr-field-description, .pr-field-message) {
+  grid-column: 2;
+}
+
+/* A choice that isn't available now steps back as a whole, its words included. */
+.pr-choice:has(> input:disabled) > label,
+.pr-field:has(> :is(input, select, textarea):disabled, > :is(.pr-select, .pr-autocomplete) > :is(input, select):disabled) > label {
+  color: var(--pr-color-text-muted);
+  cursor: not-allowed;
+}
+
+.pr-choice > .pr-field-message:empty {
+  margin-block-start: calc(var(--pr-gap-component) / -2);
+}
+
+/* A group is one question asked of several controls: a fieldset, its legend, its choices close together. */
+.pr-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pr-gap-component);
+  margin: 0 0 var(--pr-gap-group);
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+
+.pr-group > legend {
+  padding: 0;
+  margin-block-end: calc(var(--pr-gap-component) / 2);
+}
+
+.pr-group > .pr-field,
+.pr-group > .pr-choice {
+  margin-block-end: 0;
+}
+
+/* A form: fields a group gap apart, its actions a section gap below the last field. */
+.pr-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+  margin-block-start: var(--pr-gap-group);
+}
+
+/* ---------------------------------------------------------------- utilities */
+
+/* Read by assistive technology, not shown: a label for an icon, "Error:" before a message. */
+.pr-visually-hidden {
+  position: absolute;
+  inline-size: 1px; /* allow-literal: the visually-hidden pattern needs a one-pixel box, in every theme */
+  block-size: 1px; /* allow-literal: as above */
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* ---------------------------------------------------------------- page transitions */
