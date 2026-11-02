@@ -4,5 +4,5 @@ import { providePrimalRouteScroll, withPrimalTransitions } from 'primal-angular'
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideBrowserGlobalErrorListeners(), provideRouter(routes, withPrimalTransitions(), withPreloading(PreloadAllModules), withComponentInputBinding()), providePrimalRouteScroll()],
+  providers: [provideBrowserGlobalErrorListeners(), provideRouter(routes, withPrimalTransitions(), withPreloading(PreloadAllModules), withComponentInputBinding()), providePrimalRouteScroll({ scroller: () => document.getElementById('main') })],
 };
