@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema.json",
+  "id": "list-detail",
+  "name": "List and detail",
+  "layer": "surface",
+  "layerWhy": "It is a place where the list, the detail and their actions serve the journey of managing things.",
+  "promise": "Find a thing, open it, change it, delete it, or make one; each at its own address.",
+  "expectation": "The list beside the open item, or each on its own with a way back.",
+  "evidence": "Every item opens cold from its readable address; delete has Undo; a new thing opens; the list keeps its state while items open.",
+  "behaviour": [
+    "/list-detail/<slug>, never a bare id.",
+    "Narrow, the list or the item shows, with \"All reports\".",
+    "Delete apart from Rename."
+  ],
+  "context": "Records: reports, customers, invoices.",
+  "relationships": [
+    "Next two moves: rename and delete beside the title; New Report above the list."
+  ],
+  "states": [
+    "List",
+    "Item",
+    "Not found",
+    "Empty",
+    "Filtered to nothing"
+  ],
+  "accessibility": [
+    "The open item is marked in the list; changes are announced."
+  ],
+  "failures": [
+    "Never stops at create: edit and delete are there."
+  ],
+  "do": [
+    "Open what was just made."
+  ],
+  "dont": [
+    "Ids in the address."
+  ],
+  "api": {
+    "css": [
+      ".pr-split",
+      ".pr-split-list",
+      ".pr-split-detail",
+      ".pr-split-back"
+    ]
+  },
+  "example": "/surfaces/list-detail"
+}

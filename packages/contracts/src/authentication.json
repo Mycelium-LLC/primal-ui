@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema.json",
+  "id": "authentication",
+  "name": "Authentication",
+  "layer": "surface",
+  "layerWhy": "It is a place where several cells (sign-in, sign-up, reset) serve one journey: getting in.",
+  "promise": "Get in, get an account, or get back in when the password is lost, each at its own address.",
+  "expectation": "A narrow column with the product's name, one question at a time, no card.",
+  "evidence": "Each place restores from a cold link; a mismatch says so beside the form with the reset; every place links to the other two.",
+  "behaviour": [
+    "Sign-in, sign-up and reset at /sign-in, /sign-up, /reset.",
+    "The email typed at sign-in carries to the reset.",
+    "The reset never says whether an account exists."
+  ],
+  "context": "The way into any product.",
+  "relationships": [
+    "Next two moves: switch between sign-in and sign-up, and reach the reset."
+  ],
+  "states": [
+    "Sign in",
+    "Mismatch",
+    "Signed in",
+    "Sign up",
+    "Check your inbox",
+    "Reset"
+  ],
+  "accessibility": [
+    "Autocomplete hints for password managers; errors under fields."
+  ],
+  "failures": [
+    "Never a dead end.",
+    "Never a card around the form."
+  ],
+  "do": [
+    "Carry what was typed between places."
+  ],
+  "dont": [
+    "A sign-in in a modal over the product."
+  ],
+  "api": {
+    "css": [
+      ".pr-auth",
+      ".pr-auth-brand",
+      ".pr-auth-switch"
+    ]
+  },
+  "example": "/surfaces/authentication/sign-in"
+}

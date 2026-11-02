@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema.json",
+  "id": "icon-button",
+  "name": "Icon button",
+  "layer": "primitive",
+  "layerWhy": "A button whose words are its name rather than its face; it keeps the same single-action promise as any button.",
+  "promise": "Pressing it does the one thing its name says.",
+  "expectation": "A familiar mark (close, edit, more) does what the mark always does.",
+  "evidence": "Its name is read aloud and shown on hover (title, or a Primal tooltip); it acknowledges like any button.",
+  "behaviour": [
+    "A square target the height of a control.",
+    "Quiet by default: it usually sits among others.",
+    "Shows its name as the browser title unless a Primal tooltip is on it."
+  ],
+  "context": "For actions everyone knows by their mark, on a toolbar, in a corner, at the end of a row. Not for anything that needs its words to be understood.",
+  "relationships": [
+    "It has a name like any button: \"Close Panel\".",
+    "Among icon buttons, the marks share one style and size."
+  ],
+  "states": [
+    "Ready",
+    "Hover",
+    "Pressed",
+    "Focus",
+    "Pressed toggle (aria-pressed)",
+    "Disabled"
+  ],
+  "accessibility": [
+    "aria-label is required: the label input.",
+    "The svg is aria-hidden.",
+    "At least 24 by 24 pixels."
+  ],
+  "failures": [
+    "Never a mark without a name.",
+    "Never a mark that means something else elsewhere in the product."
+  ],
+  "do": [
+    "Use it for marks with one meaning everywhere.",
+    "Give it a tooltip when the mark alone could be read two ways."
+  ],
+  "dont": [
+    "An icon button for a rare or unfamiliar action.",
+    "Two marks that look alike for different actions."
+  ],
+  "api": {
+    "css": [
+      ".pr-icon-button",
+      "aria-label"
+    ],
+    "angular": [
+      "button[primalIconButton], a[primalIconButton]"
+    ],
+    "inputs": [
+      "label: its name (required)",
+      "emphasis: quiet by default",
+      "kind"
+    ]
+  },
+  "example": "/actions/actions"
+}

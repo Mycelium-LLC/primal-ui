@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema.json",
+  "id": "menu",
+  "name": "Menu",
+  "layer": "primitive",
+  "layerWhy": "It holds commands; each command is an action of its own.",
+  "promise": "Pressing the button shows a short list of things to do to one thing.",
+  "expectation": "A list beside its button; pressing outside closes it.",
+  "evidence": "It opens on the first command, moves with arrows and letters, and returns focus to its button whenever it closes.",
+  "behaviour": [
+    "Enter, Space or ↓ open on the first command; ↑ on the last.",
+    "A letter jumps; Home and End go to the ends.",
+    "Running a command closes the menu.",
+    "Escape closes only the menu."
+  ],
+  "context": "Actions on one item when there is no room to show them all. Not for navigation between places.",
+  "relationships": [
+    "Its button names what it is about: \"Show Report Actions\".",
+    "A destructive command is in the danger colour, last, after a line."
+  ],
+  "states": [
+    "Closed",
+    "Open",
+    "Active command",
+    "Not available (aria-disabled)"
+  ],
+  "accessibility": [
+    "menu and menuitem roles; aria-haspopup and aria-expanded on the button."
+  ],
+  "failures": [
+    "Never leaves focus in a closed menu.",
+    "Never hides the only way to do something essential."
+  ],
+  "do": [
+    "Put the destructive command last, apart."
+  ],
+  "dont": [
+    "A menu of one command."
+  ],
+  "api": {
+    "css": [
+      ".pr-menu",
+      "[role=\"menuitem\"]"
+    ],
+    "angular": [
+      "primal-menu",
+      "[primalMenuTrigger]",
+      "button[primalMenuItem]"
+    ],
+    "inputs": [
+      "label (required)",
+      "primalMenuItem: kind"
+    ]
+  },
+  "example": "/navigation/navigation"
+}

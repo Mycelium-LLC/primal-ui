@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema.json",
+  "id": "autocomplete",
+  "name": "Autocomplete",
+  "layer": "primitive",
+  "layerWhy": "One field with suggested answers; still one question.",
+  "promise": "Typing narrows a list of answers; with [strict], only one of them is a valid answer.",
+  "expectation": "A text field that opens a list on focus or click, marking what matches the words typed.",
+  "evidence": "Matches are marked, a status says how many, an empty result says so; a search box opens on focus with its own blank list.",
+  "behaviour": [
+    "Opens on click, ↓, or on focus with [openOnFocus].",
+    "[blank] options show while the field is empty.",
+    "Text that differs only by case or accents becomes the option on leaving."
+  ],
+  "context": "Cities, people, pages: a long list someone partly knows. Search boxes.",
+  "relationships": [
+    "Typing narrows; the chosen answer is the field's value."
+  ],
+  "states": [
+    "Empty",
+    "Typing",
+    "No matches",
+    "Chosen",
+    "Invalid (strict)"
+  ],
+  "accessibility": [
+    "combobox with aria-autocomplete=\"list\"; the count is announced."
+  ],
+  "failures": [
+    "Never blank while it has something to offer."
+  ],
+  "do": [
+    "Give a search box a blank list."
+  ],
+  "dont": [
+    "Strict on a field where any answer is valid."
+  ],
+  "api": {
+    "css": [
+      ".pr-autocomplete",
+      ".pr-list",
+      ".pr-match"
+    ],
+    "angular": [
+      "primal-autocomplete"
+    ],
+    "inputs": [
+      "options",
+      "strict",
+      "blank",
+      "openOnFocus",
+      "emptyMessage",
+      "strictMessage"
+    ]
+  },
+  "example": "/forms/text-fields"
+}

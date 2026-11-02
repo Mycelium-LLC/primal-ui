@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema.json",
+  "id": "select",
+  "name": "Select",
+  "layer": "primitive",
+  "layerWhy": "It is one field whose answer is one option; a primitive part of a form.",
+  "promise": "One answer from a known list, chosen by pointing or by the keyboard.",
+  "expectation": "A field with a chevron that opens a list Primal draws, the chosen option checked.",
+  "evidence": "The list sits against the field, the active option is shaded and the chosen one checked; the native select keeps the value for forms and autofill.",
+  "behaviour": [
+    "Opens on click, Enter, Space or ↓; arrows move; typing jumps; Escape closes.",
+    "Groups have headings."
+  ],
+  "context": "Five or more options. Fewer: radios.",
+  "relationships": [
+    "Its label is the question; the options are answers."
+  ],
+  "states": [
+    "Closed",
+    "Open",
+    "Active option",
+    "Chosen",
+    "Disabled",
+    "Invalid"
+  ],
+  "accessibility": [
+    "combobox and listbox roles; aria-activedescendant follows the active option."
+  ],
+  "failures": [
+    "Never hides the chosen value.",
+    "Never loses the native value."
+  ],
+  "do": [
+    "Put the most common answer where the eye lands."
+  ],
+  "dont": [
+    "A select for yes or no."
+  ],
+  "api": {
+    "css": [
+      "select",
+      ".pr-select",
+      ".pr-list",
+      ".pr-option"
+    ],
+    "angular": [
+      "primal-select"
+    ],
+    "inputs": [
+      "options"
+    ]
+  },
+  "example": "/forms/select"
+}

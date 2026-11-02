@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema.json",
+  "id": "popover",
+  "name": "Popover",
+  "layer": "primitive",
+  "layerWhy": "It holds a little beside the page; the page stays the person's own.",
+  "promise": "A few details or a small task beside its button, gone when you press outside.",
+  "expectation": "A raised box against its button.",
+  "evidence": "Focus moves into it if it holds something to press, and returns to the button on close.",
+  "behaviour": [
+    "Opens and closes from its button; Escape and a press outside close it.",
+    "Placed against its button, flipped when there is no room, in either direction."
+  ],
+  "context": "Small details or a small form about one thing.",
+  "relationships": [
+    "Its button says what it holds."
+  ],
+  "states": [
+    "Closed",
+    "Open"
+  ],
+  "accessibility": [
+    "role=\"dialog\" with a label; aria-haspopup and aria-expanded on the button."
+  ],
+  "failures": [
+    "Never blocks the page.",
+    "Never drops focus to the top of the page."
+  ],
+  "do": [
+    "Keep it small."
+  ],
+  "dont": [
+    "A popover for a long form."
+  ],
+  "api": {
+    "css": [
+      ".pr-layer",
+      "[popover]"
+    ],
+    "angular": [
+      "primal-popover",
+      "[primalPopoverTrigger]"
+    ],
+    "inputs": [
+      "label (required)",
+      "side"
+    ]
+  },
+  "example": "/navigation/popovers"
+}

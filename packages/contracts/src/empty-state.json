@@ -1,0 +1,50 @@
+{
+  "$schema": "../schema.json",
+  "id": "empty-state",
+  "name": "Empty state",
+  "layer": "primitive",
+  "layerWhy": "It stands where content would be; the next step is someone's action.",
+  "promise": "There is nothing here, this is why, and this is what to do.",
+  "expectation": "A quiet panel in the content's place with a title, a reason and a button.",
+  "evidence": "It names the reason and the next step in place.",
+  "behaviour": [
+    "It is announced as a status."
+  ],
+  "context": "Empty lists, tables and searches.",
+  "relationships": [
+    "Its button is the next step."
+  ],
+  "states": [
+    "Nothing yet",
+    "Nothing matches",
+    "Not found"
+  ],
+  "accessibility": [
+    "role=\"status\"."
+  ],
+  "failures": [
+    "Never a blank area.",
+    "Never a picture instead of words."
+  ],
+  "do": [
+    "Offer the next step."
+  ],
+  "dont": [
+    "\"No data.\""
+  ],
+  "api": {
+    "css": [
+      ".pr-empty",
+      ".pr-empty-title",
+      ".pr-empty-actions"
+    ],
+    "angular": [
+      "primal-empty"
+    ],
+    "inputs": [
+      "title (required)",
+      "reason (required)"
+    ]
+  },
+  "example": "/content/information"
+}

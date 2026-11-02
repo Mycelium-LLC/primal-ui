@@ -1,0 +1,8 @@
+{
+  "name": "@mycelium/primal-contracts",
+  "version": "0.9.0",
+  "description": "Mycelium Primal's component contracts: what each element promises, as framework-independent data.",
+  "private": true,
+  "type": "module",
+  "files": ["src", "schema.json"]
+}

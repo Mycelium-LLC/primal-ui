@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema.json",
+  "id": "nav-items",
+  "name": "Navigation items",
+  "layer": "primitive",
+  "layerWhy": "Each item goes to one place; going is not a job.",
+  "promise": "This is where each one goes, and the one I am in is marked.",
+  "expectation": "A column of place names, the current one in the primary's quiet fill.",
+  "evidence": "The current one is marked by fill and aria-current, so it reads without colour too.",
+  "behaviour": [
+    "Each is a link with a real address."
+  ],
+  "context": "The places of a product or section: a side navigation, settings sections.",
+  "relationships": [
+    "An icon helps find, the word names."
+  ],
+  "states": [
+    "Current",
+    "Not current",
+    "Hover",
+    "Focus"
+  ],
+  "accessibility": [
+    "Links in a list inside a labelled <nav>."
+  ],
+  "failures": [
+    "Never acts; navigation only moves."
+  ],
+  "do": [
+    "Keep places where they are, week after week."
+  ],
+  "dont": [
+    "An item that opens a dialog."
+  ],
+  "api": {
+    "css": [
+      ".pr-nav-list",
+      "[aria-current=\"page\"]"
+    ]
+  },
+  "example": "/navigation/navigation"
+}

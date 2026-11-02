@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema.json",
+  "id": "status",
+  "name": "Status",
+  "layer": "primitive",
+  "layerWhy": "It says how one thing stands; no job.",
+  "promise": "This is fine, needs attention, has stopped, hasn't started, or is under way.",
+  "expectation": "A mark and a word at the end of a row, saying how that row stands.",
+  "evidence": "The mark's shape says the state (dot, triangle, square, ring, half), the word says it fully, the colour only adds.",
+  "behaviour": [
+    "Five states, each with its own shape."
+  ],
+  "context": "Records with a state: invoices, members, jobs.",
+  "relationships": [
+    "One status per item."
+  ],
+  "states": [
+    "Positive",
+    "Warning",
+    "Negative",
+    "Neutral",
+    "In progress"
+  ],
+  "accessibility": [
+    "The word is the accessible text; the mark is decoration."
+  ],
+  "failures": [
+    "Never colour alone."
+  ],
+  "do": [
+    "Use the state's own word."
+  ],
+  "dont": [
+    "A status dot with no word."
+  ],
+  "api": {
+    "css": [
+      ".pr-status",
+      "[data-state]"
+    ]
+  },
+  "example": "/content/information"
+}

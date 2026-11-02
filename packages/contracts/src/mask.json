@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema.json",
+  "id": "mask",
+  "name": "Shaped input",
+  "layer": "primitive",
+  "layerWhy": "It shapes one answer as it is typed; it is part of a field.",
+  "promise": "The answer arrives in the form it is asked for, without fighting the person.",
+  "expectation": "Separators appear as they type; pasting is shaped too.",
+  "evidence": "The caret stays where they type; deleting runs back cleanly; email, phone and website have ready shapes.",
+  "behaviour": [
+    "phone: a pattern of digits (000-000-0000), a leading + kept as typed.",
+    "email: no spaces, one @, the domain in lower case.",
+    "url: https:// written in on focus, cleared if left alone.",
+    "Any pattern: 0 digit, a letter, * either."
+  ],
+  "context": "Phone numbers, emails, websites, codes with a known shape.",
+  "relationships": [
+    "It sits on a field's native input."
+  ],
+  "states": [
+    "Empty",
+    "Typing",
+    "Pasted",
+    "Deleting"
+  ],
+  "accessibility": [
+    "Sets inputmode so the phone shows the right keyboard."
+  ],
+  "failures": [
+    "Never moves the caret away.",
+    "Never refuses a paste."
+  ],
+  "do": [
+    "Use the pattern your country uses."
+  ],
+  "dont": [
+    "A mask that blocks a valid international number."
+  ],
+  "api": {
+    "css": [
+      "inputmode"
+    ],
+    "angular": [
+      "input[primalMask]"
+    ],
+    "inputs": [
+      "primalMask: phone | email | url | a pattern",
+      "phonePattern"
+    ]
+  },
+  "example": "/forms/text-fields"
+}

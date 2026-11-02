@@ -13,6 +13,7 @@ Primal is meant to be two things. It's a design system you install and use as it
 | `packages/tokens` | The design tokens and the colour model, framework-independent, built to CSS and JSON |
 | `packages/css` | The reset and the classless base for every native element, Google Sans, and the coverage inventory |
 | `packages/angular` | The Angular adapter (Angular 22+) |
+| `packages/contracts` | Every component's contract as framework-independent JSON; the catalog is generated from it |
 | `apps/showcase` | The live showcase: every planned page, each showing the native HTML it covers until its release builds it |
 | `.folio/` | The plan in Folio: the baseline, the ledger of releases 0.1.0 to 1.0.0, and Niko's decisions |
 
@@ -25,8 +26,9 @@ npm install
 npm run build          # the Angular adapter, then the showcase
 npx ng serve showcase  # http://localhost:6840
 npm run check:folio    # checks the ledger
+npm run check:contracts # every component has a complete contract
 ```
 
 ## Status
 
-Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are shipped; 0.3.0 (forms) and 0.4.0 (Magma by default) are ready for QA; 0.5.0 (actions, feedback and the behaviour model) is built; 0.6.0 (navigation, top layers, focus and keys) is built; 0.7.0 (content, information, layout and the first cells) is built; 0.8.0 (reference surfaces) is being built. The plan to 1.0.0 is in `.folio/`.
+Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are shipped; 0.3.0 (forms) and 0.4.0 (Magma by default) are ready for QA; 0.5.0 (actions, feedback and the behaviour model) is built; 0.6.0 (navigation, top layers, focus and keys) is built; 0.7.0 (content, information, layout and the first cells) is built; 0.8.0 (reference surfaces) is built; 0.9.0 (the contract catalog) is being built. The plan to 1.0.0 is in `.folio/`.

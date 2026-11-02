@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema.json",
+  "id": "item-tile",
+  "name": "Item tile",
+  "layer": "cell",
+  "layerWhy": "It shows one item with its payload named and kept, a whole job of presenting a thing in a collection.",
+  "promise": "The one thing this tile exists to show stays, whatever the width.",
+  "expectation": "A card with its state, its title, and metadata that gives way.",
+  "evidence": "At 320px with real-length data the title is shown in full; in a narrow tile the number, labels and assignee give way first.",
+  "behaviour": [
+    "Payload: the title.",
+    "Built on the card."
+  ],
+  "context": "Issues, tasks, products in a board or grid.",
+  "relationships": [
+    "A status, badges and an avatar around the payload."
+  ],
+  "states": [
+    "Wide",
+    "Narrow"
+  ],
+  "accessibility": [
+    "As the card."
+  ],
+  "failures": [
+    "Never cuts the payload while metadata survives."
+  ],
+  "do": [
+    "Mark everything but the payload data-gives-way."
+  ],
+  "dont": [
+    "Truncating the title with an ellipsis."
+  ],
+  "api": {
+    "css": [
+      ".pr-card",
+      "[data-gives-way]"
+    ]
+  },
+  "example": "/content/cells"
+}

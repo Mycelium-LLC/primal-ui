@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema.json",
+  "id": "tooltip",
+  "name": "Tooltip",
+  "layer": "primitive",
+  "layerWhy": "It is a phrase about one thing; it does nothing.",
+  "promise": "A short description of what I am pointing at or focused on.",
+  "expectation": "A dark label above the thing after a moment.",
+  "evidence": "It shows on hover after half a second and at once on keyboard focus, hides on leaving and Escape, and is read as the thing's description.",
+  "behaviour": [
+    "Never interactive.",
+    "Hidden on press."
+  ],
+  "context": "What an icon means; a shortcut.",
+  "relationships": [
+    "It adds to the thing's name; it never replaces it."
+  ],
+  "states": [
+    "Hidden",
+    "Shown"
+  ],
+  "accessibility": [
+    "role=\"tooltip\" linked by aria-describedby."
+  ],
+  "failures": [
+    "Never holds the only copy of something important (no hover on a phone)."
+  ],
+  "do": [
+    "Keep it to a phrase."
+  ],
+  "dont": [
+    "A link inside a tooltip."
+  ],
+  "api": {
+    "css": [
+      ".pr-tooltip",
+      "role=\"tooltip\""
+    ],
+    "angular": [
+      "[primalTooltip]"
+    ],
+    "inputs": [
+      "primalTooltip (required)",
+      "tooltipSide"
+    ]
+  },
+  "example": "/navigation/popovers"
+}

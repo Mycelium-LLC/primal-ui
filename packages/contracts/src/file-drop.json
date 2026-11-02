@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema.json",
+  "id": "file-drop",
+  "name": "File drop zone",
+  "layer": "primitive",
+  "layerWhy": "One field whose answer is files; part of a form.",
+  "promise": "Files can be dropped here or chosen, and the field keeps only the kinds it takes.",
+  "expectation": "A big target that takes the primary while a file is over it, and the files listed under it.",
+  "evidence": "Each file is listed with its size and Remove; a file the field doesn't accept is left out and named.",
+  "behaviour": [
+    "The native input covers the zone: click, drop and the keyboard all work.",
+    "Dropping several when it takes several."
+  ],
+  "context": "Attachments, imports: when files are the point of the form.",
+  "relationships": [
+    "The description says which kinds and sizes."
+  ],
+  "states": [
+    "Empty",
+    "Dragging over",
+    "Files chosen",
+    "Turned away",
+    "Disabled"
+  ],
+  "accessibility": [
+    "The native file input is focusable; each Remove is named for its file.",
+    "Additions and removals are announced."
+  ],
+  "failures": [
+    "Never keeps a file silently that the field can't take.",
+    "Never cuts a file name."
+  ],
+  "do": [
+    "Say what it takes in the description."
+  ],
+  "dont": [
+    "A drop zone for a single profile picture in a long form."
+  ],
+  "api": {
+    "css": [
+      ".pr-drop-zone",
+      ".pr-file-list"
+    ],
+    "angular": [
+      "primal-file-drop"
+    ],
+    "inputs": [
+      "dragWords",
+      "chooseWords",
+      "dropWords"
+    ]
+  },
+  "example": "/forms/pickers"
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema.json",
+  "id": "list-item",
+  "name": "List item",
+  "layer": "primitive",
+  "layerWhy": "It is one row of a list; the list does the job.",
+  "promise": "One thing per row: what it is, a line about it, and its state at the end.",
+  "expectation": "Rows divided by thin lines, each with something at the start and the end.",
+  "evidence": "The lines mean only \"separate items of one list\"; the title wraps, never cut.",
+  "behaviour": [
+    "The title links to the thing; the end holds a status or an action."
+  ],
+  "context": "People, files, reports, results.",
+  "relationships": [
+    "The current item (aria-current) takes the primary's quiet fill."
+  ],
+  "states": [
+    "Ready",
+    "Current",
+    "Hover on its link"
+  ],
+  "accessibility": [
+    "A real <ul> and <li>."
+  ],
+  "failures": [
+    "Never repeats a fact (a dot and the same word)."
+  ],
+  "do": [
+    "Put the name first."
+  ],
+  "dont": [
+    "A list item as a page section."
+  ],
+  "api": {
+    "css": [
+      ".pr-list-items",
+      ".pr-item-body",
+      ".pr-item-title",
+      ".pr-item-line",
+      ".pr-item-end"
+    ]
+  },
+  "example": "/content/content"
+}

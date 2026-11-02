@@ -184,6 +184,11 @@
       "n": 32,
       "decision": "0.8.0 starts before the 0.7.0 review",
       "ruling": "Niko chose 'Continue to 0.8.0' on 2026-11-02 while 0.3.0 to 0.7.0 wait for his review; decision 9 gives way again, as in decisions 28, 30 and 31."
+    },
+    {
+      "n": 33,
+      "decision": "0.9.0 starts before the 0.8.0 review",
+      "ruling": "Niko chose 'Continue to 0.9.0' on 2026-11-02 while 0.3.0 to 0.8.0 wait for his review; decision 9 gives way again, as in decisions 28 and 30 to 32."
     }
   ],
   "releases": [
@@ -1466,16 +1471,21 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
-      "makesTrue": [],
+      "makesTrue": [
+        "primal/catalog/every-primitive-cell-and-surface-documents-its-contract",
+        "primal/catalog/each-component-is-classified-as-primitive-cell-or-surface-by",
+        "primal/catalog/contracts-are-kept-as-framework-independent-data-next-to-the",
+        "primal/catalog/every-contract-answers-three-questions-what-it-promises-what"
+      ],
       "globalOrIrreversible": false,
       "businessMeasure": "Behaviour is written down, not tribal.",
       "version": "0.9.0",
       "name": "Every element keeps its promise",
       "track": "Contracts",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Being built 2026-11-02 in session 33-folio-every-element, on release/0.9.0 (cut from release/0.8.0); Niko watches it live and comments. Not ready for QA until he asks (decision 29).",
       "dependsOn": [
         "0.8.0"
       ],
@@ -1484,13 +1494,16 @@
       "size": "M",
       "items": [
         {
-          "text": "Contract schema (framework-independent data) and a contract for every component shipped by 0.8.0."
+          "text": "*Done 2026-11-02:* The contract schema (packages/contracts/schema.json, framework-independent JSON) and 53 contracts: 45 primitives, 3 cells, 5 surfaces; each with its layer and why, the three answers, the seven parts, do and don't, API and live example.",
+          "state": "done"
         },
         {
-          "text": "Documentation pages generated from the contracts, with live examples, do and don't, accessibility notes and API."
+          "text": "*Done 2026-11-02:* The catalog and a page per contract, generated from packages/contracts/contracts.json (built from src/), each linking to its live example.",
+          "state": "done"
         },
         {
-          "text": "A check that fails the build when a component has no contract or its contract is incomplete."
+          "text": "*Done 2026-11-02:* check:contracts fails the build and CI when an Angular part has no contract, a contract misses a part or is too thin to say anything, or its example is not a showcase page.",
+          "state": "done"
         },
         {
           "text": "Release chain for 0.9.0."
