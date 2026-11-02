@@ -109,3 +109,11 @@
 .pr-demo-made {
   margin: 0;
 }
+
+.pr-demo-nav {
+  max-inline-size: 16rem;
+}
+
+.pr-demo-people li {
+  grid-template-columns: 1fr auto;
+}

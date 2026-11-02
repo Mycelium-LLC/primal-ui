@@ -1,11 +1,21 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { PlainHtml } from '../../../shell/plain-html/plain-html';
 
-/** Placeholder until 0.6.0: the plain native elements this page will cover (decision 10). */
 @Component({
   selector: 'pr-navigation-disclosure-page',
-  imports: [PagePlaceholder],
+  imports: [PlainHtml],
   templateUrl: './disclosure.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavigationDisclosurePage {}
+export class NavigationDisclosurePage {
+  protected readonly plain = `<div class="pr-accordion">
+  <details name="plan" open>
+    <summary>Free</summary>
+    <p>One person, three reports.</p>
+  </details>
+  <details name="plan">
+    <summary>Team</summary>
+    <p>Up to 20 people, every report.</p>
+  </details>
+</div>`;
+}

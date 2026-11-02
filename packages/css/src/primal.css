@@ -2186,6 +2186,10 @@ progress:indeterminate::-moz-progress-bar {
   outline-offset: calc(var(--pr-focus-offset) * -1);
 }
 
+.pr-tablist > [role='tab']:disabled {
+  color: color-mix(in oklab, var(--pr-color-text) 35%, var(--pr-color-surface));
+}
+
 .pr-tablist > [role='tab'][aria-selected='true'] {
   color: var(--pr-color-text);
 }
