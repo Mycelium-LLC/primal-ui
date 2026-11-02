@@ -44,5 +44,8 @@
       ".pr-auth-switch"
     ]
   },
+  "usage": {
+    "markup": "<div class=\"pr-auth\">\n  <p class=\"pr-auth-brand\">Your product</p>\n  <h2>Sign in</h2>\n  <form primalForm>…fields… <button primalButton type=\"submit\" emphasis=\"primary\">Sign In</button></form>\n  <p class=\"pr-auth-switch\">New here? <a href=\"/sign-up\">Create an account</a></p>\n</div>"
+  },
   "example": "/surfaces/authentication/sign-in"
 }

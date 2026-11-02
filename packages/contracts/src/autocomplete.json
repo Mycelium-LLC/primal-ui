@@ -53,5 +53,9 @@
       "strictMessage"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "markup": "<primal-field label=\"City\">\n  <primal-autocomplete [options]=\"cities\">\n    <input primalControl type=\"text\" />\n  </primal-autocomplete>\n</primal-field>"
+  },
   "example": "/forms/text-fields"
 }

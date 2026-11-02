@@ -489,8 +489,9 @@ tfoot :is(th, td) {
   opacity: 0.45;
 }
 
+/* A number column ends at the end: its words and their arrow together at the column's end edge. */
 :is(th, td)[data-numeric] > .pr-sort {
-  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
 
 th[aria-sort] {

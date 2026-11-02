@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostAttributeToken, computed, inject, input } from '@angular/core';
+import { optionalBoolean } from '../attributes';
 
 /**
  * A link that says where it takes you. An address on another site opens in a new tab, safely,
@@ -22,7 +23,7 @@ export class PrimalLink {
   private readonly href = inject(new HostAttributeToken('href'), { optional: true });
 
   /** Opens elsewhere. By default, true for an address on another site. */
-  readonly external = input<boolean | undefined>(undefined);
+  readonly external = input<boolean | undefined, unknown>(undefined, { transform: optionalBoolean });
   /** What a download is: its type and size ("PDF, 2 MB"). */
   readonly file = input<string>();
 

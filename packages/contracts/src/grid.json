@@ -36,5 +36,8 @@
       "--pr-grid-min"
     ]
   },
+  "usage": {
+    "markup": "<div class=\"pr-grid\" style=\"--pr-grid-min: 12rem\">…</div>"
+  },
   "example": "/content/layout"
 }

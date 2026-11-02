@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, booleanAttribute } from '@angular/core';
 
 export type PrimalTone = 'info' | 'success' | 'warning' | 'danger';
 
@@ -36,9 +36,9 @@ export class PrimalAlert {
   readonly tone = input<PrimalTone>('info');
   readonly title = input<string>();
   /** About the whole product (offline, maintenance): edge to edge, above everything. */
-  readonly banner = input(false);
+  readonly banner = input(false, { transform: booleanAttribute });
   /** Announce it: it appeared after the page loaded. Danger is urgent; the rest is polite. */
-  readonly live = input(false);
+  readonly live = input(false, { transform: booleanAttribute });
 
   protected readonly role = computed(() => (!this.live() ? null : this.tone() === 'danger' ? 'alert' : 'status'));
 }

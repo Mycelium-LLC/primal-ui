@@ -56,5 +56,9 @@
       "kind"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+    "markup": "<button primalIconButton type=\"button\" label=\"Close Panel\">\n  <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\">…</svg>\n</button>"
+  },
   "example": "/actions/actions"
 }

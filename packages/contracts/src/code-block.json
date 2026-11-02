@@ -44,5 +44,9 @@
       "copyLabel"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_CONTENT } from 'primal-angular';",
+    "markup": "<primal-code-block language=\"HTML\" [code]=\"snippet\" />"
+  },
   "example": "/content/content"
 }

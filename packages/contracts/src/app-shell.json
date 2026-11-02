@@ -42,5 +42,8 @@
       ".pr-shell-account"
     ]
   },
+  "usage": {
+    "markup": "<div class=\"pr-shell\">\n  <div class=\"pr-shell-bar\">\n    <button class=\"pr-shell-menu pr-icon-button\" aria-label=\"Show Menu\">…</button>\n    <a class=\"pr-shell-brand\" href=\"/\">Your product</a>\n  </div>\n  <nav class=\"pr-shell-nav\" aria-label=\"Places\"><ul class=\"pr-nav-list\">…</ul></nav>\n  <main class=\"pr-shell-main\">…</main>\n</div>"
+  },
   "example": "/surfaces/app-shell"
 }

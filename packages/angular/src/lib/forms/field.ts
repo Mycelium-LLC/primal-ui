@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, contentChild, effect, inject, input } from '@angular/core';
+import { optionalBoolean } from '../attributes';
 import { PrimalControl } from './control';
 import { PrimalFieldGroup } from './group';
 
@@ -37,7 +38,7 @@ export class PrimalField {
   readonly label = input.required<string>();
   readonly description = input<string>();
   /** Show "Optional". By default it follows a typed control: optional unless it's required. Never on a choice. */
-  readonly optional = input<boolean | undefined>(undefined);
+  readonly optional = input<boolean | undefined, unknown>(undefined, { transform: optionalBoolean });
 
   protected readonly control = contentChild(PrimalControl);
   private readonly group = inject(PrimalFieldGroup, { optional: true });

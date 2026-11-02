@@ -48,5 +48,9 @@
       "unit"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "markup": "<primal-field label=\"Seats\">\n  <primal-number unit=\"seats\">\n    <input primalControl type=\"number\" min=\"1\" max=\"50\" step=\"1\" value=\"5\" />\n  </primal-number>\n</primal-field>"
+  },
   "example": "/forms/text-fields"
 }

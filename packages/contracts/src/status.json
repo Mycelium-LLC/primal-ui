@@ -39,5 +39,8 @@
       "[data-state]"
     ]
   },
+  "usage": {
+    "markup": "<span class=\"pr-status\" data-state=\"warning\">Payment due in 3 days</span>"
+  },
   "example": "/content/information"
 }

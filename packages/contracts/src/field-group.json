@@ -50,5 +50,9 @@
       "cards"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "markup": "<primal-field-group legend=\"Plan\" cards>\n  <primal-field label=\"Free\" description=\"One person.\"><input primalControl type=\"radio\" name=\"plan\" value=\"free\" required /></primal-field>\n  <primal-field label=\"Team\" description=\"Up to 20 people.\"><input primalControl type=\"radio\" name=\"plan\" value=\"team\" /></primal-field>\n</primal-field-group>"
+  },
   "example": "/forms/choices"
 }

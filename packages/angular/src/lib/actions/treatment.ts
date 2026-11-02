@@ -1,4 +1,4 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, input, booleanAttribute } from '@angular/core';
 import { PrimalActionKind } from '../behaviour/model';
 
 /** How much an action matters here. The kind adds the danger treatment on its own. */
@@ -23,7 +23,7 @@ export abstract class PrimalActionTreatment {
   readonly kind = input<PrimalActionKind>('mutative');
   readonly emphasis = input<PrimalEmphasis>('default');
   /** The last step of an irreversible destructive action, after its gate. */
-  readonly final = input(false);
+  readonly final = input(false, { transform: booleanAttribute });
 
   protected abstract readonly isLink: boolean;
 

@@ -37,5 +37,8 @@
       "--pr-scroll-height"
     ]
   },
+  "usage": {
+    "markup": "<div class=\"pr-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Activity\" style=\"--pr-scroll-height: 12rem\">…</div>"
+  },
   "example": "/content/layout"
 }

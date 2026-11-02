@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, computed, inject, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, computed, inject, input, output, signal, booleanAttribute } from '@angular/core';
 import { PrimalAnnouncer } from '../behaviour/announcer';
 import { PrimalActionTreatment } from './treatment';
 
@@ -43,7 +43,7 @@ export class PrimalButton extends PrimalActionTreatment {
   /** The work to do on press. While it runs the button is busy; a second press does nothing. */
   readonly run = input<PrimalRun>();
   /** Busy from outside, when you run the work yourself. */
-  readonly busy = input(false);
+  readonly busy = input(false, { transform: booleanAttribute });
   /** The work failed. Show the failure beside the thing that failed; the button is ready again. */
   readonly failed = output<unknown>();
 

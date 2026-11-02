@@ -31,7 +31,8 @@
 <p>Add the files to your project's styles in <code>angular.json</code>:</p>
 <pre><code>{{ angularJson }}</code></pre>
 <p>
-  So that moving to a new page starts at its top, add <code>providePrimalRouteScroll()</code> next to your router. Back and
+  Page changes cross-fade, timed by Primal's motion tokens and instant under reduced motion: add
+  <code>withPrimalTransitions()</code> to your router. Then, so that moving to a new page starts at its top, add <code>providePrimalRouteScroll()</code> next to your router. Back and
   forward still return the person to where they were. If your pages scroll inside a box rather than the window (an app shell
   whose main area scrolls on its own), give it that box: <code>providePrimalRouteScroll(&#123; scroller: () =&gt; document.getElementById('main') &#125;)</code>.
 </p>

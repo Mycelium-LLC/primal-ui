@@ -57,5 +57,9 @@
       "file: what a download is (\"PDF, 2 MB\")"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+    "markup": "<a primalLink href=\"/report.pdf\" download file=\"PDF, 2 MB\">Download Report</a>"
+  },
   "example": "/actions/actions"
 }

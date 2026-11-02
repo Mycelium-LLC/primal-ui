@@ -21,5 +21,7 @@ jobs:
         run: npm run check:tokens
       - name: Every component has a complete contract
         run: npm run check:contracts
+      - name: The adapter's unit tests
+        run: npm test
       - name: Build the tokens, the Angular adapter and the showcase
         run: npm run build

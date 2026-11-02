@@ -44,5 +44,9 @@
       "tooltipSide"
     ]
   },
+  "usage": {
+    "import": "import { PRIMAL_TOP_LAYERS } from 'primal-angular';",
+    "markup": "<button primalIconButton type=\"button\" label=\"Copy Address\" primalTooltip=\"Copy address, ⌘C\">…</button>"
+  },
   "example": "/navigation/popovers"
 }

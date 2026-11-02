@@ -43,5 +43,9 @@
       "PrimalConfirm.ask({ title, body, confirm, cancel, kind })"
     ]
   },
+  "usage": {
+    "import": "import { PrimalConfirm } from 'primal-angular';",
+    "markup": "const yes = await inject(PrimalConfirm).ask({\n  title: 'Delete “Acme Studio” for good?',\n  confirm: 'Delete Workspace',\n  cancel: 'Keep Workspace',\n  kind: 'destructive',\n});"
+  },
   "example": "/navigation/dialogs"
 }

@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   DOCUMENT,
+  DestroyRef,
   ElementRef,
   EnvironmentInjector,
   Injectable,
@@ -91,12 +92,12 @@ export class PrimalToaster {
   template: `
     <div class="pr-visually-hidden" aria-live="polite" aria-atomic="false">
       @for (t of toasts(); track t.id) {
-        <p>{{ t.message }}</p>
+        <p dir="auto">{{ t.message }}</p>
       }
     </div>
     @for (t of toasts(); track t.id) {
       <div class="pr-toast" [attr.data-leaving]="t.leaving ? '' : null">
-        <p class="pr-toast-message">{{ t.message }}</p>
+        <p class="pr-toast-message" dir="auto">{{ t.message }}</p>
         @if (t.action; as action) {
           <button type="button" (click)="act(t, action)">{{ action.label }}</button>
         }
@@ -115,7 +116,26 @@ export class PrimalToasterRegion {
   private readonly timers = new Map<number, { left: number; started: number; timer?: ReturnType<typeof setTimeout> }>();
   private held = false;
 
+  constructor() {
+    // A modal dialog makes everything outside it inert, a toast's Undo included. So while one is
+    // open the toaster lives inside the topmost one, and comes back to the page when it closes.
+    const watch = new MutationObserver(() => this.follow());
+    watch.observe(this.document.body, { subtree: true, attributes: true, attributeFilter: ['open'] });
+    inject(DestroyRef).onDestroy(() => watch.disconnect());
+  }
+
+  /** Puts the toaster in the topmost open modal dialog, or in the page, and keeps it on top. */
+  private follow(): void {
+    const dialogs = [...this.document.querySelectorAll('dialog')].filter((d) => d.matches(':modal'));
+    const home = dialogs.at(-1) ?? this.document.body;
+    if (this.element.parentElement === home) return;
+    home.append(this.element);
+    // Moving it closes it; it opens again, above everything there.
+    if (this.toasts().some((t) => !t.leaving)) this.element.showPopover();
+  }
+
   add(toast: Toast): void {
+    this.follow();
     const shown = this.toasts().filter((t) => !t.leaving);
     if (shown.length >= MOST) this.remove(shown[0].id);
     this.toasts.update((list) => [...list, toast]);

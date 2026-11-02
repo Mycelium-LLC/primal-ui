@@ -12,6 +12,7 @@ import {
   signal,
   untracked,
   viewChild,
+  booleanAttribute,
 } from '@angular/core';
 import { PrimalControl } from './control';
 import { PrimalForm } from './form';
@@ -72,7 +73,7 @@ export class PrimalAutocomplete {
   /** The answers to offer: strings, or { value, label, group, disabled }. */
   readonly options = input<(string | PrimalOption)[]>([]);
   /** Only one of the options is a valid answer; anything else gets the strict message. */
-  readonly strict = input(false);
+  readonly strict = input(false, { transform: booleanAttribute });
   /** What the field says when typing leaves nothing. {text} is what the person typed. */
   readonly emptyMessage = input('Nothing matches “{text}”.');
   /** The message when `strict` and the text is not one of the options. */
@@ -83,7 +84,7 @@ export class PrimalAutocomplete {
    */
   readonly blank = input<(string | PrimalOption)[]>();
   /** Open the list as soon as the field has focus, empty or not: a search box. */
-  readonly openOnFocus = input(false);
+  readonly openOnFocus = input(false, { transform: booleanAttribute });
 
   protected readonly control = contentChild(PrimalControl);
   private readonly list = viewChild.required<ElementRef<HTMLElement>>('list');

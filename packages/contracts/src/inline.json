@@ -37,5 +37,8 @@
       "[data-gap]"
     ]
   },
+  "usage": {
+    "markup": "<div class=\"pr-inline\" data-gap=\"component\">\n  <strong>Ada Shapiro</strong>\n  <span class=\"pr-badge\">Owner</span>\n  <button type=\"button\" class=\"pr-button-quiet pr-push\">Message Ada</button>\n</div>"
+  },
   "example": "/content/layout"
 }
