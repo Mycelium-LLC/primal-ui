@@ -1,0 +1,121 @@
+@if (contract(); as c) {
+  <nav class="pr-breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a routerLink="/contracts/catalog">Contract catalog</a></li>
+      <li><span aria-current="page">{{ c.name }}</span></li>
+    </ol>
+  </nav>
+  <h1>{{ c.name }}</h1>
+  <p class="pr-contract-layer"><span class="pr-badge" data-tone="primary">{{ layerTitle() }}</span> {{ c.layerWhy }}</p>
+
+  <h2>Three questions</h2>
+  <dl class="pr-details">
+    <dt>It promises</dt>
+    <dd>{{ c.promise }}</dd>
+    <dt>Its presence says</dt>
+    <dd>{{ c.expectation }}</dd>
+    <dt>It shows it kept it</dt>
+    <dd>{{ c.evidence }}</dd>
+  </dl>
+  <p><a primalButton [routerLink]="exampleLink()" [queryParams]="exampleQuery()" emphasis="primary" kind="navigational">See It Live</a></p>
+
+  <h2>Behaviour</h2>
+  <ul>
+    @for (l of c.behaviour; track l) {
+      <li>{{ l }}</li>
+    }
+  </ul>
+
+  <h2>Context</h2>
+  <p>{{ c.context }}</p>
+
+  <h2>Relationships</h2>
+  <ul>
+    @for (l of c.relationships; track l) {
+      <li>{{ l }}</li>
+    }
+  </ul>
+
+  <h2>States</h2>
+  <ul class="pr-inline" data-gap="component" role="list">
+    @for (s of c.states; track s) {
+      <li class="pr-badge">{{ s }}</li>
+    }
+  </ul>
+
+  <h2>Accessibility</h2>
+  <ul>
+    @for (l of c.accessibility; track l) {
+      <li>{{ l }}</li>
+    }
+  </ul>
+
+  <h2>It never</h2>
+  <ul>
+    @for (l of c.failures; track l) {
+      <li>{{ l }}</li>
+    }
+  </ul>
+
+  <h2>Do and don't</h2>
+  <div class="pr-grid" style="--pr-grid-min: 16rem">
+    <div>
+      <h3><span class="pr-status" data-state="positive">Do</span></h3>
+      <ul>
+        @for (l of c.do; track l) {
+          <li>{{ l }}</li>
+        }
+      </ul>
+    </div>
+    <div>
+      <h3><span class="pr-status" data-state="negative">Don't</span></h3>
+      <ul>
+        @for (l of c.dont; track l) {
+          <li>{{ l }}</li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <h2>API</h2>
+  <dl class="pr-details">
+    <dt>CSS</dt>
+    <dd>
+      @for (s of c.api.css; track s) {
+        <code>{{ s }}</code>&ngsp;
+      }
+    </dd>
+    @if (c.api.angular?.length) {
+      <dt>Angular</dt>
+      <dd>
+        @for (s of c.api.angular; track s) {
+          <code>{{ s }}</code>&ngsp;
+        }
+      </dd>
+    }
+    @if (c.api.inputs?.length) {
+      <dt>Inputs and outputs</dt>
+      <dd>
+        <ul>
+          @for (s of c.api.inputs; track s) {
+            <li>{{ s }}</li>
+          }
+        </ul>
+      </dd>
+    }
+  </dl>
+
+  <nav class="pr-contract-next pr-actions" aria-label="Other contracts">
+    @if (previous(); as p) {
+      <a [routerLink]="['/contracts/catalog', p.id]">← {{ p.name }}</a>
+    }
+    @if (next(); as n) {
+      <div class="pr-actions-group"><a [routerLink]="['/contracts/catalog', n.id]">{{ n.name }} →</a></div>
+    }
+  </nav>
+} @else {
+  <h1>No such contract</h1>
+  <primal-empty title="This component has no contract here" reason="The link may have a typo, or the component was renamed.">
+    <a primalButton routerLink="/contracts/catalog" kind="navigational">Show All Contracts</a>
+  </primal-empty>
+}

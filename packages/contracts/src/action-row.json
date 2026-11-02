@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema.json",
+  "id": "action-row",
+  "name": "Row of actions",
+  "layer": "primitive",
+  "layerWhy": "It places actions by their weight; it decides no job of its own.",
+  "promise": "Safe actions sit together at the end, the main one last; a destructive one sits apart.",
+  "expectation": "The main action is where the hand expects it, and taking something away is never next to keeping it.",
+  "evidence": "The destructive action is a section gap from the safe ones and in the danger treatment; on a phone the row stacks.",
+  "behaviour": [
+    "Danger at the start, safe group at the end.",
+    "Wraps on narrow widths with the main action first in reading."
+  ],
+  "context": "At the end of a form, a dialog or a detail.",
+  "relationships": [
+    "It holds buttons; their emphasis ranks them.",
+    "The distance is the decision on destructive actions (0.5.0)."
+  ],
+  "states": [
+    "Wide",
+    "Wrapped"
+  ],
+  "accessibility": [
+    "Order in the markup is the reading and tab order."
+  ],
+  "failures": [
+    "Never puts Delete between Cancel and Save."
+  ],
+  "do": [
+    "One primary at the end of the group."
+  ],
+  "dont": [
+    "Two destructive actions in one row."
+  ],
+  "api": {
+    "css": [
+      ".pr-actions",
+      ".pr-actions-group"
+    ]
+  },
+  "example": "/actions/actions"
+}

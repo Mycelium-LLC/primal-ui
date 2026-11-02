@@ -22,8 +22,8 @@ Addresses are `primal/<feature>/<requirement>`. Statements never name a screen, 
 | 0.5.0 | Every action answers (actions, feedback, the behaviour model) | built (session 35, 2026-11-02), release/0.5.0 |
 | 0.6.0 | You always know where you are (navigation, top layers, focus) | built (session 87, 2026-11-02), release/0.6.0 |
 | 0.7.0 | Things look like what they are (content, information, layout, first cells) | built (session F0, 2026-11-02), release/0.7.0 |
-| 0.8.0 | Whole places to work in (reference surfaces) | being built (session DB, 2026-11-02) |
-| 0.9.0 | Every element keeps its promise (the contract catalog) | draft |
+| 0.8.0 | Whole places to work in (reference surfaces) | built (session DB, 2026-11-02), release/0.8.0 |
+| 0.9.0 | Every element keeps its promise (the contract catalog) | being built (session 33, 2026-11-02) |
 | 1.0.0 | Open to everyone (open source, published packages, the acceptance test) | draft |
 
 ## Checking

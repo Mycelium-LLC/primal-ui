@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema.json",
+  "id": "subscribe",
+  "name": "Subscribe",
+  "layer": "cell",
+  "layerWhy": "It does one whole job, subscribing someone, end to end with its feedback, from primitives only.",
+  "promise": "Give an email and get what was promised, or be told exactly what to fix.",
+  "expectation": "A promise, an email field and one button.",
+  "evidence": "It ends in a subscription said in place, naming the address, or in an error under the field that says what to do; nothing is left to the page.",
+  "behaviour": [
+    "Payload: the promise.",
+    "Busy at once; a bad address or a failure keeps what was typed.",
+    "\"Use Another Address\" starts over."
+  ],
+  "context": "A newsletter, release notes, a waitlist.",
+  "relationships": [
+    "Built from a field, a shaped input, a button and an alert."
+  ],
+  "states": [
+    "Ready",
+    "Busy",
+    "Error",
+    "Subscribed"
+  ],
+  "accessibility": [
+    "The result is announced; focus returns to the field on an error."
+  ],
+  "failures": [
+    "Never ends without saying what happened.",
+    "Never loses the typed address."
+  ],
+  "do": [
+    "Say what arrives and how often."
+  ],
+  "dont": [
+    "A subscribe form that only says \"Thanks!\""
+  ],
+  "api": {
+    "css": [
+      ".pr-subscribe"
+    ],
+    "angular": [
+      "primal-subscribe"
+    ],
+    "inputs": [
+      "title",
+      "promise",
+      "subscribe(email) (required)",
+      "fieldLabel",
+      "actionLabel",
+      "doneTitle",
+      "doneText",
+      "anotherLabel"
+    ]
+  },
+  "example": "/content/cells"
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "../schema.json",
+  "id": "field-group",
+  "name": "Field group",
+  "layer": "primitive",
+  "layerWhy": "It asks one question of several controls; still one question, not a whole form.",
+  "promise": "These choices answer one question together.",
+  "expectation": "A legend over choices close together, and one message for them.",
+  "evidence": "A radio group is one tab stop moved by arrows; its message is the group's; as cards, the whole card is the target and the chosen one takes the primary edge.",
+  "behaviour": [
+    "Re-checks every choice when one changes.",
+    "With [cards], each choice is a card side by side, wrapping as the width allows."
+  ],
+  "context": "A set of radios, checkboxes or switches about one thing. Cards when each option needs a few words.",
+  "relationships": [
+    "The legend is the question; each choice's label is an answer."
+  ],
+  "states": [
+    "Plain",
+    "Cards",
+    "Chosen",
+    "Invalid",
+    "Disabled choice"
+  ],
+  "accessibility": [
+    "A native <fieldset> and <legend>; arrow keys move within radios as the browser does.",
+    "Focus rings the card in card mode."
+  ],
+  "failures": [
+    "Never a group without a legend.",
+    "Never hides the mark on a card."
+  ],
+  "do": [
+    "Use cards for a few options with a sentence each."
+  ],
+  "dont": [
+    "Cards for a long list of options."
+  ],
+  "api": {
+    "css": [
+      ".pr-group",
+      ".pr-choice-cards"
+    ],
+    "angular": [
+      "primal-field-group"
+    ],
+    "inputs": [
+      "legend (required)",
+      "description",
+      "cards"
+    ]
+  },
+  "example": "/forms/choices"
+}

@@ -53,5 +53,6 @@ export const routes: Routes = [
   { matcher: listDetail, title: 'List and detail · Primal', loadComponent: () => import('./pages/surfaces/list-detail/list-detail').then((m) => m.SurfacesListDetailPage) },
   { path: 'surfaces/multi-step-form', title: 'Multi-step form · Primal', loadComponent: () => import('./pages/surfaces/multi-step-form/multi-step-form').then((m) => m.SurfacesMultiStepFormPage) },
   { path: 'contracts/catalog', title: 'Contract catalog · Primal', loadComponent: () => import('./pages/contracts/catalog/catalog').then((m) => m.ContractsCatalogPage) },
+  { path: 'contracts/catalog/:id', title: 'Contract · Primal', loadComponent: () => import('./pages/contracts/contract/contract').then((m) => m.ContractsContractPage) },
   { path: '**', title: 'Not found · Primal', loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFoundPage) },
 ];

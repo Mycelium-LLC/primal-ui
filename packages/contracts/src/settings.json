@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema.json",
+  "id": "settings",
+  "name": "Settings",
+  "layer": "surface",
+  "layerWhy": "It is a place: sections of settings, each a cell, serving the journey of changing how the product works.",
+  "promise": "Each section has its own address; changes are saved as they are made.",
+  "expectation": "Sections at the side, the section's settings beside them.",
+  "evidence": "A switch says \"Saved\" beside itself; a form says it on its button; the irreversible sits apart behind a confirmation.",
+  "behaviour": [
+    "/settings/<section> restores cold.",
+    "On a phone the sections sit above as a row."
+  ],
+  "context": "Every product's settings.",
+  "relationships": [
+    "Next two moves: the other sections, Save Changes at the end of a form."
+  ],
+  "states": [
+    "Profile",
+    "Notifications",
+    "Appearance",
+    "Account"
+  ],
+  "accessibility": [
+    "The current section is marked aria-current."
+  ],
+  "failures": [
+    "Never loses a change on leaving."
+  ],
+  "do": [
+    "Save switches at once."
+  ],
+  "dont": [
+    "One giant Save for every section."
+  ],
+  "api": {
+    "css": [
+      ".pr-nav-list",
+      ".pr-details"
+    ]
+  },
+  "example": "/surfaces/settings"
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema.json",
+  "id": "progress",
+  "name": "Progress",
+  "layer": "primitive",
+  "layerWhy": "It shows how far one job has gone; the job is someone else's.",
+  "promise": "The work has a known length and this is how far along it is.",
+  "expectation": "A bar with words and a percentage.",
+  "evidence": "Its value is real; without one it travels as clearly not a number.",
+  "behaviour": [
+    "Shows the percentage when there is a value.",
+    "Without a value, a band travels the track."
+  ],
+  "context": "Uploads, imports, exports: measurable work.",
+  "relationships": [
+    "Its label names the work: \"Uploading 12 photos\"."
+  ],
+  "states": [
+    "Known value",
+    "No value yet",
+    "Done"
+  ],
+  "accessibility": [
+    "A native <progress> named by its label."
+  ],
+  "failures": [
+    "Never faked."
+  ],
+  "do": [
+    "Give it a value as soon as you know one."
+  ],
+  "dont": [
+    "A progress bar that loops forever on known work."
+  ],
+  "api": {
+    "css": [
+      "progress",
+      ".pr-progress",
+      ".pr-progress-value"
+    ],
+    "angular": [
+      "primal-progress"
+    ],
+    "inputs": [
+      "label",
+      "value",
+      "max"
+    ]
+  },
+  "example": "/actions/feedback"
+}

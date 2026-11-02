@@ -1,0 +1,40 @@
+{
+  "$schema": "../schema.json",
+  "id": "divider",
+  "name": "Divider",
+  "layer": "primitive",
+  "layerWhy": "It arranges other parts by space; it keeps no promise to the person of its own.",
+  "promise": "What is before and after are different sections.",
+  "expectation": "A thin line where one section ends and the next begins.",
+  "evidence": "It is drawn only where that meaning holds; between controls it stands upright.",
+  "behaviour": [
+    "Horizontal in a stack; vertical in a row or toolbar."
+  ],
+  "context": "Between sections, between groups of controls.",
+  "relationships": [
+    "It separates; space groups."
+  ],
+  "states": [
+    "Horizontal",
+    "Vertical"
+  ],
+  "accessibility": [
+    "An <hr>, a separator."
+  ],
+  "failures": [
+    "Never decoration."
+  ],
+  "do": [
+    "Use space first."
+  ],
+  "dont": [
+    "Lines between every row of a form."
+  ],
+  "api": {
+    "css": [
+      "hr",
+      ".pr-divider"
+    ]
+  },
+  "example": "/content/layout"
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema.json",
+  "id": "form",
+  "name": "Form",
+  "layer": "primitive",
+  "layerWhy": "It holds fields and says when they are all right; the job a form does belongs to the cell around it.",
+  "promise": "Pressing its main action either sends a complete answer or shows exactly what is missing.",
+  "expectation": "On submit, every wrong field shows its message and focus goes to the first.",
+  "evidence": "The browser's bubbles are off; (validSubmit) fires only when every field is valid.",
+  "behaviour": [
+    "novalidate; errors under fields on submit.",
+    "Focus moves to the first field that needs attention.",
+    "Reset returns every field to untouched."
+  ],
+  "context": "Any group of fields sent together.",
+  "relationships": [
+    "Its actions sit a section gap under the last field (.pr-form-actions)."
+  ],
+  "states": [
+    "Untouched",
+    "Submitted with errors",
+    "Valid"
+  ],
+  "accessibility": [
+    "Focus moves to what needs attention, so a keyboard user lands on it."
+  ],
+  "failures": [
+    "Never sends an incomplete answer.",
+    "Never clears what was typed on an error."
+  ],
+  "do": [
+    "One primary action, worded by what it does."
+  ],
+  "dont": [
+    "Validating while the person is still typing their first try."
+  ],
+  "api": {
+    "css": [
+      "form[novalidate]",
+      ".pr-form-actions"
+    ],
+    "angular": [
+      "form[primalForm]"
+    ],
+    "inputs": [
+      "(validSubmit)",
+      "submitted",
+      "resets"
+    ]
+  },
+  "example": "/forms/validation"
+}

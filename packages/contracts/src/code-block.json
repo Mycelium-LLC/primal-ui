@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema.json",
+  "id": "code-block",
+  "name": "Code block",
+  "layer": "primitive",
+  "layerWhy": "It shows code to read and copy; part of a page about code.",
+  "promise": "This code can be copied exactly as shown.",
+  "expectation": "Code in a well, its language above, Copy Code at the end.",
+  "evidence": "Copy Code says \"Copied\" in place; the code scrolls within itself.",
+  "behaviour": [
+    "The code region is focusable so the keyboard scrolls it."
+  ],
+  "context": "Documentation, settings that need a snippet.",
+  "relationships": [
+    "Its language names it."
+  ],
+  "states": [
+    "Ready",
+    "Copied"
+  ],
+  "accessibility": [
+    "A <pre> named by its language."
+  ],
+  "failures": [
+    "Never moves the page sideways."
+  ],
+  "do": [
+    "Show what to paste, whole."
+  ],
+  "dont": [
+    "Screenshots of code."
+  ],
+  "api": {
+    "css": [
+      ".pr-code-block",
+      ".pr-code-block-bar"
+    ],
+    "angular": [
+      "primal-code-block"
+    ],
+    "inputs": [
+      "code (required)",
+      "language",
+      "copyLabel"
+    ]
+  },
+  "example": "/content/content"
+}

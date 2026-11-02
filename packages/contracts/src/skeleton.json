@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema.json",
+  "id": "skeleton",
+  "name": "Skeleton",
+  "layer": "primitive",
+  "layerWhy": "It holds the shape of content that is coming; the content is someone else's.",
+  "promise": "This is where content will be, and this is its shape.",
+  "expectation": "Blocks the size and shape of the rows, text and pictures to come.",
+  "evidence": "It sits inside a container marked aria-busy, and is hidden from assistive technology.",
+  "behaviour": [
+    "Shimmers slowly; still under reduced motion."
+  ],
+  "context": "Lists and pages whose shape is known before their data.",
+  "relationships": [
+    "It mirrors the real row: an avatar and two lines become a circle and two lines."
+  ],
+  "states": [
+    "Line",
+    "Text",
+    "Circle",
+    "Block"
+  ],
+  "accessibility": [
+    "aria-hidden; the container's aria-busy is what is heard."
+  ],
+  "failures": [
+    "Never a shape that doesn't match what arrives."
+  ],
+  "do": [
+    "Match the real row."
+  ],
+  "dont": [
+    "A skeleton when the data is already there."
+  ],
+  "api": {
+    "css": [
+      ".pr-skeleton",
+      "[data-shape]",
+      "[aria-busy=\"true\"]"
+    ],
+    "angular": [
+      "primal-skeleton"
+    ],
+    "inputs": [
+      "shape: line | text | circle | block"
+    ]
+  },
+  "example": "/actions/feedback"
+}

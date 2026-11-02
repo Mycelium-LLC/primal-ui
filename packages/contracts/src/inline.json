@@ -1,0 +1,41 @@
+{
+  "$schema": "../schema.json",
+  "id": "inline",
+  "name": "Inline",
+  "layer": "primitive",
+  "layerWhy": "It arranges other parts by space; it keeps no promise to the person of its own.",
+  "promise": "Things side by side, wrapping when room runs out.",
+  "expectation": "A row aligned on its middles.",
+  "evidence": "It wraps instead of overflowing; .pr-push sends one to the end.",
+  "behaviour": [
+    "Wraps; aligns centred."
+  ],
+  "context": "Name and badge, a row of metadata, a row of buttons.",
+  "relationships": [
+    ".pr-push puts the last thing at the end."
+  ],
+  "states": [
+    "One line",
+    "Wrapped"
+  ],
+  "accessibility": [
+    "Keeps the markup's order."
+  ],
+  "failures": [
+    "Never scrolls the page sideways."
+  ],
+  "do": [
+    "Use .pr-push rather than spacers."
+  ],
+  "dont": [
+    "Floats."
+  ],
+  "api": {
+    "css": [
+      ".pr-inline",
+      ".pr-push",
+      "[data-gap]"
+    ]
+  },
+  "example": "/content/layout"
+}

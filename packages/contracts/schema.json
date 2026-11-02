@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://primal.mycelium/contracts/schema.json",
+  "title": "A Primal component contract",
+  "description": "What an element promises, what its presence makes someone expect, and how it shows it kept the promise; with its behaviour, context, relationships, states, accessibility and failure conditions. Framework-independent: the documentation is generated from it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "layer", "layerWhy", "promise", "expectation", "evidence", "behaviour", "context", "relationships", "states", "accessibility", "failures", "do", "dont", "api", "example"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "Its address in the catalog." },
+    "name": { "type": "string", "minLength": 1 },
+    "layer": { "enum": ["primitive", "cell", "surface"], "description": "Classified by the promise it keeps, never by its size or markup." },
+    "layerWhy": { "type": "string", "minLength": 20, "description": "Why it is that layer." },
+    "promise": { "type": "string", "minLength": 20, "description": "What it promises." },
+    "expectation": { "type": "string", "minLength": 20, "description": "What its presence makes someone expect." },
+    "evidence": { "type": "string", "minLength": 20, "description": "How it shows whether it kept the promise." },
+    "behaviour": { "$ref": "#/$defs/lines" },
+    "context": { "type": "string", "minLength": 20, "description": "Where it belongs, and where it doesn't." },
+    "relationships": { "$ref": "#/$defs/lines" },
+    "states": { "$ref": "#/$defs/lines" },
+    "accessibility": { "$ref": "#/$defs/lines" },
+    "failures": { "$ref": "#/$defs/lines", "description": "What it must never do." },
+    "do": { "$ref": "#/$defs/lines" },
+    "dont": { "$ref": "#/$defs/lines" },
+    "api": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["css"],
+      "properties": {
+        "css": { "type": "array", "items": { "type": "string" }, "description": "The classes and attributes that draw it without script." },
+        "angular": { "type": "array", "items": { "type": "string" }, "description": "The Angular adapter's selectors, exactly as declared." },
+        "inputs": { "type": "array", "items": { "type": "string" }, "description": "The Angular inputs and outputs, each with a few words." }
+      }
+    },
+    "example": { "type": "string", "pattern": "^/", "description": "The showcase page with its live example." }
+  },
+  "$defs": {
+    "lines": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 3 } }
+  }
+}

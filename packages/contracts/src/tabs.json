@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema.json",
+  "id": "tabs",
+  "name": "Tabs",
+  "layer": "primitive",
+  "layerWhy": "It switches between faces of one thing; it moves, and does no job of its own.",
+  "promise": "Each tab is another face of the same thing, and choosing one shows it at once.",
+  "expectation": "A row of names with the chosen one underlined, and its face under it.",
+  "evidence": "The chosen tab is underlined in the primary and announced as selected; faces keep their state while hidden.",
+  "behaviour": [
+    "One tab stop; ← → move and show (following the reading direction); Home and End go to the ends.",
+    "Disabled tabs are skipped."
+  ],
+  "context": "Summary, Data, History of one report. Never unrelated places, never filters.",
+  "relationships": [
+    "Each tab labels its panel; a tab worth sharing keeps its face in the address."
+  ],
+  "states": [
+    "Chosen",
+    "Not chosen",
+    "Hover",
+    "Focus",
+    "Disabled"
+  ],
+  "accessibility": [
+    "tablist, tab and tabpanel roles, linked by ids.",
+    "Panels are focusable."
+  ],
+  "failures": [
+    "Never a filter.",
+    "Never loses what was typed in a hidden face."
+  ],
+  "do": [
+    "Put the most used face first."
+  ],
+  "dont": [
+    "Tabs that navigate between unrelated pages."
+  ],
+  "api": {
+    "css": [
+      ".pr-tablist",
+      "[role=\"tab\"]",
+      "[role=\"tabpanel\"]"
+    ],
+    "angular": [
+      "primal-tabs",
+      "primal-tab"
+    ],
+    "inputs": [
+      "label (required)",
+      "selected",
+      "primal-tab: label, disabled"
+    ]
+  },
+  "example": "/navigation/navigation"
+}

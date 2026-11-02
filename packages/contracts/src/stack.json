@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema.json",
+  "id": "stack",
+  "name": "Stack",
+  "layer": "primitive",
+  "layerWhy": "It arranges other parts by space; it keeps no promise to the person of its own.",
+  "promise": "Things one under the other, a known gap apart.",
+  "expectation": "Grouping by space alone.",
+  "evidence": "Strip every border and fill and the grouping still reads.",
+  "behaviour": [
+    "data-gap: component, group (default) or section.",
+    "A list as a stack drops its bullets."
+  ],
+  "context": "Any group read top to bottom: a profile, a form's fields, a list of facts.",
+  "relationships": [
+    "The gap says how related the parts are."
+  ],
+  "states": [
+    "Component gap",
+    "Group gap",
+    "Section gap"
+  ],
+  "accessibility": [
+    "Keeps the markup's order."
+  ],
+  "failures": [
+    "Never a box to make a group."
+  ],
+  "do": [
+    "Pick the gap by relation."
+  ],
+  "dont": [
+    "Margins on each child instead."
+  ],
+  "api": {
+    "css": [
+      ".pr-stack",
+      "[data-gap]"
+    ]
+  },
+  "example": "/content/layout"
+}

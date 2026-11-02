@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema.json",
+  "id": "link",
+  "name": "Link",
+  "layer": "primitive",
+  "layerWhy": "It keeps one part of a promise: it takes you somewhere. Moving is never a whole job.",
+  "promise": "It takes the person to another place and changes nothing.",
+  "expectation": "Following it goes somewhere; it says when that is away from this site or a file.",
+  "evidence": "An address on another site opens in a new tab with an arrow shown and \"(opens in a new tab)\" read; a download shows an arrow down and the file's type and size.",
+  "behaviour": [
+    "External addresses open in a new tab with rel=\"noopener noreferrer\".",
+    "A download shows its file type and size when given.",
+    "Back always returns to where the person was."
+  ],
+  "context": "In running text, in lists of places, and as a button-shaped link when it starts a task on its own page.",
+  "relationships": [
+    "Its words name the destination, not \"here\".",
+    "A link that looks like a button still only navigates."
+  ],
+  "states": [
+    "Ready",
+    "Hover",
+    "Focus",
+    "Visited",
+    "External",
+    "Download"
+  ],
+  "accessibility": [
+    "A native <a href>.",
+    "The new-tab warning is read, not only shown.",
+    "The arrows are content with empty alternative text."
+  ],
+  "failures": [
+    "Never performs an action.",
+    "Never opens a new tab without saying so."
+  ],
+  "do": [
+    "Name where it goes.",
+    "Say what a download is."
+  ],
+  "dont": [
+    "\"Click here\".",
+    "A link that deletes or saves."
+  ],
+  "api": {
+    "css": [
+      "a",
+      "a[target=\"_blank\"]",
+      "a[download]",
+      ".pr-link-file"
+    ],
+    "angular": [
+      "a[primalLink]"
+    ],
+    "inputs": [
+      "external: opens elsewhere (another site by default)",
+      "file: what a download is (\"PDF, 2 MB\")"
+    ]
+  },
+  "example": "/actions/actions"
+}
