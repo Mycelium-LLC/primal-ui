@@ -9,11 +9,11 @@
   margin-block-start: 0;
 }
 
-.pr-inline {
+.pr-inline-elements {
   font-size: var(--pr-text-small);
 }
 
-.pr-inline tbody th {
+.pr-inline-elements tbody th {
   font-weight: var(--pr-weight-regular);
   white-space: nowrap;
 }

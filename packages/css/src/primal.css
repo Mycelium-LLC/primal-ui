@@ -638,7 +638,6 @@ textarea {
   background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
   color: var(--pr-color-text);
   font-weight: var(--pr-weight-strong);
-  white-space: nowrap;
   cursor: pointer;
   user-select: none;
   transition:
@@ -992,9 +991,9 @@ input[type='file']:hover::file-selector-button {
 }
 
 .pr-select-value {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* The chosen answer is shown whole: it wraps, never cut (Niko's rule). */
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
 }
 
 .pr-select-placeholder {
@@ -2925,14 +2924,14 @@ summary {
 .pr-status {
   --pr-status-tone: var(--pr-color-text-muted);
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.4em;
-  white-space: nowrap;
 }
 
 .pr-status::before {
   content: '';
   flex: none;
+  align-self: center;
   inline-size: 0.6em;
   block-size: 0.6em;
   background-color: var(--pr-status-tone);

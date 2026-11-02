@@ -32,6 +32,11 @@
   vertical-align: middle;
 }
 
+/* A matrix of states compares one label across treatments, so each stays on one line; the table scrolls instead. */
+.pr-states-table button {
+  white-space: nowrap;
+}
+
 .pr-demo-list {
   display: grid;
   gap: var(--pr-gap-group);

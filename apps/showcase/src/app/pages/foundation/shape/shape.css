@@ -1,6 +1,7 @@
 .pr-samples {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  container-type: inline-size;
   gap: var(--pr-gap-group);
   margin-block-end: var(--pr-gap-section);
 }
@@ -22,7 +23,19 @@ figcaption {
   inline-size: 6rem;
   block-size: 4rem;
   background-color: var(--pr-color-surface-sunken);
-  border: var(--pr-border-width) solid var(--pr-color-border);
+  /* The shape is what is shown, so its edge must read in light and dark. */
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+}
+
+/* Four samples: four across, or two by two; never three and an orphan. */
+.pr-samples:has(> :nth-child(4):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 72rem) {
+  .pr-samples:has(> :nth-child(4):last-child) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .pr-line {
