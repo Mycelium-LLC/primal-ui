@@ -159,6 +159,16 @@
       "n": 27,
       "decision": "Exact Magma in dark",
       "ruling": "In dark the primary fill stays exactly the primary, with white text, as in light (Niko, 2026-10-20: 'keep exact magma'): Magma is #E61924 with white text at 4.64:1 in both modes, and its hover and pressed deepen in both. A fill is lifted towards white in dark only if it would sink into the page (under 3:1 against the dark surfaces). Text in the primary (links) is still lightened in dark so it reads on the page."
+    },
+    {
+      "n": 28,
+      "decision": "0.5.0 starts before the 0.4.0 review",
+      "ruling": "Niko started 0.5.0 on 2026-11-02 with 0.3.0 and 0.4.0 still waiting for his review ('Start 0.5.0 Actions'), so decision 9 gives way for this release. He watches the showcase live while it is built and comments as he goes; each comment is fixed at once or put in the plan, by the size of the fix (Niko, 2026-11-02)."
+    },
+    {
+      "n": 29,
+      "decision": "How a release is QA'd",
+      "ruling": "No QA run until Niko asks for one, and no pushing for it. When he does, QA walks two journeys from nothing: (1) scaffold a new Angular project, install Primal, use it, and write down every bug on the way; (2) build your own design system with Primal as the base, and judge how easy it is (Niko, 2026-11-02)."
     }
   ],
   "releases": [
@@ -840,16 +850,30 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
-      "makesTrue": [],
+      "makesTrue": [
+        "primal/actions/a-button-s-label-names-the-action-with-the-person-s-verb-and",
+        "primal/actions/a-destructive-action-never-sits-as-a-peer-of-safe-ones-it",
+        "primal/feedback/loading-shows-the-shape-of-what-is-coming-when-the-shape-is",
+        "primal/feedback-contract/every-action-is-acknowledged-within-100-ms-then-states-its",
+        "primal/feedback-contract/feedback-weight-follows-one-ladder-irreversible-actions-are",
+        "primal/feedback-contract/where-a-message-goes-is-decided-by-what-it-is-who-is-saying",
+        "primal/action-kinds/each-action-kind-destructive-constructive-mutative",
+        "primal/tables/every-table-sorts-by-its-columns-unless-it-is-turned-off",
+        "primal/fields/email-phone-and-website-answers-are-shaped-as-they-are-typed",
+        "primal/fields/a-search-box-opens-its-list-on-focus-showing-what-it-offers",
+        "primal/fields/a-number-is-typed-or-stepped-within-its-limits",
+        "primal/fields/choices-can-be-cards-each-a-whole-target",
+        "primal/fields/a-file-field-can-take-files-dropped-on-it"
+      ],
       "globalOrIrreversible": false,
       "businessMeasure": "Feedback is decided, not defaulted.",
       "version": "0.5.0",
       "name": "Every action answers",
       "track": "Actions and feedback",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Being built 2026-11-02 in session 35-folio-every-action, on release/0.5.0 (cut from release/0.4.0); Niko watches it live and comments. Not ready for QA until he asks (decision 29).",
       "dependsOn": [
         "0.4.0"
       ],
@@ -858,16 +882,24 @@
       "size": "M",
       "items": [
         {
-          "text": "Actions: Button, IconButton, Link (internal, external, download), ButtonGroup."
+          "text": "*Done 2026-11-02:* Actions: Button (primalButton: four treatments, its kind, busy at once, deaf to a second press, says its outcome in place), IconButton, Link (internal, external, download), ButtonGroup, and the .pr-actions row with a destructive action apart.",
+          "state": "done"
         },
         {
-          "text": "Feedback: Alert, Toast, Spinner, Progress, Skeleton."
+          "text": "*Done 2026-11-02:* Feedback: Alert (and the banner), Toast (PrimalToaster, with undo, held while pointed at), Spinner, Progress, Skeleton.",
+          "state": "done"
         },
         {
-          "text": "The behaviour model written once: the three facts (what it is, who says it, what it wants), the fixed set of places, and what each place means."
+          "text": "*Done 2026-11-02:* The behaviour model written once (PRIMAL_PLACES): the three facts, six places, what each means, is for and is never for.",
+          "state": "done"
         },
         {
-          "text": "Action kinds written once (destructive, constructive, mutative, navigational, background, confirmatory; reversible or not), each with gate, sequence, weight, reversibility window and error contract."
+          "text": "*Done 2026-11-02:* Action kinds written once (PRIMAL_ACTION_KINDS): gate, sequence, weight, reversibility window and error contract for each of the six kinds, with a live example of each.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-02 (Niko's comments):* every table sorts by its columns, on by default; email, phone and website shaped as typed; a search box that opens on focus with its own blank list; a number stepper; choice cards; a file drop zone.",
+          "state": "done"
         },
         {
           "text": "Release chain for 0.5.0."
@@ -981,6 +1013,66 @@
           "success": "The action-kind page states all five for each kind in plain words, and every action component names its kind.",
           "disqualifier": "An action behaves differently from its kind's written contract.",
           "evidence": "Niko's v1 brief, 2026-10-20 (session 7F-primal-foundation)"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/tables/every-table-sorts-by-its-columns-unless-it-is-turned-off",
+          "requirementKind": "invariant",
+          "statement": "Every table sorts by its columns by default, and sorting can be turned off for a table or a column.",
+          "success": "Pressing a column header sorts by it, again reverses, a third time restores the original order; the header shows the direction and it is announced; a table or column marked off has no sort control.",
+          "disqualifier": "A table with headers cannot be sorted without extra work, or a table whose order is its meaning cannot opt out.",
+          "evidence": "Niko, live comment while 0.5.0 was built, 2026-11-02 (session 35-folio-every-action)."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/email-phone-and-website-answers-are-shaped-as-they-are-typed",
+          "requirementKind": "invariant",
+          "statement": "Email, phone and website answers are shaped as they are typed or pasted, without moving the caret away from where the person types.",
+          "success": "A phone number takes its pattern's separators, an email keeps no spaces and one @ with its domain in lower case, a website starts with https://; deleting runs back through them cleanly.",
+          "disqualifier": "A shaped field jumps the caret, refuses a paste, or leaves a stray separator behind.",
+          "evidence": "Niko, live comment while 0.5.0 was built, 2026-11-02 (session 35-folio-every-action)."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/a-search-box-opens-its-list-on-focus-showing-what-it-offers",
+          "requirementKind": "invariant",
+          "statement": "A search box opens its list as soon as it has focus, showing what it offers while empty and what matches once typed.",
+          "success": "Focusing an empty search shows its blank list (popular, recent); typing narrows to matches with the match marked; Escape closes it.",
+          "disqualifier": "An empty search shows nothing until something is typed.",
+          "evidence": "Niko, live comment while 0.5.0 was built, 2026-11-02 (session 35-folio-every-action)."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/a-number-is-typed-or-stepped-within-its-limits",
+          "requirementKind": "invariant",
+          "statement": "A number is typed or stepped within its limits, with its unit beside it and its digits lined up.",
+          "success": "− and + step by the field's step, stop at min and max (their button disabled there), repeat while held, and keep focus in the input.",
+          "disqualifier": "Stepping passes a limit, or the browser's own spin arrows are the only way to step.",
+          "evidence": "Niko, live comment while 0.5.0 was built, 2026-11-02 (session 35-folio-every-action)."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/choices-can-be-cards-each-a-whole-target",
+          "requirementKind": "invariant",
+          "statement": "A group of choices can be shown as cards, each a whole target that keeps its mark.",
+          "success": "Clicking anywhere on a card chooses it; the chosen card has the primary edge; the radio or checkbox mark still shows one-of or any-of.",
+          "disqualifier": "Only the small mark or the label is clickable, or a card hides whether it is one-of or any-of.",
+          "evidence": "Niko, live comment while 0.5.0 was built, 2026-11-02 (session 35-folio-every-action)."
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/fields/a-file-field-can-take-files-dropped-on-it",
+          "requirementKind": "invariant",
+          "statement": "A file field can take files dropped on a zone, lists what it holds, and says what it turned away.",
+          "success": "Dropping or choosing files lists each with its size and a way to remove it; a file the field does not accept is left out and named.",
+          "disqualifier": "A dropped file the field cannot take is silently kept or silently dropped.",
+          "evidence": "Niko, live comment while 0.5.0 was built, 2026-11-02 (session 35-folio-every-action)."
         }
       ]
     },

@@ -1,7 +1,156 @@
-<pr-page-placeholder title="Actions" release="0.5.0" covers="Button, IconButton, Link, ButtonGroup.">
-<p><button type="button">Save Changes</button> <button type="button" disabled>Disabled Action</button></p>
-<p><button type="button" aria-label="Close panel">×</button> (an icon-only button)</p>
-<p><a href="#">An internal link</a> · <a href="https://example.com" rel="noopener" target="_blank">An external link</a> · <a href="favicon.ico" download>Download Icon</a></p>
-<p role="group" aria-label="Text alignment"><button type="button">Left</button><button type="button">Centre</button><button type="button">Right</button></p>
-<p><input type="image" src="favicon.ico" alt="Submit with an image" width="24" height="24"> (input type image)</p>
-</pr-page-placeholder>
+<h1>Actions</h1>
+<p>
+  An action is something you press to make something happen. Its label says what, with your verb and an object: "Save Changes",
+  never "Submit". Every action names its kind (<a routerLink="/actions/action-kinds">Action kinds</a>), and its kind decides how it
+  behaves; its emphasis decides only how loud it looks.
+</p>
+
+<h2>Four treatments</h2>
+<p>Each is a promise. Use the primary once per place, for the one thing that happens here.</p>
+<div class="pr-demo-row">
+  <button primalButton type="button" emphasis="primary" kind="constructive">Create Report</button>
+  <button primalButton type="button">Duplicate Report</button>
+  <button primalButton type="button" emphasis="quiet">Preview Report</button>
+  <button primalButton type="button" kind="destructive">Delete Report</button>
+</div>
+<dl class="pr-demo-meanings">
+  <dt>Primary</dt>
+  <dd>This is what happens here.</dd>
+  <dt>Default</dt>
+  <dd>You can do this.</dd>
+  <dt>Quiet</dt>
+  <dd>Also possible, less often. No fill until you point at it.</dd>
+  <dt>Danger</dt>
+  <dd>This takes something away. Its edge and words, never a primary fill.</dd>
+</dl>
+
+<h2>It answers at once</h2>
+<p>
+  Give a button its work, and it keeps the feedback contract by itself: busy the moment you press it, the same size while it
+  works, deaf to a second press, then it says what happened, where you are already looking. Press it twice, fast.
+</p>
+<div class="pr-demo-row">
+  <button primalButton type="button" emphasis="primary" [run]="save">Save Changes</button>
+  <button primalButton type="button" kind="background" [run]="startExport">Export Reports</button>
+</div>
+<p class="pr-demo-note" aria-live="polite">The work ran {{ saves() }} {{ saves() === 1 ? 'time' : 'times' }}.</p>
+
+<h2>Every state</h2>
+<p>Point at them and press them; tab to see the focus ring.</p>
+<div class="pr-table">
+  <table class="pr-states-table" [sortable]="false">
+    <caption>Buttons in each state</caption>
+    <thead>
+      <tr>
+        <th scope="col">State</th>
+        <th scope="col">Primary</th>
+        <th scope="col">Default</th>
+        <th scope="col">Quiet</th>
+        <th scope="col">Danger</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Ready</th>
+        <td><button primalButton type="button" emphasis="primary">Save Changes</button></td>
+        <td><button primalButton type="button">Copy Link</button></td>
+        <td><button primalButton type="button" emphasis="quiet">Show Details</button></td>
+        <td><button primalButton type="button" kind="destructive">Remove Member</button></td>
+      </tr>
+      <tr>
+        <th scope="row">Working</th>
+        <td><button primalButton type="button" emphasis="primary" [busy]="true">Save Changes</button></td>
+        <td><button primalButton type="button" [busy]="true">Copy Link</button></td>
+        <td><button primalButton type="button" emphasis="quiet" [busy]="true">Show Details</button></td>
+        <td><button primalButton type="button" kind="destructive" [busy]="true">Remove Member</button></td>
+      </tr>
+      <tr>
+        <th scope="row">Not available, still reachable</th>
+        <td><button primalButton type="button" emphasis="primary" aria-disabled="true">Save Changes</button></td>
+        <td><button primalButton type="button" aria-disabled="true">Copy Link</button></td>
+        <td><button primalButton type="button" emphasis="quiet" aria-disabled="true">Show Details</button></td>
+        <td><button primalButton type="button" kind="destructive" aria-disabled="true">Remove Member</button></td>
+      </tr>
+      <tr>
+        <th scope="row">Disabled</th>
+        <td><button primalButton type="button" emphasis="primary" disabled>Save Changes</button></td>
+        <td><button primalButton type="button" disabled>Copy Link</button></td>
+        <td><button primalButton type="button" emphasis="quiet" disabled>Show Details</button></td>
+        <td><button primalButton type="button" kind="destructive" disabled>Remove Member</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p>
+  "Not available, still reachable" uses <code>aria-disabled</code>: the button stays in the tab order, so its description can say
+  why it can't be pressed yet. Prefer it to <code>disabled</code>, which the keyboard skips.
+</p>
+
+<h2>With an icon</h2>
+<p>An icon goes before the words and helps you find the action; the words still say what it does.</p>
+<div class="pr-demo-row">
+  <button primalButton type="button" emphasis="primary" kind="constructive">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+    Add Member
+  </button>
+  <button primalButton type="button" kind="background">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m-4-4 4 4 4-4M5 20h14" /></svg>
+    Download Invoices
+  </button>
+</div>
+
+<h2>Icon buttons</h2>
+<p>
+  An icon alone, for actions everyone knows by their mark, among others on a toolbar or in a corner. It still has a name, read
+  aloud and shown when you point at it. Quiet by default.
+</p>
+<div class="pr-demo-row">
+  <button primalIconButton type="button" label="Edit Name">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 20 4-1 11-11-3-3L5 16z" /></svg>
+  </button>
+  <button primalIconButton type="button" label="Copy Address">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" /><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3" /></svg>
+  </button>
+  <button primalIconButton type="button" label="Show More Actions" emphasis="default">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.75" /><circle cx="12" cy="12" r="1.75" /><circle cx="19" cy="12" r="1.75" /></svg>
+  </button>
+  <button primalIconButton type="button" label="Close Panel">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+  </button>
+</div>
+
+<h2>Links</h2>
+<p>A link takes you somewhere and changes nothing. It says when it leaves this site, and what a download is.</p>
+<ul>
+  <li><a primalLink routerLink="/foundation/colour">Colour</a>, a page here</li>
+  <li><a primalLink href="https://developer.mozilla.org/docs/Web/HTML/Element/a">The anchor element on MDN</a>, opens in a new tab</li>
+  <li><a primalLink href="favicon.ico" download file="ICO, 15 KB">Download Primal's Icon</a></li>
+</ul>
+<p>
+  A link may look like a button when it starts a task on its own page. It still only takes you there:
+  <a primalButton routerLink="/forms/examples" emphasis="primary" kind="navigational">Open Example Forms</a>
+</p>
+
+<h2>Button groups</h2>
+<p>A few buttons that act on one thing, joined into one control with one name. With <code>aria-pressed</code>, they're toggles.</p>
+<primal-button-group label="Text alignment">
+  @for (a of alignments; track a.value) {
+    <button type="button" [attr.aria-pressed]="align() === a.value" (click)="align.set(a.value)">{{ a.label }}</button>
+  }
+</primal-button-group>
+<p class="pr-demo-note" [style.text-align]="align()">This line is aligned to the {{ align() }}.</p>
+
+<h2>A row of actions</h2>
+<p>
+  Safe actions together, at the end, the main one last. A destructive one never sits among them: it goes apart, at the start, a
+  section gap away, in the danger treatment. On a phone the row stacks, with the main action on top.
+</p>
+<div class="pr-actions pr-demo-frame">
+  <button primalButton type="button" kind="destructive">Delete Report</button>
+  <div class="pr-actions-group">
+    <button primalButton type="button" emphasis="quiet">Cancel Changes</button>
+    <button primalButton type="button" emphasis="primary">Save Changes</button>
+  </div>
+</div>
+
+<pr-plain-html [code]="plain" />

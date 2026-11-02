@@ -66,6 +66,9 @@ export const space = {
 export const layout = {
   'container-reading': { meaning: 'The maximum width of reading pages and documentation.', value: '72rem' },
   'field-width': { meaning: 'The widest a single-line field grows: as wide as the answer it asks for.', value: '28rem' },
+  'choice-card-min': { meaning: 'The narrowest a choice card gets before the cards wrap to fewer columns.', value: '14rem' },
+  'drop-zone-height': { meaning: 'The least height of a drop zone: a target big enough to aim a dragged file at.', value: '9rem' },
+  'toast-width': { meaning: 'The widest a toast grows: one short sentence and its action.', value: '24rem' },
   'list-height': { meaning: 'The tallest an open list of options grows before it scrolls: about eight options.', value: '20rem' },
   'container-full': { meaning: 'Full width, for app surfaces that use the whole screen.', value: '100%' },
 };
@@ -102,4 +105,6 @@ export const motion = {
   'ease-standard': { meaning: 'A change in place.', value: 'cubic-bezier(0.2, 0, 0, 1)' },
   'ease-enter': { meaning: 'Arriving: fast start, gentle stop.', value: 'cubic-bezier(0, 0, 0, 1)' },
   'ease-exit': { meaning: 'Leaving: gentle start, fast end.', value: 'cubic-bezier(0.3, 0, 1, 1)' },
+  'loop-spin': { meaning: 'One turn of a spinner: steady, never urgent. A loop, so reduced motion swaps it for a slow fade rather than stopping it.', value: '800ms' },
+  'loop-shimmer': { meaning: 'One pass of the light across a skeleton: slow, so waiting never looks frantic.', value: '1600ms' },
 };

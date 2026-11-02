@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { PRIMAL_PLACES, PRIMAL_TABLES } from 'primal-angular';
 
-/** Placeholder until 0.5.0: the plain native elements this page will cover (decision 10). */
+/** The behaviour model, read from the same words the library exports. */
 @Component({
   selector: 'pr-actions-behaviour-model-page',
-  imports: [PagePlaceholder],
+  imports: [PRIMAL_TABLES],
   templateUrl: './behaviour-model.html',
+  styleUrl: '../actions-pages.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActionsBehaviourModelPage {}
+export class ActionsBehaviourModelPage {
+  protected readonly places = PRIMAL_PLACES;
+}

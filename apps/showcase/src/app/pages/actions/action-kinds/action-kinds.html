@@ -1,3 +1,119 @@
-<pr-page-placeholder title="Action kinds" release="0.5.0" covers="Gate, sequence, weight, undo and error contract per kind.">
-<p><button type="button">Create Release</button> (constructive) · <button type="button">Rename Release</button> (mutative) · <a href="#">Open Release</a> (navigational) · <button type="button">Delete Release</button> (destructive)</p>
-</pr-page-placeholder>
+<h1>Action kinds</h1>
+<p>
+  Every action is one of six kinds, and each kind is decided once, here, in plain words: what stands before it (gate), what happens
+  from the press to the end (sequence), how loud its answer is (weight), how it is taken back (reversibility) and what shows when it
+  fails (error). Every Primal action names its kind, and behaves as its kind is written. Read this and you know how any product built
+  on Primal behaves without opening a screen.
+</p>
+
+@for (k of kinds; track k.kind) {
+  <section class="pr-demo-kind" [attr.aria-labelledby]="'kind-' + k.kind">
+    <h2 [id]="'kind-' + k.kind">{{ k.title }}</h2>
+    <p>{{ k.does }}</p>
+    <dl class="pr-demo-places">
+      <dt>Gate</dt>
+      <dd>{{ k.gate }}</dd>
+      <dt>Sequence</dt>
+      <dd>{{ k.sequence }}</dd>
+      <dt>Weight</dt>
+      <dd>{{ k.weight }}</dd>
+      <dt>Reversibility</dt>
+      <dd>{{ k.reversibility }}</dd>
+      <dt>Error</dt>
+      <dd>{{ k.error }}</dd>
+      <dt>Looks</dt>
+      <dd>{{ k.looks }}</dd>
+    </dl>
+
+    <h3>Try it</h3>
+    <div class="pr-demo-frame">
+      @switch (k.kind) {
+        @case ('constructive') {
+          <form class="pr-demo-inline-form" (submit)="$event.preventDefault()">
+            <primal-field label="Report name">
+              <input primalControl [(ngModel)]="newName" name="newName" required />
+            </primal-field>
+            <button primalButton type="submit" emphasis="primary" kind="constructive" [run]="create">Create Report</button>
+          </form>
+          <ul class="pr-demo-made">
+            @for (r of made(); track r) {
+              <li>{{ r }}</li>
+            }
+          </ul>
+        }
+        @case ('mutative') {
+          <primal-field label="Workspace name">
+            <input primalControl [(ngModel)]="workspaceName" name="workspaceName" />
+          </primal-field>
+          <div class="pr-demo-row">
+            <button primalButton type="button" emphasis="primary" kind="mutative" [run]="rename">Save Name</button>
+          </div>
+          <primal-field label="Email me a weekly summary">
+            <input primalControl type="checkbox" role="switch" checked />
+          </primal-field>
+        }
+        @case ('destructive') {
+          <p><strong>Reversible.</strong> It goes at once; Undo is the gate.</p>
+          <ul class="pr-demo-list pr-demo-reports">
+            @for (m of members(); track m) {
+              <li>
+                <span>{{ m }}</span>
+                <button primalButton type="button" kind="destructive" (click)="removeMember(m)">Remove Member</button>
+              </li>
+            } @empty {
+              <li class="pr-demo-note">Nobody left. <button primalButton type="button" emphasis="quiet" (click)="resetMembers()">Bring Them Back</button></li>
+            }
+          </ul>
+
+          <p><strong>Irreversible.</strong> It says so before, and its gate can't be passed by habit.</p>
+          @if (workspaceGone()) {
+            <primal-alert tone="danger" title="“Acme Studio” is deleted" [live]="true">
+              <p>Its reports and members are gone for good.</p>
+              <div class="pr-alert-actions"><button primalButton type="button" (click)="resetWorkspace()">Start the Example Again</button></div>
+            </primal-alert>
+          } @else if (!confirming()) {
+            <div class="pr-actions">
+              <button primalButton type="button" kind="destructive" (click)="confirming.set(true)">Delete Workspace</button>
+              <div class="pr-actions-group">
+                <button primalButton type="button" emphasis="primary" [run]="rename">Save Changes</button>
+              </div>
+            </div>
+          } @else {
+            <primal-alert tone="danger" title="Delete “Acme Studio” for good?">
+              <p>Its 12 reports and 4 members go with it. This can't be undone.</p>
+              <primal-field label="Type the workspace name to confirm" description="Acme Studio" [optional]="false">
+                <input primalControl [(ngModel)]="typedName" name="typedName" autocomplete="off" />
+              </primal-field>
+              <div class="pr-alert-actions">
+                <button primalButton type="button" kind="destructive" [final]="true" [attr.aria-disabled]="typedName() !== 'Acme Studio' ? 'true' : null" [run]="deleteWorkspace">Delete Workspace</button>
+                <button primalButton type="button" emphasis="quiet" (click)="cancelDelete()">Keep Workspace</button>
+              </div>
+            </primal-alert>
+          }
+        }
+        @case ('navigational') {
+          <p>
+            <a primalLink routerLink="/actions/feedback">Go to Feedback</a>, then use the browser's Back: you return here. A link
+            that starts a task may look like a button and still only navigates:
+            <a primalButton routerLink="/forms/examples" kind="navigational">Open Example Forms</a>
+          </p>
+        }
+        @case ('background') {
+          <div class="pr-demo-row">
+            <button primalButton type="button" kind="background" [run]="startSync">Sync Contacts</button>
+          </div>
+          @if (syncing() || synced() > 0) {
+            <primal-progress label="Syncing 40 contacts" [value]="synced()" [max]="40" />
+          }
+        }
+        @case ('confirmatory') {
+          <p>
+            The final button in the irreversible delete above is confirmatory: its words repeat the action ("Delete Workspace", never
+            "OK"), and the other answer ("Keep Workspace") is always there and costs nothing. Dialogs, the usual home of a question,
+            arrive in 0.6.0.
+          </p>
+        }
+      }
+    </div>
+  </section>
+}

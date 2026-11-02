@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { PRIMAL_FORMS } from 'primal-angular';
+import { PRIMAL_FORMS, PRIMAL_TABLES } from 'primal-angular';
 
 @Component({
   selector: 'pr-forms-validation-page',
-  imports: [PRIMAL_FORMS],
+  imports: [PRIMAL_TABLES, PRIMAL_FORMS],
   templateUrl: './validation.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

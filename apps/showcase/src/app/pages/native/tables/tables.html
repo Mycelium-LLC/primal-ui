@@ -26,6 +26,20 @@
   </tfoot>
 </table>
 
+<h2>Sorting</h2>
+<p>
+  Every table sorts by its columns, on by default. Press a header to sort by it, again to reverse, and a third time for the order
+  the rows came in; the header shows which way, and the change is read aloud. Numbers sort as numbers, dates by their
+  <code>&lt;time datetime&gt;</code>, words in the page's language. Try the two tables on this page.
+</p>
+<ul>
+  <li>Turn it off for a table whose order is its meaning (steps, a matrix of states): <code>&lt;table [sortable]="false"&gt;</code>.</li>
+  <li>Turn it off for one column: <code>&lt;th scope="col" data-sort="false"&gt;</code>.</li>
+  <li>A cell sorts by its <code>data-sort-value</code> when its words aren't the value ("3 days ago").</li>
+  <li>Rows drawn from your data: bind <code>(sorted)</code> and sort the data; Primal then leaves the rows alone.</li>
+</ul>
+<p>Sorting needs script: in plain HTML the headers stay as they are, and the Angular adapter adds the buttons.</p>
+
 <h2>A long table</h2>
 <p>
   Wrap a table in <code>.pr-table</code>, a focusable region, and it scrolls sideways within itself on a narrow screen. A long

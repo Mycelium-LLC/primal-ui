@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { PRIMAL_TABLES } from 'primal-angular';
 import {
   ADJUST,
   Adjust,
@@ -23,6 +24,7 @@ type Scheme = keyof typeof SCHEMES;
 /** The colour page: a project's three choices and a harmony, with every role derived live. */
 @Component({
   selector: 'pr-foundation-colour-page',
+  imports: [PRIMAL_TABLES],
   templateUrl: './colour.html',
   styleUrl: './colour.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

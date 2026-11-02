@@ -41,10 +41,26 @@
   <primal-field label="Enterprise" description="Talk to us first."><input primalControl type="radio" name="plan" value="enterprise" disabled /></primal-field>
 </primal-field-group>
 
+<h2>As cards</h2>
+<p>
+  When each option needs a few words (a plan, a delivery speed), the choices can be cards: each a whole target, side by side as the
+  width allows. The mark stays, so a card still says "one of these" or "any of these". The chosen card takes the primary's edge.
+</p>
+<primal-field-group legend="Plan" description="You can change it at any time." [cards]="true">
+  <primal-field label="Free" description="One person, three reports."><input primalControl type="radio" name="plan-card" value="free" required /></primal-field>
+  <primal-field label="Team" description="Up to 20 people, every report. $12 a person a month."><input primalControl type="radio" name="plan-card" value="team" checked /></primal-field>
+  <primal-field label="Enterprise" description="Talk to us first: single sign-on, audit log."><input primalControl type="radio" name="plan-card" value="enterprise" disabled /></primal-field>
+</primal-field-group>
+<primal-field-group legend="Add to every order" description="Choose any, or none." [cards]="true">
+  <primal-field label="Gift wrap" description="Recycled paper, no plastic."><input primalControl type="checkbox" /></primal-field>
+  <primal-field label="A printed receipt" description="In the box, without prices."><input primalControl type="checkbox" checked /></primal-field>
+  <primal-field label="Carbon offset" description="We plant a tree per order."><input primalControl type="checkbox" /></primal-field>
+</primal-field-group>
+
 <h2>Every state</h2>
 <p>Hover and press any of them; tab to see the focus ring.</p>
 <div class="pr-table">
-  <table class="pr-states-table">
+  <table class="pr-states-table" [sortable]="false">
     <caption>Checkboxes and radios in each state</caption>
     <thead>
       <tr>
