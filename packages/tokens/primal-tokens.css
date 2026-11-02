@@ -129,6 +129,12 @@
   /* An avatar beside a name: the height of a control. */
   --pr-avatar-size: 2.5rem;
 
+  /* The width of a side navigation: room for a place name of a few words. */
+  --pr-nav-width: 15rem;
+
+  /* The width of the list beside its detail: an item's name and a line about it. */
+  --pr-list-pane-width: 22rem;
+
   /* The widest a toast grows: one short sentence and its action. */
   --pr-toast-width: 24rem;
 

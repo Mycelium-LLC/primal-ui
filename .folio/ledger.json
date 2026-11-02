@@ -179,6 +179,11 @@
       "n": 31,
       "decision": "0.7.0 starts before the 0.6.0 review",
       "ruling": "Niko chose 'Continue to 0.7.0' on 2026-11-02 while 0.3.0 to 0.6.0 wait for his review; decision 9 gives way again, as in decisions 28 and 30."
+    },
+    {
+      "n": 32,
+      "decision": "0.8.0 starts before the 0.7.0 review",
+      "ruling": "Niko chose 'Continue to 0.8.0' on 2026-11-02 while 0.3.0 to 0.7.0 wait for his review; decision 9 gives way again, as in decisions 28, 30 and 31."
     }
   ],
   "releases": [
@@ -1368,16 +1373,21 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
-      "makesTrue": [],
+      "makesTrue": [
+        "primal/reference/a-developer-starts-a-project-from-reference-surfaces-for",
+        "primal/reference/every-reference-surface-works-at-phone-and-desk-widths-says",
+        "primal/reference/every-durable-place-in-a-reference-surface-has-a-readable",
+        "primal/reference/each-reference-surface-makes-clear-where-the-person-s"
+      ],
       "globalOrIrreversible": false,
       "businessMeasure": "A project starts from places, not parts.",
       "version": "0.8.0",
       "name": "Whole places to work in",
       "track": "Surfaces",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Being built 2026-11-02 in session DB-folio-whole-places, on release/0.8.0 (cut from release/0.7.0); Niko watches it live and comments. Not ready for QA until he asks (decision 29).",
       "dependsOn": [
         "0.7.0"
       ],
@@ -1386,10 +1396,12 @@
       "size": "M",
       "items": [
         {
-          "text": "Reference surfaces: authentication (sign-in, sign-up, reset), app shell (global and local navigation, phone collapse), settings, list with detail, multi-step form."
+          "text": "*Done 2026-11-02:* Reference surfaces: authentication (sign-in, sign-up and reset, each at its own address), app shell (.pr-shell: bar, side navigation, place; narrow, the navigation and search fold behind Show Menu), settings (a section per address; switches save at once, forms on Save Changes, the irreversible apart behind a confirmation), list with detail (.pr-split: find, open, rename, delete with Undo, create, each item at a readable address), multi-step form (.pr-steps: the step in the address, answers kept, a review with Change).",
+          "state": "done"
         },
         {
-          "text": "Each surface's journey written as 3–5 steps with its next two moves, and checked by the blur test."
+          "text": "*Done 2026-11-02:* Each surface's journey written as 3 to 5 steps with its next two moves, on its page.",
+          "state": "done"
         },
         {
           "text": "Release chain for 0.8.0."

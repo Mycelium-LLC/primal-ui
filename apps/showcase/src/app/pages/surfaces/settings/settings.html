@@ -1,14 +1,90 @@
-<pr-page-placeholder title="Settings" release="0.8.0" covers="A settings area.">
-<form (submit)="$event.preventDefault()" aria-label="Settings specimen">
-  <h2>Notifications</h2>
-  <p><label><input type="checkbox" role="switch" checked> Email me when a report is ready</label></p>
-  <h2>Appearance</h2>
-  <fieldset><legend>Theme</legend>
-    <label><input type="radio" name="theme" checked> Follow the system</label><br>
-    <label><input type="radio" name="theme"> Light</label><br>
-    <label><input type="radio" name="theme"> Dark</label>
-  </fieldset>
-  <h2>Danger zone</h2>
-  <p><button type="button">Delete Account</button></p>
-</form>
-</pr-page-placeholder>
+<h1>Settings</h1>
+<p>
+  A settings area: the sections listed at the side, each its own address, so "Notifications" can be linked to. A switch saves the
+  moment it changes and says so beside it; a form of several fields saves when you press Save Changes; the irreversible lives last,
+  apart, behind a confirmation.
+</p>
+
+<h2>The journey</h2>
+<ol class="pr-journey">
+  <li><strong>Arrive</strong> at a section from a link, or pick one at the side.</li>
+  <li><strong>Change</strong> a setting: a switch saves at once; a form saves with Save Changes, and says "Saved" where you pressed.</li>
+  <li><strong>Leave</strong>: nothing is lost, because every change was saved as it was made.</li>
+</ol>
+<p class="pr-moves">Next two moves, within reach in every section: the other sections at the side, and Save Changes at the end of a form.</p>
+
+<div class="pr-surface-frame">
+  <p class="pr-surface-address">/surfaces/settings/{{ current().slug }}</p>
+  <div class="pr-surface-body">
+    <div class="pr-settings">
+      <nav aria-label="Settings">
+        <ul class="pr-nav-list">
+          @for (s of sections; track s.slug) {
+            <li><a [routerLink]="['/surfaces/settings', s.slug]" [attr.aria-current]="s.slug === current().slug ? 'page' : null">{{ s.title }}</a></li>
+          }
+        </ul>
+      </nav>
+
+      <section aria-labelledby="settings-title">
+        <h2 id="settings-title" class="pr-surface-heading">{{ current().title }}</h2>
+        @switch (current().slug) {
+          @case ('notifications') {
+            <p>Email only; nothing is sent in the night (22:00 to 07:00).</p>
+            @for (n of notifications; track n.label) {
+              <div class="pr-inline" data-gap="component">
+                <primal-field [label]="n.label" [description]="n.description">
+                  <input primalControl type="checkbox" role="switch" [checked]="n.on" (change)="toggled(n.label)" />
+                </primal-field>
+                @if (savedNote() === n.label) {
+                  <span class="pr-status pr-demo-note" data-state="positive" role="status">Saved</span>
+                }
+              </div>
+            }
+          }
+          @case ('appearance') {
+            <primal-field-group legend="Theme" description="Changes this showcase at once." [cards]="true">
+              @for (t of themes; track t.value) {
+                <primal-field [label]="t.label" [description]="t.description">
+                  <input primalControl type="radio" name="theme" [value]="t.value" [checked]="prefs.theme() === t.value" (change)="prefs.theme.set(t.value)" />
+                </primal-field>
+              }
+            </primal-field-group>
+          }
+          @case ('account') {
+            <dl class="pr-details">
+              <dt>Plan</dt>
+              <dd>Team, 8 of 20 seats</dd>
+              <dt>Member since</dt>
+              <dd>March 2024</dd>
+            </dl>
+            <hr class="pr-divider" />
+            <h3>Delete your account</h3>
+            <p>Your reports, comments and settings go with it, for good. Reports you shared stay with the people you shared them with.</p>
+            @if (deleted()) {
+              <primal-alert tone="danger" title="Your account is deleted" [live]="true">
+                <p>The demo deleted nothing. <button primalButton type="button" emphasis="quiet" (click)="deleted.set(false)">Start the Example Again</button></p>
+              </primal-alert>
+            } @else {
+              <button primalButton type="button" kind="destructive" (click)="deleteAccount()">Delete Account</button>
+            }
+          }
+          @default {
+            <form primalForm class="pr-stack">
+              <div class="pr-inline">
+                <primal-avatar [name]="name()" size="large" />
+                <p class="pr-demo-note">Your initials stand in until you add a picture.</p>
+              </div>
+              <primal-field label="Your name"><input primalControl name="name" autocomplete="name" required [value]="name()" (input)="draft.set($any($event.target).value)" /></primal-field>
+              <primal-field label="Email" description="Where receipts and sign-in links go.">
+                <input primalControl primalMask="email" type="email" name="email" autocomplete="email" required value="ada@example.com" />
+              </primal-field>
+              <div class="pr-inline" data-gap="component">
+                <button primalButton type="submit" emphasis="primary" [run]="saveProfile">Save Changes</button>
+              </div>
+            </form>
+          }
+        }
+      </section>
+    </div>
+  </div>
+</div>

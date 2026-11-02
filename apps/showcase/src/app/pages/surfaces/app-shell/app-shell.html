@@ -1,11 +1,60 @@
-<pr-page-placeholder title="App shell" release="0.8.0" covers="Global and local navigation, and the phone collapse.">
-<header><p>header: the page's introduction</p></header>
-<nav aria-label="Specimen"><a href="#">nav: one</a> · <a href="#">two</a></nav>
-<search><label>search landmark <input type="search"></label></search>
-<main><p>main (shown inside the page's own main, as a specimen)</p>
-  <article><hgroup><h2>article</h2><p>hgroup subtitle</p></hgroup><p>A self-contained composition.</p></article>
-  <section><h2>section</h2><p>A thematic grouping.</p></section>
-  <aside><p>aside: tangential content</p></aside>
-</main>
-<footer><p>footer: the page's closing</p></footer>
-</pr-page-placeholder>
+<h1>App shell</h1>
+<p>
+  The frame every place in a product sits in, and the part that holds still: the bar across the top (the product, search, your
+  account), the side navigation between the product's places, and the place itself. It lays itself out by its own width: narrow, the
+  side navigation folds behind Show Menu, and search moves into it, so nothing is lost, only put away.
+</p>
+
+<h2>The journey</h2>
+<ol class="pr-journey">
+  <li><strong>Arrive</strong> in a place: the side navigation says which, by its fill and to a screen reader.</li>
+  <li><strong>Move</strong> to another place from the side; the bar and the navigation don't move.</li>
+  <li><strong>On a phone</strong>, Show Menu opens the navigation over the place, and choosing a place closes it.</li>
+</ol>
+<p class="pr-moves">Next two moves, within reach from every place: the other places at the side, and your account in the bar.</p>
+
+<div class="pr-surface-widths">
+  @for (frame of frames; track frame) {
+    <div class="pr-surface-frame">
+      <p class="pr-surface-address">{{ frame }} · /{{ here().toLowerCase() }}</p>
+      <div class="pr-shell">
+        <div class="pr-shell-bar">
+          <button primalIconButton type="button" class="pr-shell-menu" [label]="menuOpen()[frame] ? 'Close Menu' : 'Show Menu'" [attr.aria-expanded]="!!menuOpen()[frame]" (click)="toggle(frame)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+          <a class="pr-shell-brand" href="#" (click)="$event.preventDefault(); go(frame, 'Reports')">Acme Studio</a>
+          <span class="pr-search-field"><input type="search" placeholder="Search Acme Studio" [attr.aria-label]="'Search Acme Studio'" /></span>
+          <primal-menu label="Your account" class="pr-shell-account">
+            <button primalMenuTrigger type="button" class="pr-button-quiet pr-icon-button" aria-label="Ada Shapiro, your account">
+              <primal-avatar name="Ada Shapiro" size="small" />
+            </button>
+            <button primalMenuItem type="button">Open Settings</button>
+            <button primalMenuItem type="button">Switch Workspace</button>
+            <hr />
+            <button primalMenuItem type="button">Sign Out</button>
+          </primal-menu>
+        </div>
+        <nav class="pr-shell-nav" [attr.data-open]="menuOpen()[frame] ? '' : null" [attr.aria-label]="'Acme Studio, ' + frame">
+          <span class="pr-search-field pr-shell-nav-search"><input type="search" placeholder="Search Acme Studio" aria-label="Search Acme Studio" /></span>
+          <ul class="pr-nav-list">
+            @for (p of places; track p.label) {
+              <li>
+                <a href="#" [attr.aria-current]="p.label === here() ? 'page' : null" (click)="$event.preventDefault(); go(frame, p.label)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path [attr.d]="p.icon" /></svg>
+                  {{ p.label }}
+                  @if (p.count) {
+                    <span class="pr-badge pr-push" [attr.aria-label]="p.count + ' waiting'">{{ p.count }}</span>
+                  }
+                </a>
+              </li>
+            }
+          </ul>
+        </nav>
+        <main class="pr-shell-main" [attr.aria-label]="here()">
+          <h2 class="pr-surface-heading">{{ here() }}</h2>
+          <p>{{ placeText() }}</p>
+        </main>
+      </div>
+    </div>
+  }
+</div>

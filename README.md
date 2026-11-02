@@ -29,4 +29,4 @@ npm run check:folio    # checks the ledger
 
 ## Status
 
-Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are shipped; 0.3.0 (forms) and 0.4.0 (Magma by default) are ready for QA; 0.5.0 (actions, feedback and the behaviour model) is built; 0.6.0 (navigation, top layers, focus and keys) is built; 0.7.0 (content, information, layout and the first cells) is being built. The plan to 1.0.0 is in `.folio/`.
+Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are shipped; 0.3.0 (forms) and 0.4.0 (Magma by default) are ready for QA; 0.5.0 (actions, feedback and the behaviour model) is built; 0.6.0 (navigation, top layers, focus and keys) is built; 0.7.0 (content, information, layout and the first cells) is built; 0.8.0 (reference surfaces) is being built. The plan to 1.0.0 is in `.folio/`.
