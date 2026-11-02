@@ -130,6 +130,9 @@ export class PrimalToasterRegion {
     const home = dialogs.at(-1) ?? this.document.body;
     if (this.element.parentElement === home) return;
     home.append(this.element);
+    // While a dialog has the person's attention, a toast's time stands still: an Undo is never
+    // taken away while they can't get to it.
+    this.hold(home !== this.document.body);
     // Moving it closes it; it opens again, above everything there.
     if (this.toasts().some((t) => !t.leaving)) this.element.showPopover();
   }

@@ -19,7 +19,7 @@
     <div class="pr-split" [attr.data-showing]="slug() ? 'detail' : 'list'">
       <section class="pr-split-list pr-stack" data-gap="component" aria-labelledby="reports-title">
         <div class="pr-inline" data-gap="component">
-          <h2 id="reports-title" class="pr-surface-heading">Reports <span class="pr-badge">{{ reports.count() }}</span></h2>
+          <h2 id="reports-title" class="pr-surface-heading" tabindex="-1">Reports <span class="pr-badge">{{ reports.count() }}</span></h2>
           <button primalButton type="button" emphasis="primary" kind="constructive" class="pr-push" (click)="newName.set(''); creating.set(true)">New Report</button>
         </div>
         <label for="report-filter" class="pr-visually-hidden">Find a report</label>

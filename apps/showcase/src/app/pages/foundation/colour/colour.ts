@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, signal } from '@angular/core';
 import { PRIMAL_TABLES } from 'primal-angular';
 import {
   ADJUST,
@@ -20,6 +20,10 @@ import {
 
 type Oklch = number[];
 type Scheme = keyof typeof SCHEMES;
+
+/** Where the page keeps the viewer's picks between visits: a per-viewer convenience, so it works without storage too. */
+const KEY = 'primal-showcase-colour';
+const isOklch = (v: unknown): v is Oklch => Array.isArray(v) && v.length === 3 && v.every((n) => typeof n === 'number' && Number.isFinite(n));
 
 /** The colour page: a project's three choices and a harmony, with every role derived live. */
 @Component({
@@ -145,6 +149,32 @@ export class FoundationColourPage {
   });
 
   protected readonly copied = signal(false);
+
+  constructor() {
+    this.restore();
+    effect(() => {
+      const saved = { black: this.black(), white: this.white(), primary: this.primary(), scheme: this.scheme(), adjust: this.adjust() };
+      try {
+        localStorage.setItem(KEY, JSON.stringify(saved));
+      } catch {
+        // No storage: the picks last for this visit only.
+      }
+    });
+  }
+
+  private restore(): void {
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) ?? 'null');
+      if (!saved) return;
+      if (isOklch(saved.black)) this.black.set(saved.black);
+      if (isOklch(saved.white)) this.white.set(saved.white);
+      if (isOklch(saved.primary)) this.primary.set(saved.primary);
+      if (saved.scheme in SCHEMES) this.scheme.set(saved.scheme);
+      if (saved.adjust && typeof saved.adjust === 'object' && 'companion' in saved.adjust && 'tertiary' in saved.adjust) this.adjust.set(saved.adjust);
+    } catch {
+      // Unreadable or no storage: Primal's own choices.
+    }
+  }
 
   protected pick(which: 'black' | 'white' | 'primary', hex: string): void {
     this[which].set(fromHex(hex));
