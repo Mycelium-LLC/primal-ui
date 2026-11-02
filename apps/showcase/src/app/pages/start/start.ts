@@ -13,8 +13,8 @@ export class StartPage {
 <link rel="stylesheet" href="my-theme.css" />`;
 
   protected readonly angularJson = `"styles": [
-  "primal-ui/packages/tokens/primal-tokens.css",
-  "primal-ui/packages/css/src/primal.css",
+  "node_modules/primal-tokens/primal-tokens.css",
+  "node_modules/primal-css/src/primal.css",
   "src/my-theme.css"
 ]`;
 
@@ -53,6 +53,10 @@ export class AppShell {
   --pr-tertiary-angle: -30;
 }`;
 
-  protected readonly build = `npm install
-npm run build`;
+  protected readonly build = `# in a clone of Mycelium-LLC/primal-ui
+npm install
+npm run pack            # writes dist/packs/*.tgz
+
+# in your project
+npm install /path/to/primal-ui/dist/packs/*.tgz`;
 }
