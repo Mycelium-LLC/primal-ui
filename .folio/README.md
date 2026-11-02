@@ -18,8 +18,8 @@ Addresses are `primal/<feature>/<requirement>`. Statements never name a screen, 
 | 0.1.0 | A base you can make your own (the shell with every page, tokens, themes, both directions) | shipped 2026-10-20 (#1 → 4d0284f, tag 0.1.0) |
 | 0.2.0 | Plain HTML reads right (every native element accounted for) | shipped 2026-10-20 (#2 → afc5b00, tag 0.2.0) |
 | 0.3.0 | Fields that never leave you guessing (forms) | ready for QA (#4) |
-| 0.4.0 | Magma by default (Mycelium's Magma, ink and white; the primary's states and scale) | draft |
-| 0.5.0 | Every action answers (actions, feedback, the behaviour model) | draft |
+| 0.4.0 | Magma by default (Mycelium's Magma, ink and white; the primary's states and scale) | ready for QA (#5) |
+| 0.5.0 | Every action answers (actions, feedback, the behaviour model) | being built (session 35, 2026-11-02) |
 | 0.6.0 | You always know where you are (navigation, top layers, focus) | draft |
 | 0.7.0 | Things look like what they are (content, information, layout, first cells) | draft |
 | 0.8.0 | Whole places to work in (reference surfaces) | draft |

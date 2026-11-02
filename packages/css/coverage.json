@@ -230,7 +230,7 @@
       "group": "Text-level",
       "outcome": "styled",
       "where": "0.1.0",
-      "reason": "The primary colour and an underline; 0.5.0 adds the Link primitive (external and download)."
+      "reason": "The primary colour and an underline; an external link and a download say so with an arrow (the Link primitive adds the words for screen readers and the file's type and size)."
     },
     {
       "element": "em",
@@ -629,7 +629,7 @@
       "group": "Forms",
       "outcome": "styled",
       "where": "0.3.0",
-      "reason": "Drawn by Primal: a quiet fill, or the primary for a submit, with hover, pressed, focus and disabled. 0.5.0 builds the action primitives on it."
+      "reason": "Drawn by Primal: a quiet fill, or the primary for a submit, with hover, pressed, focus, busy and disabled; four treatments (primary, default, quiet, danger) and the action primitives built on it."
     },
     {
       "element": "select",
