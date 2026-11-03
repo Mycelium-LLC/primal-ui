@@ -1,0 +1,36 @@
+name: Deploy
+
+# A release tag (x.y.z) on main deploys the landing page and the showcase to primal.myceliumllc.dev,
+# then checks the live site states that version.
+on:
+  push:
+    tags: ['[0-9]+.[0-9]+.[0-9]+']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # keyless sign-in to Google Cloud
+
+jobs:
+  deploy:
+    runs-on: ${{ vars.ACTIONS_RUNNER_MODE == 'self-hosted' && fromJSON('["self-hosted", "mycelium-macos"]') || 'ubuntu-latest' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build && npm run build:site
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/398844206526/locations/global/workloadIdentityPools/github-actions/providers/primal
+          service_account: primal-deploy@mycelium-hq.iam.gserviceaccount.com
+      - name: Deploy to Firebase Hosting
+        run: npx -y firebase-tools@latest deploy --only hosting:mycelium-primal --project myceliumllc-dev --non-interactive
+      - name: The live site states this version
+        run: |
+          want=$(node -p "require('./package.json').version")
+          got=$(curl -fsS https://mycelium-primal.web.app/version.json | node -p "JSON.parse(require('fs').readFileSync(0)).version")
+          echo "live: $got, released: $want"
+          [ "$got" = "$want" ]
