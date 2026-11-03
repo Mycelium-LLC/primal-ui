@@ -4,7 +4,7 @@
  * doesn't know, no answer too thin to say anything. Primal's own check uses it, and a design
  * system built on Primal can check its own contracts with it:
  *
- *   npx primal-contracts-check path/to/contracts      (a folder of <id>.json contracts, and nothing else)
+ *   npx -p @mycelium-llc/primal-contracts primal-contracts-check path/to/contracts      (a folder of <id>.json contracts, and nothing else)
  */
 
 import { readFileSync, readdirSync, realpathSync } from 'node:fs';

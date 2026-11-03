@@ -50,7 +50,7 @@ npm run check:contracts    # every contract complete, every Angular part has one
 In another repository, check a folder of your contracts with the published checker. The folder must hold contracts only, since every `.json` in it is read as one:
 
 ```bash
-npx primal-contracts-check contracts/
+npx -p @mycelium-llc/primal-contracts primal-contracts-check contracts/
 ```
 
 ## 6. Ship it
