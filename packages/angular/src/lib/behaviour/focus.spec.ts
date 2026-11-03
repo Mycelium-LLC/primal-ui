@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { primalFocusAfterRemove } from './focus';
 
 function list(names: string[]): HTMLUListElement {
@@ -9,6 +9,9 @@ function list(names: string[]): HTMLUListElement {
   document.body.append(ul);
   return ul;
 }
+
+// Every spec shares one page, so the clock goes back to real after each test here.
+afterEach(() => vi.useRealTimers());
 
 describe('primalFocusAfterRemove', () => {
   it('moves focus to the next item’s same control', () => {
