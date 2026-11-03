@@ -29,7 +29,8 @@
   "files": [
     "primal-tokens.css",
     "primal-tokens.json",
-    "src"
+    "src",
+    "README.md"
   ],
   "scripts": {
     "build": "node build.mjs",

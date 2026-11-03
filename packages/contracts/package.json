@@ -30,7 +30,8 @@
     "src",
     "schema.json",
     "contracts.json",
-    "validate.mjs"
+    "validate.mjs",
+    "README.md"
   ],
   "bin": {
     "primal-contracts-check": "validate.mjs"

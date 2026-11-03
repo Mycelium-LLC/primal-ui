@@ -27,6 +27,7 @@
   ],
   "style": "src/primal.css",
   "files": [
-    "src"
+    "src",
+    "README.md"
   ]
 }
