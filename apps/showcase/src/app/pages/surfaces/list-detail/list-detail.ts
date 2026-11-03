@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_CONTENT, PRIMAL_FORMS, PRIMAL_TOP_LAYERS, PrimalToaster } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_CONTENT, PRIMAL_FORMS, PRIMAL_TOP_LAYERS, PrimalToaster } from '@mycelium-llc/primal-angular';
 import { Report, Reports } from '../reports';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

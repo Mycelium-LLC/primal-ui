@@ -1,8 +1,30 @@
 {
-  "name": "primal-contracts",
+  "name": "@mycelium-llc/primal-contracts",
   "version": "0.9.0",
   "description": "Mycelium Primal's component contracts as framework-independent JSON, the schema, and a checker for your own contracts.",
-  "private": true,
+  "license": "MIT",
+  "author": "Mycelium LLC",
+  "homepage": "https://primal.myceliumllc.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mycelium-LLC/primal-ui.git",
+    "directory": "packages/contracts"
+  },
+  "bugs": {
+    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "design-system",
+    "mycelium-primal",
+    "css",
+    "design-tokens",
+    "accessibility",
+    "rtl"
+  ],
   "type": "module",
   "files": [
     "src",

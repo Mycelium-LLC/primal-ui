@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_TABLES } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_TABLES } from '@mycelium-llc/primal-angular';
 import { PlainHtml } from '../../../shell/plain-html/plain-html';
 
 // The work behind the demo buttons is pretend: a wait (mock).

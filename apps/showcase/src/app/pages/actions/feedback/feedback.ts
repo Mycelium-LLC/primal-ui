@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_FEEDBACK, PrimalToaster, primalFocusAfterRemove } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_FEEDBACK, PrimalToaster, primalFocusAfterRemove } from '@mycelium-llc/primal-angular';
 import { PlainHtml } from '../../../shell/plain-html/plain-html';
 
 // Sample reports and people for the examples (mock data).

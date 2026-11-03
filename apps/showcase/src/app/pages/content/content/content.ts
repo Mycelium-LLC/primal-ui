@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_CONTENT, PRIMAL_TABLES } from 'primal-angular';
+import { PRIMAL_CONTENT, PRIMAL_TABLES } from '@mycelium-llc/primal-angular';
 
 // Sample reports and people (mock data), at real length.
 const REPORTS = [

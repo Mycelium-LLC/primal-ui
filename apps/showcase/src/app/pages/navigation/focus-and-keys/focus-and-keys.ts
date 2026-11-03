@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_KEYS, PRIMAL_NAVIGATION, PRIMAL_TABLES, PRIMAL_TOP_LAYERS } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_KEYS, PRIMAL_NAVIGATION, PRIMAL_TABLES, PRIMAL_TOP_LAYERS } from '@mycelium-llc/primal-angular';
 
 /** The keys, read from the same words the library exports. */
 @Component({

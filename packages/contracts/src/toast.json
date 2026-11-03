@@ -52,7 +52,7 @@
     ]
   },
   "usage": {
-    "import": "import { PrimalToaster } from 'primal-angular';",
+    "import": "import { PrimalToaster } from '@mycelium-llc/primal-angular';",
     "markup": "inject(PrimalToaster).show('Deleted “Q3 revenue”.', {\n  action: { label: 'Undo', run: () => restore() },\n});"
   },
   "example": "/actions/feedback"

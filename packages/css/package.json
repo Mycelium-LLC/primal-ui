@@ -1,8 +1,30 @@
 {
-  "name": "primal-css",
+  "name": "@mycelium-llc/primal-css",
   "version": "0.9.0",
-  "private": true,
-  "description": "Mycelium Primal's reset, base typography and layout in plain CSS, with Google Sans bundled (OFL). Needs primal-tokens.",
+  "description": "Mycelium Primal's reset, base typography and layout in plain CSS, with Google Sans bundled (OFL). Needs @mycelium-llc/primal-tokens.",
+  "license": "MIT",
+  "author": "Mycelium LLC",
+  "homepage": "https://primal.myceliumllc.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mycelium-LLC/primal-ui.git",
+    "directory": "packages/css"
+  },
+  "bugs": {
+    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "design-system",
+    "mycelium-primal",
+    "css",
+    "design-tokens",
+    "accessibility",
+    "rtl"
+  ],
   "style": "src/primal.css",
   "files": [
     "src"

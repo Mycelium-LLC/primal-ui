@@ -1,0 +1,23 @@
+name: Report a Bug
+description: Something in Primal doesn't do what its contract promises.
+labels: [bug]
+body:
+  - type: input
+    id: component
+    attributes:
+      label: Component or page
+      placeholder: primal-dialog, the Colour page…
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what you expected
+      description: The steps, the browser and its width, the direction (left to right or right to left) and the theme.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Primal version
+      placeholder: "1.0.0"

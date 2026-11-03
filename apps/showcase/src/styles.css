@@ -6,7 +6,7 @@
  */
 @font-face {
   font-family: 'Square Peg';
-  src: url('/character/square-peg.woff2') format('woff2');
+  src: url('../public/character/square-peg.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }

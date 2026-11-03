@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { PRIMAL_FORMS, PRIMAL_TABLES } from 'primal-angular';
+import { PRIMAL_FORMS, PRIMAL_TABLES } from '@mycelium-llc/primal-angular';
 
 @Component({
   selector: 'pr-forms-validation-page',

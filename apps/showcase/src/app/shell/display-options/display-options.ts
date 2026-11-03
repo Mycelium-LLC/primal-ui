@@ -3,7 +3,7 @@ import {
   PrimalDirection,
   PrimalPreferences,
   PrimalTheme,
-} from 'primal-angular';
+} from '@mycelium-llc/primal-angular';
 
 /** The showcase's display switches: the colour scheme and the text direction, applied to the whole page in place. */
 @Component({

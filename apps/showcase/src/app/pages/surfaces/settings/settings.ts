@@ -8,7 +8,7 @@ import {
   PrimalConfirm,
   PrimalPreferences,
   PrimalTheme,
-} from 'primal-angular';
+} from '@mycelium-llc/primal-angular';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

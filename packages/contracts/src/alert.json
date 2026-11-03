@@ -57,7 +57,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+    "import": "import { PRIMAL_FEEDBACK } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-alert tone=\"warning\" title=\"Your plan ends in 3 days\">\n  <p>Renew it to keep your reports.</p>\n</primal-alert>"
   },
   "example": "/actions/feedback"

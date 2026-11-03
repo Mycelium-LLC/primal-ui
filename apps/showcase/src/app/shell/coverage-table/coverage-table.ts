@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { PRIMAL_TABLES } from 'primal-angular';
+import { PRIMAL_TABLES } from '@mycelium-llc/primal-angular';
 import coverage from '../../../../../../packages/css/coverage.json';
 
 export interface Coverage {

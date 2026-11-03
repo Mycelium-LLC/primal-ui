@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { PRIMAL_ACTIONS, PRIMAL_CONTENT, PRIMAL_NAVIGATION } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_CONTENT, PRIMAL_NAVIGATION } from '@mycelium-llc/primal-angular';
 
 // MOCK DATA: the places of a sample product, and what each holds.
 const PLACES = [

@@ -51,7 +51,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "import": "import { PRIMAL_FORMS } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-field label=\"Attachments\" description=\"PDFs or images, up to 10 MB each.\">\n  <primal-file-drop>\n    <input primalControl type=\"file\" accept=\".pdf,image/*\" multiple />\n  </primal-file-drop>\n</primal-field>"
   },
   "example": "/forms/pickers"

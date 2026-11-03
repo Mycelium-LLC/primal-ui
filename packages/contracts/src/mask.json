@@ -49,7 +49,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "import": "import { PRIMAL_FORMS } from '@mycelium-llc/primal-angular';",
     "markup": "<input primalControl primalMask=\"phone\" type=\"tel\" autocomplete=\"tel\" />"
   },
   "example": "/forms/text-fields"
