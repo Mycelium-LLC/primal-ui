@@ -1,3 +1,5 @@
+import { Component, signal } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { describe, expect, it, vi } from 'vitest';
 import { primalFocusAfterRemove } from './focus';
 
@@ -36,5 +38,44 @@ describe('primalFocusAfterRemove', () => {
     expect(document.activeElement).toBe(heading);
     ul.remove();
     heading.remove();
+  });
+});
+
+@Component({
+  template: `
+    <h2 id="people-title" tabindex="-1">People</h2>
+    @if (people().length) {
+      <ul #list>
+        @for (p of people(); track p) {
+          <li>{{ p }} <button type="button" (click)="remove(p, list)">Delete {{ p }}</button></li>
+        }
+      </ul>
+    } @else {
+      <p>No people.</p>
+    }
+  `,
+})
+class EmptyStateList {
+  readonly people = signal(['Ada']);
+  remove(p: string, list: HTMLElement): void {
+    primalFocusAfterRemove(list, { fallback: () => document.getElementById('people-title') });
+    this.people.update((all) => all.filter((x) => x !== p));
+  }
+}
+
+describe('primalFocusAfterRemove with an empty state', () => {
+  it('goes to the fallback when the list leaves the page with its last item', () => {
+    vi.useFakeTimers();
+    const fixture = TestBed.createComponent(EmptyStateList);
+    document.body.append(fixture.nativeElement);
+    fixture.detectChanges();
+    const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
+    button.focus();
+    button.click();
+    fixture.detectChanges();
+    vi.runAllTimers();
+    expect(fixture.nativeElement.querySelector('ul')).toBeNull();
+    expect(document.activeElement?.id).toBe('people-title');
+    fixture.nativeElement.remove();
   });
 });

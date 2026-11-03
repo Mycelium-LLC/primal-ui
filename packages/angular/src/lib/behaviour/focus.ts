@@ -8,7 +8,8 @@ export interface PrimalFocusAfterRemoveOptions {
 /**
  * When an item is removed with its own button, focus would fall to the top of the page. Call this
  * just before removing it: once the list has drawn again, focus goes to the same control in the
- * item that took its place (the next one, or the last), or to the fallback when none is left.
+ * item that took its place (the next one, or the last), or to the fallback when none is left or
+ * the list itself has gone.
  *
  *   protected remove(report: Report, list: HTMLElement): void {
  *     primalFocusAfterRemove(list, { fallback: () => document.getElementById('reports-title') });
@@ -26,7 +27,8 @@ export function primalFocusAfterRemove(list: HTMLElement, options: PrimalFocusAf
   const control = [...items[at].querySelectorAll<HTMLElement>(FOCUSABLE)].findIndex((c) => c === active);
   // A timer, not a frame: the list draws first, in a background tab too.
   setTimeout(() => {
-    const left = [...list.querySelectorAll<HTMLElement>(selector)];
+    // A list shown only while it has items (an @if with an empty state) leaves the page with its last one.
+    const left = list.isConnected ? [...list.querySelectorAll<HTMLElement>(selector)] : [];
     const next = left[Math.min(at, left.length - 1)];
     const target = next ? (next.querySelectorAll<HTMLElement>(FOCUSABLE)[Math.max(control, 0)] ?? next) : options.fallback?.();
     if (!target) return;
