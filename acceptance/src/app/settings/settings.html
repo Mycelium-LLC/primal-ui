@@ -1,0 +1,107 @@
+<h1 class="pr-visually-hidden">Settings</h1>
+<div class="pr-split fn-settings" [attr.data-showing]="section() ? 'detail' : 'list'">
+  <nav class="pr-split-list" aria-label="Settings">
+    <ul class="pr-nav-list">
+      @for (s of sections; track s.slug) {
+        <li><a [routerLink]="['/settings', s.slug]" [attr.aria-current]="s.slug === section() ? 'page' : null">{{ s.title }}</a></li>
+      }
+    </ul>
+  </nav>
+
+  <section class="pr-split-detail pr-stack" aria-labelledby="section-title">
+    <a class="pr-split-back" routerLink="/settings">All settings</a>
+    <h2 id="section-title">{{ current().title }}</h2>
+
+    @switch (current().slug) {
+      @case ('notifications') {
+        <p>Field Notes sends email only, and nothing between 22:00 and 07:00.</p>
+        @for (n of notifications.switches(); track n.key) {
+          <div class="pr-inline" data-gap="component">
+            <primal-field [label]="n.label" [description]="n.description">
+              <input primalControl type="checkbox" role="switch" [checked]="n.on" (change)="toggle(n.key, $any($event.target).checked)" />
+            </primal-field>
+            @if (savedNote() === n.key) {
+              <span class="pr-status" data-state="positive" role="status">Saved</span>
+            }
+          </div>
+        }
+        <div class="pr-stack" data-gap="component">
+          <primal-field-group legend="Summary email" description="Everything that happened on your projects, in one email." [cards]="true">
+            @for (d of digests; track d.value) {
+              <primal-field [label]="d.label" [description]="d.description">
+                <input primalControl type="radio" name="digest" [value]="d.value" [checked]="notifications.digest() === d.value" (change)="chooseDigest(d.value)" />
+              </primal-field>
+            }
+          </primal-field-group>
+          @if (savedNote() === 'digest') {
+            <span class="pr-status" data-state="positive" role="status">Saved</span>
+          }
+        </div>
+      }
+      @case ('appearance') {
+        <div class="pr-stack" data-gap="component">
+          <primal-field-group legend="Theme" description="Changes Field Notes at once." [cards]="true">
+            @for (t of themes; track t.value) {
+              <primal-field [label]="t.label" [description]="t.description">
+                <input primalControl type="radio" name="theme" [value]="t.value" [checked]="prefs.theme() === t.value" (change)="chooseTheme(t.value)" />
+              </primal-field>
+            }
+          </primal-field-group>
+          @if (savedNote() === 'theme') {
+            <span class="pr-status" data-state="positive" role="status">Saved</span>
+          }
+        </div>
+        <div class="pr-stack" data-gap="component">
+          <primal-field-group legend="Text direction" description="Which way the page reads." [cards]="true">
+            @for (d of directions; track d.value) {
+              <primal-field [label]="d.label" [description]="d.description">
+                <input primalControl type="radio" name="direction" [value]="d.value" [checked]="prefs.direction() === d.value" (change)="chooseDirection(d.value)" />
+              </primal-field>
+            }
+          </primal-field-group>
+          @if (savedNote() === 'direction') {
+            <span class="pr-status" data-state="positive" role="status">Saved</span>
+          }
+        </div>
+      }
+      @case ('account') {
+        @if (auth.account(); as me) {
+          <dl class="pr-details">
+            <dt>Signed in as</dt>
+            <dd>{{ me.email }}</dd>
+            <dt>Plan</dt>
+            <dd>Team, free while in beta</dd>
+          </dl>
+        }
+        <hr class="pr-divider" />
+        <h3>Delete your account</h3>
+        <p>Your profile and settings go with it, for good. Projects and notes you wrote stay with the team.</p>
+        <div class="pr-inline">
+          <button primalButton type="button" kind="destructive" (click)="deleteAccount()">Delete Account</button>
+        </div>
+      }
+      @default {
+        @if (auth.account(); as me) {
+          <form #profile primalForm class="pr-stack fn-step">
+            <div class="pr-inline">
+              <primal-avatar [name]="me.name" size="large" />
+              <p>Your initials stand in for a picture.</p>
+            </div>
+            <primal-field label="Your name">
+              <input primalControl name="name" autocomplete="name" required maxlength="80" [value]="me.name" />
+            </primal-field>
+            <primal-field label="Email" description="Where notifications and sign-in links go.">
+              <input primalControl type="email" name="email" autocomplete="email" required [value]="me.email" />
+            </primal-field>
+            <primal-field label="About you" description="A line your team sees beside your notes.">
+              <textarea primalControl name="bio" rows="2" maxlength="160" [value]="bio()"></textarea>
+            </primal-field>
+            <div class="pr-inline">
+              <button primalButton type="submit" emphasis="primary" [run]="saveProfile(profile)">Save Changes</button>
+            </div>
+          </form>
+        }
+      }
+    }
+  </section>
+</div>

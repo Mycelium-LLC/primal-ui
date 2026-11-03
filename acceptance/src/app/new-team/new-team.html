@@ -1,0 +1,85 @@
+<nav class="pr-breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a routerLink="/teams">Teams</a></li>
+    <li><span aria-current="page">New team</span></li>
+  </ol>
+</nav>
+<h1>New team</h1>
+
+@if (created(); as team) {
+  <primal-alert tone="success" [title]="'“' + team.name + '” is ready'" [live]="true">
+    <p>
+      {{ team.members.length ? 'It has ' + team.members.length + (team.members.length === 1 ? ' person.' : ' people.') : 'It is just you for now.' }}
+    </p>
+    <div class="pr-alert-actions">
+      <a primalButton routerLink="/teams" emphasis="primary" kind="navigational">Open Teams</a>
+      <button primalButton type="button" emphasis="quiet" (click)="startAgain()">Create Another Team</button>
+    </div>
+  </primal-alert>
+} @else {
+  <ol class="pr-steps" aria-label="Steps">
+    @for (s of steps; track s.key; let i = $index) {
+      <li [attr.aria-current]="s.key === step() ? 'step' : null" [attr.data-done]="i < at() ? '' : null">
+        {{ s.title }}@if (i < at()) {<span class="pr-visually-hidden"> (done)</span>}
+      </li>
+    }
+  </ol>
+
+  @switch (step()) {
+    @case ('people') {
+      <form primalForm class="pr-stack fn-step" (validSubmit)="go('review')">
+        <h2>Who is in it?</h2>
+        <primal-field-group legend="People" description="Choose anyone in the workspace. You can add more later.">
+          @for (person of workspace.people; track person.email) {
+            <primal-field [label]="person.name" [description]="person.email">
+              <input primalControl type="checkbox" name="members" [value]="person.email"
+                [checked]="members().includes(person.email)" (change)="toggleMember(person.email, $any($event.target).checked)" />
+            </primal-field>
+          }
+        </primal-field-group>
+        <div class="pr-actions">
+          <button primalButton type="button" emphasis="quiet" (click)="go('team')">Back to Team</button>
+          <div class="pr-actions-group">
+            <button primalButton type="submit" emphasis="primary">{{ members().length ? 'Continue to Review' : 'Skip to Review' }}</button>
+          </div>
+        </div>
+      </form>
+    }
+    @case ('review') {
+      <div class="pr-stack fn-step">
+        <h2>Check it once more</h2>
+        <dl class="pr-details">
+          <dt>Name</dt>
+          <dd>{{ name() }} <a href="#" (click)="$event.preventDefault(); go('team')">Change<span class="pr-visually-hidden"> name</span></a></dd>
+          <dt>Purpose</dt>
+          <dd>{{ purpose() || 'None written' }} <a href="#" (click)="$event.preventDefault(); go('team')">Change<span class="pr-visually-hidden"> purpose</span></a></dd>
+          <dt>People</dt>
+          <dd>{{ memberNames().length ? memberNames().join(', ') : 'Just you, for now' }} <a href="#" (click)="$event.preventDefault(); go('people')">Change<span class="pr-visually-hidden"> people</span></a></dd>
+        </dl>
+        <div class="pr-actions">
+          <button primalButton type="button" emphasis="quiet" (click)="go('people')">Back to People</button>
+          <div class="pr-actions-group">
+            <button primalButton type="button" emphasis="primary" kind="constructive" [run]="create">Create Team</button>
+          </div>
+        </div>
+      </div>
+    }
+    @default {
+      <form primalForm class="pr-stack fn-step" (validSubmit)="go('people')">
+        <h2>Name your team</h2>
+        <primal-field label="Team name" description="What everyone calls it.">
+          <input primalControl name="name" required maxlength="60" autocomplete="off" [value]="name()" (input)="name.set($any($event.target).value)" />
+        </primal-field>
+        <primal-field label="Purpose" description="One sentence on what the team looks after.">
+          <textarea primalControl name="purpose" rows="2" maxlength="200" [value]="purpose()" (input)="purpose.set($any($event.target).value)"></textarea>
+        </primal-field>
+        <div class="pr-actions">
+          <a primalButton routerLink="/teams" emphasis="quiet" kind="navigational">Back to Teams</a>
+          <div class="pr-actions-group">
+            <button primalButton type="submit" emphasis="primary">Continue to People</button>
+          </div>
+        </div>
+      </form>
+    }
+  }
+}

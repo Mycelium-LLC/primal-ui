@@ -1,0 +1,104 @@
+@if (project(); as p) {
+  <nav class="pr-breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a routerLink="/projects">Projects</a></li>
+      <li><span aria-current="page">{{ p.name }}</span></li>
+    </ol>
+  </nav>
+
+  <div class="fn-head">
+    <div class="pr-stack" data-gap="component">
+      <h1>{{ p.name }}</h1>
+      <span class="pr-status" [attr.data-state]="statusState[p.status]">{{ statusLabel[p.status] }}</span>
+    </div>
+    <div class="pr-actions">
+      <button primalButton type="button" kind="destructive" (click)="remove()">Delete Project</button>
+      <div class="pr-actions-group">
+        <button primalButton type="button" (click)="startRenaming()">Rename Project</button>
+      </div>
+    </div>
+  </div>
+
+  @if (p.summary) {
+    <p>{{ p.summary }}</p>
+  }
+
+  <primal-tabs label="Project" [(selected)]="tab">
+    <primal-tab [label]="'Notes (' + p.notes.length + ')'">
+      <div class="pr-stack" data-gap="section">
+        <form #noteForm primalForm class="pr-stack" (validSubmit)="addNote(noteForm)">
+          <primal-field label="New note" description="What you saw, did or need. Notes are kept newest first.">
+            <textarea id="note-text" primalControl name="note" rows="3" required maxlength="500" (input)="draft.set($any($event.target).value)"></textarea>
+          </primal-field>
+          <div class="pr-inline">
+            <button primalButton type="submit" emphasis="primary" kind="constructive">Add Note</button>
+          </div>
+        </form>
+
+        @if (p.notes.length) {
+          <ul class="pr-list-items" #notesList aria-label="Notes">
+            @for (n of p.notes; track n.id) {
+              <li>
+                <primal-avatar [name]="n.author" size="small" />
+                <span class="pr-item-body">
+                  <span class="pr-item-title">{{ n.text }}</span>
+                  <span class="pr-item-line">{{ n.author }}, <time [attr.datetime]="n.written">{{ n.written }}</time></span>
+                </span>
+                <span class="pr-item-end">
+                  <button primalButton type="button" emphasis="quiet" kind="destructive" (click)="removeNote(n)">Delete Note</button>
+                </span>
+              </li>
+            }
+          </ul>
+        } @else {
+          <primal-empty title="No notes yet" reason="Notes are what happened in the field, in the words of whoever was there. Write the first one above." />
+        }
+      </div>
+    </primal-tab>
+
+    <primal-tab label="Details">
+      <dl class="pr-details">
+        <dt>Owner</dt>
+        <dd>{{ p.owner }}</dd>
+        <dt>Status</dt>
+        <dd>{{ statusLabel[p.status] }}</dd>
+        <dt>Last updated</dt>
+        <dd><time [attr.datetime]="p.updated">{{ p.updated }}</time></dd>
+        <dt>Notes</dt>
+        <dd>{{ p.notes.length }}</dd>
+        <dt>Address</dt>
+        <dd>/projects/{{ p.slug }}</dd>
+      </dl>
+    </primal-tab>
+
+    <primal-tab label="People">
+      <ul class="pr-list-items" aria-label="People">
+        @for (person of people(); track person) {
+          <li>
+            <primal-avatar [name]="person" size="small" />
+            <span class="pr-item-body">
+              <span class="pr-item-title">{{ person }}</span>
+              <span class="pr-item-line">{{ person === p.owner ? 'Owner' : 'Wrote notes' }}</span>
+            </span>
+          </li>
+        }
+      </ul>
+    </primal-tab>
+  </primal-tabs>
+
+  <primal-dialog title="Rename project" [(open)]="renaming">
+    <form primalForm id="rename-project" (validSubmit)="rename()">
+      <primal-field label="Name">
+        <input primalControl name="name" required maxlength="60" autocomplete="off" [value]="newName()" (input)="newName.set($any($event.target).value)" />
+      </primal-field>
+    </form>
+    <div class="pr-dialog-actions" dialog-actions>
+      <button primalButton type="button" emphasis="quiet" (click)="renaming.set(false)">Keep Name</button>
+      <button primalButton type="submit" form="rename-project" emphasis="primary">Rename Project</button>
+    </div>
+  </primal-dialog>
+} @else {
+  <primal-empty title="No project at this address" reason="It may have been deleted, or the link has a typo.">
+    <a primalButton routerLink="/projects" emphasis="primary" kind="navigational">Open Projects</a>
+  </primal-empty>
+}
