@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, effect, signal } from '@angular/core';
 import { PRIMAL_TABLES } from '@mycelium-llc/primal-angular';
 import {
+  BLACK_MAX,
+  WHITE_MIN,
   ADJUST,
   Adjust,
   DEFAULTS,
@@ -44,6 +46,8 @@ export class FoundationColourPage {
 
   protected readonly schemes = Object.entries(SCHEMES).map(([key, s]) => ({ key: key as Scheme, ...s }));
   protected readonly toHex = toHex;
+  /** The range every role is checked across, in OKLCH lightness. */
+  protected readonly range = { black: BLACK_MAX * 100, white: WHITE_MIN * 100 };
 
   protected readonly choices = computed(() => ({
     black: this.black(),

@@ -224,6 +224,11 @@
       "n": 40,
       "decision": "Going public",
       "ruling": "Niko delegated every 1.0.0 decision on 2026-11-03 ('u decide all'). Making the repository public and publishing to npm are still done only after the final QA passes, and Niko is told the moment it happens."
+    },
+    {
+      "n": 41,
+      "decision": "Every colour pair reads for any black and white, within a stated range",
+      "ruling": "Session 35, 2026-11-03 (Niko: 'u decide all'). The roles are measured, not assumed: any black up to 0.22 OKLCH lightness and any white from 0.95, tinted or not, with any primary, keeps every pair at WCAG 2.2 AA. The system colours follow the page's white exactly (relative colour in CSS); the primary as text sits at a luminance cap of 0.11 (was 0.14, so Magma's link is a shade deeper), the fill's dark floor is 0.176 (Magma's own, so Magma stays exactly Magma), and the companion and tertiary sit 0.04 darker in light so an out-of-gamut hue can't wash out. The build's contrast check sweeps 27 blacks and whites; the Colour page states the range and shows any miss outside it."
     }
   ],
   "releases": [
