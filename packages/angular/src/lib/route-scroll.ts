@@ -35,18 +35,21 @@ export class PrimalRouteScroll {
   /** Where each visit was left, by its navigation id, so Back can return there. */
   private readonly left = new Map<number, number>();
   private current = 0;
+  private watched: HTMLElement | null = null;
 
   constructor() {
     inject(Router).events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        const box = this.options.scroller?.();
-        this.left.set(this.current, box ? box.scrollTop : window.scrollY);
+        const box = this.watch();
+        // A box that is hidden (display: none) reads 0; it keeps the place last read while shown.
+        if (!box) this.left.set(this.current, window.scrollY);
+        else if (box.getClientRects().length) this.left.set(this.current, box.scrollTop);
         this.trigger = event.navigationTrigger;
         this.restoring = event.navigationTrigger === 'popstate' && event.restoredState ? event.restoredState.navigationId : null;
       }
       if (!(event instanceof NavigationEnd)) return;
       this.current = event.id;
-      const box = this.options.scroller?.();
+      const box = this.watch();
       // Back and forward: the browser restores the window; a scrolling box is restored here.
       if (this.trigger === 'popstate') {
         if (box && this.restoring !== null) {
@@ -67,6 +70,18 @@ export class PrimalRouteScroll {
       } else if (anchor) this.viewport.scrollToAnchor(anchor);
       else this.viewport.scrollToPosition([0, 0]);
     });
+  }
+
+  /** The scrolling box, with its place written down as it scrolls, so hiding it can't lose it. */
+  private watch(): HTMLElement | null {
+    const box = this.options.scroller?.() ?? null;
+    if (box && box !== this.watched) {
+      this.watched = box;
+      box.addEventListener('scroll', () => {
+        if (box.getClientRects().length) this.left.set(this.current, box.scrollTop);
+      }, { passive: true });
+    }
+    return box;
   }
 }
 

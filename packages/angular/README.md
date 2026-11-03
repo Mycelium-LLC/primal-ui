@@ -70,6 +70,8 @@ export class SignIn {
 }
 ```
 
+When a row is removed with its own button, call `primalFocusAfterRemove(list)` just before removing it: focus goes to the next row's same button (or the list's heading when none is left), never to the top of the page.
+
 Every component's contract (what it promises, its states, keys, accessibility and markup to copy) is in the showcase's contract catalog, `/contracts/catalog`.
 
 ## Make it yours

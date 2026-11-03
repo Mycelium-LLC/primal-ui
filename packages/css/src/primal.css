@@ -1934,6 +1934,22 @@ a.pr-button::after {
   z-index: var(--pr-layer-toast);
 }
 
+/* Inside a dialog it waits at the top, clear of the dialog's answers at the bottom. */
+.pr-toaster.pr-toaster-dialog {
+  inset-block: var(--pr-gutter) auto;
+}
+
+.pr-toaster-dialog .pr-toast {
+  animation-name: pr-toast-down;
+}
+
+@keyframes pr-toast-down {
+  from {
+    opacity: 0;
+    translate: 0 calc(-1 * var(--pr-gap-group));
+  }
+}
+
 .pr-toaster:not(:popover-open) {
   display: none;
 }
