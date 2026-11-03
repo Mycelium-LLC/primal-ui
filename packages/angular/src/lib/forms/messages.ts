@@ -11,8 +11,13 @@ export type PrimalMessages = (control: PrimalNativeControl, label: string) => st
 
 const lower = (label: string) => label.charAt(0).toLowerCase() + label.slice(1);
 
-/** "Password" becomes "your password"; a label that already says whose it is stays as it is. */
-const yours = (label: string) => (/^(your|the|a|an|my) /i.test(label) ? lower(label) : `your ${lower(label)}`);
+/**
+ * "Name" becomes "a name" when it is missing and "the name" after that, so a message fits a field
+ * about anything: a person, a project, a note. A label that already says whose it is stays as it is.
+ */
+const owned = (label: string) => /^(your|the|a|an|my|our) /i.test(label);
+const some = (label: string) => (owned(label) ? lower(label) : `${/^[aeiou]/i.test(label) ? 'an' : 'a'} ${lower(label)}`);
+const the = (label: string) => (owned(label) ? lower(label) : `the ${lower(label)}`);
 
 /** Primal's English messages: what happened, and what to type. */
 export const primalEnglishMessages: PrimalMessages = (el, label) => {
@@ -23,10 +28,10 @@ export const primalEnglishMessages: PrimalMessages = (el, label) => {
   if (v.valueMissing) {
     if (type === 'checkbox') return 'Check this box to continue.';
     if (type === 'radio') return 'Choose one of the options.';
-    if (type === 'select' || type === 'file' || type === 'color') return `Choose ${yours(label)}.`;
-    return `Enter ${yours(label)}.`;
+    if (type === 'select' || type === 'file' || type === 'color') return `Choose ${some(label)}.`;
+    return `Enter ${some(label)}.`;
   }
-  if (v.badInput) return type === 'number' ? 'Enter a number, using digits only.' : `Enter ${yours(label)} in full.`;
+  if (v.badInput) return type === 'number' ? 'Enter a number, using digits only.' : `Enter ${the(label)} in full.`;
   if (v.typeMismatch) {
     if (type === 'email') return 'Enter an email address like name@example.com.';
     if (type === 'url') return 'Enter a web address that starts with https://.';
@@ -36,9 +41,9 @@ export const primalEnglishMessages: PrimalMessages = (el, label) => {
   if (v.rangeUnderflow && input) return `Enter ${input.min} or more.`;
   if (v.rangeOverflow && input) return `Enter ${input.max} or less.`;
   if (v.stepMismatch && input) return input.step === '1' || !input.step ? 'Enter a whole number.' : `Use steps of ${input.step}.`;
-  if (v.patternMismatch) return el.title || `Enter ${yours(label)} in the format shown.`;
+  if (v.patternMismatch) return el.title || `Enter ${the(label)} in the format shown.`;
   if (v.customError) return el.validationMessage;
-  return `Check ${yours(label)}.`;
+  return `Check ${the(label)}.`;
 };
 
 /** Provide your own messages (another language, another voice): { provide: PRIMAL_MESSAGES, useValue: fn }. */

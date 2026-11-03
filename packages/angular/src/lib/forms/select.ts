@@ -13,6 +13,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { PrimalControl } from './control';
+import { PRIMAL_SELECT_SET, primalApplyWanted } from './select-value';
 import { PrimalForm } from './form';
 import { PrimalListItem, PrimalListPopup, firstEnabled, fold, lastEnabled, listKey, step, toItems } from './list';
 
@@ -280,21 +281,16 @@ export class PrimalSelect {
 
   /** Follows the native select when code changes it: new options, a value set by a forms API, disabled. */
   private follow(select: HTMLSelectElement): void {
-    const observer = new MutationObserver(() => this.refresh());
+    const observer = new MutationObserver(() => {
+      primalApplyWanted(select);
+      this.refresh();
+    });
     observer.observe(select, { childList: true, subtree: true, attributes: true, characterData: true });
     const fieldset = select.closest('fieldset');
     if (fieldset) observer.observe(fieldset, { attributes: true, attributeFilter: ['disabled'] });
-    for (const prop of ['value', 'selectedIndex'] as const) {
-      const native = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, prop)!;
-      Object.defineProperty(select, prop, {
-        configurable: true,
-        get: () => native.get!.call(select),
-        set: (v) => {
-          native.set!.call(select, v);
-          this.refresh();
-        },
-      });
-    }
+    // primalControl watches the value from the start (select-value.ts); a value already waiting is applied now.
+    if (primalApplyWanted(select)) this.refresh();
+    select.addEventListener(PRIMAL_SELECT_SET, () => this.refresh());
     select.addEventListener('change', () => this.refresh());
     this.destroyRef.onDestroy(() => observer.disconnect());
   }

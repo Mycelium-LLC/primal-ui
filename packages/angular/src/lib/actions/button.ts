@@ -63,6 +63,10 @@ export class PrimalButton extends PrimalActionTreatment {
         return;
       }
       const run = this.run();
+      // A submit button runs its work only for a form that is ready: an invalid one goes on to
+      // submit, so the form shows what is missing, and the button never pretends to be busy.
+      const form = (this.element as HTMLButtonElement).form;
+      if (run && (this.element as HTMLButtonElement).type === 'submit' && form && !form.checkValidity()) return;
       if (run) void this.execute(run);
     };
     this.element.addEventListener('click', guard, { capture: true });

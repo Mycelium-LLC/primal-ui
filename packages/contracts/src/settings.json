@@ -35,12 +35,13 @@
   ],
   "api": {
     "css": [
+      ".pr-settings",
       ".pr-nav-list",
       ".pr-details"
     ]
   },
   "usage": {
-    "markup": "<div class=\"pr-split\">\n  <nav class=\"pr-split-list\" aria-label=\"Settings\"><ul class=\"pr-nav-list\">…sections…</ul></nav>\n  <section class=\"pr-split-detail\">…the section's settings…</section>\n</div>"
+    "markup": "<div class=\"pr-settings\">\n  <nav aria-label=\"Settings\"><ul class=\"pr-nav-list\">…sections, the current one aria-current=\"page\"…</ul></nav>\n  <section aria-labelledby=\"profile-title\">\n    <h2 id=\"profile-title\">Profile</h2>\n    …the section's settings…\n  </section>\n</div>"
   },
   "example": "/surfaces/settings"
 }

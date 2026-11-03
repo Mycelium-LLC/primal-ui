@@ -22,15 +22,9 @@ export class SurfacesAppShellPage {
   protected readonly places = PLACES;
   protected readonly here = signal('Invoices');
   protected readonly placeText = computed(() => PLACES.find((p) => p.label === this.here())?.text ?? '');
-  protected readonly menuOpen = signal<Record<string, boolean>>({});
 
-  protected toggle(frame: string): void {
-    this.menuOpen.update((m) => ({ ...m, [frame]: !m[frame] }));
-  }
-
-  /** Choosing a place moves there, and on a phone closes the menu so the place shows. */
+  /** Choosing a place moves there; primalShellMenu closes the phone menu so the place shows. */
   protected go(frame: string, place: string): void {
     this.here.set(place);
-    this.menuOpen.update((m) => ({ ...m, [frame]: false }));
   }
 }
