@@ -1623,7 +1623,7 @@
       "version": "1.0.0",
       "name": "Open to everyone",
       "track": "Distribution",
-      "status": "Approved 2026-11-03 (Niko: 'u decide all'); building in release/1.0.0, session 35.",
+      "status": "Ready for QA 2026-11-03 in release/1.0.0 (session 35). Going public waits on Niko: the npm token and his word.",
       "dependsOn": [
         "0.9.0"
       ],
@@ -1632,40 +1632,52 @@
       "size": "L",
       "items": [
         {
-          "text": "The name check and the four decisions written down (decisions 35-40)."
+          "text": "*Done 2026-11-03:* The name check and the four decisions written down (decisions 35-40).",
+          "state": "done"
         },
         {
-          "text": "Open-source files: LICENSE (MIT), CONTRIBUTING, CODE_OF_CONDUCT, SECURITY (private advisories), CHANGELOG from 0.1.0, issue and pull-request templates."
+          "text": "*Done 2026-11-03:* Open-source files: LICENSE (MIT), CONTRIBUTING, CODE_OF_CONDUCT, SECURITY (private advisories), CHANGELOG from 0.1.0, issue and pull-request templates.",
+          "state": "done"
         },
         {
-          "text": "A README for strangers: what Primal is, the two ways in, a short install, links."
+          "text": "*Done 2026-11-03:* A README for strangers: what Primal is, the two ways in, a short install, links.",
+          "state": "done"
         },
         {
-          "text": "Packages renamed to @mycelium-llc/primal-*, each with its README, license, repository and files; a publish workflow on tags (npm provenance) that can fall back to the self-hosted runner."
+          "text": "*Done 2026-11-03:* Packages renamed to @mycelium-llc/primal-*, each with its README, license, repository and files; a publish workflow on tags (npm provenance) that can fall back to the self-hosted runner.",
+          "state": "done"
         },
         {
-          "text": "A starter: a template repository from install to a first screen."
+          "text": "*Done 2026-11-03:* A starter: a template repository from install to a first screen.",
+          "state": "done"
         },
         {
-          "text": "The fork guide: clone or use the template, rename, your colour, your tokens, your contracts, the contract check."
+          "text": "*Done 2026-11-03:* The fork guide: clone or use the template, rename, your colour, your tokens, your contracts, the contract check.",
+          "state": "done"
         },
         {
-          "text": "The landing page, built from Primal: what it is, why it's different, Install Primal and Fork Primal, the Colour picker live, links to the showcase, the catalog, the acceptance app and GitHub; social images, favicon, meta."
+          "text": "*Done 2026-11-03:* The landing page, built from Primal: what it is, why it's different, Install Primal and Fork Primal, the Colour picker live, links to the showcase, the catalog, the acceptance app and GitHub; social images, favicon, meta.",
+          "state": "done"
         },
         {
-          "text": "Hosting: the mycelium-primal site at primal.myceliumllc.dev, deployed by CI from main, /version.json as JSON before the app's catch-all."
+          "text": "*Done 2026-11-03:* Hosting: the mycelium-primal site at primal.myceliumllc.dev, deployed by CI from main, /version.json as JSON before the app's catch-all.",
+          "state": "done"
         },
         {
-          "text": "The acceptance app: authentication, forms, settings, navigation, tables, dialogs, empty states and feedback, from Primal alone, hosted beside the showcase."
+          "text": "*Done 2026-11-03:* The acceptance app: authentication, forms, settings, navigation, tables, dialogs, empty states and feedback, from Primal alone, hosted beside the showcase.",
+          "state": "done"
         },
         {
-          "text": "Every colour pair reads for any black and white a project chooses."
+          "text": "*Done 2026-11-03:* Every colour pair reads for any black and white a project chooses.",
+          "state": "done"
         },
         {
-          "text": "Checked in Chrome, Safari and Firefox, with VoiceOver, at phone and desk widths."
+          "text": "*Done 2026-11-03:* Checked in Chrome, Safari and Firefox, with VoiceOver, at phone and desk widths.",
+          "state": "done"
         },
         {
-          "text": "A secrets sweep of the whole history before the repository goes public."
+          "text": "*Done 2026-11-03:* A secrets sweep of the whole history before the repository goes public.",
+          "state": "done"
         },
         {
           "text": "Release chain for 1.0.0: QA at Forensic care, then public, published, deployed and verified."
