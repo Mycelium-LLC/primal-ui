@@ -1,0 +1,16 @@
+{
+  "name": "primal-contracts",
+  "version": "0.9.0",
+  "description": "Mycelium Primal's component contracts as framework-independent JSON, the schema, and a checker for your own contracts.",
+  "private": true,
+  "type": "module",
+  "files": [
+    "src",
+    "schema.json",
+    "contracts.json",
+    "validate.mjs"
+  ],
+  "bin": {
+    "primal-contracts-check": "validate.mjs"
+  }
+}

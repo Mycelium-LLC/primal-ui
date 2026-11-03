@@ -48,6 +48,13 @@ for (const [name, role] of Object.entries(t.ROLES)) {
   json[v(`color-${name}`)] = { group, value: role.css, meaning: role.meaning, light: oklch(light[name]), dark: oklch(dark[name]) };
   roles.push(decl(`color-${name}`, role.css, role.meaning));
 }
+const steps = t.scale(t.DEFAULTS);
+for (const step of Object.keys(t.SCALE)) {
+  const [toward, share] = t.SCALE[step] ?? [];
+  const meaning = toward ? `Step ${step}: ${share}% primary, the rest the project's ${toward}.` : 'Step 500: the primary as chosen.';
+  json[v(`primary-${step}`)] = { group: 'scale', value: t.scaleCss(step), meaning, light: oklch(steps[step]), dark: oklch(steps[step]) };
+  roles.push(decl(`primary-${step}`, t.scaleCss(step), meaning));
+}
 for (const [name, f] of Object.entries(t.type.family)) add('type', `font-${name}`, f.value, f.meaning);
 for (const [name, s] of Object.entries(t.type.size)) add('type', `text-${name}`, fluid(s.px), s.meaning, { px: s.px });
 for (const [name, l] of Object.entries(t.type.leading)) add('type', `leading-${name}`, l.value, l.meaning);
@@ -69,7 +76,8 @@ const css = `/*
  *
  * Re-theme Primal by overriding these custom properties in your own file, loaded after this one.
  * For colour, override only the choices: --pr-black, --pr-white, --pr-primary and the two
- * harmony angles. Every colour role is derived from them.
+ * harmony angles. Every colour role, the primary's states and its 50–950 scale derive from them.
+ * Primal's own choices are Mycelium's: Magma #E61924 on ink #0B0B0D and white #FFFFFF.
  *
  * Light and dark follow the system; data-theme="light" or "dark" forces one on any element.
  */
@@ -81,7 +89,7 @@ ${root.join('\n\n')}
 }
 
 /*
- * The colour roles, derived from the choices above. Declared again on [data-palette], so a region
+ * The colour roles and the primary's scale, derived from the choices above. Declared again on [data-palette], so a region
  * that sets its own --pr-black, --pr-white or --pr-primary gets its own derived roles.
  */
 :root,

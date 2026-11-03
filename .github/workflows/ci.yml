@@ -19,5 +19,9 @@ jobs:
         run: npm run check:folio
       - name: Check the tokens are generated and meet WCAG 2.2 AA contrast
         run: npm run check:tokens
+      - name: Every component has a complete contract
+        run: npm run check:contracts
+      - name: The adapter's unit tests
+        run: npm test
       - name: Build the tokens, the Angular adapter and the showcase
         run: npm run build

@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema.json",
+  "id": "card",
+  "name": "Card",
+  "layer": "primitive",
+  "layerWhy": "It is one item of a collection; the collection, not the card, does a job.",
+  "promise": "I am one of several, and you can open me.",
+  "expectation": "A raised box among others like it, the whole box a target.",
+  "evidence": "It is drawn only inside a list of cards; the title link covers it; its payload stays and wraps while metadata marked data-gives-way goes first.",
+  "behaviour": [
+    "The whole card opens; buttons inside sit above that cover.",
+    "Narrower than 15rem, metadata gives way."
+  ],
+  "context": "Collections people open: reports, issues, products. Never a page, a section, or a lone piece of content.",
+  "relationships": [
+    "Siblings compare; a dynamic list of one is still a list."
+  ],
+  "states": [
+    "Ready",
+    "Hover",
+    "Focus (ringed)",
+    "Narrow (metadata gone)"
+  ],
+  "accessibility": [
+    "A list item with a heading link; the ring goes round the card."
+  ],
+  "failures": [
+    "Never a single child or a page container.",
+    "Never cuts its title."
+  ],
+  "do": [
+    "Name its payload; mark what can give way."
+  ],
+  "dont": [
+    "A card around a form."
+  ],
+  "api": {
+    "css": [
+      ".pr-cards",
+      ".pr-card",
+      ".pr-card-title",
+      ".pr-card-meta",
+      ".pr-card-media",
+      "[data-gives-way]"
+    ]
+  },
+  "usage": {
+    "markup": "<ul class=\"pr-cards\">\n  <li class=\"pr-card\">\n    <h3 class=\"pr-card-title\"><a href=\"/reports/q3\">Q3 revenue</a></h3>\n    <p>Revenue rose 12% over Q2.</p>\n    <p class=\"pr-card-meta\"><span data-gives-way>Updated 2 hours ago</span></p>\n  </li>\n</ul>"
+  },
+  "example": "/content/content"
+}

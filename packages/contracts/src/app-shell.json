@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema.json",
+  "id": "app-shell",
+  "name": "App shell",
+  "layer": "surface",
+  "layerWhy": "It is the place every other place sits in: a whole layout of the product's journey between places.",
+  "promise": "The bar and the navigation hold still; the place changes.",
+  "expectation": "A bar across the top, places at the side, the place itself.",
+  "evidence": "Narrow, the navigation and search fold behind Show Menu, nothing lost; choosing a place closes the menu.",
+  "behaviour": [
+    "Lays itself out by its own width.",
+    "The current place is marked in the navigation."
+  ],
+  "context": "Every product with more than one place.",
+  "relationships": [
+    "Next two moves: the other places at the side, the account in the bar."
+  ],
+  "states": [
+    "Desk",
+    "Phone, menu closed",
+    "Phone, menu open"
+  ],
+  "accessibility": [
+    "Landmarks: navigation and main, each named."
+  ],
+  "failures": [
+    "Never moves the navigation between visits."
+  ],
+  "do": [
+    "Keep places in the same order forever."
+  ],
+  "dont": [
+    "Hiding search on a phone with no way to it."
+  ],
+  "api": {
+    "css": [
+      ".pr-shell",
+      ".pr-shell-bar",
+      ".pr-shell-nav",
+      ".pr-shell-main",
+      ".pr-shell-menu",
+      ".pr-shell-account"
+    ]
+  },
+  "usage": {
+    "markup": "<div class=\"pr-shell\">\n  <div class=\"pr-shell-bar\">\n    <button class=\"pr-shell-menu pr-icon-button\" aria-label=\"Show Menu\">…</button>\n    <a class=\"pr-shell-brand\" href=\"/\">Your product</a>\n  </div>\n  <nav class=\"pr-shell-nav\" aria-label=\"Places\"><ul class=\"pr-nav-list\">…</ul></nav>\n  <main class=\"pr-shell-main\">…</main>\n</div>"
+  },
+  "example": "/surfaces/app-shell"
+}

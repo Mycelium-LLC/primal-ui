@@ -1,4 +1,51 @@
-<pr-page-placeholder title="Focus and keys" release="0.5.0" covers="Visible focus, order, return targets, Escape.">
-<p>Press Tab to move through these. Native focus rings are shown at browser defaults.</p>
-<p><a href="#">Link</a> <button type="button">Button</button> <input type="text" aria-label="A text field"> <select aria-label="A select"><option>Option</option></select> <span tabindex="0">A focusable span</span></p>
-</pr-page-placeholder>
+<h1>Focus and keys</h1>
+<p>
+  The keyboard is a full way to use anything built on Primal, not a fallback. Four rules hold everywhere, and every component's
+  keys are written down below.
+</p>
+
+<h2>Four rules</h2>
+<ol>
+  <li><strong>Focus is always visible.</strong> One ring, in the primary, means one thing: this is where the keyboard is.</li>
+  <li><strong>Focus moves in reading order.</strong> Tab follows the page as it reads, in either direction; nothing jumps.</li>
+  <li><strong>Every layer has a return.</strong> When a dialog, popover, menu or tooltip closes, focus goes back to what opened it.</li>
+  <li><strong>Escape closes the topmost layer.</strong> One press, one layer; never the dialog under the menu.</li>
+</ol>
+
+<h2>Try it</h2>
+<p>
+  Press Tab from here. Every stop shows the ring, in reading order. Open the menu or the popover, press Escape, and focus is back on
+  its button. Switch the direction at the top to right-to-left and Tab again: the order follows.
+</p>
+<div class="pr-demo-frame pr-demo-row">
+  <a routerLink="/navigation/dialogs">Dialogs</a>
+  <button primalButton type="button">Save Changes</button>
+  <primal-menu label="More actions">
+    <button primalMenuTrigger primalButton type="button" emphasis="quiet">More Actions</button>
+    <button primalMenuItem type="button">Duplicate Report</button>
+    <button primalMenuItem type="button">Download Report</button>
+  </primal-menu>
+  <primal-popover label="About this report">
+    <button primalPopoverTrigger primalButton type="button" emphasis="quiet">About Report</button>
+    <p>Updated hourly. <a routerLink="/actions/feedback">How Primal shows waiting</a></p>
+  </primal-popover>
+  <input type="text" aria-label="A note" placeholder="A note" />
+</div>
+
+<h2>Every component's keys</h2>
+<p>Each component's whole job works from the keyboard. These are its keys, in the order you meet them.</p>
+@for (c of keys; track c.component) {
+  <div class="pr-table">
+    <table [sortable]="false">
+      <caption>{{ c.component }}</caption>
+      <thead>
+        <tr><th scope="col">Key</th><th scope="col">What it does</th></tr>
+      </thead>
+      <tbody>
+        @for (k of c.keys; track k[0]) {
+          <tr><td><kbd>{{ k[0] }}</kbd></td><td>{{ k[1] }}</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

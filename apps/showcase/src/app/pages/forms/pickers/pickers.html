@@ -1,11 +1,51 @@
-<pr-page-placeholder title="Pickers" release="0.3.0" covers="Date and time fields, Slider, ColorField, FileField.">
-<p><label>Date <input type="date"></label></p>
-<p><label>Time <input type="time"></label></p>
-<p><label>Date and time <input type="datetime-local"></label></p>
-<p><label>Month <input type="month"></label></p>
-<p><label>Week <input type="week"></label></p>
-<p><label>Range <input type="range" min="0" max="100" value="40"></label></p>
-<p><label>Colour <input type="color" value="#777777"></label></p>
-<p><label>File <input type="file"></label></p>
-<p><input type="hidden" value="hidden inputs render nothing">A hidden input is on this line; it renders nothing.</p>
-</pr-page-placeholder>
+<h1>Pickers</h1>
+<p>
+  Dates, times, colours and files are picked with the browser's own picker, which is accessible, localised, and right for each
+  device. Primal styles the field around it and never draws its own calendar just to look branded.
+</p>
+
+<h2>Dates and times</h2>
+<primal-field label="Start date" description="The first day the plan applies.">
+  <input primalControl type="date" min="2026-01-01" required />
+</primal-field>
+<primal-field label="Reminder time">
+  <input primalControl type="time" step="900" />
+</primal-field>
+<primal-field label="Meeting">
+  <input primalControl type="datetime-local" />
+</primal-field>
+<primal-field label="Billing month">
+  <input primalControl type="month" />
+</primal-field>
+<primal-field label="Sprint week">
+  <input primalControl type="week" />
+</primal-field>
+
+<h2>A slider</h2>
+<p>A slider is for a value where roughly right is right. It shows its value as it moves.</p>
+<primal-field label="Notification volume" [description]="'Now ' + volume() + '%'">
+  <input primalControl type="range" min="0" max="100" step="5" [value]="volume()" (input)="volume.set(+$any($event.target).value)" />
+</primal-field>
+
+<h2>Colour</h2>
+<primal-field label="Label colour" description="Shown next to the label's name.">
+  <input primalControl type="color" value="#2f6fdf" />
+</primal-field>
+
+<h2>Files</h2>
+<primal-field label="Receipts" description="PDF or images, up to 10 MB each.">
+  <input primalControl type="file" accept=".pdf,image/*" multiple (change)="pickFiles($any($event.target))" />
+</primal-field>
+<p class="pr-picked" role="status">{{ files() ? 'Chosen: ' + files() : '' }}</p>
+
+<h3>With a drop zone</h3>
+<p>
+  When files are the point of the form (attachments, an import), give them a drop zone: a target big enough to drop files on, or to
+  click. The chosen files are listed with their sizes, each with a way to take it back out, and a file the field doesn't take is
+  turned away with its name.
+</p>
+<primal-field label="Attachments" description="PDFs or images, up to 10 MB each.">
+  <primal-file-drop>
+    <input primalControl type="file" accept=".pdf,image/*" multiple />
+  </primal-file-drop>
+</primal-field>

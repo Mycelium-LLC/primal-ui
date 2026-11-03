@@ -1,15 +1,82 @@
-<pr-page-placeholder title="Select" release="0.3.0" covers="Select, groups, and suggestions.">
-<p><label>Select
-  <select>
-    <optgroup label="Web">
-      <option>Angular</option>
-    </optgroup>
-    <optgroup label="Later">
-      <option disabled>Mac</option>
-      <option disabled>Mobile</option>
-    </optgroup>
-  </select></label></p>
-<p><label>Multiple <select multiple size="3"><option>One</option><option>Two</option><option>Three</option></select></label></p>
-<p><label>With suggestions <input list="frameworks"></label>
-<datalist id="frameworks"><option value="Angular"></option><option value="Plain HTML"></option></datalist></p>
-</pr-page-placeholder>
+<h1>Select</h1>
+<p>
+  A select is one answer from a list that is too long for radios. Primal draws the list: it opens under the field, as wide as
+  it, and answers the keys a native select does (the arrows, Home and End, typing a letter to jump, Enter to choose, Escape to
+  close). The native select stays inside as the value, so forms, required and reset work as they always do.
+</p>
+
+<h2>One from a list</h2>
+<primal-field label="Country">
+  <primal-select>
+    <select primalControl autocomplete="country-name" required>
+      <option value="">Choose a country</option>
+      @for (c of countries; track c) {
+        <option>{{ c }}</option>
+      }
+    </select>
+  </primal-select>
+</primal-field>
+
+<h2>Grouped options</h2>
+<p>Options that belong together sit under a heading. One that can't be chosen now stays in the list, stepped back.</p>
+<primal-field label="Framework" description="Angular is the one Primal supports today.">
+  <primal-select>
+    <select primalControl>
+      <optgroup label="Supported">
+        <option>Angular</option>
+        <option>Plain HTML</option>
+      </optgroup>
+      <optgroup label="When Mycelium needs them">
+        <option disabled>Mac</option>
+        <option disabled>Mobile</option>
+      </optgroup>
+    </select>
+  </primal-select>
+</primal-field>
+
+<h2>States</h2>
+<primal-field label="Region" description="Set by your organisation.">
+  <primal-select>
+    <select primalControl disabled>
+      <option>Europe</option>
+    </select>
+  </primal-select>
+</primal-field>
+<primal-field label="Time zone">
+  <primal-select>
+    <select primalControl="This time zone isn't available on your plan. Choose another one.">
+      <option>Asia/Jerusalem</option>
+      <option>Europe/Lisbon</option>
+      <option>Europe/London</option>
+    </select>
+  </primal-select>
+</primal-field>
+
+<h2>Several from a list</h2>
+<p>When the person can choose more than one, the list stays open in the page, so they see everything they've chosen.</p>
+<primal-field label="Languages" description="Hold Ctrl or Cmd to choose more than one.">
+  <select primalControl multiple size="4">
+    <option selected>English</option>
+    <option>Hebrew</option>
+    <option>Portuguese</option>
+    <option>Arabic</option>
+  </select>
+</primal-field>
+
+<h2>Autocomplete</h2>
+<p>
+  When the person knows the answer, they type it. Clicking the field shows every option first; typing narrows them to the ones
+  that contain the text, with the match marked. The arrows and Enter choose, and Escape closes the list, or clears the field.
+</p>
+<primal-field label="City" description="Type a few letters, or choose from the list.">
+  <primal-autocomplete [options]="cities">
+    <input primalControl type="text" />
+  </primal-autocomplete>
+</primal-field>
+<primal-field label="Country of residence" description="One of the countries in the list.">
+  <primal-autocomplete [options]="countries" [strict]="true">
+    <input primalControl type="text" required />
+  </primal-autocomplete>
+</primal-field>
+
+<pr-plain-html [code]="plain" />

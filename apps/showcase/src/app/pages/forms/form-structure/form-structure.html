@@ -1,15 +1,58 @@
-<pr-page-placeholder title="Form structure" release="0.3.0" covers="FieldLabel, FormField, FieldGroup, OutputValue, Progress, Meter.">
-<form (submit)="$event.preventDefault()">
-  <fieldset>
-    <legend>Fieldset and legend</legend>
-    <p><label for="a">Label (for)</label> <input id="a" name="a" type="number" value="2"> +
-       <input id="b" name="b" type="number" value="3" aria-label="Second number"> =
-       <output name="total" for="a b">5</output></p>
-  </fieldset>
-  <p><label>Progress <progress value="40" max="100">40%</progress></label></p>
-  <p><label>Indeterminate <progress></progress></label></p>
-  <p><label>Meter <meter min="0" max="100" low="30" high="80" optimum="90" value="65">65</meter></label></p>
-  <p><button type="submit">Save Changes</button> <button type="reset">Reset Form</button>
-     <input type="submit" value="Send Request"> <input type="reset" value="Clear Fields"> <input type="button" value="Run Check"></p>
-</form>
-</pr-page-placeholder>
+<h1>Form structure</h1>
+<p>A form is made of a few parts, and each one has a single job.</p>
+<dl>
+  <dt>Field (<code>primal-field</code>, <code>.pr-field</code>)</dt>
+  <dd>One question: its label, an optional description, the native control, and the message.</dd>
+  <dt>Label</dt>
+  <dd>The question, always visible and tied to its control, so clicking it focuses the control.</dd>
+  <dt>Description</dt>
+  <dd>What the person needs before they answer: the format, the limits, why it's asked. It's read out with the control.</dd>
+  <dt>Message</dt>
+  <dd>What went wrong and what to type, directly under the control. It's announced when it appears.</dd>
+  <dt>Group (<code>primal-field-group</code>, <code>.pr-group</code>)</dt>
+  <dd>Several controls that answer one question, under one legend: a radio group, an address, a date in three parts.</dd>
+  <dt>Form (<code>form[primalForm]</code>)</dt>
+  <dd>The fields, then the actions a section gap below. On submit it shows every message and moves focus to the first one.</dd>
+</dl>
+
+<h2>A value worked out from the answers</h2>
+<p>An <code>output</code> shows a result as the person types: here, the price for the seats chosen.</p>
+<primal-field label="Seats" [description]="'At ' + price + ' a seat, each month.'">
+  <input primalControl id="seats" type="number" min="1" max="50" required [value]="seats()" (input)="seats.set(+$any($event.target).value || 0)" />
+</primal-field>
+<p>Total each month: <output for="seats">{{ total() }}</output></p>
+
+<h2>Progress and meters</h2>
+<p>Progress shows how much of a known job is done. A meter shows where a value sits in a known range.</p>
+<div class="pr-field">
+  <label for="upload">Uploading receipts</label>
+  <p class="pr-field-description" id="upload-hint">7 of 10 files.</p>
+  <progress id="upload" value="70" max="100" aria-describedby="upload-hint">70%</progress>
+</div>
+<div class="pr-field">
+  <label for="storage">Storage used</label>
+  <p class="pr-field-description" id="storage-hint">{{ storage }} of 100 GB.</p>
+  <meter id="storage" min="0" max="100" low="70" high="90" optimum="20" [value]="storage" aria-describedby="storage-hint">{{ storage }} GB</meter>
+</div>
+<div class="pr-field">
+  <label for="storage-full">Storage used, nearly full</label>
+  <p class="pr-field-description" id="storage-full-hint">93 of 100 GB.</p>
+  <meter id="storage-full" min="0" max="100" low="70" high="90" optimum="20" value="93" aria-describedby="storage-full-hint">93 GB</meter>
+</div>
+
+<h2>The form's buttons</h2>
+<p>
+  A field is outlined: type here. A button is filled: press here. The form's one main action, its submit, wears the primary;
+  every other button is a quiet fill. Each one names what it does.
+</p>
+<div class="pr-form-actions">
+  <button type="submit" form="none">Save Changes</button>
+  <button type="button">Preview Changes</button>
+  <button type="reset" form="none">Discard Changes</button>
+</div>
+<h3>Not available now</h3>
+<div class="pr-form-actions">
+  <button type="submit" form="none" disabled>Save Changes</button>
+  <button type="button" disabled>Preview Changes</button>
+</div>
+

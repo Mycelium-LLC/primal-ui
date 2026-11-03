@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema.json",
+  "id": "container",
+  "name": "Container",
+  "layer": "primitive",
+  "layerWhy": "It arranges other parts by space; it keeps no promise to the person of its own.",
+  "promise": "Content at a width that reads, or the full width when the product needs it.",
+  "expectation": "A centred column with the gutter at its edges.",
+  "evidence": "Reading width by default; data-width=\"full\" for app surfaces (decision 11).",
+  "behaviour": [
+    "Centred; the gutter grows with the screen."
+  ],
+  "context": "The page's main column.",
+  "relationships": [
+    "Every page has one."
+  ],
+  "states": [
+    "Reading",
+    "Full"
+  ],
+  "accessibility": [
+    "No semantics of its own."
+  ],
+  "failures": [
+    "Never a card around the page."
+  ],
+  "do": [
+    "Use reading width for reading."
+  ],
+  "dont": [
+    "Nesting containers."
+  ],
+  "api": {
+    "css": [
+      ".pr-container",
+      "[data-width=\"full\"]"
+    ]
+  },
+  "usage": {
+    "markup": "<main class=\"pr-container\">…</main>"
+  },
+  "example": "/content/layout"
+}

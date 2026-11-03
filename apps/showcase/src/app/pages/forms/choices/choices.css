@@ -1,0 +1,11 @@
+/* The columns sit under "Every column", indented, so the group reads as one. */
+.pr-nested {
+  display: grid;
+  gap: var(--pr-gap-group);
+  padding-inline-start: calc(var(--pr-choice-size) + var(--pr-gap-component));
+}
+
+.pr-states-table td {
+  text-align: center;
+  vertical-align: middle;
+}

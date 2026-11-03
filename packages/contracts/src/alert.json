@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema.json",
+  "id": "alert",
+  "name": "Alert",
+  "layer": "primitive",
+  "layerWhy": "It says one fact about the place it sits in; acting on the fact is up to the page.",
+  "promise": "Something about this place is true, and stays true until it changes.",
+  "expectation": "A message above what it is about that won't go away until the situation does.",
+  "evidence": "Its tone is a mark and words as well as colour; it has no close button; a banner variant speaks for the whole product.",
+  "behaviour": [
+    "Stays until the condition changes.",
+    "With [live], appearing after load, it is announced (danger urgently)."
+  ],
+  "context": "Above the page, section or form it is about. Not for the result of an action just taken.",
+  "relationships": [
+    "Its place is \"alert\" (or \"banner\") in the behaviour model.",
+    "Its actions sit inside it, under the words."
+  ],
+  "states": [
+    "Info",
+    "Success",
+    "Warning",
+    "Danger",
+    "Banner"
+  ],
+  "accessibility": [
+    "role=\"status\" or role=\"alert\" only when it appears after load.",
+    "The mark is drawn by CSS, the words carry the meaning."
+  ],
+  "failures": [
+    "Never dismissible: a fact is changed, not hidden.",
+    "Never colour alone."
+  ],
+  "do": [
+    "Title the fact; say what to do in the body."
+  ],
+  "dont": [
+    "An alert for \"Saved\".",
+    "Several alerts stacked about one thing."
+  ],
+  "api": {
+    "css": [
+      ".pr-alert",
+      "[data-tone]",
+      ".pr-banner",
+      ".pr-alert-title",
+      ".pr-alert-actions"
+    ],
+    "angular": [
+      "primal-alert"
+    ],
+    "inputs": [
+      "tone: info | success | warning | danger",
+      "title",
+      "banner",
+      "live"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+    "markup": "<primal-alert tone=\"warning\" title=\"Your plan ends in 3 days\">\n  <p>Renew it to keep your reports.</p>\n</primal-alert>"
+  },
+  "example": "/actions/feedback"
+}

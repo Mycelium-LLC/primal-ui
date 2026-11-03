@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, signal } from '@angular/core';
+import { PRIMAL_TABLES } from 'primal-angular';
 import {
   ADJUST,
   Adjust,
@@ -12,15 +13,22 @@ import {
   fromHex,
   harmony,
   palette,
+  scale,
+  SCALE,
   toHex,
 } from '../../../../../../../packages/tokens/src/colour-model.mjs';
 
 type Oklch = number[];
 type Scheme = keyof typeof SCHEMES;
 
+/** Where the page keeps the viewer's picks between visits: a per-viewer convenience, so it works without storage too. */
+const KEY = 'primal-showcase-colour';
+const isOklch = (v: unknown): v is Oklch => Array.isArray(v) && v.length === 3 && v.every((n) => typeof n === 'number' && Number.isFinite(n));
+
 /** The colour page: a project's three choices and a harmony, with every role derived live. */
 @Component({
   selector: 'pr-foundation-colour-page',
+  imports: [PRIMAL_TABLES],
   templateUrl: './colour.html',
   styleUrl: './colour.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,6 +102,23 @@ export class FoundationColourPage {
     }),
   );
 
+  /** The primary's states, as a person meets them; each sample is drawn by the browser from the roles. */
+  protected readonly states = [
+    { label: 'Fill', role: 'primary', sample: 'Save' },
+    { label: 'Hover', role: 'primary-hover', sample: 'Save' },
+    { label: 'Pressed', role: 'primary-pressed', sample: 'Save' },
+    { label: 'Quiet fill', role: 'primary-surface', sample: 'Current' },
+    { label: 'Text', role: 'primary-text', sample: 'A link' },
+    { label: 'Focus', role: 'focus', sample: 'Focus' },
+  ];
+
+  /** The primary's scale, 50 to 950: step 500 is the primary as chosen. */
+  protected readonly steps = computed(() => {
+    const s = scale(this.choices());
+    const { black, white } = this.choices();
+    return Object.keys(SCALE).map((step) => ({ step, hex: toHex(s[step]), fg: toHex(s[step][0] < 0.6 ? white : black) }));
+  });
+
   protected readonly system = computed(() =>
     Object.keys(SYSTEM).map((name) => ({
       name,
@@ -124,6 +149,32 @@ export class FoundationColourPage {
   });
 
   protected readonly copied = signal(false);
+
+  constructor() {
+    this.restore();
+    effect(() => {
+      const saved = { black: this.black(), white: this.white(), primary: this.primary(), scheme: this.scheme(), adjust: this.adjust() };
+      try {
+        localStorage.setItem(KEY, JSON.stringify(saved));
+      } catch {
+        // No storage: the picks last for this visit only.
+      }
+    });
+  }
+
+  private restore(): void {
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) ?? 'null');
+      if (!saved) return;
+      if (isOklch(saved.black)) this.black.set(saved.black);
+      if (isOklch(saved.white)) this.white.set(saved.white);
+      if (isOklch(saved.primary)) this.primary.set(saved.primary);
+      if (saved.scheme in SCHEMES) this.scheme.set(saved.scheme);
+      if (saved.adjust && typeof saved.adjust === 'object' && 'companion' in saved.adjust && 'tertiary' in saved.adjust) this.adjust.set(saved.adjust);
+    } catch {
+      // Unreadable or no storage: Primal's own choices.
+    }
+  }
 
   protected pick(which: 'black' | 'white' | 'primary', hex: string): void {
     this[which].set(fromHex(hex));

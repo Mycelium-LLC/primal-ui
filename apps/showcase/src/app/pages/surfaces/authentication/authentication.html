@@ -1,14 +1,88 @@
-<pr-page-placeholder title="Authentication" release="0.7.0" covers="Sign in, sign up, reset.">
-<form (submit)="$event.preventDefault()" aria-label="Sign in specimen">
-  <h2>Sign in</h2>
-  <p><label>Email <input type="email" autocomplete="username"></label></p>
-  <p><label>Password <input type="password" autocomplete="current-password"></label></p>
-  <p><button type="submit">Sign In</button></p>
-</form>
-<form (submit)="$event.preventDefault()" aria-label="Sign up specimen">
-  <h2>Create your account</h2>
-  <p><label>Email <input type="email" autocomplete="email"></label></p>
-  <p><label>Password <input type="password" autocomplete="new-password"></label></p>
-  <p><button type="submit">Create Account</button></p>
-</form>
-</pr-page-placeholder>
+<h1>Authentication</h1>
+<p>
+  A gate, not a page of content: one narrow column, the product's name above it, one question at a time. Each of its three places has
+  its own address, so a link from an email lands on the right one.
+</p>
+
+<h2>The journey</h2>
+<ol class="pr-journey">
+  <li><strong>Arrive</strong> at sign-in from a link or a signed-out page.</li>
+  <li><strong>Sign in</strong> with email and password; a mismatch says so and offers the reset, beside the form.</li>
+  <li><strong>Forgot?</strong> The reset asks for the email only, and says a link is on its way without saying whether an account exists.</li>
+  <li><strong>New here?</strong> Sign-up asks for three things, and ends at "check your inbox".</li>
+</ol>
+<p class="pr-moves">Next two moves, within reach at every step: switch between sign-in and sign-up, and reach the reset.</p>
+<p class="pr-demo-note">Try <code>ada&#64;example.com</code> with <code>correct horse</code> to sign in; any other password shows the mismatch.</p>
+
+<div class="pr-surface-frame">
+  <p class="pr-surface-address">/surfaces/authentication/{{ mode() }}</p>
+  <div class="pr-surface-body">
+    <div class="pr-auth">
+      <p class="pr-auth-brand">Mycelium <strong>Primal</strong></p>
+
+      @switch (mode()) {
+        @case ('sign-up') {
+          @if (sent(); as email) {
+            <h2>Check your inbox</h2>
+            <p>We sent a link to <strong>{{ email }}</strong>. Open it to finish making your account; it works for 24 hours.</p>
+            <button primalButton type="button" emphasis="quiet" (click)="sent.set(null)">Use Another Address</button>
+          } @else {
+            <h2>Create your account</h2>
+            <form primalForm>
+              <primal-field label="Your name"><input primalControl name="name" autocomplete="name" required /></primal-field>
+              <primal-field label="Email"><input #upEmail primalControl primalMask="email" type="email" name="email" autocomplete="email" required /></primal-field>
+              <primal-field label="Password" description="At least 12 characters. A sentence works well.">
+                <input primalControl type="password" name="password" autocomplete="new-password" minlength="12" required />
+              </primal-field>
+              <button primalButton type="submit" emphasis="primary" kind="constructive" [run]="signUp(upEmail)">Create Account</button>
+            </form>
+          }
+          <p class="pr-auth-switch">Have an account? <a routerLink="/surfaces/authentication/sign-in">Sign in</a></p>
+        }
+        @case ('reset') {
+          @if (sent(); as email) {
+            <h2>Check your inbox</h2>
+            <p>If an account uses <strong>{{ email }}</strong>, a link to set a new password is on its way. It works for an hour.</p>
+          } @else {
+            <h2>Reset your password</h2>
+            <p>Enter the email you sign in with, and we'll send a link to set a new password.</p>
+            <form primalForm>
+              <primal-field label="Email"><input #resetEmail primalControl primalMask="email" type="email" name="email" autocomplete="username" required [value]="remembered()" /></primal-field>
+              <button primalButton type="submit" emphasis="primary" [run]="reset(resetEmail)">Send Reset Link</button>
+            </form>
+          }
+          <p class="pr-auth-switch"><a routerLink="/surfaces/authentication/sign-in">Back to sign in</a></p>
+        }
+        @default {
+          @if (signedIn(); as email) {
+            <h2>You're signed in</h2>
+            <p>Signed in as <strong>{{ email }}</strong>.</p>
+            <div class="pr-inline" data-gap="component">
+              <a primalButton routerLink="/surfaces/list-detail" emphasis="primary" kind="navigational">Go to Reports</a>
+              <button primalButton type="button" emphasis="quiet" (click)="signedIn.set(null)">Sign Out</button>
+            </div>
+          } @else {
+            <h2>Sign in</h2>
+            @if (mismatch()) {
+              <primal-alert tone="danger" title="That email and password don't match" [live]="true">
+                <p>Check them and try again, or <a routerLink="/surfaces/authentication/reset">reset your password</a>.</p>
+              </primal-alert>
+            }
+            <form primalForm>
+              <primal-field label="Email"><input #inEmail primalControl primalMask="email" type="email" name="email" autocomplete="username" required (input)="remembered.set(inEmail.value)" /></primal-field>
+              <primal-field label="Password">
+                <input #inPassword primalControl [type]="showPassword() ? 'text' : 'password'" name="password" autocomplete="current-password" required />
+              </primal-field>
+              <div class="pr-inline" data-gap="component">
+                <primal-field label="Show password"><input primalControl type="checkbox" [checked]="showPassword()" (change)="showPassword.set(!showPassword())" /></primal-field>
+                <a class="pr-push" routerLink="/surfaces/authentication/reset">Forgot your password?</a>
+              </div>
+              <button primalButton type="submit" emphasis="primary" [run]="signIn(inEmail, inPassword)">Sign In</button>
+            </form>
+            <p class="pr-auth-switch">New here? <a routerLink="/surfaces/authentication/sign-up">Create an account</a></p>
+          }
+        }
+      }
+    </div>
+  </div>
+</div>

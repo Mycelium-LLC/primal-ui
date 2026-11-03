@@ -1,15 +1,30 @@
-<pr-page-placeholder title="Contract catalog" release="0.8.0" covers="Every component's promise, states, relationships, accessibility and failures.">
-<article aria-label="Contract specimen">
-  <h2>Button</h2>
-  <dl>
-    <dt>Layer</dt><dd>Primitive</dd>
-    <dt>Promise</dt><dd>Trigger a recognizable action when activated.</dd>
-    <dt>Behaviour</dt><dd>Mouse, touch, Enter and Space; disabled; pending; feedback after action.</dd>
-    <dt>Context</dt><dd>Where a person can reasonably anticipate an action.</dd>
-    <dt>Relationships</dt><dd>The label names the action; placement and emphasis carry priority.</dd>
-    <dt>States</dt><dd>Default, hover, focus-visible, pressed, disabled, pending.</dd>
-    <dt>Accessibility</dt><dd>Native button semantics, accessible name, keyboard activation, visible focus.</dd>
-    <dt>Failure conditions</dt><dd>Never silently ignores activation, falsely implies completion, or allows a duplicate while pending.</dd>
-  </dl>
-</article>
-</pr-page-placeholder>
+<h1>Contract catalog</h1>
+<p>
+  Every element in Primal says what it promises, what its presence makes someone expect, and how it shows it kept the promise; then
+  its behaviour, context, relationships, states, accessibility and what it must never do. The contracts are data next to the code
+  (<code>packages/contracts</code>), every page here is generated from them, and the build fails if any component is missing one.
+</p>
+
+<label for="contract-filter" class="pr-visually-hidden">Find a component</label>
+<span class="pr-search-field"><input id="contract-filter" type="search" placeholder="Find a component" [value]="filter()" (input)="filter.set($any($event.target).value)" /></span>
+
+@for (group of groups(); track group.layer) {
+  <section [attr.aria-labelledby]="'layer-' + group.layer">
+    <h2 [id]="'layer-' + group.layer">{{ group.title }} <span class="pr-badge">{{ group.contracts.length }}</span></h2>
+    <p class="pr-demo-note">{{ group.means }}</p>
+    <ul class="pr-list-items">
+      @for (c of group.contracts; track c.id) {
+        <li>
+          <span class="pr-item-body">
+            <span class="pr-item-title"><a [routerLink]="['/contracts/catalog', c.id]">{{ c.name }}</a></span>
+            <span class="pr-item-line">{{ c.promise }}</span>
+          </span>
+        </li>
+      }
+    </ul>
+  </section>
+} @empty {
+  <primal-empty [title]="'No component matches “' + filter() + '”'" reason="Search by a name, or by words from what it promises.">
+    <button primalButton type="button" (click)="filter.set('')">Clear Search</button>
+  </primal-empty>
+}

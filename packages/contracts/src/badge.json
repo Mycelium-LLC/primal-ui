@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema.json",
+  "id": "badge",
+  "name": "Badge",
+  "layer": "primitive",
+  "layerWhy": "It states one short fact about something; no job.",
+  "promise": "This thing has this fact: New, 3, Overdue.",
+  "expectation": "A small pill on or beside the thing.",
+  "evidence": "Always words or a number, so it reads without colour; the tone only adds.",
+  "behaviour": [
+    "A number is lined up as tabular digits."
+  ],
+  "context": "Counts and short states.",
+  "relationships": [
+    "It belongs to the thing it sits on."
+  ],
+  "states": [
+    "Plain",
+    "Primary",
+    "Success",
+    "Warning",
+    "Danger",
+    "Info"
+  ],
+  "accessibility": [
+    "An aria-label when a number needs words (\"12 unread\")."
+  ],
+  "failures": [
+    "Never colour alone.",
+    "Never decoration."
+  ],
+  "do": [
+    "One badge per fact."
+  ],
+  "dont": [
+    "A badge and a status saying the same thing."
+  ],
+  "api": {
+    "css": [
+      ".pr-badge",
+      "[data-tone]"
+    ]
+  },
+  "usage": {
+    "markup": "<span class=\"pr-badge\" data-tone=\"danger\">Overdue</span>"
+  },
+  "example": "/content/information"
+}

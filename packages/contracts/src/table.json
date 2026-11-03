@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema.json",
+  "id": "table",
+  "name": "Table",
+  "layer": "primitive",
+  "layerWhy": "It shows rows to read across and down; what a table is about is the page's job.",
+  "promise": "Rows of the same kind, read across and down, sortable by any column.",
+  "expectation": "Column headers that sort, numbers lined up, and an empty table that says why.",
+  "evidence": "Each header sorts ascending, descending, then back; it shows which way and announces it; numbers and dates sort by value.",
+  "behaviour": [
+    "On by default; [sortable]=\"false\" for a table, data-sort=\"false\" for a column.",
+    "data-sort-value and <time datetime> sort by value.",
+    "With (sorted) bound, the data is sorted by you, not the rows."
+  ],
+  "context": "Data people compare. Not for layout.",
+  "relationships": [
+    "A .pr-table wrapper scrolls it within itself."
+  ],
+  "states": [
+    "Unsorted",
+    "Ascending",
+    "Descending",
+    "Empty",
+    "Tall (scrolls with its header kept)"
+  ],
+  "accessibility": [
+    "Headers are buttons inside <th> with aria-sort.",
+    "The scroll wrapper is a focusable, named region."
+  ],
+  "failures": [
+    "Never moves the page sideways.",
+    "Never sorts a table whose order is its meaning."
+  ],
+  "do": [
+    "data-numeric on number columns."
+  ],
+  "dont": [
+    "A table for a form layout."
+  ],
+  "api": {
+    "css": [
+      "table",
+      ".pr-table",
+      "[data-numeric]",
+      "td[data-empty]",
+      ".pr-sort"
+    ],
+    "angular": [
+      "table"
+    ],
+    "inputs": [
+      "sortable",
+      "(sorted)"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_TABLES } from 'primal-angular';",
+    "markup": "<div class=\"pr-table\">\n  <table>\n    <caption>Invoices</caption>\n    <thead><tr><th scope=\"col\">Customer</th><th scope=\"col\" data-numeric>Amount</th></tr></thead>\n    <tbody>…</tbody>\n  </table>\n</div>"
+  },
+  "example": "/native/tables"
+}

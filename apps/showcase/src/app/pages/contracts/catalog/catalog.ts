@@ -1,11 +1,31 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PagePlaceholder } from '../../../shell/page-placeholder/page-placeholder';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { PRIMAL_ACTIONS, PRIMAL_CONTENT } from 'primal-angular';
+import { CONTRACTS, LAYERS } from '../contracts';
 
-/** Placeholder until 0.8.0: the plain native elements this page will cover (decision 10). */
+/** The catalog: every contract by layer, generated from packages/contracts. */
 @Component({
   selector: 'pr-contracts-catalog-page',
-  imports: [PagePlaceholder],
+  imports: [PRIMAL_ACTIONS, PRIMAL_CONTENT, RouterLink],
   templateUrl: './catalog.html',
+  styleUrl: '../../actions/actions-pages.css',
+  styles: `
+    section {
+      margin-block-start: var(--pr-gap-section);
+    }
+
+    h2 {
+      margin-block-end: 0;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContractsCatalogPage {}
+export class ContractsCatalogPage {
+  protected readonly filter = signal('');
+
+  protected readonly groups = computed(() => {
+    const f = this.filter().trim().toLocaleLowerCase();
+    const match = (c: (typeof CONTRACTS)[number]) => !f || `${c.name} ${c.promise}`.toLocaleLowerCase().includes(f);
+    return LAYERS.map((l) => ({ ...l, contracts: CONTRACTS.filter((c) => c.layer === l.layer && match(c)) })).filter((g) => g.contracts.length);
+  });
+}

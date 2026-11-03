@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema.json",
+  "id": "pagination",
+  "name": "Pagination",
+  "layer": "primitive",
+  "layerWhy": "It moves through one list; moving is never a job.",
+  "promise": "Each page of the same list is one press away, and this one is marked.",
+  "expectation": "Previous, the pages near yours, the first and last, and Next.",
+  "evidence": "The current page is in the primary's quiet fill and announced as current; the row keeps its length.",
+  "behaviour": [
+    "Folds far pages into a gap.",
+    "Previous and Next disable at the ends."
+  ],
+  "context": "Long lists split into pages. Keep the page in the address.",
+  "relationships": [
+    "It belongs to the list above it."
+  ],
+  "states": [
+    "First page",
+    "Middle",
+    "Last page"
+  ],
+  "accessibility": [
+    "A <nav> with a label; aria-current=\"page\"; each number named \"Page n\"."
+  ],
+  "failures": [
+    "Never loses the page on Back."
+  ],
+  "do": [
+    "Put the page in the address."
+  ],
+  "dont": [
+    "Pagination for ten items."
+  ],
+  "api": {
+    "css": [
+      ".pr-pagination",
+      ".pr-pagination-gap",
+      "[aria-current=\"page\"]"
+    ],
+    "angular": [
+      "primal-pagination"
+    ],
+    "inputs": [
+      "pages (required)",
+      "page",
+      "label",
+      "previous",
+      "next"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_NAVIGATION } from 'primal-angular';",
+    "markup": "<primal-pagination label=\"Invoices, pages\" [pages]=\"12\" [(page)]=\"page\" />"
+  },
+  "example": "/navigation/navigation"
+}

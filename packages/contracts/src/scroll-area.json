@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema.json",
+  "id": "scroll-area",
+  "name": "Scroll area",
+  "layer": "primitive",
+  "layerWhy": "It arranges other parts by space; it keeps no promise to the person of its own.",
+  "promise": "A region that scrolls within itself and never moves the page.",
+  "expectation": "A box with its own scroll.",
+  "evidence": "It is focusable and named, so the keyboard scrolls it too.",
+  "behaviour": [
+    "--pr-scroll-height sets its height.",
+    "Overscroll is contained."
+  ],
+  "context": "Long activity, logs, lists inside a panel.",
+  "relationships": [
+    "It belongs to the section around it."
+  ],
+  "states": [
+    "Short",
+    "Scrolling"
+  ],
+  "accessibility": [
+    "tabindex=\"0\", role=\"region\" and a label."
+  ],
+  "failures": [
+    "Never traps the page's scroll."
+  ],
+  "do": [
+    "Name it."
+  ],
+  "dont": [
+    "Scroll areas inside scroll areas."
+  ],
+  "api": {
+    "css": [
+      ".pr-scroll",
+      "--pr-scroll-height"
+    ]
+  },
+  "usage": {
+    "markup": "<div class=\"pr-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Activity\" style=\"--pr-scroll-height: 12rem\">…</div>"
+  },
+  "example": "/content/layout"
+}

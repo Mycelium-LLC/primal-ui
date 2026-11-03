@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema.json",
+  "id": "search",
+  "name": "Search with results",
+  "layer": "cell",
+  "layerWhy": "It does one whole job, finding things, with every result and feedback state, from primitives only.",
+  "promise": "Type, and see what matches, how many, and what to do when nothing does.",
+  "expectation": "A search field and its results under it.",
+  "evidence": "Waiting shows the results' shape; then a count and each result with the match marked; none offers a way out; a failure offers Try Again.",
+  "behaviour": [
+    "Payload: the results.",
+    "Waits 250 ms after typing; a late answer never replaces a newer one.",
+    "Empty shows its blank list (popular).",
+    "Escape clears."
+  ],
+  "context": "Docs, records, a product's whole content.",
+  "relationships": [
+    "Built from a search field, list items, skeletons, an empty state and an alert."
+  ],
+  "states": [
+    "Idle",
+    "Searching",
+    "Results",
+    "No results",
+    "Failed"
+  ],
+  "accessibility": [
+    "A search landmark; the count and states are announced."
+  ],
+  "failures": [
+    "Never a blank result area."
+  ],
+  "do": [
+    "Give it a blank list."
+  ],
+  "dont": [
+    "A search that only works on Enter with no feedback."
+  ],
+  "api": {
+    "css": [
+      ".pr-search-results",
+      ".pr-search-count"
+    ],
+    "angular": [
+      "primal-search"
+    ],
+    "inputs": [
+      "label (required)",
+      "search(query) (required)",
+      "blank",
+      "blankTitle"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_CELLS } from 'primal-angular';",
+    "markup": "<primal-search label=\"Search the docs\" [search]=\"searchDocs\" [blank]=\"popular\" />"
+  },
+  "example": "/content/cells"
+}

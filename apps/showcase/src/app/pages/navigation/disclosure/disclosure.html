@@ -1,12 +1,49 @@
-<pr-page-placeholder title="Disclosure" release="0.5.0" covers="Accordion on details and summary.">
+<h1>Disclosure</h1>
+<p>
+  A disclosure is a summary you open for the detail: the browser's own <code>&lt;details&gt;</code>, so it works without script,
+  is found by the browser's search when closed, and keeps its open state where it is shown. Opening one never moves what you are
+  reading.
+</p>
+
+<h2>An accordion</h2>
+<p>Several, one under the other. Each opens on its own.</p>
+<div class="pr-accordion">
+  <details>
+    <summary>What is a primitive?</summary>
+    <p>Part of a promise that isn't a whole job yet: a field, a button, a link.</p>
+  </details>
+  <details open>
+    <summary>What is a cell?</summary>
+    <p>One complete, predictable job, built from primitives: a sign-in form, a newsletter signup.</p>
+  </details>
+  <details>
+    <summary>What is a surface?</summary>
+    <p>A place where cells serve a journey: a settings page, an app shell.</p>
+  </details>
+</div>
+
+<h2>Only one open</h2>
+<p>Give them the same <code>name</code>, and opening one closes the others: for answers you compare, not read together.</p>
+<div class="pr-accordion">
+  <details name="plan" open>
+    <summary>Free</summary>
+    <p>One person, three reports. No card needed.</p>
+  </details>
+  <details name="plan">
+    <summary>Team</summary>
+    <p>Up to 20 people, every report, $12 a person a month.</p>
+  </details>
+  <details name="plan">
+    <summary>Enterprise</summary>
+    <p>Single sign-on, an audit log, and a contract. Talk to us first.</p>
+  </details>
+</div>
+
+<h2>On its own</h2>
+<p>A single disclosure in running text, for the detail most people skip.</p>
 <details>
-  <summary>What is a primitive?</summary>
-  <p>Part of a promise that isn't a whole job yet.</p>
+  <summary>Why does Primal mark optional fields, not required ones?</summary>
+  <p>Most of a good form is required, so marking the few optional ones is less noise, and says what you can leave.</p>
 </details>
-<details open>
-  <summary>What is a cell?</summary>
-  <p>One complete, predictable job.</p>
-</details>
-<details name="faq"><summary>Exclusive one</summary><p>Only one in this group opens at a time.</p></details>
-<details name="faq"><summary>Exclusive two</summary><p>Opening this closes the other.</p></details>
-</pr-page-placeholder>
+
+<pr-plain-html [code]="plain" />

@@ -1,6 +1,6 @@
 {
   "name": "primal-tokens",
-  "version": "0.2.0",
+  "version": "0.9.0",
   "private": true,
   "description": "Mycelium Primal's design tokens, framework-independent.",
   "style": "primal-tokens.css",

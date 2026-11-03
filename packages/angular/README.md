@@ -1,64 +1,83 @@
-# PrimalAngular
+# primal-angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
+**TL;DR:** The Angular adapter of Mycelium Primal, the open-source design system by Mycelium: its fields, actions, feedback, navigation, top layers, content and cells as Angular 22+ components and directives. It needs Primal's two style packages loaded as global styles.
 
-## Code scaffolding
+## Install
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Until Primal is published, the packages come from its repository as package files:
 
 ```bash
-ng generate --help
+# in a clone of Mycelium-LLC/primal-ui
+npm install
+npm run pack            # writes dist/packs/*.tgz
+
+# in your project
+npm install /path/to/primal-ui/dist/packs/*.tgz
 ```
 
-## Building
+Load the tokens, then the core styles, then your own theme, in `angular.json`:
 
-To build the library, run:
-
-```bash
-ng build primal-angular
+```json
+"styles": [
+  "node_modules/primal-tokens/primal-tokens.css",
+  "node_modules/primal-css/src/primal.css",
+  "src/my-theme.css"
+]
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+Add the router helpers next to your router:
 
-### Publishing the Library
+```ts
+import { provideRouter } from '@angular/router';
+import { providePrimalRouteScroll, withPrimalTransitions } from 'primal-angular';
 
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-
-   ```bash
-   cd dist/primal-angular
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes, withPrimalTransitions()), providePrimalRouteScroll()],
+};
 ```
 
-## Running end-to-end tests
+## Use
 
-For end-to-end (e2e) testing, run:
+Import the group you need into a standalone component:
 
-```bash
-ng e2e
+| Import | What's in it |
+|---|---|
+| `PRIMAL_FORMS` | `primal-field`, `primalControl`, `primal-field-group`, `primalForm`, `primal-select`, `primal-autocomplete`, `primalMask`, `primal-number`, `primal-file-drop` |
+| `PRIMAL_ACTIONS` | `primalButton`, `primalIconButton`, `primalLink`, `primal-button-group` |
+| `PRIMAL_FEEDBACK` | `primal-alert`, `primal-spinner`, `primal-progress`, `primal-skeleton` (toasts come from `PrimalToaster`) |
+| `PRIMAL_NAVIGATION` | `primal-tabs`, `primal-tab`, `primal-pagination`, `primal-menu` |
+| `PRIMAL_TOP_LAYERS` | `primal-dialog`, `primal-popover`, `primalTooltip` (confirmations come from `PrimalConfirm`) |
+| `PRIMAL_TABLES` | every `<table>` sorts by its columns |
+| `PRIMAL_CONTENT` | `primal-code-block`, `primal-avatar`, `primal-empty`, `primal-toolbar` |
+| `PRIMAL_CELLS` | `primal-subscribe`, `primal-search` |
+
+```ts
+import { Component } from '@angular/core';
+import { PRIMAL_ACTIONS, PRIMAL_FORMS } from 'primal-angular';
+
+@Component({
+  selector: 'app-sign-in',
+  imports: [PRIMAL_FORMS, PRIMAL_ACTIONS],
+  template: `
+    <form primalForm>
+      <primal-field label="Email"><input primalControl type="email" autocomplete="username" required /></primal-field>
+      <button primalButton type="submit" emphasis="primary" [run]="signIn">Sign In</button>
+    </form>
+  `,
+})
+export class SignIn {
+  protected readonly signIn = async () => 'Signed in';
+}
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+When a row is removed with its own button, call `primalFocusAfterRemove(list)` just before removing it: focus goes to the next row's same button (or the list's heading when none is left), never to the top of the page.
 
-## Additional Resources
+Every component's contract (what it promises, its states, keys, accessibility and markup to copy) is in the showcase's contract catalog, `/contracts/catalog`.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Make it yours
+
+Override tokens in your own theme file, loaded after Primal; never edit a component. Your colour is three choices (`--pr-black`, `--pr-white`, `--pr-primary`) and a harmony; the showcase's Colour page writes the file and checks its contrast.
+
+## License
+
+Private until Primal 1.0.0.

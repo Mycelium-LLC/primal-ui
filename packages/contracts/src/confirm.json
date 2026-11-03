@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema.json",
+  "id": "confirm",
+  "name": "Confirmation",
+  "layer": "primitive",
+  "layerWhy": "It asks one question; the action it confirms is its own kind.",
+  "promise": "An irreversible action waits for one deliberate yes.",
+  "expectation": "A dialog whose answers repeat the action, the safe one first in focus.",
+  "evidence": "Resolves true only for its confirm; every way out is false; focus starts on the safe answer for a destructive one.",
+  "behaviour": [
+    "Built on the dialog.",
+    "Its confirm is the final danger fill for a destructive action."
+  ],
+  "context": "Only for what cannot be undone.",
+  "relationships": [
+    "Confirm: \"Delete Workspace\". Cancel: \"Keep Workspace\"."
+  ],
+  "states": [
+    "Asking",
+    "Answered"
+  ],
+  "accessibility": [
+    "As the dialog."
+  ],
+  "failures": [
+    "Never \"OK\" or \"Yes\".",
+    "Never for something undoable."
+  ],
+  "do": [
+    "Say what is lost in the body."
+  ],
+  "dont": [
+    "A confirmation before a save."
+  ],
+  "api": {
+    "css": [
+      "dialog.pr-dialog"
+    ],
+    "angular": [
+      "primal-confirm-dialog"
+    ],
+    "inputs": [
+      "PrimalConfirm.ask({ title, body, confirm, cancel, kind })"
+    ]
+  },
+  "usage": {
+    "import": "import { PrimalConfirm } from 'primal-angular';",
+    "markup": "const yes = await inject(PrimalConfirm).ask({\n  title: 'Delete “Acme Studio” for good?',\n  confirm: 'Delete Workspace',\n  cancel: 'Keep Workspace',\n  kind: 'destructive',\n});"
+  },
+  "example": "/navigation/dialogs"
+}

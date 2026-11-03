@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { PRIMAL_TABLES } from 'primal-angular';
 import { CoverageTable } from '../../../shell/coverage-table/coverage-table';
 
 /* MOCK DATA: a month of build times, to show a long numeric table. */
@@ -11,7 +12,7 @@ const BUILDS = Array.from({ length: 30 }, (_, i) => ({
 
 @Component({
   selector: 'pr-native-tables-page',
-  imports: [CoverageTable],
+  imports: [PRIMAL_TABLES, CoverageTable],
   templateUrl: './tables.html',
   styleUrl: './tables.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

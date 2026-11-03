@@ -13,16 +13,16 @@ export class StartPage {
 <link rel="stylesheet" href="my-theme.css" />`;
 
   protected readonly angularJson = `"styles": [
-  "primal-ui/packages/tokens/primal-tokens.css",
-  "primal-ui/packages/css/src/primal.css",
+  "node_modules/primal-tokens/primal-tokens.css",
+  "node_modules/primal-css/src/primal.css",
   "src/my-theme.css"
 ]`;
 
   protected readonly config = `import { provideRouter } from '@angular/router';
-import { providePrimalRouteScroll } from 'primal-angular';
+import { providePrimalRouteScroll, withPrimalTransitions } from 'primal-angular';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), providePrimalRouteScroll()],
+  providers: [provideRouter(routes, withPrimalTransitions()), providePrimalRouteScroll()],
 };`;
 
   protected readonly prefs = `import { inject } from '@angular/core';
@@ -46,13 +46,17 @@ export class AppShell {
 
   protected readonly theme = `/* my-theme.css, loaded after Primal */
 :root {
-  --pr-black: #1f1b16;
-  --pr-white: #faf7f2;
-  --pr-primary: #0b7a5a;
+  --pr-black: #17140f;
+  --pr-white: #fdfbf8;
+  --pr-primary: #0e8763;
   --pr-companion-angle: 30; /* Analogous */
   --pr-tertiary-angle: -30;
 }`;
 
-  protected readonly build = `npm install
-npm run build`;
+  protected readonly build = `# in a clone of Mycelium-LLC/primal-ui
+npm install
+npm run pack            # writes dist/packs/*.tgz
+
+# in your project
+npm install /path/to/primal-ui/dist/packs/*.tgz`;
 }

@@ -1,13 +1,15 @@
 {
   "name": "primal-ui",
-  "version": "0.2.0",
+  "version": "0.9.0",
   "scripts": {
     "ng": "ng",
-    "build": "node packages/tokens/build.mjs && ng build primal-angular && ng build showcase",
+    "build": "node packages/tokens/build.mjs && node packages/contracts/build.mjs && node packages/contracts/check-contracts.mjs && ng build primal-angular && ng build showcase",
     "watch": "ng build showcase --watch --configuration development",
     "check:folio": "node .folio/check-ledger.mjs",
-    "test": "ng test",
-    "check:tokens": "node packages/tokens/build.mjs --check && node packages/tokens/check-contrast.mjs && node packages/tokens/check-literals.mjs"
+    "test": "ng test primal-angular --watch=false",
+    "check:tokens": "node packages/tokens/build.mjs --check && node packages/tokens/check-contrast.mjs && node packages/tokens/check-literals.mjs",
+    "check:contracts": "node packages/contracts/build.mjs --check && node packages/contracts/check-contracts.mjs",
+    "pack": "node scripts/pack.mjs"
   },
   "private": true,
   "packageManager": "npm@11.19.1",

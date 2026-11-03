@@ -1,9 +1,16 @@
-/* The showcase shell. Every value is a Primal token, so it follows light, dark and both directions. */
+/*
+ * The showcase shell. Every value is a Primal token, so it follows light, dark and both directions.
+ *
+ * One box the size of the viewport: the header across the top, and under it two boxes side by side,
+ * the page list and the page. Each scrolls on its own; the window never scrolls, so the header and
+ * the list hold still while a page is read.
+ */
 :host {
-  display: block;
-  max-inline-size: var(--pr-container-reading);
-  margin-inline: auto;
-  padding-inline: var(--pr-gutter);
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  block-size: 100dvh;
+  overflow: hidden;
 }
 
 .pr-skip {
@@ -14,6 +21,7 @@
 .pr-skip:focus {
   inset-inline-start: var(--pr-gutter);
   inset-block-start: var(--pr-gutter);
+  z-index: var(--pr-layer-overlay);
   background-color: var(--pr-color-surface-raised);
   padding: var(--pr-gap-component);
 }
@@ -25,8 +33,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--pr-gap-group);
-  padding-block: var(--pr-gap-group);
-  margin-block-end: var(--pr-gap-section);
+  padding: var(--pr-gap-group) var(--pr-gutter);
   border-block-end: var(--pr-border-width) solid var(--pr-color-border);
 }
 
@@ -57,20 +64,45 @@
   }
 }
 
-/* ---------------------------------------------------------------- body */
+/* ---------------------------------------------------------------- body: two scrolling boxes */
 
 .pr-body {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--pr-gap-section);
+  grid-template-columns: minmax(0, 1fr);
+  min-block-size: 0;
+}
+
+/* Each box fills the body's height and scrolls within itself; neither moves the other, or the window. */
+/* Positioned too, so what is placed absolutely inside (visually hidden text) stays inside its box, not the page. */
+.pr-nav,
+.pr-main {
+  position: relative;
+  min-block-size: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 
 .pr-nav {
   display: none;
+  padding: var(--pr-gap-group) var(--pr-gutter) var(--pr-gap-section);
+}
+
+/*
+ * On a phone the page list, when open, takes the page's place: both share one cell, and the page
+ * is made invisible, not removed, so it keeps where it was scrolled to (display: none would lose it).
+ */
+.pr-nav,
+.pr-main {
+  grid-area: 1 / 1;
 }
 
 .pr-nav-open {
   display: block;
+}
+
+.pr-main.pr-main-hidden {
+  visibility: hidden;
 }
 
 @media (width >= 48rem) {
@@ -79,17 +111,22 @@
   }
 
   .pr-body {
-    grid-template-columns: 13rem minmax(0, 1fr);
+    grid-template-columns: 15rem minmax(0, 1fr);
   }
 
   .pr-nav {
     display: block;
-    position: sticky;
-    inset-block-start: var(--pr-gap-group);
-    align-self: start;
-    max-block-size: calc(100dvh - 2 * var(--pr-gap-group));
-    overflow-y: auto;
-    padding-block-end: var(--pr-gap-group);
+    border-inline-end: var(--pr-border-width) solid var(--pr-color-border);
+  }
+
+  .pr-nav {
+    grid-area: 1 / 1;
+  }
+
+  .pr-main,
+  .pr-main.pr-main-hidden {
+    grid-area: 1 / 2;
+    visibility: visible;
   }
 }
 
@@ -116,7 +153,7 @@
 }
 
 .pr-nav a:hover {
-  color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
 }
 
 /* A page still to be built steps back: muted, with the release that builds it. */
@@ -131,7 +168,7 @@
 
 /* The current place: the primary, because the primary means where something is happening. */
 .pr-nav a.pr-current {
-  color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
   font-weight: var(--pr-weight-strong);
 }
 
@@ -142,27 +179,28 @@
   margin-block: var(--pr-gap-group) var(--pr-gap-component);
 }
 
-.pr-visually-hidden {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
+/* The page: at the reading width, with the footer at the end of its scroll. */
 .pr-main {
-  min-inline-size: 0;
-  padding-block-end: var(--pr-gap-section);
+  display: flex;
+  flex-direction: column;
+  padding-inline: var(--pr-gutter);
 }
 
 .pr-main:focus {
   outline: none;
 }
 
+.pr-page {
+  flex: 1 0 auto;
+  inline-size: 100%;
+  max-inline-size: calc(var(--pr-container-reading) - 15rem);
+  padding-block: var(--pr-gap-section);
+}
+
 /* ---------------------------------------------------------------- footer */
 
 .pr-footer {
+  max-inline-size: calc(var(--pr-container-reading) - 15rem);
   padding-block: var(--pr-gap-group) var(--pr-gap-section);
   border-block-start: var(--pr-border-width) solid var(--pr-color-border);
   font-size: var(--pr-text-small);

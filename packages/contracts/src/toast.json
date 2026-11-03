@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema.json",
+  "id": "toast",
+  "name": "Toast",
+  "layer": "primitive",
+  "layerWhy": "It reports one outcome where the person can no longer see it; it is a voice of other parts, not a job.",
+  "promise": "Something just happened out of sight, and it can be undone for a moment.",
+  "expectation": "A short message in the corner that fades, with Undo when there is one.",
+  "evidence": "It stays five seconds, eight with an action, waits while pointed at or focused, and announces itself politely.",
+  "behaviour": [
+    "At most three; a newer one pushes the oldest out.",
+    "Escape closes the newest.",
+    "Its action closes it after running.",
+    "It sits above dialogs (a manual popover)."
+  ],
+  "context": "The outcome of an action whose place is gone, or of work that finished elsewhere. Never routine outcomes, lasting facts, questions or errors to fix.",
+  "relationships": [
+    "Its place is \"toast\" in the behaviour model.",
+    "It holds the undo of a reversible destructive action."
+  ],
+  "states": [
+    "Showing",
+    "Held (pointed at or focused)",
+    "Leaving"
+  ],
+  "accessibility": [
+    "A labelled region with a polite live region.",
+    "Its buttons are real buttons in the tab order."
+  ],
+  "failures": [
+    "Never the only place an error shows.",
+    "Never takes an undo away while it is being read."
+  ],
+  "do": [
+    "Name what happened: \"Deleted “Q3 revenue”.\""
+  ],
+  "dont": [
+    "\"Success!\"",
+    "A toast for a saved setting."
+  ],
+  "api": {
+    "css": [
+      ".pr-toaster",
+      ".pr-toast",
+      ".pr-toast-message"
+    ],
+    "angular": [
+      "primal-toaster"
+    ],
+    "inputs": [
+      "PrimalToaster.show(message, { action, duration })"
+    ]
+  },
+  "usage": {
+    "import": "import { PrimalToaster } from 'primal-angular';",
+    "markup": "inject(PrimalToaster).show('Deleted “Q3 revenue”.', {\n  action: { label: 'Undo', run: () => restore() },\n});"
+  },
+  "example": "/actions/feedback"
+}

@@ -1,6 +1,104 @@
-<pr-page-placeholder title="Feedback" release="0.4.0" covers="Alert, Toast, Spinner, Progress, Skeleton.">
-<p role="alert">An alert: the report could not be saved. Check your connection and try again.</p>
-<p role="status">A status message: 3 changes saved.</p>
-<p><label>Working <progress></progress></label></p>
-<p><label>Uploading <progress value="70" max="100">70%</progress></label></p>
-</pr-page-placeholder>
+<h1>Feedback</h1>
+<p>
+  Feedback is how the system answers. Each part speaks from one place, with one meaning
+  (<a routerLink="/actions/behaviour-model">The behaviour model</a>): nobody picks a toast by taste.
+</p>
+
+<h2>Alerts</h2>
+<p>
+  Place: <strong>alert</strong>. Something about this place is true, and stays true until it changes. It sits above what it is
+  about, and says its tone with a mark and words as well as colour. It has no close button: a fact is changed, not dismissed.
+</p>
+<div class="pr-demo-stack">
+  <primal-alert title="Reports refresh every hour">
+    <p>The numbers below are from 14:00.</p>
+  </primal-alert>
+  <primal-alert tone="success" title="Your domain is verified">
+    <p>Email from billing&#64;example.com now reaches your customers' inboxes.</p>
+  </primal-alert>
+  <primal-alert tone="warning" title="Your plan ends in 3 days">
+    <p>Renew it to keep your reports. Nothing is deleted before then.</p>
+    <div class="pr-alert-actions"><button primalButton type="button" emphasis="primary">Renew Plan</button></div>
+  </primal-alert>
+  <primal-alert tone="danger" title="Payments are paused">
+    <p>Your card was declined on 1 November. Update it to send invoices again.</p>
+    <div class="pr-alert-actions"><button primalButton type="button">Update Card</button></div>
+  </primal-alert>
+</div>
+
+<h3>A banner</h3>
+<p>
+  Place: <strong>banner</strong>. The whole product is in a different state: offline, under maintenance, signed in as someone else.
+  Edge to edge, above everything it is about.
+</p>
+<div class="pr-demo-frame pr-demo-frame-flush">
+  <primal-alert tone="warning" [banner]="true" title="You're offline">
+    <p>Changes are kept on this device and sent when you're back.</p>
+  </primal-alert>
+  <p class="pr-demo-inner">The product, below its banner.</p>
+</div>
+
+<h2>Toasts</h2>
+<p>
+  Place: <strong>toast</strong>, the corner: the one raised voice. It says what just happened where you can no longer see it, holds
+  the undo, and fades: five seconds, eight with an undo, and it waits while you point at it or tab into it. Never for a routine
+  change (the button says "Saved"), a lasting fact (an alert) or an error to fix (beside the thing that failed).
+</p>
+<ul class="pr-demo-list pr-demo-reports" [attr.aria-busy]="null">
+  @for (r of reports(); track r.id) {
+    <li>
+      <span>{{ r.name }}</span>
+      <button primalButton type="button" kind="destructive" (click)="remove(r)">Delete Report</button>
+    </li>
+  } @empty {
+    <li class="pr-demo-note">No reports. <button primalButton type="button" emphasis="quiet" (click)="restoreAll()">Bring Them Back</button></li>
+  }
+</ul>
+<div class="pr-demo-row">
+  <button primalButton type="button" kind="background" [run]="exportAll">Export Reports</button>
+</div>
+
+<h2>Waiting</h2>
+<p>
+  Loading shows the shape of what is coming when the shape is known, and a value when the length is known. A spinner only when
+  neither is.
+</p>
+
+<h3>Skeletons: the shape is known</h3>
+<p>A list loads as skeletons of its rows: the avatar and two lines each row will have.</p>
+<div class="pr-demo-row">
+  <button primalButton type="button" (click)="reloadPeople()">Reload People</button>
+</div>
+<ul class="pr-demo-list pr-demo-people" [attr.aria-busy]="loadingPeople() ? 'true' : null" aria-label="People">
+  @if (loadingPeople()) {
+    @for (i of [1, 2, 3]; track i) {
+      <li>
+        <primal-skeleton shape="circle" />
+        <span class="pr-demo-lines"><primal-skeleton shape="text" style="inline-size: 40%" /><primal-skeleton shape="text" style="inline-size: 70%" /></span>
+      </li>
+    }
+  } @else {
+    @for (p of people; track p.name) {
+      <li>
+        <span class="pr-demo-avatar" aria-hidden="true">{{ p.name[0] }}</span>
+        <span class="pr-demo-lines"><strong>{{ p.name }}</strong><span class="pr-demo-note">{{ p.role }}</span></span>
+      </li>
+    }
+  }
+</ul>
+
+<h3>Progress: the length is known</h3>
+<p>Measurable work shows how far along it is, in words and a percentage. Never faked.</p>
+<div class="pr-demo-stack">
+  <primal-progress label="Uploading 12 photos" [value]="uploaded()" [max]="12" />
+  <div class="pr-demo-row">
+    <button primalButton type="button" kind="background" [busy]="uploading()" (click)="upload()">Upload Photos</button>
+  </div>
+  <primal-progress label="Preparing your export" />
+</div>
+<p>The second has no value yet: it travels, so it is clearly moving and clearly not a number.</p>
+
+<h3>A spinner: neither is known</h3>
+<p><primal-spinner label="Checking the address" /> Checking the address…</p>
+
+<pr-plain-html [code]="plain" />

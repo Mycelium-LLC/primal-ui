@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema.json",
+  "id": "number",
+  "name": "Number",
+  "layer": "primitive",
+  "layerWhy": "One field whose answer is a number; part of a form.",
+  "promise": "A number typed or stepped, never past its limits.",
+  "expectation": "The value between − and +, its unit beside it.",
+  "evidence": "− and + stop at min and max (disabled there), repeat while held, and keep focus in the input.",
+  "behaviour": [
+    "Steps by the field's step; an empty field starts from its min.",
+    "Arrow keys and typing work as in any number field."
+  ],
+  "context": "Counts, quantities, percentages, weights.",
+  "relationships": [
+    "Its unit belongs in the label too, for screen readers."
+  ],
+  "states": [
+    "Empty",
+    "Within limits",
+    "At min",
+    "At max",
+    "Disabled",
+    "Invalid"
+  ],
+  "accessibility": [
+    "The buttons are named \"Decrease Seats\" and are out of the tab order; the input keeps the keys."
+  ],
+  "failures": [
+    "Never steps past a limit."
+  ],
+  "do": [
+    "Set min, max and step."
+  ],
+  "dont": [
+    "A stepper for a phone number or a year."
+  ],
+  "api": {
+    "css": [
+      ".pr-number",
+      ".pr-number-step",
+      ".pr-number-unit"
+    ],
+    "angular": [
+      "primal-number"
+    ],
+    "inputs": [
+      "unit"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "markup": "<primal-field label=\"Seats\">\n  <primal-number unit=\"seats\">\n    <input primalControl type=\"number\" min=\"1\" max=\"50\" step=\"1\" value=\"5\" />\n  </primal-number>\n</primal-field>"
+  },
+  "example": "/forms/text-fields"
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "../schema.json",
+  "id": "details-list",
+  "name": "Details",
+  "layer": "primitive",
+  "layerWhy": "It lays out facts about one thing; reading facts is not a job.",
+  "promise": "Each term is followed by its value.",
+  "expectation": "Terms muted, values beside them, stacked on a phone.",
+  "evidence": "A real description list; long values wrap.",
+  "behaviour": [
+    "Two columns where there is room, one on a phone."
+  ],
+  "context": "The facts of one record.",
+  "relationships": [
+    "Terms are short nouns."
+  ],
+  "states": [
+    "Wide",
+    "Narrow"
+  ],
+  "accessibility": [
+    "A native <dl>."
+  ],
+  "failures": [
+    "Never a table for one record."
+  ],
+  "do": [
+    "Keep terms the same across records."
+  ],
+  "dont": [
+    "Details for a list of many things."
+  ],
+  "api": {
+    "css": [
+      ".pr-details"
+    ]
+  },
+  "usage": {
+    "markup": "<dl class=\"pr-details\">\n  <dt>Plan</dt><dd>Team</dd>\n  <dt>Seats</dt><dd>8 of 20</dd>\n</dl>"
+  },
+  "example": "/content/content"
+}

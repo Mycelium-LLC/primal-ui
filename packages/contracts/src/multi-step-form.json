@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema.json",
+  "id": "multi-step-form",
+  "name": "Multi-step form",
+  "layer": "surface",
+  "layerWhy": "It is a place where several forms serve one long journey, step by step.",
+  "promise": "I can see the steps, go back without losing anything, and check everything before it's done.",
+  "expectation": "Numbered steps, the current one in the primary, a review with Change.",
+  "evidence": "The step is in the address; Back goes to the step before; a step that can't be shown yet sends the address back to the first.",
+  "behaviour": [
+    "Answers kept across steps.",
+    "Done steps are checked and revisitable.",
+    "The last step is a review."
+  ],
+  "context": "Onboarding, checkout, setup.",
+  "relationships": [
+    "Next two moves: Back, and the step after."
+  ],
+  "states": [
+    "Step",
+    "Done step",
+    "Review",
+    "Finished"
+  ],
+  "accessibility": [
+    "Steps in an ordered list with aria-current=\"step\"."
+  ],
+  "failures": [
+    "Never loses an answer.",
+    "Never jumps ahead of what is answered."
+  ],
+  "do": [
+    "Show every answer before finishing."
+  ],
+  "dont": [
+    "More steps than the task needs."
+  ],
+  "api": {
+    "css": [
+      ".pr-steps",
+      "[aria-current=\"step\"]",
+      "[data-done]"
+    ]
+  },
+  "usage": {
+    "markup": "<ol class=\"pr-steps\" aria-label=\"Steps\">\n  <li data-done>Workspace</li>\n  <li aria-current=\"step\">Team</li>\n  <li>Review</li>\n</ol>"
+  },
+  "example": "/surfaces/multi-step-form"
+}

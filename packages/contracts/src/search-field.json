@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema.json",
+  "id": "search-field",
+  "name": "Search field",
+  "layer": "primitive",
+  "layerWhy": "It is one field: a way in, not a question.",
+  "promise": "Typing here finds things.",
+  "expectation": "A field with a magnifier at its start.",
+  "evidence": "The magnifier says what it is before a word is read; it is never marked Optional.",
+  "behaviour": [
+    "The native search input keeps Escape to clear."
+  ],
+  "context": "Bars, lists, the top of results.",
+  "relationships": [
+    "Its placeholder may say what it searches, its label must."
+  ],
+  "states": [
+    "Empty",
+    "Typed"
+  ],
+  "accessibility": [
+    "A labelled <input type=\"search\">, inside a search landmark where it searches the page."
+  ],
+  "failures": [
+    "Never without a label."
+  ],
+  "do": [
+    "Say what it searches."
+  ],
+  "dont": [
+    "A search field that filters by default without saying so."
+  ],
+  "api": {
+    "css": [
+      ".pr-search-field",
+      "input[type=\"search\"]"
+    ]
+  },
+  "usage": {
+    "markup": "<label for=\"find\" class=\"pr-visually-hidden\">Search members</label>\n<span class=\"pr-search-field\"><input id=\"find\" type=\"search\" placeholder=\"Search members\" /></span>"
+  },
+  "example": "/content/layout"
+}

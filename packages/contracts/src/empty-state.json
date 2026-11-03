@@ -1,0 +1,57 @@
+{
+  "$schema": "../schema.json",
+  "id": "empty-state",
+  "name": "Empty state",
+  "layer": "primitive",
+  "layerWhy": "It stands where content would be; the next step is someone's action.",
+  "promise": "There is nothing here, this is why, and this is what to do.",
+  "expectation": "A quiet panel in the content's place with a title, a reason and a button.",
+  "evidence": "It names the reason and the next step in place.",
+  "behaviour": [
+    "It is announced as a status."
+  ],
+  "context": "Empty lists, tables and searches.",
+  "relationships": [
+    "Its button is the next step.",
+    "It is one of the few places a product may show its character: an illustration in empty-art, never instead of the words."
+  ],
+  "states": [
+    "Nothing yet",
+    "Nothing matches",
+    "Not found"
+  ],
+  "accessibility": [
+    "role=\"status\"."
+  ],
+  "failures": [
+    "Never a blank area.",
+    "Never a picture instead of words."
+  ],
+  "do": [
+    "Offer the next step."
+  ],
+  "dont": [
+    "\"No data.\""
+  ],
+  "api": {
+    "css": [
+      ".pr-empty",
+      ".pr-empty-title",
+      ".pr-empty-actions",
+      "[empty-art]"
+    ],
+    "angular": [
+      "primal-empty"
+    ],
+    "inputs": [
+      "title (required)",
+      "reason (required)",
+      "[empty-art]: the product's illustration, above the words (Primal ships none)"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_CONTENT, PRIMAL_ACTIONS } from 'primal-angular';",
+    "markup": "<primal-empty title=\"No reports yet\" reason=\"Reports appear here once the first month closes.\">\n  <img empty-art src=\"/art/empty.png\" alt=\"\" />\n  <button primalButton type=\"button\" emphasis=\"primary\">Create Report</button>\n</primal-empty>"
+  },
+  "example": "/content/information"
+}

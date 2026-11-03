@@ -1,6 +1,67 @@
-<pr-page-placeholder title="Information" release="0.6.0" covers="Badge, Avatar, StatusIndicator, EmptyState.">
-<p><span>Badge: <small>New</small></span></p>
-<p><img src="favicon.ico" alt="Avatar specimen" width="32" height="32"> An avatar is an image of a person or thing.</p>
-<p>Status: <span>Active</span></p>
-<section aria-label="Empty state specimen"><h3>No releases yet</h3><p>Nothing has shipped. Cut the first release to see it here.</p></section>
-</pr-page-placeholder>
+<h1>Information</h1>
+<p>
+  Information parts say what something is and how it stands, before a word is read. Each carries its meaning in shape or words as
+  well as colour. Turn colour off and every one still reads:
+</p>
+<primal-field label="Show without colour">
+  <input primalControl type="checkbox" role="switch" [checked]="grey()" (change)="grey.set($any($event.target).checked)" />
+</primal-field>
+
+<div [class.pr-demo-grey]="grey()">
+  <h2>Badges</h2>
+  <p>One short fact about the thing it sits on, always in words or a number.</p>
+  <div class="pr-inline" data-gap="component">
+    <span class="pr-badge">Beta</span>
+    <span class="pr-badge" data-tone="primary">New</span>
+    <span class="pr-badge" data-tone="success">Paid</span>
+    <span class="pr-badge" data-tone="warning">Due soon</span>
+    <span class="pr-badge" data-tone="danger">Overdue</span>
+    <span class="pr-badge" data-tone="info">3</span>
+  </div>
+  <p class="pr-demo-spaced">Inbox <span class="pr-badge" data-tone="primary" aria-label="12 unread">12</span></p>
+
+  <h2>Status</h2>
+  <p>
+    A mark and a word. The mark's shape says the state on its own: a full dot is fine, a triangle needs attention, a square has
+    stopped, a ring hasn't started, a half is under way.
+  </p>
+  <ul class="pr-stack" data-gap="component">
+    <li><span class="pr-status" data-state="positive">Active</span></li>
+    <li><span class="pr-status" data-state="warning">Payment due in 3 days</span></li>
+    <li><span class="pr-status" data-state="negative">Suspended</span></li>
+    <li><span class="pr-status" data-state="neutral">Invited, not joined</span></li>
+    <li><span class="pr-status" data-state="progress">Importing</span></li>
+  </ul>
+
+  <h2>Avatars</h2>
+  <p>A person or one thing: their picture, or their initials when there is none or it fails to load.</p>
+  <div class="pr-inline">
+    <primal-avatar name="Ada Shapiro" size="small" />
+    <primal-avatar name="Ada Shapiro" />
+    <primal-avatar name="Ada Shapiro" size="large" />
+    <primal-avatar name="Noa Levi" src="/a-picture-that-is-not-there.jpg" />
+    <span class="pr-avatar-group" role="group" aria-label="4 people">
+      <primal-avatar name="Ada Shapiro" />
+      <primal-avatar name="Noa Levi" />
+      <primal-avatar name="Sam Okafor" />
+      <primal-avatar name="Primal" />
+    </span>
+  </div>
+  <p class="pr-demo-note">Noa's picture doesn't load, so her initials stand in.</p>
+</div>
+
+<h2>Empty states</h2>
+<p>
+  Where the content would be: why it's empty, and the next step. Never a blank, never a picture instead of the words. An empty state
+  is one of the few places a product may show its character: give it an illustration with <code>empty-art</code>. Primal ships none;
+  the mushroom is Mycelium's.
+</p>
+<div class="pr-grid" style="--pr-grid-min: 18rem">
+  <primal-empty title="No reports yet" reason="Reports appear here once the first month closes, or make one now.">
+    <img empty-art src="/character/03-hammock.png" alt="" width="264" height="240" />
+    <button primalButton type="button" emphasis="primary" kind="constructive">Create Report</button>
+  </primal-empty>
+  <primal-empty title="Nobody else is here" reason="Invite your team to share reports and comment on them.">
+    <button primalButton type="button">Invite People</button>
+  </primal-empty>
+</div>

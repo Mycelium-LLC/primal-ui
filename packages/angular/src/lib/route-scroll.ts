@@ -2,6 +2,7 @@ import { ViewportScroller } from '@angular/common';
 import {
   EnvironmentProviders,
   Injectable,
+  InjectionToken,
   inject,
   makeEnvironmentProviders,
   provideEnvironmentInitializer,
@@ -9,29 +10,86 @@ import {
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { PrimalPreferences } from './preferences';
 
+export interface PrimalRouteScrollOptions {
+  /**
+   * The box the pages scroll in, when it isn't the window: an app shell whose main area scrolls
+   * on its own. Read on each navigation, so it may appear after start-up.
+   */
+  readonly scroller?: () => HTMLElement | null;
+}
+
+const OPTIONS = new InjectionToken<PrimalRouteScrollOptions>('PRIMAL_ROUTE_SCROLL_OPTIONS', { factory: () => ({}) });
+
 /**
  * Moving to a new page starts at its top, as it would on a website without a router. Back and
- * forward are left to the browser, so the person returns where they were; a link to an anchor
- * goes to that anchor. Turned off with PrimalPreferences.scrollToTop.
+ * forward return to where the person was; a link to an anchor goes to that anchor. Turned off
+ * with PrimalPreferences.scrollToTop. Works on the window, or on a scrolling box (options.scroller).
  */
 @Injectable({ providedIn: 'root' })
 export class PrimalRouteScroll {
   private readonly prefs = inject(PrimalPreferences);
-  private readonly scroller = inject(ViewportScroller);
+  private readonly viewport = inject(ViewportScroller);
+  private readonly options = inject(OPTIONS);
   private trigger: NavigationStart['navigationTrigger'];
+  private restoring: number | null = null;
+  /** Where each visit was left, by its navigation id, so Back can return there. */
+  private readonly left = new Map<number, number>();
+  private current = 0;
+  private watched: HTMLElement | null = null;
 
   constructor() {
     inject(Router).events.subscribe((event) => {
-      if (event instanceof NavigationStart) this.trigger = event.navigationTrigger;
-      if (!(event instanceof NavigationEnd) || !this.prefs.scrollToTop() || this.trigger === 'popstate') return;
-      const anchor = new URL(event.urlAfterRedirects, 'http://primal').hash.slice(1);
-      if (anchor) this.scroller.scrollToAnchor(decodeURIComponent(anchor));
-      else this.scroller.scrollToPosition([0, 0]);
+      if (event instanceof NavigationStart) {
+        const box = this.watch();
+        // A box that is hidden (display: none) reads 0; it keeps the place last read while shown.
+        if (!box) this.left.set(this.current, window.scrollY);
+        else if (box.getClientRects().length) this.left.set(this.current, box.scrollTop);
+        this.trigger = event.navigationTrigger;
+        this.restoring = event.navigationTrigger === 'popstate' && event.restoredState ? event.restoredState.navigationId : null;
+      }
+      if (!(event instanceof NavigationEnd)) return;
+      this.current = event.id;
+      const box = this.watch();
+      // Back and forward: the browser restores the window; a scrolling box is restored here.
+      if (this.trigger === 'popstate') {
+        if (box && this.restoring !== null) {
+          const top = this.left.get(this.restoring) ?? 0;
+          // After the page has rendered; a timer, not a frame, so a background tab gets it too.
+          setTimeout(() => box.scrollTo({ top }));
+        }
+        return;
+      }
+      if (!this.prefs.scrollToTop()) return;
+      const anchor = decodeURIComponent(new URL(event.urlAfterRedirects, 'http://primal').hash.slice(1));
+      if (box) {
+        setTimeout(() => {
+          const target = anchor ? document.getElementById(anchor) : null;
+          if (target) target.scrollIntoView();
+          else box.scrollTo({ top: 0 });
+        });
+      } else if (anchor) this.viewport.scrollToAnchor(anchor);
+      else this.viewport.scrollToPosition([0, 0]);
     });
+  }
+
+  /** The scrolling box, with its place written down as it scrolls, so hiding it can't lose it. */
+  private watch(): HTMLElement | null {
+    const box = this.options.scroller?.() ?? null;
+    if (box && box !== this.watched) {
+      this.watched = box;
+      box.addEventListener('scroll', () => {
+        if (box.getClientRects().length) this.left.set(this.current, box.scrollTop);
+      }, { passive: true });
+    }
+    return box;
   }
 }
 
-/** Turns on route-change scrolling. Add it to the application's providers, next to provideRouter. */
-export function providePrimalRouteScroll(): EnvironmentProviders {
-  return makeEnvironmentProviders([provideEnvironmentInitializer(() => inject(PrimalRouteScroll))]);
+/**
+ * Turns on route-change scrolling. Add it to the application's providers, next to provideRouter.
+ * Give it the scrolling box when the pages don't scroll the window:
+ *   providePrimalRouteScroll({ scroller: () => document.getElementById('main') })
+ */
+export function providePrimalRouteScroll(options: PrimalRouteScrollOptions = {}): EnvironmentProviders {
+  return makeEnvironmentProviders([{ provide: OPTIONS, useValue: options }, provideEnvironmentInitializer(() => inject(PrimalRouteScroll))]);
 }

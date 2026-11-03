@@ -1,0 +1,82 @@
+{
+  "$schema": "../schema.json",
+  "id": "button",
+  "name": "Button",
+  "layer": "primitive",
+  "layerWhy": "It keeps one part of a promise: this action happens when pressed. It does no whole job alone, however interactive it is.",
+  "promise": "Pressing it does the one thing its words say, once.",
+  "expectation": "Pressing it starts something now, and it will say what happened.",
+  "evidence": "It goes busy within 100 ms, ignores a second press while busy, and says its outcome where it is (\"Saved\") and aloud.",
+  "behaviour": [
+    "Activates on pointer, touch, Enter and Space.",
+    "With [run], busy at once and for at least 450 ms, then shows the returned word for two seconds.",
+    "A second press while busy, or any press while aria-disabled, is stopped before any (click) on it runs.",
+    "A destructive kind always wears the danger edge; its final step the danger fill."
+  ],
+  "context": "Where a person can expect an action: the end of a form, a row of actions, inside an item. Never to move between places; that is a link.",
+  "relationships": [
+    "Its label is the person's verb and an object: \"Save Changes\".",
+    "Emphasis ranks it among its siblings: one primary per place.",
+    "A destructive one sits apart from safe ones (.pr-actions)."
+  ],
+  "states": [
+    "Ready",
+    "Hover",
+    "Pressed",
+    "Focus",
+    "Busy (spinner, size held)",
+    "Done (its outcome word)",
+    "Not available (aria-disabled, still reachable)",
+    "Disabled"
+  ],
+  "accessibility": [
+    "A native <button>, so it is announced and pressed as one.",
+    "Its outcome is announced through a polite live region.",
+    "aria-busy while working; aria-disabled keeps it in the tab order to explain why.",
+    "The focus ring is always visible from the keyboard."
+  ],
+  "failures": [
+    "Never ignores a press without showing it was heard.",
+    "Never says it is done before the work is.",
+    "Never runs twice for one intention.",
+    "Never reads \"Submit\", \"OK\" or \"Click here\"."
+  ],
+  "do": [
+    "Name the action and its object.",
+    "Use aria-disabled with a reason in the description rather than disabled.",
+    "Return the outcome word from [run]."
+  ],
+  "dont": [
+    "Two primary buttons in one place.",
+    "A Delete beside Save at the same weight.",
+    "A button that only navigates."
+  ],
+  "api": {
+    "css": [
+      "button",
+      ".pr-button (on a link)",
+      ".pr-button-primary",
+      ".pr-button-quiet",
+      ".pr-button-danger",
+      ".pr-button-final",
+      "[aria-busy=\"true\"]",
+      "[aria-disabled=\"true\"]"
+    ],
+    "angular": [
+      "button[primalButton], a[primalButton]"
+    ],
+    "inputs": [
+      "emphasis: default | primary | quiet",
+      "kind: the action kind (mutative by default)",
+      "final: the last step of an irreversible action",
+      "run: the work; its returned word is said in place",
+      "busy: busy from outside",
+      "(failed): the work threw"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+    "markup": "<button primalButton type=\"button\" emphasis=\"primary\" [run]=\"save\">Save Changes</button>"
+  },
+  "example": "/actions/actions"
+}

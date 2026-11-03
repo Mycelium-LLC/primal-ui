@@ -1,13 +1,89 @@
-<pr-page-placeholder title="Text fields" release="0.3.0" covers="TextField and its kinds, NumberField, TextArea.">
-<p><label>Text <input type="text" placeholder="Your name"></label></p>
-<p><label>Email <input type="email" autocomplete="email"></label></p>
-<p><label>Password <input type="password" autocomplete="current-password"></label></p>
-<p><label>Phone <input type="tel" autocomplete="tel"></label></p>
-<p><label>Website <input type="url"></label></p>
-<p><label>Search <input type="search"></label></p>
-<p><label>Number <input type="number" min="0" max="10" value="3"></label></p>
-<p><label>Disabled <input type="text" value="Can't change this" disabled></label></p>
-<p><label>Read-only <input type="text" value="Read only" readonly></label></p>
-<p><label>Required <input type="text" required></label></p>
-<p><label>Text area <textarea rows="3"></textarea></label></p>
-</pr-page-placeholder>
+<h1>Text fields</h1>
+<p>
+  A text field is one question with a typed answer. It has a visible label, a description when the question needs one, and its
+  message directly under it. The control stays the browser's own input, so autofill, the phone's keyboard for each kind and
+  pasting all keep working.
+</p>
+<p>
+  Most of a good form is required, so Primal marks what's <em>optional</em> rather than what's required. Try leaving a field,
+  or typing something it can't take: the message says what to type.
+</p>
+
+<h2>The kinds</h2>
+<primal-field label="Full name">
+  <input primalControl type="text" autocomplete="name" required />
+</primal-field>
+<primal-field label="Email" description="We only use it to send receipts.">
+  <input primalControl primalMask="email" type="email" autocomplete="email" required />
+</primal-field>
+<primal-field label="Password" description="At least 12 characters. A sentence works well.">
+  <input primalControl type="password" autocomplete="new-password" minlength="12" required />
+</primal-field>
+<primal-field label="Phone" description="050-123-4567, or +972 for another country.">
+  <input primalControl primalMask="phone" type="tel" autocomplete="tel" />
+</primal-field>
+<primal-field label="Website">
+  <input primalControl primalMask="url" type="url" autocomplete="url" />
+</primal-field>
+<primal-field label="Search the docs">
+  <primal-autocomplete class="pr-search-field" [options]="pages" [blank]="popular" [openOnFocus]="true" emptyMessage="No page matches “{text}”.">
+    <input primalControl type="search" />
+  </primal-autocomplete>
+</primal-field>
+<primal-field label="Seats" description="Between 1 and 50.">
+  <primal-number unit="seats">
+    <input primalControl type="number" inputmode="numeric" min="1" max="50" step="1" value="5" required />
+  </primal-number>
+</primal-field>
+<primal-field label="What should we improve?" description="A sentence or two is plenty.">
+  <textarea primalControl rows="4" maxlength="500"></textarea>
+</primal-field>
+
+<h2>Shaped as you type</h2>
+<p>
+  Email, phone and website are shaped while they are typed, and when they are pasted: an email keeps no spaces and one @, with its
+  domain in lower case; a phone number takes its separators from a pattern (<code>primalMask="(000) 000-0000"</code> for any other);
+  a website starts with <code>https://</code>, written in for you. The caret stays where you are typing.
+</p>
+
+<h2>Search</h2>
+<p>
+  A search box opens its list as soon as it has focus: empty, it shows what is popular; typing narrows it to what matches. Give the
+  empty list its own options with <code>[blank]</code>, and open it on focus with <code>[openOnFocus]="true"</code>.
+</p>
+
+<h2>Numbers</h2>
+<p>
+  A number is typed or stepped. − and + step by the field's step and stop at its min and max, faster while held; the arrow keys
+  work as they do in any number field, and the unit sits after the value.
+</p>
+<primal-field label="Discount" description="Percent off the first invoice.">
+  <primal-number unit="%">
+    <input primalControl type="number" min="0" max="100" step="5" value="10" />
+  </primal-number>
+</primal-field>
+<primal-field label="Weight">
+  <primal-number unit="kg">
+    <input primalControl type="number" min="0" step="0.1" value="2.5" style="--pr-number-digits: 5" />
+  </primal-number>
+</primal-field>
+<primal-field label="Licences" description="Disabled: your plan sets this.">
+  <primal-number>
+    <input primalControl type="number" value="12" disabled />
+  </primal-number>
+</primal-field>
+
+<h2>States</h2>
+<primal-field label="Account number" description="Read-only: you can copy it, not change it.">
+  <input primalControl type="text" value="PR-2026-0042" readonly />
+</primal-field>
+<primal-field label="Company" description="Disabled because only an owner can change it.">
+  <input primalControl type="text" value="Mycelium" disabled />
+</primal-field>
+<primal-field label="Username">
+  <input primalControl="That username is taken. Try adding a number." type="text" value="niko" required />
+</primal-field>
+
+<h2>In code</h2>
+<pre><code>{{ angular }}</code></pre>
+<pr-plain-html [code]="plain" />

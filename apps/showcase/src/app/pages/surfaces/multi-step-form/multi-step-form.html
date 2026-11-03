@@ -1,7 +1,108 @@
-<pr-page-placeholder title="Multi-step form" release="0.7.0" covers="A form across steps.">
-<ol aria-label="Steps"><li aria-current="step">Account</li><li>Profile</li><li>Done</li></ol>
-<form (submit)="$event.preventDefault()" aria-label="Step 1 specimen">
-  <p><label>Email <input type="email"></label></p>
-  <p><button type="submit">Continue to Profile</button></p>
-</form>
-</pr-page-placeholder>
+<h1>Multi-step form</h1>
+<p>
+  A task too long for one screen, broken into steps the person can see. The step is in the address, so Back goes to the step
+  before; what is typed is kept across steps; the last step shows everything once more, each part with a way to change it.
+</p>
+
+<h2>The journey</h2>
+<ol class="pr-journey">
+  <li><strong>Workspace</strong>: its name and address.</li>
+  <li><strong>Team</strong>: who to invite, or no one yet.</li>
+  <li><strong>Review</strong>: everything once more, each with Change; then Create Workspace.</li>
+  <li><strong>Done</strong>: the workspace is made, and its first moves are offered.</li>
+</ol>
+<p class="pr-moves">Next two moves, within reach at every step: Back (and the browser's Back), and the step after.</p>
+
+<div class="pr-surface-frame">
+  <p class="pr-surface-address">/surfaces/multi-step-form?step={{ step() }}</p>
+  <div class="pr-surface-body pr-steps-surface">
+    @if (created()) {
+      <div class="pr-showcase-welcome-art pr-showcase-success" aria-hidden="true">
+        <img class="pr-showcase-art" src="/character/09-high-five.png" alt="" width="264" height="240" />
+        <p class="pr-showcase-note">zero drama.</p>
+      </div>
+      <primal-alert tone="success" [title]="'“' + workspace() + '” is ready'" [live]="true">
+        <p>It lives at {{ address() }}.primal.example.@if (invites().length) { We invited {{ invites().length }} {{ invites().length === 1 ? 'person' : 'people' }}.}</p>
+        <div class="pr-alert-actions">
+          <a primalButton routerLink="/surfaces/list-detail" emphasis="primary" kind="navigational">Open Workspace</a>
+          <button primalButton type="button" emphasis="quiet" (click)="startAgain()">Start the Example Again</button>
+        </div>
+      </primal-alert>
+    } @else {
+      <ol class="pr-steps" aria-label="Steps">
+        @for (s of steps; track s.key; let i = $index) {
+          <li [attr.aria-current]="s.key === step() ? 'step' : null" [attr.data-done]="i < at() ? '' : null">
+            {{ s.title }}@if (i < at()) {<span class="pr-visually-hidden"> (done)</span>}
+          </li>
+        }
+      </ol>
+
+      @switch (step()) {
+        @case ('team') {
+          <form primalForm (validSubmit)="go('review')">
+            <h2 class="pr-surface-heading">Who should join you?</h2>
+            <p>Add their email addresses, one at a time. You can invite people later too.</p>
+            <div class="pr-inline" data-gap="component">
+              <primal-field label="Email" [optional]="true">
+                <input #invite primalControl primalMask="email" type="email" name="invite" autocomplete="off" (keydown.enter)="$event.preventDefault(); addInvite(invite)" />
+              </primal-field>
+              <button primalButton type="button" (click)="addInvite(invite)">Add Person</button>
+            </div>
+            @if (invites().length) {
+              <ul class="pr-list-items">
+                @for (e of invites(); track e) {
+                  <li>
+                    <primal-avatar [name]="e" size="small" />
+                    <span class="pr-item-body"><span class="pr-item-title">{{ e }}</span></span>
+                    <button primalIconButton type="button" [label]="'Remove ' + e" (click)="removeInvite(e)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+                    </button>
+                  </li>
+                }
+              </ul>
+            }
+            <div class="pr-actions">
+              <button primalButton type="button" emphasis="quiet" (click)="go('workspace')">Back to Workspace</button>
+              <div class="pr-actions-group">
+                <button primalButton type="submit" emphasis="primary">{{ invites().length ? 'Continue to Review' : 'Skip to Review' }}</button>
+              </div>
+            </div>
+          </form>
+        }
+        @case ('review') {
+          <h2 class="pr-surface-heading">Check it once more</h2>
+          <dl class="pr-details">
+            <dt>Workspace</dt>
+            <dd>{{ workspace() }} <a href="#" (click)="$event.preventDefault(); go('workspace')">Change<span class="pr-visually-hidden"> workspace</span></a></dd>
+            <dt>Address</dt>
+            <dd>{{ address() }}.primal.example <a href="#" (click)="$event.preventDefault(); go('workspace')">Change<span class="pr-visually-hidden"> address</span></a></dd>
+            <dt>Team</dt>
+            <dd>{{ invites().length ? invites().join(', ') : 'Just you, for now' }} <a href="#" (click)="$event.preventDefault(); go('team')">Change<span class="pr-visually-hidden"> team</span></a></dd>
+          </dl>
+          <div class="pr-actions">
+            <button primalButton type="button" emphasis="quiet" (click)="go('team')">Back to Team</button>
+            <div class="pr-actions-group">
+              <button primalButton type="button" emphasis="primary" kind="constructive" [run]="create">Create Workspace</button>
+            </div>
+          </div>
+        }
+        @default {
+          <form primalForm (validSubmit)="go('team')">
+            <h2 class="pr-surface-heading">Name your workspace</h2>
+            <primal-field label="Workspace name" description="Your team or company. You can change it later.">
+              <input primalControl name="workspace" required [value]="workspace()" (input)="setWorkspace($any($event.target).value)" />
+            </primal-field>
+            <primal-field label="Address" description="Letters, numbers and dashes. It becomes yourname.primal.example.">
+              <input primalControl name="address" required pattern="[a-z0-9-]+" title="Use lower-case letters, numbers and dashes only." [value]="address()" (input)="setAddress($any($event.target).value)" />
+            </primal-field>
+            <div class="pr-actions">
+              <div class="pr-actions-group">
+                <button primalButton type="submit" emphasis="primary">Continue to Team</button>
+              </div>
+            </div>
+          </form>
+        }
+      }
+    }
+  </div>
+</div>

@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema.json",
+  "id": "accordion",
+  "name": "Accordion",
+  "layer": "primitive",
+  "layerWhy": "It discloses detail; reading it is not a job.",
+  "promise": "Each summary opens the detail under it, without moving what I'm reading.",
+  "expectation": "Summaries one under the other with a chevron that turns.",
+  "evidence": "Native <details>: it works without script, is found by the browser's search, and same-named ones open one at a time.",
+  "behaviour": [
+    "Enter or Space on a summary toggles it."
+  ],
+  "context": "Answers people skim, settings people rarely open.",
+  "relationships": [
+    "Same name, one open."
+  ],
+  "states": [
+    "Closed",
+    "Open"
+  ],
+  "accessibility": [
+    "Native details and summary semantics."
+  ],
+  "failures": [
+    "Never hides something everyone needs."
+  ],
+  "do": [
+    "Write summaries as the question."
+  ],
+  "dont": [
+    "An accordion around a whole page."
+  ],
+  "api": {
+    "css": [
+      "details",
+      "summary",
+      ".pr-accordion"
+    ]
+  },
+  "usage": {
+    "markup": "<div class=\"pr-accordion\">\n  <details name=\"plan\" open><summary>Free</summary><p>One person.</p></details>\n  <details name=\"plan\"><summary>Team</summary><p>Up to 20 people.</p></details>\n</div>"
+  },
+  "example": "/navigation/disclosure"
+}

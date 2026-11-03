@@ -1,0 +1,49 @@
+{
+  "$schema": "../schema.json",
+  "id": "spinner",
+  "name": "Spinner",
+  "layer": "primitive",
+  "layerWhy": "It says one thing, \"working\", and nothing about when it ends.",
+  "promise": "Something is happening and its length is unknown.",
+  "expectation": "A turning mark beside the work.",
+  "evidence": "It is used only when neither the shape nor the length of what is coming is known, and it is read as its label.",
+  "behaviour": [
+    "Turns steadily; under reduced motion it breathes instead."
+  ],
+  "context": "Short waits of unknown length. A list that is loading uses skeletons; measurable work uses progress.",
+  "relationships": [
+    "Its label says what is happening: \"Checking the address\"."
+  ],
+  "states": [
+    "Turning",
+    "Breathing (reduced motion)"
+  ],
+  "accessibility": [
+    "role=\"status\" with a visually hidden label."
+  ],
+  "failures": [
+    "Never hides a known shape or length."
+  ],
+  "do": [
+    "Say what it waits for."
+  ],
+  "dont": [
+    "A spinner for a page whose layout is known."
+  ],
+  "api": {
+    "css": [
+      ".pr-spinner"
+    ],
+    "angular": [
+      "primal-spinner"
+    ],
+    "inputs": [
+      "label"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+    "markup": "<primal-spinner label=\"Checking the address\" />"
+  },
+  "example": "/actions/feedback"
+}

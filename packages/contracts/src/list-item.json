@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema.json",
+  "id": "list-item",
+  "name": "List item",
+  "layer": "primitive",
+  "layerWhy": "It is one row of a list; the list does the job.",
+  "promise": "One thing per row: what it is, a line about it, and its state at the end.",
+  "expectation": "Rows divided by thin lines, each with something at the start and the end.",
+  "evidence": "The lines mean only \"separate items of one list\"; the title wraps, never cut.",
+  "behaviour": [
+    "The title links to the thing; the end holds a status or an action.",
+    "When a row is removed with its own button, focus moves to the same button in the row that takes its place (the next, or the last), or to the list's heading when none is left; never to the top of the page. In Angular, primalFocusAfterRemove(list) does it."
+  ],
+  "context": "People, files, reports, results.",
+  "relationships": [
+    "The current item (aria-current) takes the primary's quiet fill."
+  ],
+  "states": [
+    "Ready",
+    "Current",
+    "Hover on its link"
+  ],
+  "accessibility": [
+    "A real <ul> and <li>.",
+    "Removing a row never drops focus: keyboard and screen-reader users stay where they were in the list."
+  ],
+  "failures": [
+    "Never repeats a fact (a dot and the same word).",
+    "Focus falls to the top of the page after a row's Delete."
+  ],
+  "do": [
+    "Put the name first."
+  ],
+  "dont": [
+    "A list item as a page section."
+  ],
+  "api": {
+    "css": [
+      ".pr-list-items",
+      ".pr-item-body",
+      ".pr-item-title",
+      ".pr-item-line",
+      ".pr-item-end"
+    ]
+  },
+  "usage": {
+    "import": "import { primalFocusAfterRemove } from 'primal-angular';",
+    "markup": "<ul class=\"pr-list-items\">\n  <li>\n    <span class=\"pr-item-body\">\n      <span class=\"pr-item-title\"><a href=\"/people/ada\">Ada Shapiro</a></span>\n      <span class=\"pr-item-line\">ada@example.com</span>\n    </span>\n    <span class=\"pr-item-end\"><span class=\"pr-status\" data-state=\"positive\">Active</span></span>\n  </li>\n</ul>\n\n<!-- Removing a row (Angular): call primalFocusAfterRemove(list, { fallback: () => heading }) just before you remove it. -->"
+  },
+  "example": "/content/content"
+}

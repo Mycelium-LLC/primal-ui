@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema.json",
+  "id": "dialog",
+  "name": "Dialog",
+  "layer": "primitive",
+  "layerWhy": "It holds a question over the page; the work inside is the cells'.",
+  "promise": "Nothing else can happen until this is answered, and there is always a way out.",
+  "expectation": "The page covered and still, one box with a title, the answer's buttons, and Close.",
+  "evidence": "Close, Escape and the backdrop leave it; focus returns to what opened it; it has no address; on a phone it is a sheet from the bottom.",
+  "behaviour": [
+    "Focus goes to the dialog, so its title is read; Tab stays inside.",
+    "Escape closes only the topmost layer.",
+    "The page under it does not scroll."
+  ],
+  "context": "Only a question the work cannot go on without, asked once.",
+  "relationships": [
+    "Its answers sit at the end, the main one last.",
+    "A menu or popover may open from it, above it."
+  ],
+  "states": [
+    "Opening",
+    "Open",
+    "Closing",
+    "Not dismissible while working"
+  ],
+  "accessibility": [
+    "A native modal <dialog> labelled by its title, described by its description."
+  ],
+  "failures": [
+    "Never a dialog for something that can be undone.",
+    "Never a dialog with no way out.",
+    "Never a place: Back never lands in it."
+  ],
+  "do": [
+    "Word its answers as the action."
+  ],
+  "dont": [
+    "A dialog for a whole page of work."
+  ],
+  "api": {
+    "css": [
+      "dialog.pr-dialog",
+      ".pr-dialog-header",
+      ".pr-dialog-title",
+      ".pr-dialog-body",
+      ".pr-dialog-actions"
+    ],
+    "angular": [
+      "primal-dialog"
+    ],
+    "inputs": [
+      "title (required)",
+      "description",
+      "open",
+      "dismissible",
+      "closeLabel",
+      "(dismissed)"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_TOP_LAYERS, PRIMAL_ACTIONS } from 'primal-angular';",
+    "markup": "<primal-dialog title=\"Rename report\" [(open)]=\"renaming\">\n  …fields…\n  <div class=\"pr-dialog-actions\" dialog-actions>\n    <button primalButton type=\"button\" emphasis=\"quiet\" (click)=\"renaming.set(false)\">Keep Name</button>\n    <button primalButton type=\"button\" emphasis=\"primary\" [run]=\"rename\">Rename Report</button>\n  </div>\n</primal-dialog>"
+  },
+  "example": "/navigation/dialogs"
+}

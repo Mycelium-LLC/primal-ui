@@ -1,0 +1,58 @@
+{
+  "$schema": "../schema.json",
+  "id": "button-group",
+  "name": "Button group",
+  "layer": "primitive",
+  "layerWhy": "It joins a few buttons that act on one thing; it is still a single control, not a job.",
+  "promise": "Its buttons act on the same thing, and with aria-pressed only one or some are on.",
+  "expectation": "The buttons sit joined, under one name, so they read as one control.",
+  "evidence": "The pressed button sits in the primary's quiet fill and is announced as pressed; the group has one name.",
+  "behaviour": [
+    "Buttons are joined with shared outer corners.",
+    "With aria-pressed, each is a toggle."
+  ],
+  "context": "Text alignment, a view switch, zoom: a few choices about one thing. Not for separate actions; those are a .pr-actions row.",
+  "relationships": [
+    "One name for the group: \"Text alignment\".",
+    "Each button keeps its own verb."
+  ],
+  "states": [
+    "Ready",
+    "Hover",
+    "Pressed (aria-pressed)",
+    "Focus",
+    "Disabled"
+  ],
+  "accessibility": [
+    "role=\"group\" with an aria-label.",
+    "aria-pressed on toggles."
+  ],
+  "failures": [
+    "Never mixes unrelated actions in one group.",
+    "Never shows the pressed one by colour alone."
+  ],
+  "do": [
+    "Keep it to a few buttons about one thing."
+  ],
+  "dont": [
+    "A destructive action inside a group of safe ones."
+  ],
+  "api": {
+    "css": [
+      ".pr-button-group",
+      "[aria-pressed]",
+      "role=\"group\""
+    ],
+    "angular": [
+      "primal-button-group"
+    ],
+    "inputs": [
+      "label: the group's name (required)"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+    "markup": "<primal-button-group label=\"Text alignment\">\n  <button type=\"button\" [attr.aria-pressed]=\"align() === 'start'\" (click)=\"align.set('start')\">Start</button>\n  <button type=\"button\" [attr.aria-pressed]=\"align() === 'end'\" (click)=\"align.set('end')\">End</button>\n</primal-button-group>"
+  },
+  "example": "/actions/actions"
+}

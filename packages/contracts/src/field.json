@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema.json",
+  "id": "field",
+  "name": "Field",
+  "layer": "primitive",
+  "layerWhy": "It asks one question; answering a whole form is a cell's job.",
+  "promise": "One question, with its label, a description when needed, and what's wrong with the answer right under it.",
+  "expectation": "A visible label above a control the browser owns, and a message that appears only when there is something to say.",
+  "evidence": "After the person has had their go, a wrong answer shows the danger edge and a message under the control that says what to type, in the person's words; optional fields are marked \"Optional\".",
+  "behaviour": [
+    "The control stays native: autofill, the phone's keyboard and pasting work.",
+    "Validates on leaving the field, on input once shown, and on submit.",
+    "Messages come from the browser's validity, worded by PRIMAL_MESSAGES; [primalControl]=\"error\" wins.",
+    "A search box, a choice, a slider or a colour is never marked Optional."
+  ],
+  "context": "Wherever the product asks the person something. Not for showing a value that can't change; that is a detail.",
+  "relationships": [
+    "The label is the question; the description says what to give; the message says what to fix.",
+    "Inside a group, a radio's message belongs to the group."
+  ],
+  "states": [
+    "Empty",
+    "Filled",
+    "Focus",
+    "Read-only",
+    "Disabled",
+    "Invalid (after their go)",
+    "Optional"
+  ],
+  "accessibility": [
+    "The label is a <label for>; description and message are linked with aria-describedby.",
+    "aria-invalid when wrong; \"Error:\" read before the message.",
+    "The message region is polite, so it is announced as it speaks."
+  ],
+  "failures": [
+    "Never an error before the person has had their go.",
+    "Never \"Invalid input\".",
+    "Never a placeholder as the label."
+  ],
+  "do": [
+    "Mark what is optional, not what is required.",
+    "Size the control to the answer."
+  ],
+  "dont": [
+    "A field without a visible label.",
+    "Errors in a banner far from the field."
+  ],
+  "api": {
+    "css": [
+      ".pr-field",
+      ".pr-field-description",
+      ".pr-field-message",
+      ".pr-optional",
+      ".pr-choice"
+    ],
+    "angular": [
+      "primal-field",
+      "input[primalControl], select[primalControl], textarea[primalControl]"
+    ],
+    "inputs": [
+      "label (required)",
+      "description",
+      "optional: overrides the default",
+      "[primalControl]: an error from outside, worded"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "markup": "<primal-field label=\"Email\" description=\"We only use it to send receipts.\">\n  <input primalControl type=\"email\" autocomplete=\"email\" required />\n</primal-field>"
+  },
+  "example": "/forms/text-fields"
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "../schema.json",
+  "id": "avatar",
+  "name": "Avatar",
+  "layer": "primitive",
+  "layerWhy": "It stands for a person or one thing; no job.",
+  "promise": "This is who or what it is.",
+  "expectation": "A round picture or initials.",
+  "evidence": "Its name is what is read; initials stand in when the picture is missing or fails.",
+  "behaviour": [
+    "Overlapping avatars form a group."
+  ],
+  "context": "Beside a name, in a list, in a bar.",
+  "relationships": [
+    "It goes with the person's name nearby."
+  ],
+  "states": [
+    "Picture",
+    "Initials",
+    "Small",
+    "Medium",
+    "Large"
+  ],
+  "accessibility": [
+    "role=\"img\" with the name; the initials are hidden from reading."
+  ],
+  "failures": [
+    "Never the only place a name appears."
+  ],
+  "do": [
+    "Show the name beside it."
+  ],
+  "dont": [
+    "An avatar for a non-person object with a person's look."
+  ],
+  "api": {
+    "css": [
+      ".pr-avatar",
+      ".pr-avatar-group",
+      "[data-size]"
+    ],
+    "angular": [
+      "primal-avatar"
+    ],
+    "inputs": [
+      "name (required)",
+      "src",
+      "size"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_CONTENT } from 'primal-angular';",
+    "markup": "<primal-avatar name=\"Ada Shapiro\" src=\"/people/ada.jpg\" />"
+  },
+  "example": "/content/information"
+}

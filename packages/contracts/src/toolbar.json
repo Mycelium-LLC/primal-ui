@@ -1,0 +1,51 @@
+{
+  "$schema": "../schema.json",
+  "id": "toolbar",
+  "name": "Toolbar",
+  "layer": "primitive",
+  "layerWhy": "It groups controls for one thing; each control is its own action.",
+  "promise": "The controls for this thing, one tab stop.",
+  "expectation": "A row of controls under a line, groups divided.",
+  "evidence": "Tab reaches it once; arrows move between controls, following the reading direction; the last used is remembered.",
+  "behaviour": [
+    "Home and End go to the ends.",
+    "Text fields keep their arrows."
+  ],
+  "context": "Editors, tables, documents.",
+  "relationships": [
+    "Groups split by .pr-divider."
+  ],
+  "states": [
+    "Ready",
+    "Focused control",
+    "Pressed toggle"
+  ],
+  "accessibility": [
+    "role=\"toolbar\" with a label; a roving tab stop."
+  ],
+  "failures": [
+    "Never more than one tab stop."
+  ],
+  "do": [
+    "Group related controls."
+  ],
+  "dont": [
+    "A toolbar of unrelated actions."
+  ],
+  "api": {
+    "css": [
+      ".pr-toolbar"
+    ],
+    "angular": [
+      "primal-toolbar"
+    ],
+    "inputs": [
+      "label (required)"
+    ]
+  },
+  "usage": {
+    "import": "import { PRIMAL_CONTENT, PRIMAL_ACTIONS } from 'primal-angular';",
+    "markup": "<primal-toolbar label=\"Text formatting\">\n  <button primalIconButton type=\"button\" label=\"Bold\">…</button>\n  <hr class=\"pr-divider\" />\n  <button primalButton type=\"button\" emphasis=\"quiet\">Insert Link</button>\n</primal-toolbar>"
+  },
+  "example": "/content/layout"
+}

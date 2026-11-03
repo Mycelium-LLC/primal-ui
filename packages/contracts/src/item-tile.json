@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema.json",
+  "id": "item-tile",
+  "name": "Item tile",
+  "layer": "cell",
+  "layerWhy": "It shows one item with its payload named and kept, a whole job of presenting a thing in a collection.",
+  "promise": "The one thing this tile exists to show stays, whatever the width.",
+  "expectation": "A card with its state, its title, and metadata that gives way.",
+  "evidence": "At 320px with real-length data the title is shown in full; in a narrow tile the number, labels and assignee give way first.",
+  "behaviour": [
+    "Payload: the title.",
+    "Built on the card."
+  ],
+  "context": "Issues, tasks, products in a board or grid.",
+  "relationships": [
+    "A status, badges and an avatar around the payload."
+  ],
+  "states": [
+    "Wide",
+    "Narrow"
+  ],
+  "accessibility": [
+    "As the card."
+  ],
+  "failures": [
+    "Never cuts the payload while metadata survives."
+  ],
+  "do": [
+    "Mark everything but the payload data-gives-way."
+  ],
+  "dont": [
+    "Truncating the title with an ellipsis."
+  ],
+  "api": {
+    "css": [
+      ".pr-card",
+      "[data-gives-way]"
+    ]
+  },
+  "usage": {
+    "markup": "<ul class=\"pr-cards\">\n  <li class=\"pr-card\">\n    <p class=\"pr-card-meta\"><span class=\"pr-status\" data-state=\"negative\">Bug</span><span data-gives-way>#214</span></p>\n    <h3 class=\"pr-card-title\"><a href=\"/issues/214\">Export drops the last row</a></h3>\n  </li>\n</ul>"
+  },
+  "example": "/content/cells"
+}

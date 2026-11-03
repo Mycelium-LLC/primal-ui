@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema.json",
+  "id": "breadcrumbs",
+  "name": "Breadcrumbs",
+  "layer": "primitive",
+  "layerWhy": "It goes up a hierarchy; moving is not a job.",
+  "promise": "Each step is a real level above this one, and the last is where you are.",
+  "expectation": "Links separated by slashes, ending in the current place in plain words.",
+  "evidence": "The current place is not a link and is marked aria-current.",
+  "behaviour": [
+    "Wraps on narrow widths."
+  ],
+  "context": "Places inside a real hierarchy. Not a history of where the person has been.",
+  "relationships": [
+    "Each step names a place."
+  ],
+  "states": [
+    "Steps",
+    "Current"
+  ],
+  "accessibility": [
+    "A <nav> labelled \"Breadcrumb\" with an ordered list."
+  ],
+  "failures": [
+    "Never invents a level that isn't a place."
+  ],
+  "do": [
+    "End with the current place."
+  ],
+  "dont": [
+    "Breadcrumbs on a flat site."
+  ],
+  "api": {
+    "css": [
+      ".pr-breadcrumbs",
+      "[aria-current=\"page\"]"
+    ]
+  },
+  "usage": {
+    "markup": "<nav class=\"pr-breadcrumbs\" aria-label=\"Breadcrumb\">\n  <ol>\n    <li><a href=\"/reports\">Reports</a></li>\n    <li><span aria-current=\"page\">Q3 revenue</span></li>\n  </ol>\n</nav>"
+  },
+  "example": "/navigation/navigation"
+}

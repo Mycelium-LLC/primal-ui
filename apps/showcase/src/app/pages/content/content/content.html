@@ -1,9 +1,75 @@
-<pr-page-placeholder title="Content" release="0.6.0" covers="Card (as a list item), ListItem, DescriptionList, CodeBlock.">
-<ul>
-  <!-- MOCK DATA: specimen list items -->
-  <li><article><h3><a href="#">Release 0.1.0</a></h3><p>A base you can make your own.</p></article></li>
-  <li><article><h3><a href="#">Release 0.2.0</a></h3><p>Plain HTML reads right.</p></article></li>
+<h1>Content</h1>
+<p>
+  Content parts show things as what they are. A card is one of a collection you open; a list item is one row of a list; details are
+  facts about one thing; a table is for reading across and down; a code block is code to read and copy.
+</p>
+
+<h2>Cards</h2>
+<p>
+  A card is a list item: one of several, each something you open. So Primal draws a card only inside a list of cards, and the whole
+  card is the target. A lone card, or a card around a page, gets no card treatment at all.
+</p>
+<ul class="pr-cards">
+  @for (r of reports; track r.title) {
+    <li class="pr-card">
+      <h3 class="pr-card-title"><a href="#" (click)="$event.preventDefault()">{{ r.title }}</a></h3>
+      <p>{{ r.summary }}</p>
+      <p class="pr-card-meta">
+        <span class="pr-status" [attr.data-state]="r.state">{{ r.stateLabel }}</span>
+        <span data-gives-way>Updated {{ r.updated }}</span>
+      </p>
+    </li>
+  }
 </ul>
-<dl><dt>Repository</dt><dd>Mycelium-LLC/primal-ui</dd><dt>Level</dt><dd>L2</dd></dl>
-<pre><code>&lt;button type="button"&gt;Save Changes&lt;/button&gt;</code></pre>
-</pr-page-placeholder>
+<p class="pr-demo-note">Narrow a card and its "Updated" line gives way first; the title and summary stay, and wrap, never cut.</p>
+
+<h2>List items</h2>
+<p>One row each: who or what, a line about it, and its state or action at the end.</p>
+<ul class="pr-list-items">
+  @for (p of people; track p.name) {
+    <li>
+      <primal-avatar [name]="p.name" />
+      <span class="pr-item-body">
+        <span class="pr-item-title"><a href="#" (click)="$event.preventDefault()">{{ p.name }}</a></span>
+        <span class="pr-item-line">{{ p.email }}</span>
+      </span>
+      <span class="pr-item-end">
+        <span class="pr-status" [attr.data-state]="p.state">{{ p.stateLabel }}</span>
+      </span>
+    </li>
+  }
+</ul>
+
+<h2>Details</h2>
+<p>Facts about one thing, each a term and its value: side by side where there's room, one under the other on a phone.</p>
+<dl class="pr-details">
+  <dt>Repository</dt>
+  <dd>Mycelium-LLC/primal-ui</dd>
+  <dt>Version</dt>
+  <dd>0.7.0</dd>
+  <dt>Status</dt>
+  <dd><span class="pr-status" data-state="progress">Being built</span></dd>
+  <dt>Packages</dt>
+  <dd>Tokens, CSS, and the Angular adapter (Angular 22 and up)</dd>
+</dl>
+
+<h2>Tables</h2>
+<p>
+  Built on <a routerLink="/native/tables">the native table</a>: sorted by any column, numbers lined up, and when empty it says why
+  in place of its rows.
+</p>
+<div class="pr-table">
+  <table>
+    <caption>Invoices due this week</caption>
+    <thead>
+      <tr><th scope="col">Customer</th><th scope="col">Due</th><th scope="col" data-numeric>Amount</th></tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="3" data-empty>Nothing is due this week. Invoices due next week show from Monday.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Code blocks</h2>
+<p>The language above, Copy Code at the end, and the code scrolls within itself.</p>
+<primal-code-block language="HTML" [code]="snippet" />

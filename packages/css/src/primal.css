@@ -39,10 +39,8 @@ video {
   block-size: auto;
 }
 
-input,
-button,
-textarea,
-select {
+/* Zero specificity, like every Primal rule on controls, so the control rules below can set colour. */
+:where(input, button, textarea, select) {
   font: inherit;
   color: inherit;
 }
@@ -163,7 +161,7 @@ pre {
 }
 
 a {
-  color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
   text-decoration-thickness: from-font;
   text-underline-offset: 0.15em;
 }
@@ -364,7 +362,7 @@ figcaption {
 
 /* The focus ring means one thing: this is where the keyboard is. */
 :focus-visible {
-  outline: var(--pr-focus-width) solid var(--pr-color-primary);
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
   outline-offset: var(--pr-focus-offset);
 }
 
@@ -454,6 +452,62 @@ tfoot :is(th, td) {
   border-block-end: 0;
 }
 
+/*
+ * A sortable column's header is a button that fills the header: its words, then where it is
+ * sorted. Unsorted, a faint double arrow says it can be; sorted, one arrow in the text colour.
+ */
+.pr-sort {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--pr-gap-component);
+  inline-size: 100%;
+  min-block-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.pr-sort:hover:not(:disabled) {
+  background: none;
+  color: var(--pr-color-text);
+}
+
+.pr-sort:active:not(:disabled) {
+  background: none;
+  scale: none;
+}
+
+.pr-sort::after {
+  content: '↕' / '';
+  opacity: 0.45;
+}
+
+/* A number column ends at the end: its words and their arrow together at the column's end edge. */
+:is(th, td)[data-numeric] > .pr-sort {
+  justify-content: flex-end;
+}
+
+th[aria-sort] {
+  color: var(--pr-color-text);
+}
+
+th[aria-sort='ascending'] > .pr-sort::after {
+  content: '↑' / '';
+  opacity: 1;
+}
+
+th[aria-sort='descending'] > .pr-sort::after {
+  content: '↓' / '';
+  opacity: 1;
+}
+
 /* Numbers align on their end, so digits line up down a column: mark the cells (or a <col>) with data-numeric. */
 :is(th, td)[data-numeric] {
   text-align: end;
@@ -536,16 +590,17 @@ figcaption {
 }
 
 /* ---------------------------------------------------------------- native controls */
-/* Early base (0.3.0 and 0.4.0 build the field and action primitives on it). */
+/*
+ * Every native control keeps the browser's own behaviour (autofill, pickers, the phone's
+ * keyboard, arrow keys in a radio group); Primal sets its edge, size and states. 0.5.0 builds
+ * the action primitives on the button.
+ */
 
 :root {
   accent-color: var(--pr-color-primary);
 }
 
-button,
-select,
-textarea,
-input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file'], [type='image'], [type='hidden']) {
+:where(button, .pr-button, select, textarea, input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [type='file'], [type='image'], [type='hidden'])) {
   min-block-size: var(--pr-control-height);
   padding-inline: var(--pr-control-inset);
   border: var(--pr-border-width) solid var(--pr-color-border-control);
@@ -553,33 +608,2855 @@ input:not([type='checkbox'], [type='radio'], [type='range'], [type='color'], [ty
   background-color: var(--pr-color-surface);
   color: var(--pr-color-text);
   line-height: var(--pr-leading-tight);
+  transition:
+    border-color var(--pr-duration-fast) var(--pr-ease-standard),
+    background-color var(--pr-duration-fast) var(--pr-ease-standard);
 }
 
 textarea {
   padding-block: var(--pr-gap-component);
   line-height: var(--pr-leading-body);
+  resize: vertical;
 }
 
-button {
+::placeholder {
+  color: var(--pr-color-text-muted);
+  opacity: 1;
+}
+
+/*
+ * Buttons. A field is outlined (type here); an action is filled (press here). Every button is
+ * a tonal fill in the text colour; the form's one main action, its submit, wears the primary.
+ * Hover and pressed deepen the fill a step at a time, and a press answers at once.
+ */
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pr-gap-component);
+  padding-inline: calc(var(--pr-control-inset) * 1.5);
+  border-color: transparent;
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+  color: var(--pr-color-text);
+  font-weight: var(--pr-weight-strong);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--pr-duration-fast) var(--pr-ease-standard),
+    scale var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']):hover:not(:disabled) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
+}
+
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']):active:not(:disabled) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 18%, var(--pr-color-surface));
+  scale: 0.98;
+}
+
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']):focus-visible {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+/* Submitting is the form's one main action, so it wears the primary: "this is what happens here". */
+:where(button[type='submit'], input[type='submit']) {
+  background-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
+}
+
+:where(button[type='submit'], input[type='submit']):hover:not(:disabled) {
+  background-color: var(--pr-color-primary-hover);
+}
+
+:where(button[type='submit'], input[type='submit']):active:not(:disabled) {
+  background-color: var(--pr-color-primary-pressed);
+}
+
+:where(input, select, textarea):hover:not(:disabled, [readonly]) {
+  border-color: var(--pr-color-text-muted);
+}
+
+/* Focus on a field is where the typing goes: the ring, always, even from a pointer. */
+:where(input, select, textarea):focus {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+/* Read-only: you can read and copy it, not change it. Full-strength text behind a quiet edge. */
+:where(input, textarea)[readonly] {
+  background-color: transparent;
+  border-color: var(--pr-color-border);
+}
+
+/* Disabled: not available now. It steps back, and the reason belongs in its description. */
+:where(button, select, textarea, input):disabled {
+  cursor: not-allowed;
+  border-color: var(--pr-color-border);
+  background-color: var(--pr-color-surface-sunken);
+  color: var(--pr-color-text-muted);
+}
+
+:where(button, .pr-button, input[type='button'], input[type='reset'], input[type='submit']):disabled {
+  border-color: transparent;
+}
+
+/* Invalid, once the person has had their go (on leaving the field, or on submit): the danger edge. */
+:where(input, select, textarea):user-invalid,
+:where(input, select, textarea)[aria-invalid='true'] {
+  border-color: var(--pr-color-danger);
+}
+
+:where(input, select, textarea):user-invalid:focus,
+:where(input, select, textarea)[aria-invalid='true']:focus {
+  outline-color: var(--pr-color-danger);
+}
+
+select {
+  padding-inline-end: calc(var(--pr-control-inset) * 2.5);
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - var(--pr-control-inset) - 0.3em) 50%,
+    calc(100% - var(--pr-control-inset)) 50%;
+  background-size: 0.3em 0.3em;
+  background-repeat: no-repeat;
+}
+
+[dir='rtl'] select {
+  background-position:
+    calc(var(--pr-control-inset)) 50%,
+    calc(var(--pr-control-inset) + 0.3em) 50%;
+}
+
+select[multiple],
+select[size]:not([size='1']) {
+  padding-block: var(--pr-gap-component);
+  padding-inline-end: var(--pr-control-inset);
+  background-image: none;
+}
+
+/*
+ * Checkbox and radio, drawn by Primal. A checkbox is a square that fills with the primary and
+ * shows a check (or a dash, when some of a group are chosen); a radio is a circle whose centre
+ * fills. Both say "you can choose this" with the control's edge, which meets 3:1.
+ */
+input:is([type='checkbox']:not([role='switch']), [type='radio']) {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  inline-size: var(--pr-choice-size);
+  block-size: var(--pr-choice-size);
+  margin: 0;
+  flex: none;
+  border: var(--pr-border-width-choice) solid var(--pr-color-border-control);
+  background-color: var(--pr-color-surface);
+  cursor: pointer;
+  transition:
+    background-color var(--pr-duration-fast) var(--pr-ease-standard),
+    border-color var(--pr-duration-fast) var(--pr-ease-standard),
+    scale var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+input[type='checkbox']:not([role='switch']) {
+  border-radius: var(--pr-radius-well);
+}
+
+input[type='radio'] {
+  border-radius: var(--pr-radius-round);
+}
+
+/* The mark: a check, a dash or a dot, drawn in the colour that reads on the fill. */
+input:is([type='checkbox']:not([role='switch']), [type='radio'])::before {
+  content: '';
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  background-color: var(--pr-color-on-primary);
+  scale: 0;
+  transition: scale var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+input[type='checkbox']:not([role='switch'])::before {
+  clip-path: polygon(14% 44%, 0 58%, 38% 96%, 100% 22%, 86% 8%, 38% 68%);
+}
+
+input[type='checkbox']:not([role='switch']):indeterminate::before {
+  clip-path: inset(40% 6%);
+}
+
+input[type='radio']::before {
+  inline-size: 0.5em;
+  block-size: 0.5em;
+  border-radius: var(--pr-radius-round);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, [type='checkbox']:indeterminate) {
+  border-color: var(--pr-color-primary);
+  background-color: var(--pr-color-primary);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:checked, [type='checkbox']:indeterminate)::before {
+  scale: 1;
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled, :checked, [type='checkbox']:indeterminate) {
+  border-color: var(--pr-color-text);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):hover:not(:disabled):is(:checked, [type='checkbox']:indeterminate) {
+  border-color: var(--pr-color-primary-hover);
+  background-color: var(--pr-color-primary-hover);
+}
+
+input:is([type='checkbox'], [type='radio']):active:not(:disabled) {
+  scale: 0.9;
+}
+
+input:is([type='checkbox'], [type='radio']):focus-visible {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled {
+  border-color: var(--pr-color-border);
+  background-color: var(--pr-color-surface-sunken);
+  cursor: not-allowed;
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled:is(:checked, [type='checkbox']:indeterminate) {
+  background-color: var(--pr-color-border);
+}
+
+input:is([type='checkbox']:not([role='switch']), [type='radio']):disabled::before {
+  background-color: var(--pr-color-text-muted);
+}
+
+/* Invalid once the person has had their go: the danger edge, as on a field. */
+input:is([type='checkbox']:not([role='switch']), [type='radio']):is(:user-invalid, [aria-invalid='true']) {
+  border-color: var(--pr-color-danger);
+}
+
+/* A switch is a checkbox with role="switch": a track and a thumb. Its label says what it changes. */
+input[type='checkbox'][role='switch'] {
+  appearance: none;
+  position: relative;
+  inline-size: 2.25em;
+  block-size: 1.3em;
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-color-border-control);
   cursor: pointer;
   transition: background-color var(--pr-duration-fast) var(--pr-ease-standard);
 }
 
-button:hover {
+input[type='checkbox'][role='switch']::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0.15em;
+  inset-inline-start: 0.15em;
+  inline-size: 1em;
+  block-size: 1em;
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-color-surface);
+  transition: translate var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+input[type='checkbox'][role='switch']:checked {
+  background-color: var(--pr-color-primary);
+}
+
+input[type='checkbox'][role='switch']:checked::before {
+  translate: 0.95em 0;
+}
+
+[dir='rtl'] input[type='checkbox'][role='switch']:checked::before {
+  translate: -0.95em 0;
+}
+
+input[type='checkbox'][role='switch']:hover:not(:disabled, :checked) {
+  background-color: var(--pr-color-text-muted);
+}
+
+input[type='checkbox'][role='switch']:hover:not(:disabled):checked {
+  background-color: var(--pr-color-primary-hover);
+}
+
+input[type='checkbox'][role='switch']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input[type='range'] {
+  inline-size: 100%;
+  max-inline-size: var(--pr-measure);
+  margin: 0;
+}
+
+input[type='color'] {
+  inline-size: var(--pr-control-height);
+  block-size: var(--pr-control-height);
+  padding: 0;
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background: none;
+  cursor: pointer;
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0.25em;
+}
+
+input[type='color']::-webkit-color-swatch {
+  border: 0;
+  border-radius: var(--pr-radius-well);
+}
+
+input[type='file'] {
+  max-inline-size: 100%;
+  color: var(--pr-color-text-muted);
+}
+
+input[type='file']::file-selector-button {
+  min-block-size: var(--pr-control-height);
+  padding-inline: calc(var(--pr-control-inset) * 1.5);
+  margin-inline-end: var(--pr-gap-component);
+  border: 0;
+  border-radius: var(--pr-radius-control);
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+  color: var(--pr-color-text);
+  font: inherit;
+  font-weight: var(--pr-weight-strong);
+  cursor: pointer;
+}
+
+input[type='file']:hover::file-selector-button {
+  background-color: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
+}
+
+/*
+ * Lists Primal draws: the select's and the autocomplete's (decision 25). The closed select is
+ * a field, outlined, with a chevron; the open list sits on top of the page, raised, as wide as
+ * its field. The active option (under the pointer or the arrow keys) is shaded; the chosen one
+ * carries a check in the primary.
+ */
+.pr-select,
+.pr-autocomplete {
+  display: block;
+  max-inline-size: var(--pr-field-width);
+}
+
+.pr-autocomplete > input {
+  inline-size: 100%;
+}
+
+.pr-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pr-gap-component);
+  inline-size: 100%;
+  padding-inline: var(--pr-control-inset);
+  border-color: var(--pr-color-border-control);
+  background-color: var(--pr-color-surface);
+  font-weight: var(--pr-weight-regular);
+  text-align: start;
+}
+
+.pr-select-trigger:hover:not(:disabled) {
+  border-color: var(--pr-color-text-muted);
+  background-color: var(--pr-color-surface);
+}
+
+.pr-select-trigger:active:not(:disabled) {
+  background-color: var(--pr-color-surface);
+  scale: 1;
+}
+
+.pr-select-trigger:focus {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+.pr-select-trigger:disabled {
+  border-color: var(--pr-color-border);
+}
+
+.pr-select-trigger[aria-invalid='true'] {
+  border-color: var(--pr-color-danger);
+}
+
+.pr-select-trigger[aria-invalid='true']:focus {
+  outline-color: var(--pr-color-danger);
+}
+
+.pr-select-value {
+  /* The chosen answer is shown whole: it wraps, never cut (Niko's rule). */
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+
+.pr-select-placeholder {
+  color: var(--pr-color-text-muted);
+}
+
+/* The chevron points to where the list opens, and turns over while it's open. */
+.pr-select-trigger::after {
+  content: '';
+  flex: none;
+  inline-size: 0.7em;
+  block-size: 0.45em;
+  background-color: currentColor;
+  clip-path: polygon(0 0, 50% 70%, 100% 0, 100% 30%, 50% 100%, 0 30%);
+  transition: rotate var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+.pr-select-trigger[aria-expanded='true']::after {
+  rotate: 180deg;
+}
+
+.pr-list {
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  max-block-size: var(--pr-list-height);
+  margin: calc(var(--pr-gap-component) / 2) 0;
+  padding: calc(var(--pr-gap-component) / 2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-raised);
+  color: var(--pr-color-text);
+  box-shadow: var(--pr-elevation-1);
+  opacity: 1;
+  transition:
+    opacity var(--pr-duration-fast) var(--pr-ease-standard),
+    display var(--pr-duration-fast) allow-discrete,
+    overlay var(--pr-duration-fast) allow-discrete;
+}
+
+@starting-style {
+  .pr-list:popover-open {
+    opacity: 0;
+  }
+}
+
+.pr-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  min-block-size: var(--pr-control-height);
+  padding-block: calc(var(--pr-gap-component) / 2);
+  padding-inline: calc(var(--pr-control-inset) + 1em + var(--pr-gap-component)) var(--pr-control-inset);
+  border-radius: var(--pr-radius-control);
+  cursor: pointer;
+}
+
+.pr-option + .pr-option,
+.pr-list-heading + .pr-option {
+  margin-block-start: 0;
+}
+
+.pr-option-active {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface-raised));
+}
+
+/* The chosen option: a check before it, in the primary. */
+.pr-option[aria-selected='true']::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: var(--pr-control-inset);
+  inline-size: 1em;
+  block-size: 0.8em;
+  background-color: var(--pr-color-primary);
+  clip-path: polygon(14% 44%, 0 58%, 38% 96%, 100% 22%, 86% 8%, 38% 68%);
+}
+
+.pr-option[aria-selected='true'] {
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-option[aria-disabled='true'] {
+  color: var(--pr-color-text-muted);
+  cursor: not-allowed;
+}
+
+.pr-list-heading {
+  padding: var(--pr-gap-component) var(--pr-control-inset) calc(var(--pr-gap-component) / 2);
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-list-heading:not(:first-child) {
+  margin-block-start: calc(var(--pr-gap-component) / 2);
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+/* The text the person typed, marked in each option it matches. */
+.pr-match {
+  padding: 0;
+  background: none;
+  color: inherit;
+  font-weight: var(--pr-weight-strong);
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+
+.pr-list-empty {
+  margin: 0;
+  padding: var(--pr-gap-component) var(--pr-control-inset);
+  color: var(--pr-color-text-muted);
+}
+
+/* Progress: how much of a known job is done. Meter: where a value sits in a known range. */
+progress,
+meter {
+  inline-size: 100%;
+  max-inline-size: var(--pr-measure);
+  block-size: var(--pr-track-thickness);
+  border: 0;
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-color-surface-sunken);
+  overflow: hidden;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
   background-color: var(--pr-color-surface-sunken);
 }
 
-button:disabled,
-select:disabled,
-textarea:disabled,
-input:disabled {
-  cursor: not-allowed;
-  border-color: var(--pr-color-border);
-  color: var(--pr-color-text-muted);
+progress::-webkit-progress-value {
+  background-color: var(--pr-color-primary);
+}
+
+progress::-moz-progress-bar {
+  background-color: var(--pr-color-primary);
+}
+
+meter::-webkit-meter-bar {
+  background: var(--pr-color-surface-sunken);
+  border: 0;
+  border-radius: var(--pr-radius-round);
+  block-size: var(--pr-track-thickness);
+}
+
+meter::-webkit-meter-optimum-value {
+  background: var(--pr-color-success);
+}
+
+meter::-webkit-meter-suboptimum-value {
+  background: var(--pr-color-warning);
+}
+
+meter::-webkit-meter-even-less-good-value {
+  background: var(--pr-color-danger);
+}
+
+output {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--pr-weight-strong);
 }
 
 label {
   cursor: default;
+}
+
+/* ---------------------------------------------------------------- fields */
+/*
+ * A field is one question: its label, an optional description, the control, and the message
+ * that says what's wrong. Plain HTML:
+ *
+ *   <div class="pr-field">
+ *     <label for="email">Email <span class="pr-optional">Optional</span></label>
+ *     <p class="pr-field-description" id="email-hint">We only use it to send receipts.</p>
+ *     <input id="email" type="email" aria-describedby="email-hint email-message" />
+ *     <p class="pr-field-message" id="email-message" aria-live="polite"></p>
+ *   </div>
+ *
+ * Mark what's optional, not what's required: most of a good form is required.
+ */
+
+.pr-field {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--pr-gap-component) / 1.5);
+  margin-block-end: var(--pr-gap-group);
+}
+
+.pr-field > label,
+.pr-group > legend {
+  font-weight: var(--pr-weight-strong);
+}
+
+/* Separated from the label by a real space, so the gap holds in either direction. */
+.pr-optional {
+  font-weight: var(--pr-weight-regular);
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+}
+
+.pr-field-description {
+  margin: 0;
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+/* The message sits directly under its control, in the danger colour, and only takes room when it speaks. */
+.pr-field-message {
+  margin: 0;
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-danger);
+}
+
+/* An empty message takes no room but stays in place, so it is announced the moment it speaks. */
+.pr-field-message:empty {
+  block-size: 0;
+  margin-block-start: calc(var(--pr-gap-component) / -1.5);
+  overflow: hidden;
+}
+
+.pr-group > .pr-field-message:empty {
+  margin-block-start: calc(var(--pr-gap-component) * -1);
+}
+
+/* A text control in a field is as wide as what it asks for, never wider than the text measure. */
+.pr-field > :is(input, select, textarea):not([type='checkbox'], [type='radio'], [type='range'], [type='color']) {
+  inline-size: 100%;
+  max-inline-size: var(--pr-field-width);
+}
+
+/*
+ * A choice (checkbox, radio, switch): the control, then its label, then its description under
+ * the label. Placed by the grid, so the markup can come in either order.
+ */
+.pr-choice {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: var(--pr-gap-component);
+  row-gap: calc(var(--pr-gap-component) / 2);
+}
+
+.pr-choice > input {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.pr-choice > label {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: var(--pr-weight-regular);
+  cursor: pointer;
+}
+
+.pr-choice > :is(.pr-field-description, .pr-field-message) {
+  grid-column: 2;
+}
+
+/* A choice that isn't available now steps back as a whole, its words included. */
+.pr-choice:has(> input:disabled) > label,
+.pr-field:has(> :is(input, select, textarea):disabled, > :is(.pr-select, .pr-autocomplete) > :is(input, select):disabled) > label {
+  color: var(--pr-color-text-muted);
+  cursor: not-allowed;
+}
+
+.pr-choice > .pr-field-message:empty {
+  margin-block-start: calc(var(--pr-gap-component) / -2);
+}
+
+/* A group is one question asked of several controls: a fieldset, its legend, its choices close together. */
+.pr-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pr-gap-component);
+  margin: 0 0 var(--pr-gap-group);
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+
+.pr-group > legend {
+  padding: 0;
+  margin-block-end: calc(var(--pr-gap-component) / 2);
+}
+
+.pr-group > .pr-field,
+.pr-group > .pr-choice {
+  margin-block-end: 0;
+}
+
+/*
+ * A number: − and + either side of the value, joined into one control with one edge. The digits
+ * line up, the unit sits after them, and the browser's own spin arrows are gone.
+ */
+.pr-number {
+  display: inline-flex;
+  align-items: stretch;
+  inline-size: fit-content;
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface);
+  transition: border-color var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+.pr-number:hover:not(.pr-number-disabled) {
+  border-color: var(--pr-color-text-muted);
+}
+
+.pr-number:focus-within {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+.pr-number:has(:user-invalid, [aria-invalid='true']) {
+  border-color: var(--pr-color-danger);
+  outline-color: var(--pr-color-danger);
+}
+
+.pr-number-disabled {
+  border-color: var(--pr-color-border);
+  background-color: var(--pr-color-surface-sunken);
+}
+
+.pr-number-value {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  padding-inline-end: var(--pr-control-inset);
+}
+
+.pr-number input[type='number'] {
+  inline-size: calc(var(--pr-number-digits, 4) * 1ch + 2 * var(--pr-control-inset));
+  min-block-size: calc(var(--pr-control-height) - 2 * var(--pr-border-width));
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+  appearance: textfield;
+}
+
+.pr-number:not(:has(.pr-number-unit)) .pr-number-value {
+  padding-inline-end: 0;
+}
+
+.pr-number input[type='number']::-webkit-inner-spin-button,
+.pr-number input[type='number']::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.pr-number-unit {
+  color: var(--pr-color-text-muted);
+  white-space: nowrap;
+}
+
+.pr-number-step {
+  inline-size: var(--pr-control-height);
+  min-block-size: 0;
+  padding-inline: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--pr-color-text);
+}
+
+.pr-number-step:first-child {
+  border-inline-end: var(--pr-border-width) solid var(--pr-color-border);
+  border-start-start-radius: inherit;
+  border-end-start-radius: inherit;
+}
+
+.pr-number-step:last-child {
+  border-inline-start: var(--pr-border-width) solid var(--pr-color-border);
+  border-start-end-radius: inherit;
+  border-end-end-radius: inherit;
+}
+
+.pr-number-step:disabled {
+  border-color: var(--pr-color-border);
+  background-color: transparent;
+}
+
+/* Numbers anywhere line up digit under digit. */
+input[type='number'] {
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Choice cards: a few options that each need a few words, each a whole target. The mark stays,
+ * so a card still says "one of these" (a radio) or "any of these" (a checkbox); the chosen card
+ * takes the primary's edge and its quiet fill, and the keyboard's ring goes round the card.
+ */
+.pr-group.pr-choice-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--pr-choice-card-min)), 1fr));
+  gap: var(--pr-gap-component);
+}
+
+.pr-choice-cards > :not(.pr-choice) {
+  grid-column: 1 / -1;
+}
+
+.pr-choice-cards .pr-choice {
+  position: relative;
+  align-items: start;
+  align-content: start;
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface);
+  transition:
+    border-color var(--pr-duration-fast) var(--pr-ease-standard),
+    background-color var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+/* The label covers the card, so the whole card is the target. */
+.pr-choice-cards .pr-choice > label {
+  font-weight: var(--pr-weight-strong);
+  cursor: pointer;
+}
+
+.pr-choice-cards .pr-choice > label::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.pr-choice-cards .pr-choice > input {
+  margin-block-start: 0.15em;
+}
+
+.pr-choice-cards .pr-choice:hover:not(:has(:disabled)) {
+  border-color: var(--pr-color-text-muted);
+}
+
+.pr-choice-cards .pr-choice:has(:checked) {
+  border-color: var(--pr-color-primary);
+  background-color: var(--pr-color-primary-surface);
+}
+
+.pr-choice-cards .pr-choice:has(:focus-visible) {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+.pr-choice-cards .pr-choice > input:focus-visible {
+  outline: none;
+}
+
+.pr-choice-cards .pr-choice:has(:user-invalid, [aria-invalid='true']) {
+  border-color: var(--pr-color-danger);
+}
+
+.pr-choice-cards .pr-choice:has(:disabled) {
+  border-color: var(--pr-color-border);
+  background-color: var(--pr-color-surface-sunken);
+}
+
+.pr-choice-cards .pr-choice:has(:disabled) > label {
+  cursor: not-allowed;
+}
+
+/*
+ * A drop zone: a file field with a target big enough to drop files on. The native input covers
+ * the zone, unseen, so clicking anywhere opens the picker, dropping works as the browser does it,
+ * and the keyboard reaches it. While a file is dragged over it, the zone takes the primary.
+ */
+.pr-drop-zone {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: var(--pr-gap-component);
+  min-block-size: var(--pr-drop-zone-height);
+  max-inline-size: var(--pr-measure);
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width-choice) dashed var(--pr-color-border-control);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface-sunken);
+  color: var(--pr-color-text-muted);
+  text-align: center;
+  transition:
+    border-color var(--pr-duration-fast) var(--pr-ease-standard),
+    background-color var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+.pr-drop-zone > input[type='file'] {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pr-drop-zone:hover:not(:has(:disabled)) {
+  border-color: var(--pr-color-text-muted);
+}
+
+.pr-drop-zone:has(:focus-visible) {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+.pr-drop-zone[data-dragging] {
+  border-color: var(--pr-color-primary);
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-text);
+}
+
+.pr-drop-zone:has(:user-invalid, [aria-invalid='true']) {
+  border-color: var(--pr-color-danger);
+}
+
+.pr-drop-zone:has(:disabled) {
+  border-color: var(--pr-color-border);
+  opacity: 0.6;
+}
+
+.pr-drop-zone-icon {
+  inline-size: 2em;
+  block-size: 2em;
+  color: var(--pr-color-primary);
+}
+
+.pr-drop-zone-words {
+  margin: 0;
+  color: var(--pr-color-text);
+}
+
+.pr-drop-zone-choose {
+  color: var(--pr-color-primary-text);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.pr-drop-zone-hint {
+  margin: 0;
+  font-size: var(--pr-text-small);
+}
+
+/* The files chosen: each with its size, and a way to take it back out. */
+.pr-file-list {
+  display: grid;
+  gap: var(--pr-gap-component);
+  max-inline-size: var(--pr-measure);
+  margin: var(--pr-gap-component) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-file-list > li {
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  padding-inline-start: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-control);
+}
+
+.pr-file-name {
+  flex: 1;
+  min-inline-size: 0;
+  padding-block: calc(var(--pr-gap-component) / 2);
+  overflow-wrap: anywhere;
+}
+
+.pr-file-size {
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+  font-variant-numeric: tabular-nums;
+}
+
+/* A form: fields a group gap apart, its actions a section gap below the last field. */
+.pr-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+  margin-block-start: var(--pr-gap-group);
+}
+
+/* ---------------------------------------------------------------- actions */
+/*
+ * An action's treatment says how much it matters, and what kind it is. Four, each a promise:
+ *
+ *   (no class)            the default: a tonal fill in the text colour. "You can do this."
+ *   .pr-button-primary    the primary: "this is what happens here". One per place.
+ *   .pr-button-quiet      no fill until you point at it: "also possible, less often".
+ *   .pr-button-danger     the danger edge and words: "this takes something away". Never a primary fill.
+ *   .pr-button-final      a danger fill: "this is the last step, and it cannot be undone". Only
+ *                         after a gate (a confirmation the person typed or chose).
+ *
+ * A link styled as a button (a.pr-button) still navigates: it is for moving to a place that
+ * starts a task ("Create Invoice" opening its page), never for doing something.
+ */
+
+a.pr-button {
+  text-decoration: none;
+}
+
+.pr-button-primary:not(:disabled, [aria-disabled='true']) {
+  background-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
+}
+
+.pr-button-primary:not(:disabled, [aria-disabled='true']):hover {
+  background-color: var(--pr-color-primary-hover);
+}
+
+.pr-button-primary:not(:disabled, [aria-disabled='true']):active {
+  background-color: var(--pr-color-primary-pressed);
+}
+
+/* Quiet: a button by its weight and its target, not by a fill. A submit can be quiet too. */
+.pr-button-quiet:not(:disabled, [aria-disabled='true']) {
+  background-color: transparent;
+  color: var(--pr-color-text);
+}
+
+.pr-button-quiet:not(:disabled, [aria-disabled='true']):hover {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+}
+
+.pr-button-quiet:not(:disabled, [aria-disabled='true']):active {
+  background-color: color-mix(in oklab, var(--pr-color-text) 13%, var(--pr-color-surface));
+}
+
+/* Danger: the edge and the words in the danger colour, on the page. It reads as a warning, not as the main thing to do. */
+.pr-button-danger:not(:disabled, [aria-disabled='true']) {
+  border-color: var(--pr-color-danger);
+  background-color: transparent;
+  color: var(--pr-color-danger);
+}
+
+.pr-button-danger:not(:disabled, [aria-disabled='true']):hover {
+  background-color: var(--pr-color-danger-surface);
+}
+
+.pr-button-danger:not(:disabled, [aria-disabled='true']):active {
+  background-color: color-mix(in oklab, var(--pr-color-danger) 20%, var(--pr-color-surface));
+}
+
+.pr-button-danger:focus-visible,
+.pr-button-final:focus-visible {
+  outline-color: var(--pr-color-danger);
+}
+
+/* Final: the one danger fill, on the last step of something that cannot be undone. */
+.pr-button-final:not(:disabled, [aria-disabled='true']) {
+  border-color: transparent;
+  background-color: var(--pr-color-danger);
+  color: var(--pr-color-on-danger);
+}
+
+.pr-button-final:not(:disabled, [aria-disabled='true']):hover {
+  background-color: color-mix(in oklab, var(--pr-color-danger) 88%, var(--pr-color-text));
+}
+
+.pr-button-final:not(:disabled, [aria-disabled='true']):active {
+  background-color: color-mix(in oklab, var(--pr-color-danger) 76%, var(--pr-color-text));
+}
+
+/*
+ * Not available now, though it can still be reached and explained: aria-disabled keeps a button in
+ * the tab order, so its description can say why. It looks like a disabled button.
+ */
+:where(button, .pr-button)[aria-disabled='true'] {
+  cursor: not-allowed;
+  border-color: transparent;
+  background-color: var(--pr-color-surface-sunken);
+  color: var(--pr-color-text-muted);
+  scale: none;
+}
+
+/*
+ * Working: the button says it heard you at once, keeps its size and words, and a spinner turns
+ * before them. A second press does nothing until it is done (the Angular button guards it;
+ * in plain HTML, check aria-busy before you act).
+ */
+/* The spinner's room comes out of the padding, so the button is exactly as wide as before. */
+:where(button, .pr-button)[aria-busy='true'] {
+  padding-inline: calc(var(--pr-control-inset) * 1.5 - (1em + var(--pr-gap-component)) / 2);
+  cursor: progress;
+  scale: none;
+}
+
+:where(button, .pr-button)[aria-busy='true']::before {
+  content: '';
+  flex: none;
+  inline-size: 1em;
+  block-size: 1em;
+  border: 0.14em solid color-mix(in oklab, currentColor 30%, transparent);
+  border-block-start-color: currentColor;
+  border-radius: var(--pr-radius-round);
+  animation: pr-spin var(--pr-loop-spin) linear infinite;
+}
+
+/* The words a button says when it is done stand where its label was, so nothing moves. */
+.pr-button-face {
+  display: inline-grid;
+}
+
+.pr-button-face > * {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pr-gap-component);
+}
+
+.pr-button-face > .pr-button-label[hidden] {
+  display: inline-flex;
+  visibility: hidden;
+}
+
+.pr-button-said {
+  animation: var(--pr-duration-base) var(--pr-ease-enter) both pr-fade-in;
+}
+
+/* An icon button is square, a full target, and has a name you can't see: aria-label. */
+.pr-icon-button {
+  inline-size: var(--pr-control-height);
+  padding-inline: 0;
+  flex: none;
+}
+
+:where(button, .pr-button) svg {
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  flex: none;
+}
+
+/* A link says where it takes you: away from this site, or to a file. The words for it are read, not shown. */
+a[target='_blank']::after,
+a[rel~='external']::after,
+a[download]::after {
+  display: inline-block;
+  margin-inline-start: 0.2em;
+  font-size: 0.85em;
+  text-decoration: none;
+}
+
+a[target='_blank']::after,
+a[rel~='external']::after {
+  content: '↗' / '';
+}
+
+a[target='_blank']:dir(rtl)::after,
+a[rel~='external']:dir(rtl)::after {
+  content: '↖' / '';
+}
+
+a[download]::after {
+  content: '↓' / '';
+}
+
+a.pr-button::after {
+  font-size: 1em;
+}
+
+.pr-link-file {
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+}
+
+/*
+ * Actions in a row: safe ones together at the end, in reading order; a destructive one apart,
+ * at the start, a section gap from them (decision on distance). On a phone, they stack.
+ *
+ *   <div class="pr-actions">
+ *     <button class="pr-button-danger">Delete Report</button>
+ *     <div class="pr-actions-group"><button>Cancel Changes</button><button class="pr-button-primary">Save Changes</button></div>
+ *   </div>
+ */
+.pr-actions {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: var(--pr-gap-section);
+  row-gap: var(--pr-gap-group);
+}
+
+.pr-actions-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+  margin-inline-start: auto;
+}
+
+/*
+ * A button group: a few buttons that act on one thing, joined into one control. With
+ * aria-pressed, it is a set of toggles; the pressed one sits in the primary's quiet fill.
+ */
+.pr-button-group {
+  display: inline-flex;
+  gap: var(--pr-border-width);
+  border-radius: var(--pr-radius-control);
+}
+
+.pr-button-group > :where(button, .pr-button) {
+  border-radius: 0;
+}
+
+.pr-button-group > :where(button, .pr-button):first-child {
+  border-start-start-radius: var(--pr-radius-control);
+  border-end-start-radius: var(--pr-radius-control);
+}
+
+.pr-button-group > :where(button, .pr-button):last-child {
+  border-start-end-radius: var(--pr-radius-control);
+  border-end-end-radius: var(--pr-radius-control);
+}
+
+.pr-button-group > :where(button, .pr-button):focus-visible {
+  position: relative;
+}
+
+.pr-button-group > [aria-pressed='true']:not(:disabled) {
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+}
+
+/* ---------------------------------------------------------------- feedback */
+/*
+ * An alert speaks about the place it sits in, and stays until what it says stops being true.
+ * Its tone is said by its mark and its words as well as its colour.
+ *
+ *   <div class="pr-alert" data-tone="warning" role="status">
+ *     <p class="pr-alert-title">Your plan ends in 3 days</p>
+ *     <p>Renew it to keep your reports.</p>
+ *   </div>
+ */
+.pr-alert {
+  --pr-alert-tone: var(--pr-color-info);
+  --pr-alert-surface: var(--pr-color-info-surface);
+  --pr-alert-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 11v5M12 8h.01'/%3E%3C/svg%3E");
+  position: relative;
+  display: grid;
+  row-gap: calc(var(--pr-gap-component) / 2);
+  max-inline-size: var(--pr-measure);
+  padding: var(--pr-gap-group);
+  padding-inline-start: calc(var(--pr-gap-group) + 1.25em + var(--pr-gap-component));
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-alert-surface);
+  color: var(--pr-color-text);
+}
+
+.pr-alert::before {
+  content: '';
+  position: absolute;
+  inset-block-start: calc(var(--pr-gap-group) + (1lh - 1.25em) / 2);
+  inset-inline-start: var(--pr-gap-group);
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  background-color: var(--pr-alert-tone);
+  mask: var(--pr-alert-mark) center / contain no-repeat;
+}
+
+.pr-alert > * {
+  margin: 0;
+}
+
+.pr-alert-title {
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-alert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+  margin-block-start: var(--pr-gap-component);
+}
+
+.pr-alert[data-tone='success'] {
+  --pr-alert-tone: var(--pr-color-success);
+  --pr-alert-surface: var(--pr-color-success-surface);
+  --pr-alert-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m8 12.5 2.5 2.5L16 9.5'/%3E%3C/svg%3E");
+}
+
+.pr-alert[data-tone='warning'] {
+  --pr-alert-tone: var(--pr-color-warning);
+  --pr-alert-surface: var(--pr-color-warning-surface);
+  --pr-alert-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 2.5 20h19z'/%3E%3Cpath d='M12 10v4M12 17h.01'/%3E%3C/svg%3E");
+}
+
+.pr-alert[data-tone='danger'] {
+  --pr-alert-tone: var(--pr-color-danger);
+  --pr-alert-surface: var(--pr-color-danger-surface);
+  --pr-alert-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m9 9 6 6M15 9l-6 6'/%3E%3C/svg%3E");
+}
+
+/* A banner is an alert about the whole product (offline, maintenance): edge to edge, above everything it is about. */
+.pr-alert.pr-banner::before {
+  inset-inline-start: var(--pr-gutter);
+}
+
+.pr-alert.pr-banner {
+  max-inline-size: none;
+  border-radius: 0;
+  padding-inline: calc(var(--pr-gutter) + 1.25em + var(--pr-gap-component)) var(--pr-gutter);
+  border-block-end: var(--pr-border-width) solid var(--pr-alert-tone);
+}
+
+/*
+ * Toasts: the corner, the one raised voice. A toast reports what just happened where the person
+ * can no longer see it (the row is gone, the job finished elsewhere), holds the undo, and fades.
+ * The toaster is a manual popover, so it sits over dialogs too.
+ */
+.pr-toaster {
+  position: fixed;
+  inset: auto var(--pr-gutter) var(--pr-gutter) auto;
+  inset-inline: auto var(--pr-gutter);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--pr-gap-component);
+  inline-size: min(var(--pr-toast-width), 100% - 2 * var(--pr-gutter));
+  z-index: var(--pr-layer-toast);
+}
+
+/* Inside a dialog it waits at the top, clear of the dialog's answers at the bottom. */
+.pr-toaster.pr-toaster-dialog {
+  inset-block: var(--pr-gutter) auto;
+}
+
+.pr-toaster-dialog .pr-toast {
+  animation-name: pr-toast-down;
+}
+
+@keyframes pr-toast-down {
+  from {
+    opacity: 0;
+    translate: 0 calc(-1 * var(--pr-gap-group));
+  }
+}
+
+.pr-toaster:not(:popover-open) {
+  display: none;
+}
+
+.pr-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-group);
+  inline-size: 100%;
+  min-block-size: var(--pr-control-height);
+  padding-block: var(--pr-gap-component);
+  padding-inline: var(--pr-gap-group) var(--pr-gap-component);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-text);
+  color: var(--pr-color-surface);
+  box-shadow: var(--pr-elevation-1);
+  animation: var(--pr-duration-base) var(--pr-ease-enter) both pr-toast-in;
+}
+
+.pr-toast[data-leaving] {
+  animation: var(--pr-duration-fast) var(--pr-ease-exit) both pr-fade-out;
+}
+
+.pr-toast-message {
+  flex: 1;
+  margin: 0;
+}
+
+/* On the toast's ink, its buttons are drawn in the page colour. */
+.pr-toast :where(button) {
+  min-block-size: calc(var(--pr-control-height) - var(--pr-gap-component));
+  background-color: transparent;
+  color: var(--pr-color-surface);
+}
+
+.pr-toast :where(button):hover {
+  background-color: color-mix(in oklab, var(--pr-color-surface) 16%, var(--pr-color-text));
+}
+
+.pr-toast :where(button):focus-visible {
+  outline-color: var(--pr-color-surface);
+}
+
+.pr-toast-close {
+  inline-size: calc(var(--pr-control-height) - var(--pr-gap-component));
+  padding-inline: 0;
+}
+
+@keyframes pr-toast-in {
+  from {
+    opacity: 0;
+    translate: 0 var(--pr-gap-group);
+  }
+}
+
+/* A spinner: work is happening, and nobody knows how long it takes. Only when neither the shape nor the length is known. */
+.pr-spinner {
+  display: inline-block;
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  vertical-align: middle;
+  border: 0.15em solid color-mix(in oklab, currentColor 25%, transparent);
+  border-block-start-color: var(--pr-color-primary);
+  border-radius: var(--pr-radius-round);
+  animation: pr-spin var(--pr-loop-spin) linear infinite;
+}
+
+/* A progress bar with its words: what is happening, and how far along it is. */
+.pr-progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--pr-gap-component);
+  max-inline-size: var(--pr-measure);
+}
+
+.pr-progress > progress {
+  grid-column: 1 / -1;
+}
+
+.pr-progress-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--pr-color-text-muted);
+}
+
+/* No value yet: a band travels the track, so it is clearly moving and clearly not a number. */
+progress:indeterminate {
+  background-image: linear-gradient(to right, transparent 0 35%, var(--pr-color-primary) 35% 65%, transparent 65%);
+  background-size: 250% 100%;
+  animation: pr-travel var(--pr-loop-shimmer) linear infinite;
+}
+
+progress:indeterminate::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+progress:indeterminate::-moz-progress-bar {
+  background-color: transparent;
+}
+
+/*
+ * A skeleton is the shape of what is coming: a line of text, a picture, a round avatar. The
+ * container says it is busy (aria-busy="true"), and the skeletons are hidden from assistive
+ * technology, which hears the busy state instead.
+ */
+.pr-skeleton {
+  display: block;
+  block-size: 1lh;
+  max-inline-size: var(--pr-measure);
+  border-radius: var(--pr-radius-well);
+  background-color: var(--pr-color-surface-sunken);
+  background-image: linear-gradient(
+    to right,
+    transparent 30%,
+    color-mix(in oklab, var(--pr-color-text) 5%, var(--pr-color-surface-sunken)) 50%,
+    transparent 70%
+  );
+  background-size: 250% 100%;
+  animation: pr-travel var(--pr-loop-shimmer) linear infinite;
+}
+
+.pr-skeleton[data-shape='text'] {
+  block-size: 0.8lh;
+  margin-block: 0.1lh;
+}
+
+.pr-skeleton[data-shape='circle'] {
+  inline-size: 2.5em;
+  block-size: 2.5em;
+  border-radius: var(--pr-radius-round);
+}
+
+.pr-skeleton[data-shape='block'] {
+  block-size: auto;
+  aspect-ratio: 16 / 9;
+}
+
+@keyframes pr-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@keyframes pr-travel {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes pr-breathe {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Less motion: a spinner breathes instead of turning, and skeletons hold still. */
+@media (prefers-reduced-motion: reduce) {
+  .pr-spinner,
+  :where(button, .pr-button)[aria-busy='true']::before {
+    animation: pr-breathe var(--pr-loop-shimmer) ease-in-out infinite;
+  }
+
+  .pr-skeleton,
+  progress:indeterminate {
+    animation: none;
+  }
+
+  progress:indeterminate {
+    background-position: 50% 0;
+  }
+}
+
+/* ---------------------------------------------------------------- navigation */
+/*
+ * Navigation only moves you: it never filters, toggles or creates. Tabs switch between faces of
+ * one thing, breadcrumbs go up a real hierarchy, pagination moves through one list, and a
+ * navigation item says where it goes and whether you are there.
+ */
+
+/* Breadcrumbs: the way up, each step a link, the place you are in its own words and not a link. */
+.pr-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+}
+
+.pr-breadcrumbs li + li::before {
+  content: '/' / '';
+  color: var(--pr-color-text-muted);
+}
+
+.pr-breadcrumbs a {
+  color: var(--pr-color-text-muted);
+}
+
+.pr-breadcrumbs a:hover {
+  color: var(--pr-color-text);
+}
+
+.pr-breadcrumbs [aria-current='page'] {
+  color: var(--pr-color-text);
+  font-weight: var(--pr-weight-strong);
+}
+
+/* Tabs: faces of one thing. The chosen face is underlined in the primary; the line beneath holds them together. */
+.pr-tablist {
+  display: flex;
+  gap: var(--pr-gap-group);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pr-tablist > [role='tab'] {
+  position: relative;
+  flex: none;
+  min-block-size: var(--pr-control-height);
+  padding-inline: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--pr-color-text-muted);
+}
+
+.pr-tablist > [role='tab']:hover:not(:disabled) {
+  background: none;
+  color: var(--pr-color-text);
+}
+
+.pr-tablist > [role='tab']:active:not(:disabled) {
+  background: none;
+  scale: none;
+}
+
+.pr-tablist > [role='tab']:focus-visible {
+  outline-offset: calc(var(--pr-focus-offset) * -1);
+}
+
+.pr-tablist > [role='tab']:disabled {
+  color: color-mix(in oklab, var(--pr-color-text) 35%, var(--pr-color-surface));
+}
+
+.pr-tablist > [role='tab'][aria-selected='true'] {
+  color: var(--pr-color-text);
+}
+
+.pr-tablist > [role='tab'][aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: var(--pr-focus-width);
+  background-color: var(--pr-color-primary);
+}
+
+[role='tabpanel'] {
+  display: block;
+  padding-block-start: var(--pr-gap-group);
+}
+
+[role='tabpanel'][hidden] {
+  display: none;
+}
+
+/* Pagination: one list, page by page. The page you are on sits in the primary's quiet fill. */
+.pr-pagination ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--pr-gap-component) / 2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-pagination :where(button, a) {
+  min-inline-size: var(--pr-control-height);
+  padding-inline: var(--pr-control-inset);
+  background-color: transparent;
+  font-variant-numeric: tabular-nums;
+}
+
+.pr-pagination :where(button, a):hover:not(:disabled) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+}
+
+.pr-pagination [aria-current='page'] {
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+}
+
+.pr-pagination [aria-current='page']:hover {
+  background-color: var(--pr-color-primary-surface);
+}
+
+.pr-pagination-gap {
+  min-inline-size: var(--pr-control-height);
+  color: var(--pr-color-text-muted);
+  text-align: center;
+}
+
+/* Navigation items: where each goes; the one you are on is marked, in words for a screen reader (aria-current) and by its fill. */
+.pr-nav-list {
+  display: grid;
+  gap: calc(var(--pr-gap-component) / 4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-nav-list a {
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  min-block-size: var(--pr-control-height);
+  padding-inline: var(--pr-control-inset);
+  border-radius: var(--pr-radius-control);
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.pr-nav-list a:hover {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+}
+
+.pr-nav-list a[aria-current='page'] {
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-nav-list a svg {
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  flex: none;
+}
+
+/* ---------------------------------------------------------------- top layers */
+/*
+ * Every layer is native: a dialog is a <dialog>, a popover, menu and tooltip are popovers, a
+ * disclosure is <details>. The browser keeps the stacking, Escape and focus return; Primal sets
+ * what each looks like and what it promises.
+ */
+
+/* A layer beside the page (a popover, a menu): raised, and the page stays the person's own. */
+.pr-layer,
+.pr-menu {
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  max-inline-size: calc(100vw - 2 * var(--pr-gutter));
+  max-block-size: calc(100vh - 2 * var(--pr-gutter));
+  margin: 0;
+  overflow: auto;
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-raised);
+  color: var(--pr-color-text);
+  box-shadow: var(--pr-elevation-1);
+  opacity: 1;
+  transition:
+    opacity var(--pr-duration-fast) var(--pr-ease-standard),
+    display var(--pr-duration-fast) allow-discrete,
+    overlay var(--pr-duration-fast) allow-discrete;
+}
+
+.pr-layer {
+  padding: var(--pr-gap-group);
+}
+
+.pr-layer > :first-child {
+  margin-block-start: 0;
+}
+
+.pr-layer > :last-child {
+  margin-block-end: 0;
+}
+
+@starting-style {
+  .pr-layer:popover-open,
+  .pr-menu:popover-open {
+    opacity: 0;
+  }
+}
+
+:where(.pr-layer, .pr-menu, .pr-tooltip):not(:popover-open) {
+  opacity: 0;
+}
+
+/* A menu: commands, one per row. The one under the keyboard or pointer is shaded. */
+.pr-menu {
+  min-inline-size: var(--pr-menu-width);
+  padding: calc(var(--pr-gap-component) / 2);
+}
+
+.pr-menu [role='menuitem'] {
+  display: flex;
+  justify-content: flex-start;
+  inline-size: 100%;
+  border-radius: var(--pr-radius-well);
+  background-color: transparent;
+  font-weight: var(--pr-weight-regular);
+  text-align: start;
+}
+
+.pr-menu [role='menuitem']:is(:hover, :focus-visible):not(:disabled, [aria-disabled='true']) {
+  background-color: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface-raised));
+}
+
+.pr-menu [role='menuitem']:focus-visible {
+  outline-offset: calc(var(--pr-focus-offset) * -1);
+}
+
+.pr-menu [role='menuitem'][data-kind='destructive']:not([aria-disabled='true']) {
+  color: var(--pr-color-danger);
+}
+
+.pr-menu [role='menuitem'][aria-disabled='true'] {
+  background-color: transparent;
+  color: var(--pr-color-text-muted);
+}
+
+.pr-menu hr {
+  margin: calc(var(--pr-gap-component) / 2) 0;
+}
+
+/* A tooltip: a short phrase about the thing you are pointing at or focused on. Never something to press. */
+.pr-tooltip {
+  position: fixed;
+  inset: auto;
+  max-inline-size: min(var(--pr-tooltip-width), 100vw - 2 * var(--pr-gutter));
+  margin: 0;
+  padding: calc(var(--pr-gap-component) / 2) var(--pr-gap-component);
+  border: 0;
+  border-radius: var(--pr-radius-well);
+  background-color: var(--pr-color-text);
+  color: var(--pr-color-surface);
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-regular);
+  line-height: var(--pr-leading-tight);
+  pointer-events: none;
+  opacity: 1;
+  transition:
+    opacity var(--pr-duration-fast) var(--pr-ease-standard),
+    display var(--pr-duration-fast) allow-discrete,
+    overlay var(--pr-duration-fast) allow-discrete;
+}
+
+@starting-style {
+  .pr-tooltip:popover-open {
+    opacity: 0;
+  }
+}
+
+/*
+ * A dialog interrupts: the page behind it is covered and holds still, and the dialog is the one
+ * thing to answer. Raised the most (elevation 2), only one at a time. On a phone it rises from
+ * the bottom edge, where the thumb is.
+ */
+.pr-dialog {
+  box-sizing: border-box;
+  inline-size: min(var(--pr-dialog-width), 100% - 2 * var(--pr-gutter));
+  max-inline-size: none;
+  max-block-size: calc(100% - 2 * var(--pr-gutter));
+  padding: 0;
+  border: 0;
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-raised);
+  color: var(--pr-color-text);
+  box-shadow: var(--pr-elevation-2);
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity var(--pr-duration-slow) var(--pr-ease-enter),
+    scale var(--pr-duration-slow) var(--pr-ease-enter),
+    translate var(--pr-duration-slow) var(--pr-ease-enter),
+    display var(--pr-duration-slow) allow-discrete,
+    overlay var(--pr-duration-slow) allow-discrete;
+}
+
+.pr-dialog:not([open]) {
+  opacity: 0;
+  scale: 0.98;
+}
+
+@starting-style {
+  .pr-dialog[open] {
+    opacity: 0;
+    scale: 0.98;
+  }
+}
+
+.pr-dialog::backdrop {
+  background-color: var(--pr-color-backdrop);
+  opacity: 1;
+  transition:
+    opacity var(--pr-duration-slow) var(--pr-ease-enter),
+    display var(--pr-duration-slow) allow-discrete,
+    overlay var(--pr-duration-slow) allow-discrete;
+}
+
+.pr-dialog:not([open])::backdrop {
+  opacity: 0;
+}
+
+@starting-style {
+  .pr-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+.pr-dialog:focus-visible {
+  outline: none;
+}
+
+/* While a dialog is open, the page under it holds still. */
+html:has(.pr-dialog[open]:modal) {
+  overflow: hidden;
+}
+
+.pr-dialog-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: var(--pr-gap-component);
+  padding: var(--pr-gap-group) var(--pr-gap-group) 0;
+}
+
+.pr-dialog-title {
+  margin: 0;
+  padding-block-start: calc((var(--pr-control-height) - 1lh) / 2);
+  font-size: var(--pr-text-large);
+}
+
+.pr-dialog-close {
+  margin-block-start: calc(var(--pr-gap-component) / -2);
+  margin-inline-end: calc(var(--pr-gap-component) / -2);
+}
+
+.pr-dialog-body {
+  padding: var(--pr-gap-component) var(--pr-gap-group) var(--pr-gap-group);
+}
+
+.pr-dialog-body > :first-child {
+  margin-block-start: 0;
+}
+
+.pr-dialog-body > :last-child {
+  margin-block-end: 0;
+}
+
+/* The answers: at the end, the main one last; a destructive one apart (.pr-actions does it). */
+.pr-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--pr-gap-component);
+  padding: 0 var(--pr-gap-group) var(--pr-gap-group);
+}
+
+@media (max-width: 40rem) /* allow-literal: a media query can't read a custom property */ {
+  .pr-dialog {
+    inline-size: 100%;
+    max-block-size: calc(100% - var(--pr-gutter));
+    margin-block-end: 0;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  .pr-dialog:not([open]) {
+    scale: 1;
+    translate: 0 var(--pr-gap-section);
+  }
+
+  @starting-style {
+    .pr-dialog[open] {
+      scale: 1;
+      translate: 0 var(--pr-gap-section);
+    }
+  }
+
+  .pr-dialog-actions {
+    flex-direction: column-reverse;
+  }
+
+  .pr-dialog-actions > * {
+    inline-size: 100%;
+  }
+}
+
+/*
+ * Disclosure: a summary you open for the detail. An accordion is several, one under the other;
+ * give them the same name and only one stays open. Opening one never moves what you are reading.
+ */
+summary {
+  cursor: pointer;
+}
+
+.pr-accordion {
+  max-inline-size: var(--pr-measure);
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-accordion > details {
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pr-gap-group);
+  min-block-size: var(--pr-control-height);
+  padding-block: var(--pr-gap-component);
+  font-weight: var(--pr-weight-strong);
+  list-style: none;
+}
+
+.pr-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.pr-accordion summary::after {
+  content: '';
+  flex: none;
+  inline-size: 0.5em;
+  block-size: 0.5em;
+  margin-inline-end: 0.25em;
+  border-block-end: var(--pr-focus-width) solid currentColor;
+  border-inline-end: var(--pr-focus-width) solid currentColor;
+  rotate: 45deg;
+  translate: 0 -0.15em;
+  transition: rotate var(--pr-duration-base) var(--pr-ease-standard);
+}
+
+.pr-accordion details[open] > summary::after {
+  rotate: 225deg;
+  translate: 0 0.15em;
+}
+
+.pr-accordion summary:focus-visible {
+  outline-offset: calc(var(--pr-focus-offset) * -1);
+}
+
+.pr-accordion details > :not(summary) {
+  margin-block: 0 var(--pr-gap-group);
+}
+
+/* ---------------------------------------------------------------- content */
+/*
+ * A card is a list item: one of a collection, each something you open (UI Design Course, ch. 01).
+ * So the card treatment exists only inside a list of cards; a lone .pr-card outside one gets none.
+ * The card's title link covers the whole card, so the card is one target; anything else to press
+ * inside it sits above that cover.
+ *
+ *   <ul class="pr-cards">
+ *     <li class="pr-card">
+ *       <h3 class="pr-card-title"><a href="/reports/q3">Q3 revenue</a></h3>
+ *       <p>Revenue rose 12% over Q2.</p>
+ *       <p class="pr-card-meta">Updated 2 hours ago</p>
+ *     </li>
+ *   </ul>
+ */
+.pr-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--pr-card-min)), 1fr));
+  gap: var(--pr-gap-group);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-cards > .pr-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pr-gap-component);
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-control);
+  background-color: var(--pr-color-surface-raised);
+  container-type: inline-size;
+  transition: border-color var(--pr-duration-fast) var(--pr-ease-standard);
+}
+
+.pr-cards > .pr-card > * {
+  margin: 0;
+}
+
+.pr-cards > .pr-card:hover {
+  border-color: var(--pr-color-text-muted);
+}
+
+.pr-cards > .pr-card:has(.pr-card-title a:focus-visible) {
+  outline: var(--pr-focus-width) solid var(--pr-color-focus);
+  outline-offset: var(--pr-focus-offset);
+}
+
+.pr-card-title {
+  margin: 0;
+  font-size: var(--pr-text-body);
+  overflow-wrap: anywhere;
+}
+
+.pr-card-title a {
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.pr-card-title a:focus-visible {
+  outline: none;
+}
+
+.pr-card-title a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* Something to press inside a card sits above the card's own target. */
+.pr-card :where(button, a:not(.pr-card-title a), input, select, label) {
+  position: relative;
+  z-index: 1;
+}
+
+.pr-card-media {
+  margin: calc(var(--pr-gap-group) * -1) calc(var(--pr-gap-group) * -1) 0;
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+  overflow: hidden;
+}
+
+.pr-card-media img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* What the card is about, then the rest: metadata steps back, in a row that wraps. */
+.pr-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  margin-block-start: auto;
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+}
+
+/*
+ * The payload stays. When a card has little room, the metadata it can do without (marked
+ * data-gives-way) goes first, so what the card exists to show is never squeezed.
+ */
+@container (max-width: 15rem) /* allow-literal: a container query can't read a custom property */ {
+  .pr-card [data-gives-way] {
+    display: none;
+  }
+}
+
+/*
+ * A list of items, one per row: something at the start (an avatar, an icon), what the item is
+ * and a line about it, and something at the end (a status, an action). The lines between rows
+ * mean one thing: these are separate items of one list.
+ */
+.pr-list-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-list-items > li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: var(--pr-gap-group);
+  padding-block: var(--pr-gap-component);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-list-items > li > :only-child,
+.pr-list-items .pr-item-body:first-child {
+  grid-column: 1 / 3;
+}
+
+.pr-item-body {
+  display: grid;
+  min-inline-size: 0;
+}
+
+.pr-item-title {
+  font-weight: var(--pr-weight-strong);
+  overflow-wrap: anywhere;
+}
+
+.pr-item-title a {
+  color: var(--pr-color-text);
+}
+
+.pr-item-line {
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+}
+
+.pr-item-end {
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+}
+
+/* Details: facts about one thing, each a term and its value, side by side where there's room. */
+.pr-details {
+  display: grid;
+  grid-template-columns: minmax(min-content, max-content) 1fr;
+  gap: var(--pr-gap-component) var(--pr-gap-group);
+  margin: 0;
+}
+
+.pr-details > dt {
+  color: var(--pr-color-text-muted);
+}
+
+.pr-details > dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 30rem) /* allow-literal: a media query can't read a custom property */ {
+  .pr-details {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+  }
+
+  .pr-details > dd {
+    margin-block-end: var(--pr-gap-component);
+  }
+}
+
+/* A code block: its language, the code, and a way to copy it. It scrolls within itself, never the page. */
+.pr-code-block {
+  position: relative;
+  max-inline-size: 100%;
+  margin-block: var(--pr-gap-group);
+}
+
+.pr-code-block-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pr-gap-component);
+  padding-inline-start: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-block-end: 0;
+  border-start-start-radius: var(--pr-radius-well);
+  border-start-end-radius: var(--pr-radius-well);
+  background-color: var(--pr-color-surface-sunken);
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+}
+
+.pr-code-block-bar + pre {
+  margin-block-start: 0;
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+}
+
+.pr-code-block pre {
+  margin-block-end: 0;
+}
+
+/* ---------------------------------------------------------------- information */
+
+/*
+ * A badge says one short fact about the thing it sits on: "New", "3", "Beta". It is always words
+ * or a number, so it reads without its colour; the tone only adds to it.
+ */
+.pr-badge {
+  --pr-badge-tone: var(--pr-color-text-muted);
+  --pr-badge-surface: color-mix(in oklab, var(--pr-color-text) 8%, var(--pr-color-surface));
+  display: inline-flex;
+  align-items: center;
+  min-inline-size: 1.6em;
+  padding: 0.1em 0.55em;
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-badge-surface);
+  color: var(--pr-color-text);
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-strong);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--pr-leading-tight);
+  justify-content: center;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.pr-badge[data-tone='primary'] {
+  --pr-badge-surface: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+}
+
+.pr-badge[data-tone='success'] {
+  --pr-badge-surface: var(--pr-color-success-surface);
+  color: var(--pr-color-success);
+}
+
+.pr-badge[data-tone='warning'] {
+  --pr-badge-surface: var(--pr-color-warning-surface);
+  color: var(--pr-color-warning);
+}
+
+.pr-badge[data-tone='danger'] {
+  --pr-badge-surface: var(--pr-color-danger-surface);
+  color: var(--pr-color-danger);
+}
+
+.pr-badge[data-tone='info'] {
+  --pr-badge-surface: var(--pr-color-info-surface);
+  color: var(--pr-color-info);
+}
+
+/* An avatar is a person or a single thing: round, their picture or their initials. */
+.pr-avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--pr-avatar-size);
+  block-size: var(--pr-avatar-size);
+  overflow: hidden;
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+  font-size: max(calc(var(--pr-avatar-size) * 0.4), calc(var(--pr-text-small) * 0.8));
+  font-weight: var(--pr-weight-strong);
+  line-height: 1;
+  user-select: none;
+}
+
+.pr-avatar[data-size='small'] {
+  --pr-avatar-size: calc(var(--pr-control-height) * 0.6);
+}
+
+.pr-avatar[data-size='large'] {
+  --pr-avatar-size: calc(var(--pr-control-height) * 1.6);
+}
+
+.pr-avatar img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Several people at once: overlapped, each ringed in the page colour so the edges read. */
+.pr-avatar-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.pr-avatar-group > .pr-avatar {
+  box-shadow: 0 0 0 var(--pr-focus-width) var(--pr-color-surface);
+}
+
+.pr-avatar-group > .pr-avatar + .pr-avatar {
+  margin-inline-start: calc(var(--pr-avatar-size) * -0.25);
+}
+
+/*
+ * A status: a mark and a word. The mark's shape says the state on its own (a full dot is fine,
+ * a triangle needs attention, a square has stopped, a ring hasn't started, a half is under way),
+ * the word says it in full, and the colour only adds.
+ */
+.pr-status {
+  --pr-status-tone: var(--pr-color-text-muted);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+}
+
+.pr-status::before {
+  content: '';
+  flex: none;
+  align-self: center;
+  inline-size: 0.6em;
+  block-size: 0.6em;
+  background-color: var(--pr-status-tone);
+}
+
+.pr-status[data-state='positive'] {
+  --pr-status-tone: var(--pr-color-success);
+}
+
+.pr-status[data-state='positive']::before {
+  border-radius: var(--pr-radius-round);
+}
+
+.pr-status[data-state='warning'] {
+  --pr-status-tone: var(--pr-color-warning);
+}
+
+.pr-status[data-state='warning']::before {
+  inline-size: 0.7em;
+  block-size: 0.62em;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.pr-status[data-state='negative'] {
+  --pr-status-tone: var(--pr-color-danger);
+}
+
+.pr-status[data-state='negative']::before {
+  border-radius: 0.1em;
+}
+
+.pr-status[data-state='neutral']::before {
+  border: 0.12em solid var(--pr-status-tone);
+  border-radius: var(--pr-radius-round);
+  background-color: transparent;
+}
+
+.pr-status[data-state='progress'] {
+  --pr-status-tone: var(--pr-color-info);
+}
+
+.pr-status[data-state='progress']::before {
+  border: 0.12em solid var(--pr-status-tone);
+  border-radius: var(--pr-radius-round);
+  background: linear-gradient(to right, var(--pr-status-tone) 50%, transparent 50%);
+}
+
+.pr-status[data-state='progress']:dir(rtl)::before {
+  background: linear-gradient(to left, var(--pr-status-tone) 50%, transparent 50%);
+}
+
+/*
+ * An empty state stands where the content would be: why it is empty, and the next step. Never a
+ * blank, never a picture standing in for the words.
+ */
+.pr-empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--pr-gap-component);
+  padding: var(--pr-gap-section) var(--pr-gap-group);
+  border: var(--pr-border-width) dashed var(--pr-color-border);
+  border-radius: var(--pr-radius-control);
+  color: var(--pr-color-text-muted);
+  text-align: center;
+}
+
+.pr-empty > * {
+  margin: 0;
+  max-inline-size: var(--pr-measure);
+}
+
+/* A product's illustration, above the words: decoration, so it is never the only way the reason is said. */
+.pr-empty > [empty-art],
+.pr-empty > .pr-empty-art {
+  inline-size: auto;
+  max-inline-size: var(--pr-empty-art-size, calc(var(--pr-control-height) * 3));
+  block-size: auto;
+  margin-block-end: var(--pr-gap-component);
+}
+
+.pr-empty-title {
+  color: var(--pr-color-text);
+  font-size: var(--pr-text-large);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--pr-gap-component);
+  margin-block-start: var(--pr-gap-component);
+}
+
+/* ---------------------------------------------------------------- layout */
+/*
+ * Layout groups by space and alignment, never by boxes. The three gaps: data-gap="component",
+ * "group" (the default) or "section". Strip every border, fill and shadow and the grouping still
+ * reads.
+ */
+.pr-stack,
+.pr-inline,
+.pr-grid {
+  --pr-layout-gap: var(--pr-gap-group);
+  gap: var(--pr-layout-gap);
+}
+
+:is(.pr-stack, .pr-inline, .pr-grid)[data-gap='component'] {
+  --pr-layout-gap: var(--pr-gap-component);
+}
+
+:is(.pr-stack, .pr-inline, .pr-grid)[data-gap='section'] {
+  --pr-layout-gap: var(--pr-gap-section);
+}
+
+/* A stack: one under the other. */
+.pr-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.pr-stack > * {
+  margin-block: 0;
+}
+
+/* A list laid out as a stack keeps its meaning and drops its bullets. */
+:where(ul, ol).pr-stack {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Inline: side by side, wrapping when room runs out, lined up on their middles. */
+.pr-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pr-inline > * {
+  margin-block: 0;
+}
+
+/* Something at the end of an inline row, pushed there by space. */
+.pr-push {
+  margin-inline-start: auto;
+}
+
+/* A grid: equal columns, as many as fit at --pr-grid-min wide (the card's width by default). */
+.pr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--pr-grid-min, var(--pr-card-min))), 1fr));
+}
+
+/* A container: the reading width by default, or the full width when the product needs it (decision 11). */
+.pr-container {
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: var(--pr-container-reading);
+  margin-inline: auto;
+  padding-inline: var(--pr-gutter);
+}
+
+.pr-container[data-width='full'] {
+  max-inline-size: var(--pr-container-full);
+}
+
+/* A divider means one thing: what is before it and what is after it are different sections. */
+.pr-divider {
+  margin-block: var(--pr-gap-group);
+}
+
+.pr-inline > .pr-divider {
+  align-self: stretch;
+  margin: 0;
+  border: 0;
+  border-inline-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+/*
+ * A scroll area: a region that scrolls within itself and never moves the page. It's focusable
+ * (tabindex="0", with a name), so the keyboard can scroll it too.
+ */
+.pr-scroll {
+  max-block-size: var(--pr-scroll-height, var(--pr-list-height));
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+/* ---------------------------------------------------------------- composition */
+
+/* A toolbar: a row of controls for one thing, one tab stop, the arrow keys move between them. */
+.pr-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--pr-gap-component) / 2);
+  padding: calc(var(--pr-gap-component) / 2);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-toolbar > .pr-divider {
+  align-self: stretch;
+  margin: calc(var(--pr-gap-component) / 2) calc(var(--pr-gap-component) / 2);
+  border: 0;
+  border-inline-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+/* A search field: a magnifier at its start says what it is before a word is read. */
+.pr-search-field {
+  position: relative;
+  display: inline-flex;
+  inline-size: 100%;
+  max-inline-size: var(--pr-field-width);
+}
+
+.pr-search-field::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: var(--pr-control-inset);
+  inline-size: 1.1em;
+  margin-block: auto;
+  block-size: 1.1em;
+  background-color: var(--pr-color-text-muted);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pr-search-field > input,
+.pr-search-field input[type='search'] {
+  inline-size: 100%;
+  padding-inline-start: calc(var(--pr-control-inset) * 2 + 1.1em);
+}
+
+/* ---------------------------------------------------------------- cells */
+
+/* A cell's result speaks where the job was done: in place of its form, or right under it. */
+.pr-cell-result {
+  margin: 0;
+}
+
+.pr-search-results {
+  margin-block-start: var(--pr-gap-group);
+}
+
+.pr-search-count {
+  margin: 0 0 var(--pr-gap-component);
+  color: var(--pr-color-text-muted);
+  font-size: var(--pr-text-small);
+}
+
+/* ---------------------------------------------------------------- surfaces */
+/*
+ * Reference surfaces: whole places built from cells. Each lays itself out by its own width
+ * (container queries), so the same surface works in a phone, a panel or a desk.
+ */
+
+/*
+ * An app shell: the bar across the top (where you are in the product, search, your account),
+ * the side navigation between the product's places, and the place itself. When the shell is
+ * narrow, the side navigation folds behind a Show Menu button in the bar.
+ */
+.pr-shell {
+  display: grid;
+  grid-template-columns: var(--pr-nav-width) 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'bar bar'
+    'nav main';
+  min-block-size: 100%;
+  container-type: inline-size;
+  background-color: var(--pr-color-surface);
+}
+
+.pr-shell-bar {
+  grid-area: bar;
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-group);
+  min-block-size: calc(var(--pr-control-height) + var(--pr-gap-group));
+  padding-inline: var(--pr-gap-group);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-shell-brand {
+  font-weight: var(--pr-weight-strong);
+  color: var(--pr-color-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pr-shell-bar .pr-search-field {
+  max-inline-size: var(--pr-field-width);
+  margin-inline-start: auto;
+}
+
+.pr-shell-nav {
+  grid-area: nav;
+  padding: var(--pr-gap-group) var(--pr-gap-component);
+  border-inline-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.pr-shell-main {
+  grid-area: main;
+  min-inline-size: 0;
+  padding: var(--pr-gap-group) var(--pr-gutter) var(--pr-gap-section);
+}
+
+.pr-shell-menu,
+.pr-shell-nav-search {
+  display: none;
+}
+
+/* The account sits at the end of the bar, where the hand looks for it. */
+.pr-shell-account {
+  margin-inline-start: auto;
+}
+
+.pr-shell-bar .pr-search-field + .pr-shell-account {
+  margin-inline-start: 0;
+}
+
+/* A container query styles what is inside the shell, never the shell itself: so each part takes the full width. */
+@container (max-width: 44rem) /* allow-literal: a container query can't read a custom property */ {
+  .pr-shell > * {
+    grid-column: 1 / -1;
+  }
+
+  .pr-shell-main,
+  .pr-shell-nav[data-open] {
+    grid-row: 2;
+  }
+
+  .pr-shell-menu {
+    display: inline-flex;
+  }
+
+  .pr-shell-nav {
+    display: none;
+  }
+
+  .pr-shell-nav[data-open] {
+    display: block;
+    z-index: var(--pr-layer-overlay);
+    border-inline-end: 0;
+    background-color: var(--pr-color-surface);
+  }
+
+  /* Search moves into the menu, so it is put away, never lost. */
+  .pr-shell-bar .pr-search-field {
+    display: none;
+  }
+
+  .pr-shell-nav-search {
+    display: inline-flex;
+    margin-block-end: var(--pr-gap-group);
+  }
+
+  .pr-shell-bar .pr-search-field + .pr-shell-account {
+    margin-inline-start: auto;
+  }
+}
+
+/*
+ * A list beside its detail: the list keeps its place while you read one item. When there is no
+ * room for both, each is its own page: the list, or the item with a way back to the list.
+ */
+.pr-split {
+  display: grid;
+  grid-template-columns: var(--pr-list-pane-width) 1fr;
+  gap: var(--pr-gap-section);
+  container-type: inline-size;
+}
+
+.pr-split > * {
+  min-inline-size: 0;
+}
+
+.pr-split-back {
+  display: none;
+}
+
+@container (max-width: 44rem) /* allow-literal: a container query can't read a custom property */ {
+  .pr-split > * {
+    grid-column: 1 / -1;
+  }
+
+  .pr-split[data-showing='detail'] > .pr-split-list,
+  .pr-split[data-showing='list'] > .pr-split-detail {
+    display: none;
+  }
+
+  .pr-split-back {
+    display: inline-flex;
+  }
+}
+
+/* The item the detail shows, marked in the list. */
+.pr-list-items > li[aria-current='true'] {
+  background-color: var(--pr-color-primary-surface);
+}
+
+.pr-list-items > li[aria-current='true'] .pr-item-title a {
+  color: var(--pr-color-primary-text);
+}
+
+/*
+ * Steps: where you are in a task of several steps. Done steps are marked with a check and can be
+ * revisited; the current one is in the primary; the ones ahead wait, muted.
+ */
+.pr-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-group);
+  margin: 0 0 var(--pr-gap-section);
+  padding: 0;
+  list-style: none;
+  counter-reset: pr-step;
+}
+
+.pr-steps > li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+  color: var(--pr-color-text-muted);
+  counter-increment: pr-step;
+}
+
+.pr-steps > li::before {
+  content: counter(pr-step);
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.75em;
+  block-size: 1.75em;
+  border: var(--pr-border-width-choice) solid currentColor;
+  border-radius: var(--pr-radius-round);
+  font-size: var(--pr-text-small);
+  font-weight: var(--pr-weight-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.pr-steps > li[aria-current='step'] {
+  color: var(--pr-color-text);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-steps > li[aria-current='step']::before {
+  border-color: var(--pr-color-primary);
+  background-color: var(--pr-color-primary);
+  color: var(--pr-color-on-primary);
+}
+
+.pr-steps > li[data-done] {
+  color: var(--pr-color-text);
+}
+
+.pr-steps > li[data-done]::before {
+  content: '✓';
+  border-color: var(--pr-color-primary);
+  color: var(--pr-color-primary-text);
+}
+
+/*
+ * Authentication: a gate, not a page of content. One narrow column with the product's name above
+ * it, one question at a time; no card around it, because a lone card is not a list item.
+ */
+.pr-auth {
+  display: grid;
+  gap: var(--pr-gap-group);
+  inline-size: 100%;
+  max-inline-size: var(--pr-field-width);
+  margin-inline: auto;
+  padding-block: var(--pr-gap-section);
+}
+
+.pr-auth > * {
+  margin: 0;
+}
+
+.pr-auth-brand {
+  font-size: var(--pr-text-large);
+  font-weight: var(--pr-weight-strong);
+}
+
+.pr-auth form > button[type='submit'],
+.pr-auth form > .pr-auth-submit {
+  inline-size: 100%;
+  margin-block-start: var(--pr-gap-group);
+}
+
+.pr-auth-switch {
+  color: var(--pr-color-text-muted);
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------- utilities */
+
+/* Read by assistive technology, not shown: a label for an icon, "Error:" before a message. */
+.pr-visually-hidden {
+  position: absolute;
+  inline-size: 1px; /* allow-literal: the visually-hidden pattern needs a one-pixel box, in every theme */
+  block-size: 1px; /* allow-literal: as above */
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* ---------------------------------------------------------------- page transitions */

@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema.json",
+  "id": "grid",
+  "name": "Grid",
+  "layer": "primitive",
+  "layerWhy": "It arranges other parts by space; it keeps no promise to the person of its own.",
+  "promise": "Equal columns, as many as fit.",
+  "expectation": "Columns that fall to one on a phone.",
+  "evidence": "The column count follows the width; --pr-grid-min sets the narrowest.",
+  "behaviour": [
+    "Auto-fill columns at --pr-grid-min."
+  ],
+  "context": "Metrics, cards, tiles.",
+  "relationships": [
+    "Children are equals."
+  ],
+  "states": [
+    "Many columns",
+    "One column"
+  ],
+  "accessibility": [
+    "Keeps the markup's order."
+  ],
+  "failures": [
+    "Never ranks by column position."
+  ],
+  "do": [
+    "Set --pr-grid-min for the content."
+  ],
+  "dont": [
+    "A grid for a form."
+  ],
+  "api": {
+    "css": [
+      ".pr-grid",
+      "--pr-grid-min"
+    ]
+  },
+  "usage": {
+    "markup": "<div class=\"pr-grid\" style=\"--pr-grid-min: 12rem\">…</div>"
+  },
+  "example": "/content/layout"
+}
