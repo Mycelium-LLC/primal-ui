@@ -48,7 +48,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+    "import": "import { PRIMAL_FEEDBACK } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-progress label=\"Uploading 12 photos\" [value]=\"sent()\" [max]=\"12\" />"
   },
   "example": "/actions/feedback"

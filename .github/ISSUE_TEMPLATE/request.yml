@@ -1,0 +1,11 @@
+name: Ask for a Component or Behaviour
+description: Something a real product needs that Primal doesn't have.
+labels: [request]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What you're building, and what's missing
+      description: Primal adds a behaviour when a real product needs it. Tell us the product and the moment.
+    validations:
+      required: true

@@ -75,7 +75,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+    "import": "import { PRIMAL_ACTIONS } from '@mycelium-llc/primal-angular';",
     "markup": "<button primalButton type=\"button\" emphasis=\"primary\" [run]=\"save\">Save Changes</button>"
   },
   "example": "/actions/actions"

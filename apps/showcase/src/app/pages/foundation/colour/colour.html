@@ -164,6 +164,9 @@
     {{ misses().length }} of {{ pairs() }} colour pairs fall below WCAG 2.2 AA. Darken your black or lighten your white:
   }
 </p>
+<p class="pr-audit-range">
+  Any black up to {{ range.black }}% lightness and any white from {{ range.white }}%, with any primary, keeps every pair readable.
+</p>
 @if (misses().length) {
   <ul class="pr-misses">
     @for (m of misses(); track m.mode + m.fg + m.bg) {

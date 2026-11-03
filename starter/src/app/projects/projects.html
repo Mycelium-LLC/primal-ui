@@ -1,0 +1,41 @@
+<div class="projects-head">
+  <h1 id="projects-title" tabindex="-1">Projects</h1>
+  @if (projects().length) {
+    <button primalButton type="button" emphasis="primary" (click)="creating.set(true)">New Project</button>
+  }
+</div>
+
+@if (projects().length) {
+  <ul class="pr-list-items" #list>
+    @for (p of projects(); track p.id) {
+      <li>
+        <span class="pr-item-body">
+          <span class="pr-item-title">{{ p.name }}</span>
+          <span class="pr-item-line">{{ p.owner }}</span>
+        </span>
+        <span class="pr-item-end">
+          <button primalButton type="button" kind="destructive" (click)="remove(p)">Delete Project</button>
+        </span>
+      </li>
+    }
+  </ul>
+} @else {
+  <primal-empty title="No projects yet" reason="A project holds one piece of work. Make the first one.">
+    <button primalButton type="button" emphasis="primary" (click)="creating.set(true)">New Project</button>
+  </primal-empty>
+}
+
+<primal-dialog title="New project" [(open)]="creating">
+  <form primalForm id="new-project" (validSubmit)="create()">
+    <primal-field label="Name">
+      <input primalControl required maxlength="60" autocomplete="off" [value]="name()" (input)="name.set($any($event.target).value)" />
+    </primal-field>
+    <primal-field label="Owner" description="Who answers for it. You, if you leave it empty.">
+      <input primalControl autocomplete="name" [value]="owner()" (input)="owner.set($any($event.target).value)" />
+    </primal-field>
+  </form>
+  <div class="pr-dialog-actions" dialog-actions>
+    <button primalButton type="button" emphasis="quiet" (click)="creating.set(false)">Cancel</button>
+    <button primalButton type="submit" form="new-project" emphasis="primary">Create Project</button>
+  </div>
+</primal-dialog>

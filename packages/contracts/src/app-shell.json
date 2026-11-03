@@ -9,7 +9,8 @@
   "evidence": "Narrow, the navigation and search fold behind Show Menu, nothing lost; choosing a place closes the menu.",
   "behaviour": [
     "Lays itself out by its own width.",
-    "The current place is marked in the navigation."
+    "The current place is marked in the navigation.",
+    "On a phone, Show Menu opens the navigation with focus on the current place; Escape closes it and returns focus to the button; choosing a place closes it (primalShellMenu)."
   ],
   "context": "Every product with more than one place.",
   "relationships": [
@@ -40,10 +41,18 @@
       ".pr-shell-main",
       ".pr-shell-menu",
       ".pr-shell-account"
+    ],
+    "angular": [
+      "button[primalShellMenu]"
+    ],
+    "inputs": [
+      "[primalShellMenu]: the shell navigation it opens",
+      "[(open)]: whether the phone menu is open"
     ]
   },
   "usage": {
-    "markup": "<div class=\"pr-shell\">\n  <div class=\"pr-shell-bar\">\n    <button class=\"pr-shell-menu pr-icon-button\" aria-label=\"Show Menu\">…</button>\n    <a class=\"pr-shell-brand\" href=\"/\">Your product</a>\n  </div>\n  <nav class=\"pr-shell-nav\" aria-label=\"Places\"><ul class=\"pr-nav-list\">…</ul></nav>\n  <main class=\"pr-shell-main\">…</main>\n</div>"
+    "markup": "<div class=\"pr-shell\">\n  <div class=\"pr-shell-bar\">\n    <button primalIconButton class=\"pr-shell-menu\" [primalShellMenu]=\"nav\" #menu=\"primalShellMenu\" [label]=\"menu.open() ? 'Close Menu' : 'Show Menu'\">…</button>\n    <a class=\"pr-shell-brand\" href=\"/\">Your product</a>\n  </div>\n  <nav class=\"pr-shell-nav\" #nav aria-label=\"Places\"><ul class=\"pr-nav-list\">…</ul></nav>\n  <main class=\"pr-shell-main\">…</main>\n</div>",
+    "import": "import { PRIMAL_NAVIGATION } from '@mycelium-llc/primal-angular';"
   },
   "example": "/surfaces/app-shell"
 }

@@ -45,7 +45,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_CONTENT } from 'primal-angular';",
+    "import": "import { PRIMAL_CONTENT } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-code-block language=\"HTML\" [code]=\"snippet\" />"
   },
   "example": "/content/content"

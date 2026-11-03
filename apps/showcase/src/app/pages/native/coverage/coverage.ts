@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { PRIMAL_TABLES } from 'primal-angular';
+import { PRIMAL_TABLES } from '@mycelium-llc/primal-angular';
 import { COVERAGE, Coverage, OUTCOME_LABEL, mergeRows } from '../../../shell/coverage-table/coverage-table';
 
 type Filter = Coverage['outcome'] | 'all';

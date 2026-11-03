@@ -85,16 +85,16 @@
   },
   "--pr-color-primary": {
     "group": "colour",
-    "value": "light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))))",
+    "value": "light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.824 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.824 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.824 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))))",
     "meaning": "Where something happens: the primary action's fill, a checked control, an accent. The primary as chosen, the same in light and dark: darkened only if white text on it would not read, lifted in dark only if it would sink into the page.",
     "light": "oklch(58.89% 0.23 26.6)",
     "dark": "oklch(58.89% 0.23 26.6)"
   },
   "--pr-color-primary-text": {
     "group": "colour",
-    "value": "light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))))",
+    "value": "light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.11 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.11 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.11 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))))",
     "meaning": "The primary as text: links, the current place, a primary label. A shade further than the fill when needed, so it reads on every surface.",
-    "light": "oklch(54.52% 0.2129 26.6)",
+    "light": "oklch(50.31% 0.1965 26.6)",
     "dark": "oklch(68.78% 0.1529 20.84)"
   },
   "--pr-color-primary-hover": {
@@ -134,16 +134,16 @@
   },
   "--pr-color-companion": {
     "group": "colour",
-    "value": "oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle)))",
+    "value": "light-dark(oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness) - 0.04) c calc(h + var(--pr-companion-angle))), oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle))))",
     "meaning": "Goes with the primary: a second emphasis, a highlight, a second series. Never an action.",
-    "light": "oklch(58.89% 0.23 206.6)",
+    "light": "oklch(54.89% 0.23 206.6)",
     "dark": "oklch(58.89% 0.23 206.6)"
   },
   "--pr-color-tertiary": {
     "group": "colour",
-    "value": "oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle)))",
+    "value": "light-dark(oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness) - 0.04) c calc(h + var(--pr-tertiary-angle))), oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle))))",
     "meaning": "A third hue for decoration and a third series. Never an action.",
-    "light": "oklch(58.89% 0.23 56.6)",
+    "light": "oklch(54.89% 0.23 56.6)",
     "dark": "oklch(58.89% 0.23 56.6)"
   },
   "--pr-color-selection": {
@@ -162,7 +162,7 @@
   },
   "--pr-color-danger": {
     "group": "system",
-    "value": "light-dark(oklch(52% 0.19 27), oklch(74% 0.14 27))",
+    "value": "light-dark(oklch(from var(--pr-white) calc(0.52 - (1 - l) * 0.7) 0.19 27), oklch(74% 0.14 27))",
     "meaning": "Something failed, or cannot be undone.",
     "light": "oklch(52% 0.19 27)",
     "dark": "oklch(74% 0.14 27)"
@@ -176,7 +176,7 @@
   },
   "--pr-color-warning": {
     "group": "system",
-    "value": "light-dark(oklch(50% 0.11 65), oklch(80% 0.12 80))",
+    "value": "light-dark(oklch(from var(--pr-white) calc(0.5 - (1 - l) * 0.7) 0.11 65), oklch(80% 0.12 80))",
     "meaning": "Needs attention soon; nothing has failed.",
     "light": "oklch(50% 0.11 65)",
     "dark": "oklch(80% 0.12 80)"
@@ -190,7 +190,7 @@
   },
   "--pr-color-info": {
     "group": "system",
-    "value": "light-dark(oklch(50% 0.13 235), oklch(76% 0.11 235))",
+    "value": "light-dark(oklch(from var(--pr-white) calc(0.5 - (1 - l) * 0.7) 0.13 235), oklch(76% 0.11 235))",
     "meaning": "Worth knowing; nothing to do.",
     "light": "oklch(50% 0.13 235)",
     "dark": "oklch(76% 0.11 235)"
@@ -204,7 +204,7 @@
   },
   "--pr-color-success": {
     "group": "system",
-    "value": "light-dark(oklch(48% 0.12 150), oklch(76% 0.13 150))",
+    "value": "light-dark(oklch(from var(--pr-white) calc(0.48 - (1 - l) * 0.7) 0.12 150), oklch(76% 0.13 150))",
     "meaning": "Done, resolved, safe.",
     "light": "oklch(48% 0.12 150)",
     "dark": "oklch(76% 0.13 150)"

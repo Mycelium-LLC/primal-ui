@@ -13,20 +13,20 @@ export class StartPage {
 <link rel="stylesheet" href="my-theme.css" />`;
 
   protected readonly angularJson = `"styles": [
-  "node_modules/primal-tokens/primal-tokens.css",
-  "node_modules/primal-css/src/primal.css",
+  "node_modules/@mycelium-llc/primal-tokens/primal-tokens.css",
+  "node_modules/@mycelium-llc/primal-css/src/primal.css",
   "src/my-theme.css"
 ]`;
 
   protected readonly config = `import { provideRouter } from '@angular/router';
-import { providePrimalRouteScroll, withPrimalTransitions } from 'primal-angular';
+import { providePrimalRouteScroll, withPrimalTransitions } from '@mycelium-llc/primal-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withPrimalTransitions()), providePrimalRouteScroll()],
 };`;
 
   protected readonly prefs = `import { inject } from '@angular/core';
-import { PrimalPreferences } from 'primal-angular';
+import { PrimalPreferences } from '@mycelium-llc/primal-angular';
 
 export class AppShell {
   private readonly prefs = inject(PrimalPreferences);
@@ -52,6 +52,8 @@ export class AppShell {
   --pr-companion-angle: 30; /* Analogous */
   --pr-tertiary-angle: -30;
 }`;
+
+  protected readonly install = `npm install @mycelium-llc/primal-tokens @mycelium-llc/primal-css @mycelium-llc/primal-angular`;
 
   protected readonly build = `# in a clone of Mycelium-LLC/primal-ui
 npm install

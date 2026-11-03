@@ -1,36 +1,85 @@
 # Mycelium Primal
 
-**TL;DR:** This repo holds Mycelium Primal, an open-source design system by Mycelium (Niko's software company), built from first principles. It's private and in its first days; it goes public at v1.
+**TL;DR:** An open-source design system where every element keeps a written promise. Use it as it is in Angular (or its CSS on any web page), or make it the base of your own design system.
 
-## What it is
+**[primal.myceliumllc.dev](https://primal.myceliumllc.dev)** · [Showcase](https://primal.myceliumllc.dev/showcase/) · [Contract catalog](https://primal.myceliumllc.dev/showcase/contracts/catalog) · [Changelog](CHANGELOG.md) · MIT
 
-Primal is meant to be two things. It's a design system you install and use as it is. It's also the base that every future Mycelium design system starts from, so its own look stays minimal (Mycelium's Magma on ink and white) and is set through tokens. Its tokens, styles and component contracts don't depend on any framework, and each framework gets its own set of packages. Angular comes first; the others come only when Mycelium needs them.
+## Why Primal
+
+- **Every element keeps a promise.** Each of its 53 parts has a contract: what it promises, its states, keys, accessibility and the markup to copy. The contracts are plain JSON, and a checker keeps yours just as complete.
+- **Your brand in three choices.** Pick a black, a white and a primary; every colour role derives from them in light and dark, and every pair is measured against WCAG 2.2 AA.
+- **Native first.** Real `<button>`, `<input>`, `<dialog>` and popovers, with keyboard and screen readers handled, never a `<div>` dressed as one.
+- **Right to left and dark from the start.** Every rule is a logical property and every colour has its dark value.
+
+## Install Primal
+
+In an Angular 22 project:
+
+```bash
+npm install @mycelium-llc/primal-tokens @mycelium-llc/primal-css @mycelium-llc/primal-angular
+```
+
+Load the styles in `angular.json`, tokens first, then your own theme:
+
+```json
+"styles": [
+  "node_modules/@mycelium-llc/primal-tokens/primal-tokens.css",
+  "node_modules/@mycelium-llc/primal-css/src/primal.css",
+  "src/styles.css"
+]
+```
+
+Then import what you need into a component:
+
+```ts
+import { PRIMAL_ACTIONS, PRIMAL_FORMS } from '@mycelium-llc/primal-angular';
+```
+
+Or start from the starter, a working app with Primal already set up:
+
+```bash
+npx degit Mycelium-LLC/primal-ui/starter my-app
+cd my-app && npm install && npm start
+```
+
+Not on Angular? The two CSS packages work on any web page: link `primal-tokens.css`, then `primal.css`. The adapter's [README](packages/angular/README.md) and the showcase's [Getting started](https://primal.myceliumllc.dev/showcase/start) go further.
+
+## Fork Primal
+
+To make Primal the base of your own design system, with your name, your colour and your contracts, press **Use this template** on GitHub and follow the [fork guide](docs/fork.md).
 
 ## What's in here
 
 | Path | What it is |
 |---|---|
 | `packages/tokens` | The design tokens and the colour model, framework-independent, built to CSS and JSON |
-| `packages/css` | The reset and the classless base for every native element, Google Sans, and the coverage inventory |
+| `packages/css` | The reset, the classless base for every native element, the components' CSS, and Google Sans |
 | `packages/angular` | The Angular adapter (Angular 22+) |
-| `packages/contracts` | Every component's contract as framework-independent JSON, the schema, and `primal-contracts-check` for your own; the catalog is generated from it |
-| `apps/showcase` | The live showcase: every planned page, each showing the native HTML it covers until its release builds it |
-| `.folio/` | The plan in Folio: the baseline, the ledger of releases 0.1.0 to 1.0.0, and Niko's decisions |
+| `packages/contracts` | Every component's contract as JSON, the schema, and `primal-contracts-check` for your own |
+| `apps/showcase` | The showcase: every component, its states and its contract |
+| `apps/site` | The landing page at primal.myceliumllc.dev, on Primal's own CSS |
+| `starter` | A small Angular app with Primal set up, to copy |
+| `.folio/` | The plan: every release, its requirements and the decisions behind them |
 
-## Run it
+## Work on Primal
 
 Needs Node 24 (`.nvmrc`).
 
 ```bash
 npm install
-npm run build          # the Angular adapter, then the showcase
-npx ng serve showcase  # http://localhost:6840
-npm run check:folio    # checks the ledger
-npm run check:contracts # every component has a complete contract
-npm run pack           # the four packages as dist/packs/*.tgz, to install in another project
-npm test               # the Angular adapter's unit tests
+npx ng serve showcase   # http://localhost:6840
+npm test                # the adapter's unit tests
+npm run build           # tokens, contracts, the adapter and the showcase
+npm run build:site      # the landing page and the showcase, as served
+npm run pack            # the four packages as dist/packs/*.tgz
 ```
+
+Read [CONTRIBUTING](CONTRIBUTING.md) first. Security reports go through [SECURITY](SECURITY.md).
 
 ## Status
 
-Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) shipped on 2026-10-20; 0.3.0 to 0.9.0 (forms, Magma, actions and feedback, navigation and top layers, content and cells, reference surfaces, the contract catalog) shipped together as 0.9.0 on 2026-11-03. 1.0.0 (open to everyone) waits on four questions in `.folio/`: the name's trademark check, the npm scope, the license and where the showcase is hosted.
+Primal 1.0.0 is being prepared: the first public release. 0.1.0 to 0.9.0 are shipped (see the [changelog](CHANGELOG.md)).
+
+## License
+
+[MIT](LICENSE), © Mycelium LLC. Google Sans is bundled under the SIL Open Font License.

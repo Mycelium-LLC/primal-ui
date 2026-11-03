@@ -50,7 +50,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_CONTENT, PRIMAL_ACTIONS } from 'primal-angular';",
+    "import": "import { PRIMAL_CONTENT, PRIMAL_ACTIONS } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-empty title=\"No reports yet\" reason=\"Reports appear here once the first month closes.\">\n  <img empty-art src=\"/art/empty.png\" alt=\"\" />\n  <button primalButton type=\"button\" emphasis=\"primary\">Create Report</button>\n</primal-empty>"
   },
   "example": "/content/information"

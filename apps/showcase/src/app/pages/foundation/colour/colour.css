@@ -211,6 +211,12 @@ input[type='color'] {
   color: var(--pr-color-text-muted);
 }
 
+.pr-audit-range {
+  margin-block: 0;
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
 .pr-misses {
   font-size: var(--pr-text-small);
   color: var(--pr-color-danger);

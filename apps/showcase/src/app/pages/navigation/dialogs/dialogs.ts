@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { PRIMAL_ACTIONS, PRIMAL_FORMS, PRIMAL_NAVIGATION, PRIMAL_TOP_LAYERS, PRIMAL_TOP_LAYER_ANSWERS, PrimalConfirm } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_FORMS, PRIMAL_NAVIGATION, PRIMAL_TOP_LAYERS, PRIMAL_TOP_LAYER_ANSWERS, PrimalConfirm } from '@mycelium-llc/primal-angular';
 import { PlainHtml } from '../../../shell/plain-html/plain-html';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_ACTION_KINDS, PRIMAL_FEEDBACK, PRIMAL_FORMS, PrimalToaster, primalFocusAfterRemove } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_ACTION_KINDS, PRIMAL_FEEDBACK, PRIMAL_FORMS, PrimalToaster, primalFocusAfterRemove } from '@mycelium-llc/primal-angular';
 
 // Sample members and workspace for the examples (mock data).
 const MEMBERS = ['Ada Shapiro', 'Noa Levi', 'Sam Okafor'];

@@ -527,8 +527,14 @@ td[data-empty] {
  * can scroll it: <div class="pr-table" role="region" aria-label="…" tabindex="0">.
  */
 .pr-table {
+  /* Positioned, so visually hidden text inside a cell stays inside the scroll box, not the page. */
+  position: relative;
   overflow-x: auto;
   margin-block-end: var(--pr-gap-group);
+}
+
+.pr-table :where(td, th) time {
+  white-space: nowrap;
 }
 
 .pr-table[data-tall] {
@@ -1934,13 +1940,19 @@ a.pr-button::after {
   z-index: var(--pr-layer-toast);
 }
 
-/* Inside a dialog it waits at the top, clear of the dialog's answers at the bottom. */
-.pr-toaster.pr-toaster-dialog {
-  inset-block: var(--pr-gutter) auto;
-}
+/*
+ * On a phone a dialog is a sheet along the bottom, where the toaster sits; there, inside a dialog,
+ * it waits at the top instead, clear of the dialog's answers. On a desk the dialog is centred and
+ * the corner is already clear, so it stays there, off the dialog's title and its Close.
+ */
+@media (max-width: 40rem) /* allow-literal: the dialog's own phone breakpoint; a media query can't read a custom property */ {
+  .pr-toaster.pr-toaster-dialog {
+    inset-block: var(--pr-gutter) auto;
+  }
 
-.pr-toaster-dialog .pr-toast {
-  animation-name: pr-toast-down;
+  .pr-toaster-dialog .pr-toast {
+    animation-name: pr-toast-down;
+  }
 }
 
 @keyframes pr-toast-down {
@@ -3312,6 +3324,39 @@ summary {
 
   .pr-shell-bar .pr-search-field + .pr-shell-account {
     margin-inline-start: auto;
+  }
+}
+
+/*
+ * Settings: the sections at the side, the section's settings beside them. On a phone the sections
+ * sit above as a row that wraps, so every section stays one tap away while one is open.
+ */
+.pr-settings {
+  display: grid;
+  grid-template-columns: var(--pr-nav-width) minmax(0, 1fr);
+  gap: var(--pr-gap-section);
+  container-type: inline-size;
+}
+
+.pr-settings > section {
+  display: grid;
+  gap: var(--pr-gap-group);
+  align-content: start;
+  min-inline-size: 0;
+}
+
+.pr-settings > section > * {
+  margin: 0;
+}
+
+@container (max-width: 40rem) /* allow-literal: a container query can't read a custom property */ {
+  .pr-settings > * {
+    grid-column: 1 / -1;
+  }
+
+  .pr-settings .pr-nav-list {
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 

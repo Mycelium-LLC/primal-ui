@@ -19,7 +19,7 @@
       <p class="pr-surface-address">{{ frame }} · /{{ here().toLowerCase() }}</p>
       <div class="pr-shell">
         <div class="pr-shell-bar">
-          <button primalIconButton type="button" class="pr-shell-menu" [label]="menuOpen()[frame] ? 'Close Menu' : 'Show Menu'" [attr.aria-expanded]="!!menuOpen()[frame]" (click)="toggle(frame)">
+          <button primalIconButton class="pr-shell-menu" [primalShellMenu]="nav" #menu="primalShellMenu" [label]="menu.open() ? 'Close Menu' : 'Show Menu'">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
           </button>
           <a class="pr-shell-brand" href="#" (click)="$event.preventDefault(); go(frame, 'Reports')">Acme Studio</a>
@@ -34,7 +34,7 @@
             <button primalMenuItem type="button">Sign Out</button>
           </primal-menu>
         </div>
-        <nav class="pr-shell-nav" [attr.data-open]="menuOpen()[frame] ? '' : null" [attr.aria-label]="'Acme Studio, ' + frame">
+        <nav class="pr-shell-nav" #nav [attr.aria-label]="'Acme Studio, ' + frame">
           <span class="pr-search-field pr-shell-nav-search"><input type="search" placeholder="Search Acme Studio" aria-label="Search Acme Studio" /></span>
           <ul class="pr-nav-list">
             @for (p of places; track p.label) {

@@ -1,6 +1,30 @@
 {
-  "name": "primal-angular",
-  "version": "0.9.0",
+  "name": "@mycelium-llc/primal-angular",
+  "version": "1.0.0",
+  "description": "Mycelium Primal's Angular adapter (Angular 22+). Needs @mycelium-llc/primal-tokens and @mycelium-llc/primal-css loaded as global styles.",
+  "license": "MIT",
+  "author": "Mycelium LLC",
+  "homepage": "https://primal.myceliumllc.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mycelium-LLC/primal-ui.git",
+    "directory": "packages/angular"
+  },
+  "bugs": {
+    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "design-system",
+    "mycelium-primal",
+    "angular",
+    "components",
+    "accessibility",
+    "rtl"
+  ],
   "peerDependencies": {
     "@angular/common": "^22.2.0",
     "@angular/core": "^22.2.0",
@@ -10,7 +34,5 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false,
-  "private": true,
-  "description": "Mycelium Primal's Angular adapter (Angular 22+). Needs primal-tokens and primal-css loaded as global styles."
+  "sideEffects": false
 }
