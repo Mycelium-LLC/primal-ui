@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_FEEDBACK, PrimalToaster } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_FEEDBACK, PrimalToaster, primalFocusAfterRemove } from 'primal-angular';
 import { PlainHtml } from '../../../shell/plain-html/plain-html';
 
 // Sample reports and people for the examples (mock data).
@@ -25,13 +25,9 @@ export class ActionsFeedbackPage {
   protected readonly reports = signal(REPORTS);
 
   protected remove(report: (typeof REPORTS)[number]): void {
-    // Focus moves to the next row's Delete (or the list's way back), never to the top of the page.
-    const rows = [...document.querySelectorAll<HTMLElement>('.pr-demo-reports li')];
-    const at = rows.findIndex((li) => li.contains(document.activeElement));
-    setTimeout(() => {
-      const left = [...document.querySelectorAll<HTMLElement>('.pr-demo-reports li button')];
-      (left[Math.min(Math.max(at, 0), left.length - 1)] ?? null)?.focus();
-    });
+    // Focus moves to the next row's Delete, never to the top of the page.
+    const list = document.querySelector<HTMLElement>('.pr-demo-reports');
+    if (list) primalFocusAfterRemove(list);
     const before = this.reports();
     this.reports.update((list) => list.filter((r) => r.id !== report.id));
     this.toaster.show(`Deleted “${report.name}”.`, {

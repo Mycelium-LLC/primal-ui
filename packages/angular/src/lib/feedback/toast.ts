@@ -85,7 +85,8 @@ export class PrimalToaster {
     'aria-label': 'Notifications',
     '(pointerenter)': 'hold(true)',
     '(pointerleave)': 'hold(false)',
-    '(focusin)': 'hold(true)',
+    '[class.pr-toaster-dialog]': 'inDialog()',
+    '(focusin)': 'entered($event)',
     '(focusout)': 'hold(false)',
     '(keydown.escape)': 'closeNewest()',
   },
@@ -115,6 +116,10 @@ export class PrimalToasterRegion {
   protected readonly toasts = signal<Toast[]>([]);
   private readonly timers = new Map<number, { left: number; started: number; timer?: ReturnType<typeof setTimeout> }>();
   private held = false;
+  /** In a dialog, the toaster moves to the top, clear of the dialog's own answers. */
+  protected readonly inDialog = signal(false);
+  /** Where focus was before it came into a toast, to return it there when that toast goes. */
+  private before: HTMLElement | null = null;
 
   constructor() {
     // A modal dialog makes everything outside it inert, a toast's Undo included. So while one is
@@ -130,6 +135,7 @@ export class PrimalToasterRegion {
     const home = dialogs.at(-1) ?? this.document.body;
     if (this.element.parentElement === home) return;
     home.append(this.element);
+    this.inDialog.set(home !== this.document.body);
     // While a dialog has the person's attention, a toast's time stands still: an Undo is never
     // taken away while they can't get to it.
     this.hold(home !== this.document.body);
@@ -150,6 +156,8 @@ export class PrimalToasterRegion {
   }
 
   remove(id: number): void {
+    // A toast that held focus gives it back, so it never falls outside an open dialog.
+    if (this.element.contains(this.document.activeElement)) this.giveBack();
     const t = this.timers.get(id);
     if (t) clearTimeout(t.timer);
     this.timers.delete(id);
@@ -168,6 +176,21 @@ export class PrimalToasterRegion {
   protected closeNewest(): void {
     const shown = this.toasts().filter((t) => !t.leaving);
     if (shown.length) this.remove(shown[shown.length - 1].id);
+  }
+
+  protected entered(event: FocusEvent): void {
+    const from = event.relatedTarget;
+    if (from instanceof HTMLElement && !this.element.contains(from)) this.before = from;
+    this.hold(true);
+  }
+
+  private giveBack(): void {
+    const home = this.element.parentElement;
+    const back = this.before?.isConnected && !this.before.closest('[inert]') && home?.contains(this.before) ? this.before : null;
+    this.before = null;
+    if (back) back.focus();
+    else if (home instanceof HTMLDialogElement) home.focus();
+    else (this.document.activeElement as HTMLElement | null)?.blur();
   }
 
   protected hold(on: boolean): void {

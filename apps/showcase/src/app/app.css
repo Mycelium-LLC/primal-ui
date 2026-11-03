@@ -88,13 +88,21 @@
   padding: var(--pr-gap-group) var(--pr-gutter) var(--pr-gap-section);
 }
 
-/* On a phone the page list, when open, takes the page's place. */
+/*
+ * On a phone the page list, when open, takes the page's place: both share one cell, and the page
+ * is made invisible, not removed, so it keeps where it was scrolled to (display: none would lose it).
+ */
+.pr-nav,
+.pr-main {
+  grid-area: 1 / 1;
+}
+
 .pr-nav-open {
   display: block;
 }
 
 .pr-main.pr-main-hidden {
-  display: none;
+  visibility: hidden;
 }
 
 @media (width >= 48rem) {
@@ -111,8 +119,14 @@
     border-inline-end: var(--pr-border-width) solid var(--pr-color-border);
   }
 
+  .pr-nav {
+    grid-area: 1 / 1;
+  }
+
+  .pr-main,
   .pr-main.pr-main-hidden {
-    display: flex;
+    grid-area: 1 / 2;
+    visibility: visible;
   }
 }
 

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_ACTION_KINDS, PRIMAL_FEEDBACK, PRIMAL_FORMS, PrimalToaster } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_ACTION_KINDS, PRIMAL_FEEDBACK, PRIMAL_FORMS, PrimalToaster, primalFocusAfterRemove } from 'primal-angular';
 
 // Sample members and workspace for the examples (mock data).
 const MEMBERS = ['Ada Shapiro', 'Noa Levi', 'Sam Okafor'];
@@ -36,13 +36,9 @@ export class ActionsActionKindsPage {
 
   protected readonly members = signal(MEMBERS);
   protected removeMember(name: string): void {
-    // Focus moves to the next row's Delete (or the list's way back), never to the top of the page.
-    const rows = [...document.querySelectorAll<HTMLElement>('.pr-demo-reports li')];
-    const at = rows.findIndex((li) => li.contains(document.activeElement));
-    setTimeout(() => {
-      const left = [...document.querySelectorAll<HTMLElement>('.pr-demo-reports li button')];
-      (left[Math.min(Math.max(at, 0), left.length - 1)] ?? null)?.focus();
-    });
+    // Focus moves to the next row's Delete, never to the top of the page.
+    const list = document.querySelector<HTMLElement>('.pr-demo-reports');
+    if (list) primalFocusAfterRemove(list);
     const before = this.members();
     this.members.update((list) => list.filter((m) => m !== name));
     this.toaster.show(`Removed ${name} from the workspace.`, { action: { label: 'Undo', run: () => this.members.set(before) } });

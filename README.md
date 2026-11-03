@@ -33,4 +33,4 @@ npm test               # the Angular adapter's unit tests
 
 ## Status
 
-Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are shipped. 0.3.0 to 0.9.0 (forms, Magma, actions and feedback, navigation and top layers, content and cells, reference surfaces, the contract catalog) are built in `release/0.9.0`, QA'd once (grade C) and fixed after it; they ship together. 1.0.0 (open to everyone) waits on four questions in `.folio/`: the name's trademark check, the npm scope, the license and where the showcase is hosted.
+Active. 0.1.0 (the foundation) and 0.2.0 (plain HTML) are shipped. 0.3.0 to 0.9.0 (forms, Magma, actions and feedback, navigation and top layers, content and cells, reference surfaces, the contract catalog) are built in `release/0.9.0`, QA'd twice (C, then B) and fixed after each; they ship together. 1.0.0 (open to everyone) waits on four questions in `.folio/`: the name's trademark check, the npm scope, the license and where the showcase is hosted.
