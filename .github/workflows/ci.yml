@@ -26,3 +26,5 @@ jobs:
         run: npm test
       - name: Build the tokens, the Angular adapter and the showcase
         run: npm run build
+      - name: The starter builds from the packed packages, as a stranger would
+        run: npm run pack && node scripts/check-app.mjs starter
