@@ -3,11 +3,12 @@
  * Builds what primal.myceliumllc.dev serves, into dist/site:
  *   /            the landing page (apps/site), on Primal's own CSS
  *   /showcase/   the showcase, built for that address
+ *   /demo/       the acceptance app, built from the packed packages
  *   /version.json the version, the commit and when it was built
  * Run after `npm run build`, or on its own: it builds the showcase itself.
  */
 import { execSync } from 'node:child_process';
-import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -34,6 +35,12 @@ for (const f of ['20-watering.png', 'square-peg.woff2', 'SQUARE-PEG-OFL.txt']) c
 run('npx ng build showcase --base-href /showcase/ --output-path dist/site-showcase');
 cpSync(join(root, 'dist/site-showcase/browser'), join(out, 'showcase'), { recursive: true });
 rmSync(join(root, 'dist/site-showcase'), { recursive: true, force: true });
+
+// The acceptance app, at /demo/, built from the packed packages as a stranger would.
+if (existsSync(join(root, 'acceptance'))) {
+  run('npm run pack');
+  run('node scripts/check-app.mjs acceptance --out dist/site/demo -- --base-href /demo/');
+}
 
 // What the running site says it is.
 const version = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')).version;
