@@ -1826,7 +1826,7 @@
       "version": "1.0.1",
       "name": "On npm",
       "track": "Distribution",
-      "status": "Approved by TL on Niko's word, 2026-11-15 (decision 49). Built in session 70-folio-packages-github.",
+      "status": "Shipped 2026-11-15: primal-ui#11 merged as c955b35 (pinned to 4c678c9, QA'd B at Standard), tag 1.0.1, GitHub release, live at primal.myceliumllc.dev. On npm after the first manual publish and the trusted publishers (docs/publishing.md). Next from QA: publish.yml should tell a missing package (404) from an unreachable registry; the adapter README's router snippet should import ApplicationConfig and routes.",
       "dependsOn": [
         "1.0.0"
       ],
@@ -1847,7 +1847,8 @@
           "state": "done"
         },
         {
-          "text": "Release chain for 1.0.1, the first publish by hand, the trusted publishers set, and npm showing 1.0.1 for all four."
+          "text": "*Partial 2026-11-15:* Release chain for 1.0.1: QA B at 4c678c9; primal-ui#11 merged as c955b35, tag 1.0.1, GitHub release; Deploy live (1.0.1 c955b35, the mark at /brand/primal-mark.png); the Publish run on the tag skipped all four as not on npm yet, as designed. Missing: the first manual publish and the four trusted publishers, then npm showing 1.0.1.",
+          "state": "partial"
         }
       ],
       "rollout": "Merged and tagged 1.0.1; the site deploys on the tag; the first version of each package is published by hand from the tag, then each package's trusted publisher is set.",
@@ -2065,6 +2066,24 @@
             12,
             13,
             14
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.1",
+      "name": "On npm",
+      "date": "2026-11-15",
+      "deployed": "Deploy workflow on tag 1.0.1 (run 43648266187): primal.myceliumllc.dev /version.json states 1.0.1 c955b35. Publish run 43648266205 green, every package skipped as not on npm yet.",
+      "delivered": "The packages ready for npmjs with full metadata, a README with the mark each, and Trusted Publishing (primal-ui#11 merged c955b35, tag 1.0.1, GitHub release). Not delivered yet: the packages on npm, which wait on the first manual publish by the myceliumllc account.",
+      "delivers": [
+        {
+          "milestone": "1.0.1",
+          "items": [
+            1,
+            2,
+            3,
+            4
           ]
         }
       ]
