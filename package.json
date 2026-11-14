@@ -1,6 +1,6 @@
 {
   "name": "primal-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "build": "node packages/tokens/build.mjs && node packages/contracts/build.mjs && node packages/contracts/check-contracts.mjs && ng build primal-angular && ng build showcase",
