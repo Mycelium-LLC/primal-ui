@@ -5,10 +5,11 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   template: `
+    <a class="pr-skip" href="#main">Skip to Content</a>
     <header class="app-bar">
       <a class="app-brand" href="/">My Primal App</a>
     </header>
-    <main class="app-main"><router-outlet /></main>
+    <main id="main" class="app-main" tabindex="-1"><router-outlet /></main>
   `,
   styleUrl: './app.css',
 })

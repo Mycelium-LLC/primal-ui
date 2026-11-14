@@ -3504,6 +3504,20 @@ summary {
   white-space: nowrap;
 }
 
+/* A skip link: the first stop for the keyboard, out of sight until it has focus; it goes to the page's main content. */
+.pr-skip {
+  position: absolute;
+  inset-inline-start: -100vw;
+}
+
+.pr-skip:focus {
+  inset-inline-start: var(--pr-gutter);
+  inset-block-start: var(--pr-gutter);
+  z-index: var(--pr-layer-overlay);
+  background-color: var(--pr-color-surface-raised);
+  padding: var(--pr-gap-component);
+}
+
 /* ---------------------------------------------------------------- page transitions */
 /*
  * A page change cross-fades what is on screen: the old view steps out quickly, the new one comes

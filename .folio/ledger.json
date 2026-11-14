@@ -229,6 +229,41 @@
       "n": 41,
       "decision": "Every colour pair reads for any black and white, within a stated range",
       "ruling": "Session 35, 2026-11-03 (Niko: 'u decide all'). The roles are measured, not assumed: any black up to 0.22 OKLCH lightness and any white from 0.95, tinted or not, with any primary, keeps every pair at WCAG 2.2 AA. The system colours follow the page's white exactly (relative colour in CSS); the primary as text sits at a luminance cap of 0.11 (was 0.14, so Magma's link is a shade deeper), the fill's dark floor is 0.176 (Magma's own, so Magma stays exactly Magma), and the companion and tertiary sit 0.04 darker in light so an out-of-gamut hue can't wash out. The build's contrast check sweeps 27 blacks and whites; the Colour page states the range and shows any miss outside it."
+    },
+    {
+      "n": 42,
+      "decision": "Trademark and existing use, checked again",
+      "ruling": "Clear to go public as Mycelium Primal; decision 35 stands (TL on Niko's delegation, 2026-11-14). The check (USPTO, EUIPO and WIPO through public aggregators, npm, GitHub, domains, other UI kits) found word overlap for different goods only: live US PRIMAL registrations of Linivan Inc. (formerly Primal Fusion: 2498791, 4134560, 4134562, 8073137, classes 9 and 42, software for searching and analysing data); Primal Systems' pending 98254892 (a Nostr social app); MYCELIUM 6352173 is a crypto wallet (class 9); nothing named Primal is a UI kit or design system. The practical risk is confusion with GitHub's Primer and PrimeTek's Prime family, not a legal one. Not checked directly: the USPTO search itself (JavaScript), WIPO (captcha), EUIPO eSearch. Findings in docs/qa/1.0.0.md."
+    },
+    {
+      "n": 43,
+      "decision": "npm, confirmed",
+      "ruling": "@mycelium-llc on the public npm registry, as decision 36 (TL on Niko's delegation, 2026-11-14; @mycelium is someone else's, and @mycelium-llc is unclaimed). Niko's one step: create the free npm organisation mycelium-llc and an automation token, stored as the repository secret NPM_TOKEN; then Publish runs by hand on the 1.0.0 tag (workflow_dispatch) and skips any version already on npm."
+    },
+    {
+      "n": 44,
+      "decision": "License, confirmed",
+      "ruling": "MIT, with CONTRIBUTING, CODE_OF_CONDUCT and CHANGELOG, as decision 37 (TL on Niko's delegation, 2026-11-14)."
+    },
+    {
+      "n": 45,
+      "decision": "Hosting, confirmed",
+      "ruling": "Public on Firebase Hosting, site mycelium-primal in the existing project myceliumllc-dev (billing account 03 is at its project cap, so no new project), at primal.myceliumllc.dev, as decision 38 (TL on Niko's delegation, 2026-11-14). The zone myceliumllc.dev is Cloud DNS in the-guild-mycelium-llc per Vault's domain table; its CNAME to mycelium-primal.web.app and the certificate are in place."
+    },
+    {
+      "n": 46,
+      "decision": "Going public, the word",
+      "ruling": "TL gave the word decision 40 waits for (TL on Niko's delegation, 2026-11-14; Niko, 2026-11-14: 'i think we can get primal ui already launched and public in the website too'): the repository flips to public once the Forensic QA passes on the exact head and a secrets scan of the whole history is clean; npm follows Niko's npm step. Mycelium's website presents Primal in its own release."
+    },
+    {
+      "n": 47,
+      "decision": "Pull requests never run on Mycelium's machines",
+      "ruling": "With the repository public, a pull request may come from a fork, so CI's runner routing (ACTIONS_RUNNER_MODE) never sends a pull_request job to the self-hosted pool; pushes, tags and the deploy keep the routing, and the deploy's keyless sign-in only trusts main and tags of this repository. Hosted minutes are free for a public repository. Decided by Claude under decision 12."
+    },
+    {
+      "n": 48,
+      "decision": "The skip link is Primal's",
+      "ruling": "The showcase and the landing page each carried the same hand-written skip link, and Field Notes and the starter had none: a foundational piece Primal lacked. It is now .pr-skip in primal-css, named in the app shell's contract, and used by the showcase, the landing page, Field Notes and the starter. Decided by Claude under decision 12."
     }
   ],
   "releases": [
@@ -1623,7 +1658,7 @@
       "version": "1.0.0",
       "name": "Open to everyone",
       "track": "Distribution",
-      "status": "Ready for QA 2026-11-03 in release/1.0.0 (session 35). Going public waits on Niko: the npm token and his word.",
+      "status": "Ready for QA 2026-11-03 in release/1.0.0 (session 35); 2026-11-14 TL gave the word to go public on Niko's delegation (decisions 42 to 46) and session F4 added the trademark re-check, the fork-safe CI and the skip link (decisions 47, 48). npm waits on Niko's npm step.",
       "dependsOn": [
         "0.9.0"
       ],
@@ -1677,6 +1712,10 @@
         },
         {
           "text": "*Done 2026-11-03:* A secrets sweep of the whole history before the repository goes public.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-14:* Session F4: the trademark check again with registration numbers (decision 42), CI never runs a pull request on Mycelium's machines (decision 47), the skip link in primal-css and every app (decision 48), Publish re-runnable on a tag once NPM_TOKEN exists (decision 43).",
           "state": "done"
         },
         {
