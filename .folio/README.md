@@ -24,7 +24,7 @@ Addresses are `primal/<feature>/<requirement>`. Statements never name a screen, 
 | 0.7.0 | Things look like what they are (content, information, layout, first cells) | shipped 2026-11-03 in 0.9.0 (#7 → 7075e36, tag 0.9.0) |
 | 0.8.0 | Whole places to work in (reference surfaces) | shipped 2026-11-03 in 0.9.0 (#7 → 7075e36, tag 0.9.0) |
 | 0.9.0 | Every element keeps its promise (the contract catalog) | shipped 2026-11-03 in 0.9.0 (#7 → 7075e36, tag 0.9.0) |
-| 1.0.0 | Open to everyone (open source, published packages, the acceptance test) | ready for QA in release/1.0.0 |
+| 1.0.0 | Open to everyone (open source, published packages, the acceptance test) | shipped 2026-11-14 (#9 → 1e17565, tag 1.0.0), live at primal.myceliumllc.dev; npm waits on Niko |
 
 ## Checking
 

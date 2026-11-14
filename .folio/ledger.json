@@ -1658,7 +1658,7 @@
       "version": "1.0.0",
       "name": "Open to everyone",
       "track": "Distribution",
-      "status": "Ready for QA 2026-11-03 in release/1.0.0 (session 35); 2026-11-14 TL gave the word to go public on Niko's delegation (decisions 42 to 46) and session F4 added the trademark re-check, the fork-safe CI and the skip link (decisions 47, 48). npm waits on Niko's npm step.",
+      "status": "Shipped 2026-11-14: primal-ui#9 merged as 1e17565 (pinned to 333c536, QA'd B at Forensic), tag 1.0.0, GitHub release, live at https://primal.myceliumllc.dev, repository public. npm waits on Niko (decision 43).",
       "dependsOn": [
         "0.9.0"
       ],
@@ -1719,7 +1719,8 @@
           "state": "done"
         },
         {
-          "text": "Release chain for 1.0.0: QA at Forensic care, then public, published, deployed and verified."
+          "text": "*Partial 2026-11-14:* Release chain for 1.0.0: Forensic QA C, D, then B at 333c536; repository public (a template, private vulnerability reporting on); primal-ui#9 merged as 1e17565 pinned to 333c536, tag 1.0.0, GitHub release; Deploy put 1.0.0 (1e17565) live at primal.myceliumllc.dev. Missing: npm, which waits on Niko's npm organisation and NPM_TOKEN; the Publish run on the tag stopped there.",
+          "state": "partial"
         }
       ],
       "rollout": "After the final QA: the repository goes public, the packages publish to npm from the 1.0.0 tag, and the landing page and showcase deploy to primal.myceliumllc.dev.",
@@ -1992,6 +1993,34 @@
             3,
             4,
             5
+          ]
+        }
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "name": "Open to everyone",
+      "date": "2026-11-14",
+      "deployed": "Deployed by the Deploy workflow on tag 1.0.0 (run 43631668552) to primal.myceliumllc.dev; /version.json states 1.0.0 1e17565. Main CI passed on the release head 333c536 (run 43630969085).",
+      "delivered": "Primal is public: MIT, the repository public and a template, the landing page, showcase and Field Notes live, the starter and the fork guide (primal-ui#9 merged 1e17565, tag 1.0.0, GitHub release). Not delivered: the packages on npm, waiting on Niko's npm organisation and token.",
+      "delivers": [
+        {
+          "milestone": "1.0.0",
+          "items": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
           ]
         }
       ]
