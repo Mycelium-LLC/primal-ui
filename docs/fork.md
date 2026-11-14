@@ -39,7 +39,7 @@ Everything else lives in `packages/tokens/src/tokens.mjs`: the font families, th
 - Change every import of the Angular package to your name. The showcase, the acceptance app, the starter and the contracts all import it, so do it in one pass and check nothing is left:
 
   ```bash
-  grep -rl "@mycelium-llc/primal-" --include='*.ts' --include='*.json' --include='*.md' --include='*.html' --exclude-dir=node_modules --exclude-dir=dist . \
+  grep -rl "@mycelium-llc/primal-" --include='*.ts' --include='*.mjs' --include='*.json' --include='*.md' --include='*.html' --exclude-dir=node_modules --exclude-dir=dist . \
     | xargs sed -i.bak 's#@mycelium-llc/primal-#@your-scope/your-system-#g' && find . -name '*.bak' -not -path './node_modules/*' -delete
   grep -rn "@mycelium-llc/primal-" --exclude-dir=node_modules --exclude-dir=dist .   # prints nothing
   npm install && npm run build

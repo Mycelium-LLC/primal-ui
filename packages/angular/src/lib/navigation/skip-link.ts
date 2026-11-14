@@ -21,6 +21,6 @@ export class PrimalSkipLink {
     if (!target) return;
     event.preventDefault();
     target.focus();
-    target.scrollIntoView({ block: 'start' });
+    target.scrollIntoView?.({ block: 'start' });
   }
 }
