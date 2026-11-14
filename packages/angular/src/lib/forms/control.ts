@@ -1,6 +1,7 @@
 import { Directive, ElementRef, computed, effect, inject, input, signal, untracked } from '@angular/core';
 import { PRIMAL_MESSAGES, PrimalNativeControl } from './messages';
 import { PrimalForm } from './form';
+import { primalWatchSelect } from './select-value';
 
 let next = 0;
 
@@ -42,6 +43,7 @@ export class PrimalControl {
   private readonly validity = signal(0);
 
   constructor() {
+    if (this.element instanceof HTMLSelectElement) primalWatchSelect(this.element);
     // A reset form starts over: no field counts as answered until the person answers it again.
     effect(() => {
       if (!this.form?.resets()) return;

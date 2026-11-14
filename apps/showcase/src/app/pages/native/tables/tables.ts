@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PRIMAL_TABLES } from 'primal-angular';
+import { PRIMAL_TABLES } from '@mycelium-llc/primal-angular';
 import { CoverageTable } from '../../../shell/coverage-table/coverage-table';
 
 /* MOCK DATA: a month of build times, to show a long numeric table. */

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mycelium Primal · Design from first principles</title>
+  <meta name="description" content="An open-source design system where every element keeps a written promise. Use it as it is, or make it your own. MIT licensed." />
+  <link rel="canonical" href="https://primal.myceliumllc.dev/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mycelium Primal · Design from first principles" />
+  <meta property="og:description" content="An open-source design system where every element keeps a written promise. Use it as it is, or make it your own." />
+  <meta property="og:url" content="https://primal.myceliumllc.dev/" />
+  <meta property="og:image" content="https://primal.myceliumllc.dev/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="primal/fonts/google-sans-latin-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="primal/primal-tokens.css" />
+  <link rel="stylesheet" href="primal/primal.css" />
+  <link rel="stylesheet" href="site.css" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      "name": "Mycelium Primal",
+      "description": "An open-source design system where every element keeps a written promise.",
+      "codeRepository": "https://github.com/Mycelium-LLC/primal-ui",
+      "license": "https://opensource.org/licenses/MIT",
+      "programmingLanguage": ["CSS", "TypeScript"],
+      "author": { "@type": "Organization", "name": "Mycelium LLC" }
+    }
+  </script>
+  <script type="module" src="site.js"></script>
+</head>
+<body>
+  <a class="pr-skip" href="#main">Skip to Content</a>
+
+  <header class="site-bar">
+    <a class="site-brand" href="./" aria-label="Mycelium Primal, home">Mycelium <strong>Primal</strong></a>
+    <nav class="site-nav" aria-label="Primal">
+      <a href="showcase/">Showcase</a>
+      <a href="showcase/contracts/catalog">Contracts</a>
+      <a href="https://github.com/Mycelium-LLC/primal-ui">GitHub</a>
+    </nav>
+    <a class="pr-button pr-button-primary site-bar-cta" href="#start">Install Primal</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- Hero: what it is, in one look -->
+    <section class="site-hero" aria-labelledby="hero-title">
+      <p class="site-kicker">Open source · MIT · Angular first, CSS everywhere</p>
+      <h1 id="hero-title">Design from first principles.</h1>
+      <p class="site-lead">
+        Mycelium Primal is a design system where every element keeps a written promise. Use it as it is, or make it the base of
+        your own.
+      </p>
+      <div class="site-ctas">
+        <a class="pr-button pr-button-primary" href="#start">Install Primal</a>
+        <a class="pr-button" href="https://github.com/Mycelium-LLC/primal-ui/generate">Fork Primal</a>
+      </div>
+      <p class="site-nudge">Free forever. No account, no tracking.</p>
+      <!-- The whole idea in one picture: a system is three choices. They follow the picker below. -->
+      <div class="site-hero-art" aria-hidden="true">
+        <span class="site-dot site-dot-black"></span>
+        <span class="site-dot site-dot-white"></span>
+        <span class="site-dot site-dot-primary"></span>
+      </div>
+    </section>
+
+    <!-- How: three steps -->
+    <section class="site-section" aria-labelledby="how-title">
+      <h2 id="how-title">Three steps to your own system</h2>
+      <ol class="site-steps">
+        <li>
+          <span class="site-step-n" aria-hidden="true">1</span>
+          <h3>Install</h3>
+          <p>Four small packages: tokens, CSS, contracts and the Angular adapter.</p>
+        </li>
+        <li>
+          <span class="site-step-n" aria-hidden="true">2</span>
+          <h3>Choose three colours</h3>
+          <p>Your black, your white and your primary. Every other colour derives from them, and passes contrast.</p>
+        </li>
+        <li>
+          <span class="site-step-n" aria-hidden="true">3</span>
+          <h3>Build</h3>
+          <p>Forms, actions, navigation, dialogs, tables and whole surfaces, with keyboard and screen readers handled.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Feature 1: your colour, live -->
+    <section class="site-feature" aria-labelledby="colour-title">
+      <div class="site-feature-words">
+        <h2 id="colour-title">Your brand in three choices</h2>
+        <p>
+          Pick a black, a white and a primary. Primal derives every role from them, in light and dark, and checks every pair against
+          WCAG 2.2 AA. Try it: this whole page follows.
+        </p>
+        <form class="site-colour" id="colour" aria-label="This page's colours">
+          <label><input type="color" name="black" value="#0b0b0d" /> Black</label>
+          <label><input type="color" name="white" value="#ffffff" /> White</label>
+          <label><input type="color" name="primary" value="#e61924" /> Primary</label>
+          <button type="button" class="pr-button-quiet" id="colour-reset">Reset Colours</button>
+        </form>
+        <p class="site-colour-result" id="colour-result" aria-live="polite"></p>
+      </div>
+      <div class="site-feature-visual" aria-hidden="true">
+        <div class="site-sample">
+          <p class="site-sample-title">New Project</p>
+          <label class="site-sample-field">Name<input value="Field notes" tabindex="-1" /></label>
+          <p><span class="pr-status" data-state="positive">Ready</span> <span class="pr-badge">3 members</span></p>
+          <div class="site-sample-actions">
+            <span class="pr-button pr-button-quiet">Cancel</span>
+            <span class="pr-button pr-button-primary">Create Project</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 2: contracts -->
+    <section class="site-feature site-feature-flip" aria-labelledby="contract-title">
+      <div class="site-feature-words">
+        <h2 id="contract-title">Every element keeps a promise</h2>
+        <p>
+          Each of Primal's 53 parts has a contract: what it promises, its states, its keys, its accessibility and the markup to copy.
+          The contracts are plain JSON, framework-free, and a checker keeps your own just as complete.
+        </p>
+        <p><a href="showcase/contracts/catalog">Read the Contract Catalog</a></p>
+      </div>
+      <div class="site-feature-visual">
+        <figure class="site-contract" id="contract">
+          <figcaption>Button · primitive</figcaption>
+          <dl>
+            <dt>Promise</dt>
+            <dd data-part="promise">Pressing it does the one thing its words say, once.</dd>
+            <dt>States</dt>
+            <dd data-part="states">Ready, Hover, Pressed, Focus, Busy, Done, Not available, Disabled</dd>
+          </dl>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Feature 3: both directions, both themes -->
+    <section class="site-feature" aria-labelledby="direction-title">
+      <div class="site-feature-words">
+        <h2 id="direction-title">Right to left, and dark, from the start</h2>
+        <p>
+          Every rule is written in logical properties and every colour has its dark value, so Hebrew, Arabic and night mode are
+          never a retrofit. Turn them on here.
+        </p>
+        <div class="site-switches" role="group" aria-label="This page's direction and theme">
+          <button type="button" class="pr-button" id="flip-direction" aria-pressed="false">Read Right to Left</button>
+          <button type="button" class="pr-button" id="flip-theme" aria-pressed="false">Turn Dark On</button>
+        </div>
+      </div>
+      <div class="site-feature-visual" aria-hidden="true">
+        <ul class="pr-list-items site-sample-list">
+          <li><span class="pr-item-body"><span class="pr-item-title">Ada Shapiro</span><span class="pr-item-line">Design</span></span><span class="pr-item-end"><span class="pr-status" data-state="positive">Active</span></span></li>
+          <li><span class="pr-item-body"><span class="pr-item-title">נועה לוי</span><span class="pr-item-line">מוצר</span></span><span class="pr-item-end"><span class="pr-status" data-state="positive">פעילה</span></span></li>
+          <li><span class="pr-item-body"><span class="pr-item-title">Omar Haddad</span><span class="pr-item-line">Engineering</span></span><span class="pr-item-end"><span class="pr-status">Invited</span></span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Start: the two ways in -->
+    <section class="site-section" id="start" aria-labelledby="start-title" tabindex="-1">
+      <h2 id="start-title">Two ways in</h2>
+      <div class="site-ways">
+        <section aria-labelledby="install-title">
+          <h3 id="install-title">Install Primal</h3>
+          <p>Use it as it is, in a new or existing Angular 22 project.</p>
+          <pre><code>npm install @mycelium-llc/primal-tokens @mycelium-llc/primal-css @mycelium-llc/primal-angular</code></pre>
+          <p>Then load the styles in <code>angular.json</code>, tokens first:</p>
+          <pre><code>"styles": [
+  "node_modules/@mycelium-llc/primal-tokens/primal-tokens.css",
+  "node_modules/@mycelium-llc/primal-css/src/primal.css"
+]</code></pre>
+          <p>Not on Angular? The two CSS packages work on any web page. <a href="showcase/start">Read Getting Started</a></p>
+        </section>
+        <section aria-labelledby="fork-title">
+          <h3 id="fork-title">Fork Primal</h3>
+          <p>Make it the base of your own design system: your name, your colour, your contracts.</p>
+          <ol>
+            <li>Make your copy with <strong>Use this template</strong> on GitHub.</li>
+            <li>Set your three colours on the <a href="showcase/foundation/colour">Colour page</a> and save its file.</li>
+            <li>Write your contracts and check them: <code>npx -p @mycelium-llc/primal-contracts primal-contracts-check contracts/</code></li>
+          </ol>
+          <p><a class="pr-button" href="https://github.com/Mycelium-LLC/primal-ui/generate">Fork Primal</a></p>
+          <p><a href="https://github.com/Mycelium-LLC/primal-ui/blob/main/docs/fork.md">Read the Fork Guide</a></p>
+        </section>
+      </div>
+    </section>
+
+    <!-- Close -->
+    <section class="site-close" data-theme="dark" aria-labelledby="close-title">
+      <img class="site-close-art" src="character/20-watering.png" alt="" width="160" height="160" loading="lazy" />
+      <span class="site-close-note" aria-hidden="true">grow your own</span>
+      <h2 id="close-title">Start from first principles.</h2>
+      <div class="site-ctas">
+        <a class="pr-button pr-button-primary" href="#start">Install Primal</a>
+        <a class="pr-button" href="https://github.com/Mycelium-LLC/primal-ui/generate">Fork Primal</a>
+      </div>
+      <p class="site-nudge">Free forever. MIT licensed.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Mycelium Primal, by <a href="https://myceliumllc.dev">Mycelium</a>. <span id="version"></span></p>
+    <p>
+      <a href="https://github.com/Mycelium-LLC/primal-ui/blob/main/LICENSE">MIT License</a> ·
+      <a href="https://github.com/Mycelium-LLC/primal-ui/blob/main/CHANGELOG.md">Changelog</a> ·
+      <a href="https://github.com/Mycelium-LLC/primal-ui">GitHub</a>
+    </p>
+  </footer>
+</body>
+</html>

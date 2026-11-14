@@ -51,7 +51,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "import": "import { PRIMAL_FORMS } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-field label=\"Country\">\n  <primal-select>\n    <select primalControl required>\n      <option value=\"\">Choose a country</option>\n      <option value=\"il\">Israel</option>\n    </select>\n  </primal-select>\n</primal-field>"
   },
   "example": "/forms/select"

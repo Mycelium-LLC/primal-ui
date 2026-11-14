@@ -1,0 +1,37 @@
+<a class="pr-skip" href="#main">Skip to Content</a>
+<div class="pr-shell">
+  <div class="pr-shell-bar">
+    <button primalIconButton class="pr-shell-menu" [primalShellMenu]="nav" #menu="primalShellMenu"
+      [label]="menu.open() ? 'Close Menu' : 'Show Menu'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+    </button>
+    <a class="pr-shell-brand" routerLink="/projects">Field Notes</a>
+    @if (auth.account(); as me) {
+      <primal-menu label="Your account" class="pr-shell-account">
+        <button primalMenuTrigger type="button" class="pr-button-quiet pr-icon-button" [attr.aria-label]="me.name + ', your account'">
+          <primal-avatar [name]="me.name" size="small" />
+        </button>
+        <button primalMenuItem type="button" routerLink="/settings/profile">Open Settings</button>
+        <hr />
+        <button primalMenuItem type="button" (click)="signOut()">Sign Out</button>
+      </primal-menu>
+    }
+  </div>
+
+  <nav id="places" class="pr-shell-nav" #nav aria-label="Field Notes">
+    <ul class="pr-nav-list">
+      @for (p of places; track p.path) {
+        <li>
+          <a [routerLink]="p.path" routerLinkActive ariaCurrentWhenActive="page">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path [attr.d]="p.icon" /></svg>
+            {{ p.label }}
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <main id="main" class="pr-shell-main" tabindex="-1">
+    <router-outlet />
+  </main>
+</div>

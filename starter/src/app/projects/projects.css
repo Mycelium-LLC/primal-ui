@@ -1,0 +1,16 @@
+.projects-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pr-gap-group);
+  margin-block-end: var(--pr-gap-group);
+}
+
+.projects-head h1 {
+  margin: 0;
+}
+
+.projects-head h1:focus {
+  outline: none;
+}

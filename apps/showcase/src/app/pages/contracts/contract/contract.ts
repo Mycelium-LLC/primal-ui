@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_CONTENT } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_CONTENT } from '@mycelium-llc/primal-angular';
 import { CONTRACTS, LAYERS } from '../contracts';
 
 /** One component's contract, generated from packages/contracts: nothing on this page is written by hand. */

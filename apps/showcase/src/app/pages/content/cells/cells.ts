@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PRIMAL_CELLS, PRIMAL_CONTENT, PrimalSearchResult } from 'primal-angular';
+import { PRIMAL_CELLS, PRIMAL_CONTENT, PrimalSearchResult } from '@mycelium-llc/primal-angular';
 import { NAV } from '../../../shell/nav';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

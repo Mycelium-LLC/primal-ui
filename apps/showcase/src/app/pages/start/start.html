@@ -4,27 +4,26 @@
   Angular is the first framework with an adapter.
 </p>
 <p>
-  Primal isn't published to a package registry yet, so you use it from its repository, <code>Mycelium-LLC/primal-ui</code>,
-  which is private for now.
+  Want a working app right away? Start from the starter, an Angular app with Primal set up:
+  <code>npx degit Mycelium-LLC/primal-ui/starter my-app</code>.
 </p>
 
 <h2>1. Get the packages</h2>
-<p>
-  Until Primal is published, its four packages come from the repository as package files. Clone it, pack it (Node 24), and
-  install the four files into your project:
-</p>
+<p>Primal's packages are on npm. For an Angular project, install the tokens, the CSS and the adapter:</p>
+<pre><code>{{ install }}</code></pre>
+<p>Working on Primal itself, or trying a change before it's published? Pack it from a clone and install the files instead:</p>
 <pre><code>{{ build }}</code></pre>
 <dl>
-  <dt><code>primal-tokens</code></dt>
+  <dt><code>@mycelium-llc/primal-tokens</code></dt>
   <dd>Every token as a CSS custom property, with its light and dark values (<code>primal-tokens.css</code>).</dd>
-  <dt><code>primal-css</code></dt>
+  <dt><code>@mycelium-llc/primal-css</code></dt>
   <dd>The core styles (<code>src/primal.css</code>) and the Google Sans font files they load.</dd>
-  <dt><code>primal-angular</code></dt>
+  <dt><code>@mycelium-llc/primal-angular</code></dt>
   <dd>The Angular adapter, for Angular 22 or later.</dd>
-  <dt><code>primal-contracts</code></dt>
+  <dt><code>@mycelium-llc/primal-contracts</code></dt>
   <dd>
     Every component's contract as JSON, with its schema, and <code>primal-contracts-check</code> to check your own when you build
-    a design system on Primal: <code>npx primal-contracts-check path/to/contracts</code>. It reads every <code>.json</code> file in
+    a design system on Primal: <code>npx -p @mycelium-llc/primal-contracts primal-contracts-check path/to/contracts</code>. It reads every <code>.json</code> file in
     that folder as a contract, so keep the folder for contracts only.
   </dd>
 </dl>

@@ -1,0 +1,68 @@
+<div class="fn-head">
+  <h1 id="projects-title" tabindex="-1">Projects</h1>
+  @if (workspace.projectCount()) {
+    <button primalButton type="button" emphasis="primary" kind="constructive" (click)="startCreating(newProject)">New Project</button>
+  }
+</div>
+
+@if (workspace.projectCount()) {
+  <div class="pr-table" role="region" aria-labelledby="projects-title" tabindex="0">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Project</th>
+          <th scope="col">Owner</th>
+          <th scope="col">Status</th>
+          <th scope="col" data-numeric>Notes</th>
+          <th scope="col">Updated</th>
+          <!-- Names given by aria-label, not .pr-visually-hidden: an absolutely placed span inside a
+               sideways-scrolling .pr-table escapes its clip and scrolls the whole page on a phone. -->
+          <th scope="col" data-sort="false" aria-label="Actions"></th>
+        </tr>
+      </thead>
+      <tbody #rows>
+        @for (p of workspace.projects(); track p.slug) {
+          <tr>
+            <td><a [routerLink]="['/projects', p.slug]">{{ p.name }}</a></td>
+            <td>{{ p.owner }}</td>
+            <td><span class="pr-status" [attr.data-state]="statusState[p.status]">{{ statusLabel[p.status] }}</span></td>
+            <td data-numeric>{{ p.notes.length }}</td>
+            <td><time [attr.datetime]="p.updated">{{ p.updated }}</time></td>
+            <td>
+              <button primalButton type="button" kind="destructive" [attr.aria-label]="'Delete Project “' + p.name + '”'" (click)="remove(p)">Delete Project</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+} @else {
+  <primal-empty title="No projects yet" reason="A project holds one piece of field work and its notes. Make the first one.">
+    <button primalButton type="button" emphasis="primary" kind="constructive" (click)="startCreating(newProject)">New Project</button>
+  </primal-empty>
+}
+
+<primal-dialog title="New project" description="It opens as soon as it's made." [(open)]="creating">
+  <form #newProject primalForm id="new-project" class="pr-stack" data-gap="group" (validSubmit)="create(newProject)">
+    <primal-field label="Name">
+      <input primalControl name="name" required maxlength="60" autocomplete="off" />
+    </primal-field>
+    <primal-field label="Owner" description="Who answers for it.">
+      <primal-select>
+        <select primalControl name="owner" required>
+          <option value="">Choose an owner</option>
+          @for (person of workspace.people; track person.email) {
+            <option [value]="person.name">{{ person.name }}</option>
+          }
+        </select>
+      </primal-select>
+    </primal-field>
+    <primal-field label="Summary" description="One or two sentences on what it's for.">
+      <textarea primalControl name="summary" rows="3" maxlength="240"></textarea>
+    </primal-field>
+  </form>
+  <div class="pr-dialog-actions" dialog-actions>
+    <button primalButton type="button" emphasis="quiet" (click)="creating.set(false)">Discard New Project</button>
+    <button primalButton type="submit" form="new-project" emphasis="primary" kind="constructive">Create Project</button>
+  </div>
+</primal-dialog>

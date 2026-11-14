@@ -1,0 +1,43 @@
+name: Publish
+
+# A release tag (x.y.z) on main publishes the four packages to npm with provenance. Run it by hand on a
+# tag (Actions → Publish → Run workflow → the tag) to publish a release whose tag came before the token.
+on:
+  push:
+    tags: ['[0-9]+.[0-9]+.[0-9]+']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # npm provenance
+
+jobs:
+  publish:
+    # Provenance needs a GitHub-hosted runner, so this job never moves to the self-hosted pool.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - name: The tag is the packages' version
+        run: |
+          for p in packages/tokens packages/css packages/contracts packages/angular; do
+            v=$(node -p "require('./$p/package.json').version")
+            [ "$v" = "$GITHUB_REF_NAME" ] || { echo "$p is $v, the tag is $GITHUB_REF_NAME"; exit 1; }
+          done
+      - run: npm run check:tokens && npm run check:contracts && npm test
+      - run: npm run build
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          [ -n "$NODE_AUTH_TOKEN" ] || { echo "::error::The repository secret NPM_TOKEN is not set: an automation token of the npm organisation mycelium-llc."; exit 1; }
+          for p in packages/tokens packages/css packages/contracts dist/primal-angular; do
+            name=$(node -p "require('./$p/package.json').name"); version=$(node -p "require('./$p/package.json').version")
+            if npm view "$name@$version" version >/dev/null 2>&1; then echo "$name@$version is already on npm"; continue; fi
+            (cd "$p" && npm publish --provenance --access public)
+          done

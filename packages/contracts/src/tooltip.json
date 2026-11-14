@@ -45,7 +45,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_TOP_LAYERS } from 'primal-angular';",
+    "import": "import { PRIMAL_TOP_LAYERS } from '@mycelium-llc/primal-angular';",
     "markup": "<button primalIconButton type=\"button\" label=\"Copy Address\" primalTooltip=\"Copy address, ⌘C\">…</button>"
   },
   "example": "/navigation/popovers"

@@ -1,0 +1,449 @@
+/*
+ * The landing page. Primal's tokens and core CSS do the work; this file only lays the page out.
+ * Every value is a token, so the colour picker, dark and right to left reach all of it.
+ */
+
+@font-face {
+  font-family: 'Square Peg';
+  src: url('character/square-peg.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  background-color: var(--pr-color-surface);
+}
+
+:where(main, .site-bar, .site-footer) {
+  --site-width: min(var(--pr-container-reading), 100% - 2 * var(--pr-gutter));
+}
+
+main:focus,
+#start:focus {
+  outline: none;
+}
+
+/* ---------------------------------------------------------------- bar */
+
+/* A section reached by a link lands below the sticky bar, not under it. */
+[id] {
+  scroll-margin-block-start: calc(var(--pr-control-height) + 3 * var(--pr-gap-component));
+}
+
+.site-bar {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--pr-layer-sticky);
+  display: flex;
+  align-items: center;
+  gap: var(--pr-gap-group);
+  padding: var(--pr-gap-component) max(var(--pr-gutter), (100% - var(--pr-container-reading)) / 2);
+  background-color: color-mix(in oklab, var(--pr-color-surface) 88%, transparent);
+  backdrop-filter: blur(var(--pr-gap-component));
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.site-brand {
+  font-size: var(--pr-text-large);
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: var(--pr-gap-group);
+  margin-inline-start: auto;
+}
+
+.site-nav a {
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--pr-color-primary-text);
+}
+
+/* On a phone, the bar keeps the brand and the one call; the links live in the footer. */
+@media (width < 40rem) {
+  .site-nav {
+    display: none;
+  }
+
+  .site-bar-cta {
+    margin-inline-start: auto;
+  }
+}
+
+/* ---------------------------------------------------------------- hero */
+
+.site-hero,
+.site-section,
+.site-feature,
+.site-close,
+.site-footer {
+  inline-size: var(--site-width);
+  margin-inline: auto;
+}
+
+.site-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-block-size: calc(88svh - var(--pr-control-height));
+  padding-block: var(--pr-gap-section);
+}
+
+@media (width >= 56rem) {
+  .site-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-content: center;
+    column-gap: var(--pr-gap-section);
+  }
+
+  .site-hero > :not(.site-hero-art) {
+    grid-column: 1;
+  }
+
+  .site-hero-art {
+    grid-column: 2;
+    grid-row: 1 / span 6;
+  }
+}
+
+/* Three circles: the black, the white and the primary a project chooses. */
+.site-hero-art {
+  position: relative;
+  inline-size: min(100%, 26rem);
+  aspect-ratio: 1;
+  justify-self: center;
+  margin-block-start: var(--pr-gap-section);
+}
+
+.site-dot {
+  position: absolute;
+  inline-size: 58%;
+  aspect-ratio: 1;
+  border-radius: var(--pr-radius-round);
+  transition: background-color var(--pr-duration-base) var(--pr-ease-standard);
+}
+
+.site-dot-black {
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  background-color: var(--pr-black);
+}
+
+.site-dot-white {
+  inset-block-start: 8%;
+  inset-inline-end: 0;
+  background-color: var(--pr-white);
+  box-shadow: inset 0 0 0 var(--pr-border-width) var(--pr-color-border), var(--pr-elevation-2);
+}
+
+.site-dot-primary {
+  inset-block-end: 0;
+  inset-inline-start: 22%;
+  background-color: var(--pr-primary);
+  mix-blend-mode: multiply;
+}
+
+[data-theme='dark'] .site-dot-primary {
+  mix-blend-mode: screen;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .site-dot-primary {
+    mix-blend-mode: screen;
+  }
+}
+
+.site-kicker {
+  margin: 0 0 var(--pr-gap-group);
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+.site-hero h1 {
+  margin: 0;
+  max-inline-size: 14ch;
+  font-size: clamp(var(--pr-text-display), 2rem + 5vw, calc(var(--pr-text-display) * 2));
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.site-lead {
+  max-inline-size: 46ch;
+  margin-block: var(--pr-gap-group) 0;
+  font-size: var(--pr-text-large);
+}
+
+.site-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+  margin-block-start: var(--pr-gap-section);
+}
+
+.site-nudge {
+  margin-block: var(--pr-gap-component) 0;
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+/* On a phone the two calls take the full width, one under the other. */
+@media (width < 40rem) {
+  .site-ctas {
+    flex-direction: column;
+    align-self: stretch;
+  }
+
+  .site-hero-art {
+    inline-size: min(100%, 16rem);
+  }
+}
+
+/* ---------------------------------------------------------------- sections */
+
+.site-section,
+.site-feature {
+  padding-block: var(--pr-gap-section);
+  border-block-start: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.site-section > h2,
+.site-feature h2 {
+  margin-block-start: 0;
+}
+
+.site-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--pr-gap-section);
+  margin: var(--pr-gap-group) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-steps h3 {
+  margin-block: var(--pr-gap-component);
+}
+
+.site-steps p {
+  margin: 0;
+  color: var(--pr-color-text-muted);
+}
+
+.site-step-n {
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--pr-control-height);
+  block-size: var(--pr-control-height);
+  border-radius: var(--pr-radius-round);
+  background-color: var(--pr-color-primary-surface);
+  color: var(--pr-color-primary-text);
+  font-weight: var(--pr-weight-strong);
+}
+
+/* A feature: words on one side, the thing itself on the other; the next one turns round. */
+.site-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--pr-gap-section);
+  align-items: center;
+}
+
+@media (width >= 56rem) {
+  .site-feature {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .site-feature-flip .site-feature-words {
+    order: 2;
+  }
+}
+
+.site-feature-words p {
+  max-inline-size: 52ch;
+}
+
+.site-feature-visual {
+  display: grid;
+  place-items: center;
+  min-block-size: 18rem;
+  padding: var(--pr-gap-section) var(--pr-gap-group);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-sunken);
+}
+
+/* ---------------------------------------------------------------- feature: colour */
+
+.site-colour {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pr-gap-group);
+}
+
+.site-colour label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pr-gap-component);
+}
+
+.site-colour-result {
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+.site-sample {
+  inline-size: min(100%, 22rem);
+  padding: var(--pr-gap-group);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-raised);
+  box-shadow: var(--pr-elevation-2);
+}
+
+.site-sample-title {
+  margin-block: 0 var(--pr-gap-group);
+  font-size: var(--pr-text-large);
+  font-weight: var(--pr-weight-strong);
+}
+
+.site-sample-field {
+  display: grid;
+  gap: var(--pr-gap-component);
+}
+
+.site-sample-field input {
+  pointer-events: none;
+}
+
+.site-sample-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+}
+
+.site-sample-actions .pr-button {
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- feature: contract */
+
+.site-contract {
+  inline-size: min(100%, 24rem);
+  margin: 0;
+  padding: var(--pr-gap-group);
+  border: var(--pr-border-width) solid var(--pr-color-border);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface-raised);
+  font-family: var(--pr-font-mono);
+  font-size: var(--pr-text-small);
+}
+
+.site-contract figcaption {
+  margin-block-end: var(--pr-gap-group);
+  color: var(--pr-color-primary-text);
+  font-weight: var(--pr-weight-strong);
+}
+
+.site-contract dl {
+  margin: 0;
+}
+
+.site-contract dt {
+  color: var(--pr-color-text-muted);
+}
+
+.site-contract dd {
+  margin: 0 0 var(--pr-gap-component);
+}
+
+/* ---------------------------------------------------------------- feature: direction */
+
+.site-switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pr-gap-component);
+}
+
+.site-sample-list {
+  inline-size: min(100%, 24rem);
+}
+
+/* ---------------------------------------------------------------- two ways in */
+
+.site-ways {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: var(--pr-gap-section);
+}
+
+.site-ways h3 {
+  margin-block-start: 0;
+  font-size: var(--pr-text-xl);
+}
+
+.site-ways pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ---------------------------------------------------------------- close */
+
+.site-close {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block: var(--pr-gap-section);
+  padding: var(--pr-gap-section) var(--pr-gutter);
+  border-radius: var(--pr-radius-layer);
+  background-color: var(--pr-color-surface);
+  color: var(--pr-color-text);
+  text-align: center;
+}
+
+.site-close h2 {
+  margin-block: var(--pr-gap-component) 0;
+  font-size: var(--pr-text-3xl);
+}
+
+.site-close .site-ctas {
+  justify-content: center;
+}
+
+.site-close-art {
+  inline-size: 8rem;
+  block-size: auto;
+}
+
+/* The one handwritten note on the page: no information, six words or fewer. */
+.site-close-note {
+  font-family: 'Square Peg', 'Bradley Hand', cursive;
+  font-size: var(--pr-text-2xl);
+  line-height: 1;
+  color: var(--pr-color-primary-text);
+  rotate: -4deg;
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--pr-gap-component);
+  padding-block: var(--pr-gap-group) var(--pr-gap-section);
+  font-size: var(--pr-text-small);
+  color: var(--pr-color-text-muted);
+}
+
+.site-footer p {
+  margin: 0;
+}

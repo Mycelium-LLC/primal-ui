@@ -44,7 +44,7 @@
     ]
   },
   "usage": {
-    "import": "import { primalFocusAfterRemove } from 'primal-angular';",
+    "import": "import { primalFocusAfterRemove } from '@mycelium-llc/primal-angular';",
     "markup": "<ul class=\"pr-list-items\">\n  <li>\n    <span class=\"pr-item-body\">\n      <span class=\"pr-item-title\"><a href=\"/people/ada\">Ada Shapiro</a></span>\n      <span class=\"pr-item-line\">ada@example.com</span>\n    </span>\n    <span class=\"pr-item-end\"><span class=\"pr-status\" data-state=\"positive\">Active</span></span>\n  </li>\n</ul>\n\n<!-- Removing a row (Angular): call primalFocusAfterRemove(list, { fallback: () => heading }) just before you remove it. -->"
   },
   "example": "/content/content"

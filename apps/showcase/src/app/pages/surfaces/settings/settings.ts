@@ -8,7 +8,7 @@ import {
   PrimalConfirm,
   PrimalPreferences,
   PrimalTheme,
-} from 'primal-angular';
+} from '@mycelium-llc/primal-angular';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -25,37 +25,6 @@ const SECTIONS = [
   imports: [PRIMAL_FORMS, PRIMAL_ACTIONS, PRIMAL_FEEDBACK, PRIMAL_CONTENT, RouterLink],
   templateUrl: './settings.html',
   styleUrls: ['../surfaces.css', '../../actions/actions-pages.css'],
-  styles: `
-    .pr-settings {
-      display: grid;
-      grid-template-columns: var(--pr-nav-width) 1fr;
-      gap: var(--pr-gap-section);
-      container-type: inline-size;
-    }
-
-    .pr-settings > section {
-      display: grid;
-      gap: var(--pr-gap-group);
-      align-content: start;
-      min-inline-size: 0;
-    }
-
-    .pr-settings > section > * {
-      margin: 0;
-    }
-
-    /* A container query styles what is inside, so each part takes the full width. */
-    @container (max-width: 40rem) {
-      .pr-settings > * {
-        grid-column: 1 / -1;
-      }
-
-      .pr-settings .pr-nav-list {
-        display: flex;
-        flex-wrap: wrap;
-      }
-    }
-  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurfacesSettingsPage {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_CONTENT, PRIMAL_FEEDBACK, PRIMAL_FORMS } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_CONTENT, PRIMAL_FEEDBACK, PRIMAL_FORMS } from '@mycelium-llc/primal-angular';
 import { slugify } from '../reports';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

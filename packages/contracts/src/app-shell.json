@@ -9,7 +9,8 @@
   "evidence": "Narrow, the navigation and search fold behind Show Menu, nothing lost; choosing a place closes the menu.",
   "behaviour": [
     "Lays itself out by its own width.",
-    "The current place is marked in the navigation."
+    "The current place is marked in the navigation.",
+    "On a phone, Show Menu opens the navigation with focus on the current place; Escape closes it and returns focus to the button; choosing a place closes it (primalShellMenu)."
   ],
   "context": "Every product with more than one place.",
   "relationships": [
@@ -21,10 +22,12 @@
     "Phone, menu open"
   ],
   "accessibility": [
-    "Landmarks: navigation and main, each named."
+    "Landmarks: navigation and main, each named.",
+    "A skip link (.pr-skip) comes first for the keyboard and goes straight to the main place."
   ],
   "failures": [
-    "Never moves the navigation between visits."
+    "Never moves the navigation between visits.",
+    "A skip link never leaves the page or reloads the app."
   ],
   "do": [
     "Keep places in the same order forever."
@@ -34,16 +37,27 @@
   ],
   "api": {
     "css": [
+      ".pr-skip",
       ".pr-shell",
       ".pr-shell-bar",
       ".pr-shell-nav",
       ".pr-shell-main",
       ".pr-shell-menu",
       ".pr-shell-account"
+    ],
+    "angular": [
+      "button[primalShellMenu]",
+      "a.pr-skip"
+    ],
+    "inputs": [
+      "[primalShellMenu]: the shell navigation it opens",
+      "[(open)]: whether the phone menu is open",
+      "a.pr-skip: with PRIMAL_NAVIGATION imported, it focuses its target in place, never reloading the app under a <base href>"
     ]
   },
   "usage": {
-    "markup": "<div class=\"pr-shell\">\n  <div class=\"pr-shell-bar\">\n    <button class=\"pr-shell-menu pr-icon-button\" aria-label=\"Show Menu\">…</button>\n    <a class=\"pr-shell-brand\" href=\"/\">Your product</a>\n  </div>\n  <nav class=\"pr-shell-nav\" aria-label=\"Places\"><ul class=\"pr-nav-list\">…</ul></nav>\n  <main class=\"pr-shell-main\">…</main>\n</div>"
+    "markup": "<a class=\"pr-skip\" href=\"#main\">Skip to Content</a>\n<div class=\"pr-shell\">\n  <div class=\"pr-shell-bar\">\n    <button primalIconButton class=\"pr-shell-menu\" [primalShellMenu]=\"nav\" #menu=\"primalShellMenu\" [label]=\"menu.open() ? 'Close Menu' : 'Show Menu'\">…</button>\n    <a class=\"pr-shell-brand\" href=\"/\">Your product</a>\n  </div>\n  <nav class=\"pr-shell-nav\" #nav aria-label=\"Places\"><ul class=\"pr-nav-list\">…</ul></nav>\n  <main id=\"main\" class=\"pr-shell-main\" tabindex=\"-1\">…</main>\n</div>",
+    "import": "import { PRIMAL_NAVIGATION } from '@mycelium-llc/primal-angular';"
   },
   "example": "/surfaces/app-shell"
 }

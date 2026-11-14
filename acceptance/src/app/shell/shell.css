@@ -1,0 +1,8 @@
+/* The shell fills the page; Primal lays out everything inside it. */
+:host {
+  display: grid;
+}
+
+.pr-shell-main:focus {
+  outline: none;
+}

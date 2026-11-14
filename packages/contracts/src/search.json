@@ -52,7 +52,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_CELLS } from 'primal-angular';",
+    "import": "import { PRIMAL_CELLS } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-search label=\"Search the docs\" [search]=\"searchDocs\" [blank]=\"popular\" />"
   },
   "example": "/content/cells"

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PRIMAL_PLACES, PRIMAL_TABLES } from 'primal-angular';
+import { PRIMAL_PLACES, PRIMAL_TABLES } from '@mycelium-llc/primal-angular';
 
 /** The behaviour model, read from the same words the library exports. */
 @Component({

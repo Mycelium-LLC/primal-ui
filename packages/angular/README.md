@@ -1,26 +1,19 @@
-# primal-angular
+# @mycelium-llc/primal-angular
 
 **TL;DR:** The Angular adapter of Mycelium Primal, the open-source design system by Mycelium: its fields, actions, feedback, navigation, top layers, content and cells as Angular 22+ components and directives. It needs Primal's two style packages loaded as global styles.
 
 ## Install
 
-Until Primal is published, the packages come from its repository as package files:
-
 ```bash
-# in a clone of Mycelium-LLC/primal-ui
-npm install
-npm run pack            # writes dist/packs/*.tgz
-
-# in your project
-npm install /path/to/primal-ui/dist/packs/*.tgz
+npm install @mycelium-llc/primal-tokens @mycelium-llc/primal-css @mycelium-llc/primal-angular
 ```
 
 Load the tokens, then the core styles, then your own theme, in `angular.json`:
 
 ```json
 "styles": [
-  "node_modules/primal-tokens/primal-tokens.css",
-  "node_modules/primal-css/src/primal.css",
+  "node_modules/@mycelium-llc/primal-tokens/primal-tokens.css",
+  "node_modules/@mycelium-llc/primal-css/src/primal.css",
   "src/my-theme.css"
 ]
 ```
@@ -29,7 +22,7 @@ Add the router helpers next to your router:
 
 ```ts
 import { provideRouter } from '@angular/router';
-import { providePrimalRouteScroll, withPrimalTransitions } from 'primal-angular';
+import { providePrimalRouteScroll, withPrimalTransitions } from '@mycelium-llc/primal-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withPrimalTransitions()), providePrimalRouteScroll()],
@@ -53,7 +46,7 @@ Import the group you need into a standalone component:
 
 ```ts
 import { Component } from '@angular/core';
-import { PRIMAL_ACTIONS, PRIMAL_FORMS } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_FORMS } from '@mycelium-llc/primal-angular';
 
 @Component({
   selector: 'app-sign-in',

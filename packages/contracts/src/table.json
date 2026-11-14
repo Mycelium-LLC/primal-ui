@@ -54,7 +54,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_TABLES } from 'primal-angular';",
+    "import": "import { PRIMAL_TABLES } from '@mycelium-llc/primal-angular';",
     "markup": "<div class=\"pr-table\">\n  <table>\n    <caption>Invoices</caption>\n    <thead><tr><th scope=\"col\">Customer</th><th scope=\"col\" data-numeric>Amount</th></tr></thead>\n    <tbody>…</tbody>\n  </table>\n</div>"
   },
   "example": "/native/tables"

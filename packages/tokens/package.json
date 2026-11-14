@@ -1,13 +1,36 @@
 {
-  "name": "primal-tokens",
-  "version": "0.9.0",
-  "private": true,
+  "name": "@mycelium-llc/primal-tokens",
+  "version": "1.0.0",
   "description": "Mycelium Primal's design tokens, framework-independent.",
+  "license": "MIT",
+  "author": "Mycelium LLC",
+  "homepage": "https://primal.myceliumllc.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mycelium-LLC/primal-ui.git",
+    "directory": "packages/tokens"
+  },
+  "bugs": {
+    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "design-system",
+    "mycelium-primal",
+    "css",
+    "design-tokens",
+    "accessibility",
+    "rtl"
+  ],
   "style": "primal-tokens.css",
   "files": [
     "primal-tokens.css",
     "primal-tokens.json",
-    "src"
+    "src",
+    "README.md"
   ],
   "scripts": {
     "build": "node build.mjs",

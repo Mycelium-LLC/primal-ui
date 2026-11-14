@@ -65,7 +65,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_FORMS } from 'primal-angular';",
+    "import": "import { PRIMAL_FORMS } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-field label=\"Email\" description=\"We only use it to send receipts.\">\n  <input primalControl type=\"email\" autocomplete=\"email\" required />\n</primal-field>"
   },
   "example": "/forms/text-fields"

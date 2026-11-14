@@ -62,6 +62,10 @@ export function harmony(choices: Choices): {
 export const LIGHT_CAP: number;
 export const FILL_FLOOR: number;
 export const TEXT_CAP: number;
+export const BLACK_MAX: number;
+export const WHITE_MIN: number;
+export const SYSTEM_FOLLOW: number;
+export const HUE_DEPTH: number;
 export const TEXT_FLOOR: number;
 /** Each step's mix: [the input it mixes towards, the primary's share in percent], or null for the primary itself. */
 export const SCALE: Record<string, ['white' | 'black', number] | null>;

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PRIMAL_FORMS, PrimalOption } from 'primal-angular';
+import { PRIMAL_FORMS, PrimalOption } from '@mycelium-llc/primal-angular';
 import { PlainHtml } from '../../../shell/plain-html/plain-html';
 
 @Component({

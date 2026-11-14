@@ -49,7 +49,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_CONTENT } from 'primal-angular';",
+    "import": "import { PRIMAL_CONTENT } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-avatar name=\"Ada Shapiro\" src=\"/people/ada.jpg\" />"
   },
   "example": "/content/information"

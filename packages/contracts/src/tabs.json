@@ -53,7 +53,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_NAVIGATION } from 'primal-angular';",
+    "import": "import { PRIMAL_NAVIGATION } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-tabs label=\"Report\" [(selected)]=\"tab\">\n  <primal-tab label=\"Summary\">…</primal-tab>\n  <primal-tab label=\"Data\">…</primal-tab>\n</primal-tabs>"
   },
   "example": "/navigation/navigation"

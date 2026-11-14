@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PRIMAL_ACTIONS, PRIMAL_CONTENT } from 'primal-angular';
+import { PRIMAL_ACTIONS, PRIMAL_CONTENT } from '@mycelium-llc/primal-angular';
 import { CONTRACTS, LAYERS } from '../contracts';
 
 /** The catalog: every contract by layer, generated from packages/contracts. */

@@ -242,10 +242,10 @@
   --pr-color-border-control: color-mix(in oklab, var(--pr-color-text) 50%, var(--pr-color-surface));
 
   /* Where something happens: the primary action's fill, a checked control, an accent. The primary as chosen, the same in light and dark: darkened only if white text on it would not read, lifted in dark only if it would sink into the page. */
-  --pr-color-primary: light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.87 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))));
+  --pr-color-primary: light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.178 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.824 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.824 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.824 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))));
 
   /* The primary as text: links, the current place, a primary label. A shade further than the fill when needed, so it reads on every surface. */
-  --pr-color-primary-text: light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.14 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))));
+  --pr-color-primary-text: light-dark(color(from var(--pr-primary) srgb-linear calc(clamp(0, r, 1) * min(1, 0.11 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, g, 1) * min(1, 0.11 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))) calc(clamp(0, b, 1) * min(1, 0.11 / (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))), color(from var(--pr-primary) srgb-linear calc(1 - (1 - clamp(0, r, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, g, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))))) calc(1 - (1 - clamp(0, b, 1)) * min(1, 0.7 / (1 - (0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1)))))));
 
   /* A primary fill under the pointer: a step deeper. */
   --pr-color-primary-hover: oklch(from var(--pr-color-primary) calc(l - 0.0375) calc(c * 0.94) h);
@@ -263,10 +263,10 @@
   --pr-color-primary-surface: color-mix(in oklab, var(--pr-color-primary) 12%, var(--pr-color-surface));
 
   /* Goes with the primary: a second emphasis, a highlight, a second series. Never an action. */
-  --pr-color-companion: oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle)));
+  --pr-color-companion: light-dark(oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness) - 0.04) c calc(h + var(--pr-companion-angle))), oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle))));
 
   /* A third hue for decoration and a third series. Never an action. */
-  --pr-color-tertiary: oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle)));
+  --pr-color-tertiary: light-dark(oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness) - 0.04) c calc(h + var(--pr-tertiary-angle))), oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle))));
 
   /* Text the person has selected. */
   --pr-color-selection: color-mix(in oklab, var(--pr-color-primary) 28%, var(--pr-color-surface));
@@ -275,25 +275,25 @@
   --pr-color-backdrop: oklch(from var(--pr-black) l c h / 0.55);
 
   /* Something failed, or cannot be undone. */
-  --pr-color-danger: light-dark(oklch(52% 0.19 27), oklch(74% 0.14 27));
+  --pr-color-danger: light-dark(oklch(from var(--pr-white) calc(0.52 - (1 - l) * 0.7) 0.19 27), oklch(74% 0.14 27));
 
   /* The quiet background behind a danger message. */
   --pr-color-danger-surface: color-mix(in oklab, var(--pr-color-danger) 12%, var(--pr-color-surface));
 
   /* Needs attention soon; nothing has failed. */
-  --pr-color-warning: light-dark(oklch(50% 0.11 65), oklch(80% 0.12 80));
+  --pr-color-warning: light-dark(oklch(from var(--pr-white) calc(0.5 - (1 - l) * 0.7) 0.11 65), oklch(80% 0.12 80));
 
   /* The quiet background behind a warning message. */
   --pr-color-warning-surface: color-mix(in oklab, var(--pr-color-warning) 12%, var(--pr-color-surface));
 
   /* Worth knowing; nothing to do. */
-  --pr-color-info: light-dark(oklch(50% 0.13 235), oklch(76% 0.11 235));
+  --pr-color-info: light-dark(oklch(from var(--pr-white) calc(0.5 - (1 - l) * 0.7) 0.13 235), oklch(76% 0.11 235));
 
   /* The quiet background behind an info message. */
   --pr-color-info-surface: color-mix(in oklab, var(--pr-color-info) 12%, var(--pr-color-surface));
 
   /* Done, resolved, safe. */
-  --pr-color-success: light-dark(oklch(48% 0.12 150), oklch(76% 0.13 150));
+  --pr-color-success: light-dark(oklch(from var(--pr-white) calc(0.48 - (1 - l) * 0.7) 0.12 150), oklch(76% 0.13 150));
 
   /* The quiet background behind a success message. */
   --pr-color-success-surface: color-mix(in oklab, var(--pr-color-success) 12%, var(--pr-color-surface));

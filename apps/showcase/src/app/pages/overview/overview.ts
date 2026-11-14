@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PRIMAL_TABLES } from 'primal-angular';
+import { PRIMAL_TABLES } from '@mycelium-llc/primal-angular';
 import { RouterLink } from '@angular/router';
 import { NAV } from '../../shell/nav';
 

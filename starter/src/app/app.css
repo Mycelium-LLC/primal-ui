@@ -1,0 +1,20 @@
+/* Every value is a Primal token, so light, dark and right to left follow on their own. */
+.app-bar {
+  display: flex;
+  align-items: center;
+  padding: var(--pr-gap-group) var(--pr-gutter);
+  border-block-end: var(--pr-border-width) solid var(--pr-color-border);
+}
+
+.app-brand {
+  font-size: var(--pr-text-large);
+  font-weight: var(--pr-weight-strong);
+  color: var(--pr-color-text);
+  text-decoration: none;
+}
+
+.app-main {
+  inline-size: min(var(--pr-container-reading), 100% - 2 * var(--pr-gutter));
+  margin-inline: auto;
+  padding-block: var(--pr-gap-section);
+}

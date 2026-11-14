@@ -194,6 +194,76 @@
       "n": 34,
       "decision": "A bit of character, in the showcase only",
       "ruling": "Niko, 2026-11-02, after the review: 'Add character', 'a bit', 'its still a base template we build from'. Primal's components stay neutral; the showcase carries Mycelium's character from its brand book (the Mischief chapter's rules): the watering mushroom and a handwritten note on the welcome, a mushroom in two empty states, the high-five on one success. One surprise per screen, never in a table, form, error or anything about money; nothing moves. The library gains only a neutral hook: an empty state's empty-art slot, which a product fills with its own illustration."
+    },
+    {
+      "n": 35,
+      "decision": "The name, after the check",
+      "ruling": "'Mycelium Primal' always carries the house name in public. 'Primal' alone is crowded in software trademarks (Primal Fusion's registered PRIMAL in classes 9 and 42; Primal Systems' pending application), and the unscoped npm name primal-ui is taken. The short name stays Primal inside the product; the repository stays Mycelium-LLC/primal-ui. A web search of trademark records, not legal advice (session 35, 2026-11-03; Niko: 'u decide all')."
+    },
+    {
+      "n": 36,
+      "decision": "The packages' scope and registry",
+      "ruling": "@mycelium-llc/primal-tokens, -css, -angular and -contracts on the public npm registry, with provenance, published by a workflow on each tag. Not GitHub Packages: it needs a login even to install a public package. Needs an npm account that owns the mycelium-llc organisation and a publish token in the repository's secrets, which only Niko can set up."
+    },
+    {
+      "n": 37,
+      "decision": "The license",
+      "ruling": "MIT: the simplest permissive license, what most design systems use; Apache-2.0's patent grant adds little to CSS and components."
+    },
+    {
+      "n": 38,
+      "decision": "Where Primal lives",
+      "ruling": "primal.myceliumllc.dev, Firebase Hosting site 'mycelium-primal' in the myceliumllc-dev project: the landing page at /, the showcase under it. Deployed by CI from main on each release; /version.json states the version."
+    },
+    {
+      "n": 39,
+      "decision": "A landing page, and two ways in",
+      "ruling": "1.0.0 gains a landing page built from Primal itself, with two calls: Install Primal (the packages and the starter) and Fork Primal (a template repository and a guide to making your own design system on it). Niko asked for 'a good landing page, allowing people to clone the repo' on 2026-11-03."
+    },
+    {
+      "n": 40,
+      "decision": "Going public",
+      "ruling": "Niko delegated every 1.0.0 decision on 2026-11-03 ('u decide all'). Making the repository public and publishing to npm are still done only after the final QA passes, and Niko is told the moment it happens."
+    },
+    {
+      "n": 41,
+      "decision": "Every colour pair reads for any black and white, within a stated range",
+      "ruling": "Session 35, 2026-11-03 (Niko: 'u decide all'). The roles are measured, not assumed: any black up to 0.22 OKLCH lightness and any white from 0.95, tinted or not, with any primary, keeps every pair at WCAG 2.2 AA. The system colours follow the page's white exactly (relative colour in CSS); the primary as text sits at a luminance cap of 0.11 (was 0.14, so Magma's link is a shade deeper), the fill's dark floor is 0.176 (Magma's own, so Magma stays exactly Magma), and the companion and tertiary sit 0.04 darker in light so an out-of-gamut hue can't wash out. The build's contrast check sweeps 27 blacks and whites; the Colour page states the range and shows any miss outside it."
+    },
+    {
+      "n": 42,
+      "decision": "Trademark and existing use, checked again",
+      "ruling": "Clear to go public as Mycelium Primal; decision 35 stands (TL on Niko's delegation, 2026-11-14). The check (USPTO, EUIPO and WIPO through public aggregators, npm, GitHub, domains, other UI kits) found word overlap for different goods only: live US PRIMAL registrations of Linivan Inc. (formerly Primal Fusion: 2498791, 4134560, 4134562, 8073137, classes 9 and 42, software for searching and analysing data); Primal Systems' pending 98254892 (a Nostr social app); MYCELIUM 6352173 is a crypto wallet (class 9); nothing named Primal is a UI kit or design system. The practical risk is confusion with GitHub's Primer and PrimeTek's Prime family, not a legal one. Not checked directly: the USPTO search itself (JavaScript), WIPO (captcha), EUIPO eSearch. Findings in docs/qa/1.0.0.md."
+    },
+    {
+      "n": 43,
+      "decision": "npm, confirmed",
+      "ruling": "@mycelium-llc on the public npm registry, as decision 36 (TL on Niko's delegation, 2026-11-14; @mycelium is someone else's, and @mycelium-llc is unclaimed). Niko's one step: create the free npm organisation mycelium-llc and an automation token, stored as the repository secret NPM_TOKEN; then Publish runs by hand on the 1.0.0 tag (workflow_dispatch) and skips any version already on npm."
+    },
+    {
+      "n": 44,
+      "decision": "License, confirmed",
+      "ruling": "MIT, with CONTRIBUTING, CODE_OF_CONDUCT and CHANGELOG, as decision 37 (TL on Niko's delegation, 2026-11-14)."
+    },
+    {
+      "n": 45,
+      "decision": "Hosting, confirmed",
+      "ruling": "Public on Firebase Hosting, site mycelium-primal in the existing project myceliumllc-dev (billing account 03 is at its project cap, so no new project), at primal.myceliumllc.dev, as decision 38 (TL on Niko's delegation, 2026-11-14). The zone myceliumllc.dev is Cloud DNS in the-guild-mycelium-llc per Vault's domain table; its CNAME to mycelium-primal.web.app and the certificate are in place."
+    },
+    {
+      "n": 46,
+      "decision": "Going public, the word",
+      "ruling": "TL gave the word decision 40 waits for (TL on Niko's delegation, 2026-11-14; Niko, 2026-11-14: 'i think we can get primal ui already launched and public in the website too'): the repository flips to public once the Forensic QA passes on the exact head and a secrets scan of the whole history is clean; npm follows Niko's npm step. Mycelium's website presents Primal in its own release."
+    },
+    {
+      "n": 47,
+      "decision": "Pull requests never run on Mycelium's machines",
+      "ruling": "With the repository public, a pull request may come from a fork, so CI's runner routing (ACTIONS_RUNNER_MODE) never sends a pull_request job to the self-hosted pool; pushes, tags and the deploy keep the routing, and the deploy's keyless sign-in only trusts main and tags of this repository. Hosted minutes are free for a public repository. Decided by Claude under decision 12."
+    },
+    {
+      "n": 48,
+      "decision": "The skip link is Primal's",
+      "ruling": "The showcase and the landing page each carried the same hand-written skip link, and Field Notes and the starter had none: a foundational piece Primal lacked. It is now .pr-skip in primal-css, named in the app shell's contract, and used by the showcase, the landing page, Field Notes and the starter. Decided by Claude under decision 12."
     }
   ],
   "releases": [
@@ -1579,7 +1649,7 @@
     },
     {
       "kind": "release",
-      "state": "draft",
+      "state": "approved",
       "pending": null,
       "plannedFor": null,
       "makesTrue": [],
@@ -1588,37 +1658,71 @@
       "version": "1.0.0",
       "name": "Open to everyone",
       "track": "Distribution",
-      "status": "Draft; starts after Niko's review of the release before it.",
+      "status": "Ready for QA 2026-11-03 in release/1.0.0 (session 35); 2026-11-14 TL gave the word to go public on Niko's delegation (decisions 42 to 46) and session F4 added the trademark re-check, the fork-safe CI and the skip link (decisions 47, 48). npm waits on Niko's npm step.",
       "dependsOn": [
         "0.9.0"
       ],
       "goal": "Mycelium Primal goes public as an open-source, versioned set of packages with a starter app, and passes its acceptance test.",
-      "usersSee": "The public repository, the published packages, the starter app and the public showcase, each stating 1.0.0.",
-      "size": "M",
+      "usersSee": "A landing page at primal.myceliumllc.dev with Install and Fork; the public repository as a template; the published @mycelium-llc packages; the starter; the showcase and the acceptance app, each stating 1.0.0.",
+      "size": "L",
       "items": [
         {
-          "text": "Trademark and existing-use check of 'Mycelium Primal' and 'Primal' done, and Niko's go (see questionsForNiko)."
+          "text": "*Done 2026-11-03:* The name check and the four decisions written down (decisions 35-40).",
+          "state": "done"
         },
         {
-          "text": "License file, contributing guide, code of conduct and changelog."
+          "text": "*Done 2026-11-03:* Open-source files: LICENSE (MIT), CONTRIBUTING, CODE_OF_CONDUCT, SECURITY (private advisories), CHANGELOG from 0.1.0, issue and pull-request templates.",
+          "state": "done"
         },
         {
-          "text": "Packages published: tokens, css and angular (names and registry decided by Niko)."
+          "text": "*Done 2026-11-03:* A README for strangers: what Primal is, the two ways in, a short install, links.",
+          "state": "done"
         },
         {
-          "text": "Starter app: a new project using Primal, from install to a first screen."
+          "text": "*Done 2026-11-03:* Packages renamed to @mycelium-llc/primal-*, each with its README, license, repository and files; a publish workflow on tags (npm provenance) that can fall back to the self-hosted runner.",
+          "state": "done"
         },
         {
-          "text": "Acceptance test: a complete responsive app (authentication, forms, settings, navigation, tables, dialogs, empty states, feedback) built from Primal without new foundational behaviour."
+          "text": "*Done 2026-11-03:* A starter: a template repository from install to a first screen.",
+          "state": "done"
         },
         {
-          "text": "Repository made public (Niko's own yes)."
+          "text": "*Done 2026-11-03:* The fork guide: clone or use the template, rename, your colour, your tokens, your contracts, the contract check.",
+          "state": "done"
         },
         {
-          "text": "Release chain for 1.0.0."
+          "text": "*Done 2026-11-03:* The landing page, built from Primal: what it is, why it's different, Install Primal and Fork Primal, the Colour picker live, links to the showcase, the catalog, the acceptance app and GitHub; social images, favicon, meta.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-03:* Hosting: the mycelium-primal site at primal.myceliumllc.dev, deployed by CI from main, /version.json as JSON before the app's catch-all.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-03:* The acceptance app: authentication, forms, settings, navigation, tables, dialogs, empty states and feedback, from Primal alone, hosted beside the showcase.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-03:* Every colour pair reads for any black and white a project chooses.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-03:* Checked in Chrome, Safari and Firefox, with VoiceOver, at phone and desk widths.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-03:* A secrets sweep of the whole history before the repository goes public.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-14:* Session F4: the trademark check again with registration numbers (decision 42), CI never runs a pull request on Mycelium's machines (decision 47), the skip link in primal-css and every app (decision 48), Publish re-runnable on a tag once NPM_TOKEN exists (decision 43).",
+          "state": "done"
+        },
+        {
+          "text": "Release chain for 1.0.0: QA at Forensic care, then public, published, deployed and verified."
         }
       ],
-      "rollout": "Niko makes the repository public and publishes the packages; the showcase moves to its public address.",
+      "rollout": "After the final QA: the repository goes public, the packages publish to npm from the 1.0.0 tag, and the landing page and showcase deploy to primal.myceliumllc.dev.",
       "doneWhen": "The acceptance app is built from Primal with no new foundational behaviour; a fresh install from the published packages works from the documented steps; Niko has made the repository public.",
       "mutations": [
         {
@@ -1676,6 +1780,32 @@
           "disqualifier": "A theme with a lighter black or a warmer white misses a pair the Colour page has to warn about.",
           "evidence": "QA of 0.9.0, 2026-11-02, finding D-03 (session QP-primal-0-9-0-qa).",
           "pending": "proposed"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/open-source/a-newcomer-learns-what-primal-is-and-how-to-start-from-one-page",
+          "requirementKind": "user",
+          "statement": "A newcomer learns what Primal is, what makes it different and how to start, from one page, and leaves with either the packages installed or their own copy of the repository.",
+          "success": "From the landing page, a developer reaches a working install or their own copy in two steps.",
+          "disqualifier": "The landing page sends people to read the repository to understand what Primal is.",
+          "evidence": "Niko, 2026-11-03: 'with a good landing page, allowing people to clone the repo and all that'.",
+          "role": "a developer who has never heard of Primal",
+          "action": "open Primal's page",
+          "outcome": "I know in a minute whether it's for me, and how to start"
+        },
+        {
+          "op": "add",
+          "kind": "requirement",
+          "address": "primal/open-source/a-team-makes-its-own-design-system-from-a-copy-of-primal",
+          "requirementKind": "user",
+          "statement": "A team makes its own design system from a copy of Primal: its name, its colour, its tokens and its own contracts, without editing a Primal component.",
+          "success": "Following the fork guide, a copy builds with its own name and theme and its contracts pass the contract check.",
+          "disqualifier": "Making it theirs needed an edit inside a component.",
+          "evidence": "Niko's second QA journey, 2026-11-02: 'using this as a base to create own design system based on this, and how easy it is'.",
+          "role": "a team with its own brand",
+          "action": "start from Primal",
+          "outcome": "we have our own design system in a day"
         }
       ]
     }
@@ -1868,28 +1998,7 @@
     }
   ],
   "awaitingNiko": [],
-  "questionsForNiko": [
-    {
-      "question": "Is 'Mycelium Primal' clear of existing use and trademarks?",
-      "why": "Needed before the repository goes public at 1.0.0; Niko named it the one step left before committing to the name.",
-      "from": "Niko's naming note, 2026-10-20"
-    },
-    {
-      "question": "Which npm scope publishes the packages: @mycelium (not known to be ours) or @mycelium-llc (the estate's), and on npm or GitHub Packages?",
-      "why": "The brief suggests @mycelium/primal; npm shows no such packages and this Mac cannot tell who owns the @mycelium scope.",
-      "from": "Session 7F, 2026-10-20"
-    },
-    {
-      "question": "Which license: MIT (recommended) or Apache-2.0?",
-      "why": "The brief asks for a permissive license; MIT is the simplest, Apache-2.0 adds a patent grant.",
-      "from": "Niko's brief §6"
-    },
-    {
-      "question": "Where is the showcase hosted while the repository is private?",
-      "why": "0.1.0's done-when needs a live showcase Niko can open; Firebase Hosting in an existing Mycelium project is the usual path.",
-      "from": "Session 7F, 2026-10-20"
-    }
-  ],
+  "questionsForNiko": [],
   "notPlanned": [
     {
       "features": [],

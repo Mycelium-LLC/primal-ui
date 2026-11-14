@@ -58,7 +58,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_TOP_LAYERS, PRIMAL_ACTIONS } from 'primal-angular';",
+    "import": "import { PRIMAL_TOP_LAYERS, PRIMAL_ACTIONS } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-dialog title=\"Rename report\" [(open)]=\"renaming\">\n  …fields…\n  <div class=\"pr-dialog-actions\" dialog-actions>\n    <button primalButton type=\"button\" emphasis=\"quiet\" (click)=\"renaming.set(false)\">Keep Name</button>\n    <button primalButton type=\"button\" emphasis=\"primary\" [run]=\"rename\">Rename Report</button>\n  </div>\n</primal-dialog>"
   },
   "example": "/navigation/dialogs"

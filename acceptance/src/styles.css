@@ -1,0 +1,48 @@
+/*
+ * Field Notes' theme, loaded after Primal. The colour is Primal's own; every value below is a
+ * Primal token or a plain layout keyword.
+ */
+
+/* The page is a column the shell fills from top to bottom. */
+body,
+app-root {
+  display: grid;
+}
+
+app-root > router-outlet {
+  display: none;
+}
+
+/* Every place inside the shell is a block of its own. */
+.pr-shell-main > :not(router-outlet) {
+  display: block;
+}
+
+/* A place's head: its title, and its main action at the end. Wraps on a phone. */
+.fn-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pr-gap-group);
+  margin-block-end: var(--pr-gap-group);
+}
+
+.fn-head > * {
+  margin: 0;
+}
+
+/* A heading that takes focus when what was under it is gone (primalFocusAfterRemove's fallback). */
+.fn-head h1:focus {
+  outline: none;
+}
+
+/* A step of a multi-step form reads at a comfortable measure. */
+.fn-step {
+  max-inline-size: var(--pr-measure);
+}
+
+/* Settings: the sections sit in a column as wide as the shell's own navigation. */
+.fn-settings {
+  --pr-list-pane-width: var(--pr-nav-width);
+}

@@ -42,7 +42,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_FEEDBACK } from 'primal-angular';",
+    "import": "import { PRIMAL_FEEDBACK } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-spinner label=\"Checking the address\" />"
   },
   "example": "/actions/feedback"

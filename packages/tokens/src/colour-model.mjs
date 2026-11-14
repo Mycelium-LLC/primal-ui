@@ -12,6 +12,14 @@
  * The three choices, with Primal's defaults from the Mycelium brand book: ink #0B0B0D, white #FFFFFF
  * and Magma #E61924 (decision 25). A project replaces them with its own.
  */
+/**
+ * The range every role is checked across: a black no lighter than BLACK_MAX and a white no darker
+ * than WHITE_MIN (OKLCH lightness), tinted or not. Inside it, every pair the roles name meets
+ * WCAG 2.2 AA for any primary; outside it, the Colour page shows each miss.
+ */
+export const BLACK_MAX = 0.22;
+export const WHITE_MIN = 0.95;
+
 export const INPUTS = {
   black: { meaning: "The project's black: text in light, the page in dark. Need not be #000. Primal's is Mycelium ink, #0B0B0D.", value: [0.1505, 0.0042, 285.88] },
   white: { meaning: "The project's white: the page in light, text in dark. Need not be #fff. Primal's is white, #FFFFFF.", value: [1, 0, 0] },
@@ -126,9 +134,9 @@ export const LIGHT_CAP = 0.178;
  * in both. In dark it is only lifted, towards white, if it would sink into the page: below
  * FILL_FLOOR it misses 3:1 against the dark surfaces.
  */
-export const FILL_FLOOR = 0.13;
+export const FILL_FLOOR = 0.176;
 /** Primary text (links, the current place) must also read on the sunken well and the primary's own quiet fill, so it goes a little further. */
-export const TEXT_CAP = 0.14;
+export const TEXT_CAP = 0.11;
 export const TEXT_FLOOR = 0.3;
 // Channels are clamped to the screen's gamut first, so the luminance measured is the one shown.
 const ch = (c) => `clamp(0, ${c}, 1)`;
@@ -161,6 +169,26 @@ const stateValue = ({ l, c }) => (x) => {
   const p = primaryRole(x);
   return [p[0] - l, p[1] * c, p[2]];
 };
+
+/**
+ * A system colour in light deepens as the project's white darkens, so it still reads on that
+ * white and on its own quiet fill: SYSTEM_FOLLOW of lightness for each step the white is below
+ * pure white. In dark its value already clears any black up to 0.3 lightness.
+ */
+export const SYSTEM_FOLLOW = 0.7;
+const systemLightCss = ([l, c, h]) => `oklch(from var(--pr-white) calc(${l} - (1 - l) * ${SYSTEM_FOLLOW}) ${c} ${h})`;
+const systemValue = (s, x) => (x.mode === 'light' ? [s.light[0] - (1 - x.white[0]) * SYSTEM_FOLLOW, s.light[1], s.light[2]] : s.dark);
+
+/**
+ * The companion and the tertiary turn the primary round the wheel at its lightness. A turned hue
+ * can leave the screen's gamut and be shown lighter than asked (a vivid red's cyan), so in light
+ * they sit HUE_DEPTH darker, which keeps them at 3:1 on any white of 0.95 or more.
+ */
+export const HUE_DEPTH = 0.04;
+const hueRoleCss = (role) =>
+  `light-dark(${['light', 'dark']
+    .map((mode) => `oklch(from var(--pr-color-primary) calc(l + var(--pr-${role}-lightness)${mode === 'light' ? ` - ${HUE_DEPTH}` : ''}) c calc(h + var(--pr-${role}-angle)))`)
+    .join(', ')})`;
 
 export const ROLES = {
   surface: {
@@ -242,19 +270,19 @@ export const ROLES = {
   },
   companion: {
     meaning: 'Goes with the primary: a second emphasis, a highlight, a second series. Never an action.',
-    css: 'oklch(from var(--pr-color-primary) calc(l + var(--pr-companion-lightness)) c calc(h + var(--pr-companion-angle)))',
+    css: hueRoleCss('companion'),
     value: (x) => {
       const p = primaryRole(x);
-      return [p[0] + x.companionLightness, p[1], wrap(p[2] + x.companionAngle)];
+      return [p[0] + x.companionLightness - (x.mode === 'light' ? HUE_DEPTH : 0), p[1], wrap(p[2] + x.companionAngle)];
     },
     pairs: { surface: 'ui' },
   },
   tertiary: {
     meaning: 'A third hue for decoration and a third series. Never an action.',
-    css: 'oklch(from var(--pr-color-primary) calc(l + var(--pr-tertiary-lightness)) c calc(h + var(--pr-tertiary-angle)))',
+    css: hueRoleCss('tertiary'),
     value: (x) => {
       const p = primaryRole(x);
-      return [p[0] + x.tertiaryLightness, p[1], wrap(p[2] + x.tertiaryAngle)];
+      return [p[0] + x.tertiaryLightness - (x.mode === 'light' ? HUE_DEPTH : 0), p[1], wrap(p[2] + x.tertiaryAngle)];
     },
     pairs: { surface: 'ui' },
   },
@@ -274,8 +302,8 @@ export const ROLES = {
         name,
         {
           meaning: s.meaning,
-          css: `light-dark(${css(s.light)}, ${css(s.dark)})`,
-          value: (x) => s[x.mode],
+          css: `light-dark(${systemLightCss(s.light)}, ${css(s.dark)})`,
+          value: (x) => systemValue(s, x),
           pairs: { surface: 'text', [`${name}-surface`]: 'text' },
         },
       ],
@@ -284,7 +312,7 @@ export const ROLES = {
         {
           meaning: `The quiet background behind a${name === 'info' ? 'n' : ''} ${name} message.`,
           css: `color-mix(in oklab, var(--pr-color-${name}) 12%, var(--pr-color-surface))`,
-          value: (x) => mix(s[x.mode], 12, paper(x)),
+          value: (x) => mix(systemValue(s, x), 12, paper(x)),
         },
       ],
     ]),

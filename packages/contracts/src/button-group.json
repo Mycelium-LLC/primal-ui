@@ -51,7 +51,7 @@
     ]
   },
   "usage": {
-    "import": "import { PRIMAL_ACTIONS } from 'primal-angular';",
+    "import": "import { PRIMAL_ACTIONS } from '@mycelium-llc/primal-angular';",
     "markup": "<primal-button-group label=\"Text alignment\">\n  <button type=\"button\" [attr.aria-pressed]=\"align() === 'start'\" (click)=\"align.set('start')\">Start</button>\n  <button type=\"button\" [attr.aria-pressed]=\"align() === 'end'\" (click)=\"align.set('end')\">End</button>\n</primal-button-group>"
   },
   "example": "/actions/actions"

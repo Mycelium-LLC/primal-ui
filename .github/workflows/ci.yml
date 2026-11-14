@@ -7,7 +7,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Hosted minutes first; with ACTIONS_RUNNER_MODE=self-hosted the job moves to Mycelium's own runners,
+    # but never for a pull request: the repository is public, so a pull request may come from a fork,
+    # and a fork's code never runs on Mycelium's machines. (Hosted minutes are free for a public repository.)
+    runs-on: ${{ github.event_name != 'pull_request' && vars.ACTIONS_RUNNER_MODE == 'self-hosted' && fromJSON('["self-hosted", "mycelium-macos"]') || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,3 +28,5 @@ jobs:
         run: npm test
       - name: Build the tokens, the Angular adapter and the showcase
         run: npm run build
+      - name: The starter builds from the packed packages, as a stranger would
+        run: npm run pack && node scripts/check-app.mjs starter

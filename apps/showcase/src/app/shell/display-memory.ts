@@ -1,5 +1,5 @@
 import { Injectable, effect, inject } from '@angular/core';
-import { PrimalPreferences } from 'primal-angular';
+import { PrimalPreferences } from '@mycelium-llc/primal-angular';
 
 const KEY = 'primal-showcase-display';
 
