@@ -26,6 +26,11 @@ main:focus,
 
 /* ---------------------------------------------------------------- bar */
 
+/* A section reached by a link lands below the sticky bar, not under it. */
+[id] {
+  scroll-margin-block-start: calc(var(--pr-control-height) + 3 * var(--pr-gap-component));
+}
+
 .site-bar {
   position: sticky;
   inset-block-start: 0;

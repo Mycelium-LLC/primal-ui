@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { PRIMAL_NAVIGATION } from '@mycelium-llc/primal-angular';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, PRIMAL_NAVIGATION],
   template: `
     <a class="pr-skip" href="#main">Skip to Content</a>
     <header class="app-bar">

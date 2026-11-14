@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
+import { PrimalSkipLink } from '@mycelium-llc/primal-angular';
 import pkg from '../../../../package.json';
 import { DisplayOptions } from './shell/display-options/display-options';
 import { DisplayMemory } from './shell/display-memory';
@@ -9,7 +10,7 @@ import { NAV, isBuilt } from './shell/nav';
 
 @Component({
   selector: 'pr-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, DisplayOptions],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, DisplayOptions, PrimalSkipLink],
   templateUrl: './app.html',
   styleUrl: './app.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -2564,7 +2564,8 @@
         "A skip link (.pr-skip) comes first for the keyboard and goes straight to the main place."
       ],
       "failures": [
-        "Never moves the navigation between visits."
+        "Never moves the navigation between visits.",
+        "A skip link never leaves the page or reloads the app."
       ],
       "do": [
         "Keep places in the same order forever."
@@ -2583,11 +2584,13 @@
           ".pr-shell-account"
         ],
         "angular": [
-          "button[primalShellMenu]"
+          "button[primalShellMenu]",
+          "a.pr-skip"
         ],
         "inputs": [
           "[primalShellMenu]: the shell navigation it opens",
-          "[(open)]: whether the phone menu is open"
+          "[(open)]: whether the phone menu is open",
+          "a.pr-skip: with PRIMAL_NAVIGATION imported, it focuses its target in place, never reloading the app under a <base href>"
         ]
       },
       "usage": {

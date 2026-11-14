@@ -36,6 +36,14 @@ Everything else lives in `packages/tokens/src/tokens.mjs`: the font families, th
 ## 4. Your name
 
 - Rename the four packages in `packages/*/package.json` (`@your-scope/your-system-tokens`, and so on) and the import path in `tsconfig.json`.
+- Change every import of the Angular package to your name. The showcase, the acceptance app, the starter and the contracts all import it, so do it in one pass and check nothing is left:
+
+  ```bash
+  grep -rl "@mycelium-llc/primal-" --include='*.ts' --include='*.json' --include='*.md' --include='*.html' --exclude-dir=node_modules --exclude-dir=dist . \
+    | xargs sed -i.bak 's#@mycelium-llc/primal-#@your-scope/your-system-#g' && find . -name '*.bak' -not -path './node_modules/*' -delete
+  grep -rn "@mycelium-llc/primal-" --exclude-dir=node_modules --exclude-dir=dist .   # prints nothing
+  npm install && npm run build
+  ```
 - Change the showcase's name in `apps/showcase/src/app/app.html` and its title in `apps/showcase/src/index.html`.
 - Keep the `pr-` prefix of the CSS classes and custom properties unless you have a reason: it's in every component's CSS, and changing it means a search-and-replace across `packages/css` and `packages/angular`.
 
@@ -44,7 +52,8 @@ Everything else lives in `packages/tokens/src/tokens.mjs`: the font families, th
 A new component goes beside Primal's, never inside one. Give it a contract in `packages/contracts/src/<id>.json`, the same shape as Primal's: what it promises, what people expect of it, its states, keys, accessibility, failures, and the markup to copy. Then:
 
 ```bash
-npm run check:contracts    # every contract complete, every Angular part has one
+node packages/contracts/build.mjs   # rebuilds contracts.json from src/
+npm run check:contracts             # every contract complete, every Angular part has one
 ```
 
 In another repository, check a folder of your contracts with the published checker. The folder must hold contracts only, since every `.json` in it is read as one:
@@ -56,6 +65,14 @@ npx -p @mycelium-llc/primal-contracts primal-contracts-check contracts/
 ## 6. Ship it
 
 `npm run build` builds everything, and `npm run pack` writes your packages as tarballs to try in a real project before you publish. The publish workflow in `.github/workflows/publish.yml` publishes them to npm on a version tag, once you set the scope and an `NPM_TOKEN` secret.
+
+## What to remove or replace
+
+Some files are Mycelium's own, for running Primal itself; a copy should drop or replace them:
+
+- `.github/workflows/deploy.yml` and `firebase.json`: they deploy to Mycelium's site, and only Mycelium's repository can sign in. Delete them, or point them at your own hosting.
+- `.folio/`: the plan and decisions behind Primal's releases. Keep it as history, or replace it with your own plan; `npm run check:folio` and CI read it, so remove that step from `.github/workflows/ci.yml` if you delete the folder.
+- `docs/qa/`: Primal's QA records. Your releases get their own.
 
 ## What you keep from Primal
 

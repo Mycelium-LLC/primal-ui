@@ -2,7 +2,7 @@
 
 Every release of Mycelium Primal, newest first. Each one's full plan is in [`.folio/`](.folio/README.md), and its QA record in [`docs/qa/`](docs/qa/).
 
-## 1.0.0 — Open to everyone (unreleased)
+## 1.0.0 — Open to everyone (2026-11-14)
 
 Primal goes public: the packages on npm as `@mycelium-llc/primal-*`, the MIT license, a landing page with a starter and a fork guide, and an acceptance app built from Primal alone.
 

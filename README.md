@@ -78,7 +78,7 @@ Read [CONTRIBUTING](CONTRIBUTING.md) first. Security reports go through [SECURIT
 
 ## Status
 
-Primal 1.0.0 is being prepared: the first public release. 0.1.0 to 0.9.0 are shipped (see the [changelog](CHANGELOG.md)).
+Primal 1.0.0, the first public release, shipped on 2026-11-14. 0.1.0 to 0.9.0 came before it (see the [changelog](CHANGELOG.md)).
 
 ## License
 
