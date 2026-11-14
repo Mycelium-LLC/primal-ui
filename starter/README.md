@@ -4,12 +4,9 @@
 
 ## Start
 
-Primal's packages are on GitHub Packages, and the starter's `.npmrc` already points `@mycelium-llc` there. GitHub Packages asks for a token even to install a public package: set `GITHUB_TOKEN` to a GitHub personal access token (classic) with the `read:packages` scope.
-
 ```bash
 npx degit Mycelium-LLC/primal-ui/starter my-app
 cd my-app
-export GITHUB_TOKEN=<your token with read:packages>
 npm install
 npm start          # http://localhost:4200
 ```

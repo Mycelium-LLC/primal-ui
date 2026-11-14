@@ -1,9 +1,10 @@
-name: Publish to npmjs (dormant)
+name: Publish
 
-# Publishes the four packages to npmjs (registry.npmjs.org) with provenance. Dormant: Primal publishes to
-# GitHub Packages today (publish-github-packages.yml); this runs only by hand, on a tag, once the npm
-# organisation mycelium-llc and the repository secret NPM_TOKEN exist.
+# A release tag (x.y.z) on main publishes the four packages to npm with provenance. Run it by hand on a
+# tag (Actions → Publish → Run workflow → the tag) to publish a release whose tag came before the token.
 on:
+  push:
+    tags: ['[0-9]+.[0-9]+.[0-9]+']
   workflow_dispatch:
 
 permissions:

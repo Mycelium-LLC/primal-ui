@@ -2,12 +2,6 @@
 
 Every release of Mycelium Primal, newest first. Each one's full plan is in [`.folio/`](.folio/README.md), and its QA record in [`docs/qa/`](docs/qa/).
 
-## 1.0.1 — On GitHub Packages (2026-11-15)
-
-- The four packages are published to GitHub Packages (`npm.pkg.github.com`) under `@mycelium-llc`, by a workflow on each GitHub release that uses the repository's own token. 1.0.1 is the first version you can install; 1.0.0 was never published.
-- Install needs a project `.npmrc` that points `@mycelium-llc` at GitHub Packages, and a GitHub token with `read:packages` (GitHub asks for one even for a public package). The README, every package's README, the showcase's Getting started, the landing page and the starter say how; the starter ships the `.npmrc`.
-- The npmjs workflow stays, run by hand only, for a later move to npmjs.
-
 ## 1.0.0 — Open to everyone (2026-11-14)
 
 Primal goes public: the packages on npm as `@mycelium-llc/primal-*`, the MIT license, a landing page with a starter and a fork guide, and an acceptance app built from Primal alone.

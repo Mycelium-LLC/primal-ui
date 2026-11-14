@@ -2,8 +2,6 @@
 
 **TL;DR:** Every Mycelium Primal component's contract as framework-independent JSON (what it promises, its states, keys, accessibility and the markup to copy), the schema, and `primal-contracts-check` to keep your own contracts as complete.
 
-On GitHub Packages: with the same `.npmrc` as the other Primal packages (`@mycelium-llc:registry=https://npm.pkg.github.com`, and a token with `read:packages`):
-
 ```bash
 npx -p @mycelium-llc/primal-contracts primal-contracts-check contracts/
 ```

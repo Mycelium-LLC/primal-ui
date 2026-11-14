@@ -26,7 +26,7 @@ const tarballs = readdirSync(packs).filter((f) => f.endsWith('.tgz')).map((f) =>
 if (!app || !tarballs.length) throw new Error('usage: node scripts/check-app.mjs <app folder>, after npm run pack');
 
 const work = mkdtempSync(join(tmpdir(), `primal-${app}-`));
-cpSync(join(root, app), work, { recursive: true, filter: (src) => !/node_modules|dist|\.angular|\.npmrc$/.test(src) });
+cpSync(join(root, app), work, { recursive: true, filter: (src) => !/node_modules|dist|\.angular/.test(src) });
 const pkg = JSON.parse(readFileSync(join(work, 'package.json'), 'utf8'));
 // The packages' scope, read from the tokens package, so a fork that renames them checks its own.
 const scope = JSON.parse(readFileSync(join(root, 'packages/tokens/package.json'), 'utf8')).name.split('/')[0] + '/';

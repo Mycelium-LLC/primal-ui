@@ -1,6 +1,6 @@
 {
   "name": "@mycelium-llc/primal-contracts",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Mycelium Primal's component contracts as framework-independent JSON, the schema, and a checker for your own contracts.",
   "license": "MIT",
   "author": "Mycelium LLC",
