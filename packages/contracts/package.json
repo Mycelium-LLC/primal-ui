@@ -1,39 +1,49 @@
 {
   "name": "@mycelium-llc/primal-contracts",
-  "version": "1.0.0",
-  "description": "Mycelium Primal's component contracts as framework-independent JSON, the schema, and a checker for your own contracts.",
-  "license": "MIT",
-  "author": "Mycelium LLC",
+  "version": "1.0.1",
+  "description": "Every Mycelium Primal component's contract as framework-independent JSON (promise, states, keys, accessibility, failures), its schema, and primal-contracts-check for your own.",
+  "keywords": [
+    "design-system",
+    "component-contracts",
+    "json-schema",
+    "documentation",
+    "accessibility",
+    "design-system-tooling",
+    "mycelium",
+    "mycelium-primal"
+  ],
   "homepage": "https://primal.myceliumllc.dev",
+  "bugs": {
+    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mycelium-LLC/primal-ui.git",
     "directory": "packages/contracts"
   },
-  "bugs": {
-    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
-  "keywords": [
-    "design-system",
-    "mycelium-primal",
-    "css",
-    "design-tokens",
-    "accessibility",
-    "rtl"
-  ],
+  "license": "MIT",
+  "author": "Mycelium LLC <hello@myceliumllc.dev>",
   "type": "module",
+  "bin": {
+    "primal-contracts-check": "validate.mjs"
+  },
+  "exports": {
+    "./contracts.json": "./contracts.json",
+    "./schema.json": "./schema.json",
+    "./validate.mjs": "./validate.mjs",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
   "files": [
     "src",
     "schema.json",
     "contracts.json",
     "validate.mjs",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
-  "bin": {
-    "primal-contracts-check": "validate.mjs"
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,3 +1,5 @@
+<p align="center"><a href="https://primal.myceliumllc.dev"><img src="apps/site/brand/primal-mark.png" width="96" height="96" alt="Mycelium Primal"></a></p>
+
 # Mycelium Primal
 
 **TL;DR:** An open-source design system where every element keeps a written promise. Use it as it is in Angular (or its CSS on any web page), or make it the base of your own design system.

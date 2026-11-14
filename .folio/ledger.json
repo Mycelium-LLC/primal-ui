@@ -264,6 +264,11 @@
       "n": 48,
       "decision": "The skip link is Primal's",
       "ruling": "The showcase and the landing page each carried the same hand-written skip link, and Field Notes and the starter had none: a foundational piece Primal lacked. It is now .pr-skip in primal-css, named in the app shell's contract, and used by the showcase, the landing page, Field Notes and the starter. Decided by Claude under decision 12."
+    },
+    {
+      "n": 49,
+      "decision": "npm, properly, with Trusted Publishing",
+      "ruling": "Niko through TL, 2026-11-15: 'lets do the npm, proper, with logo and all, on hello@ account'. Primal publishes to npmjs under the npm user myceliumllc (hello@myceliumllc.dev) and organisation mycelium-llc, with npm Trusted Publishing (GitHub OIDC, no stored token; npm restricts tokens that bypass two-factor authentication). npm can trust a publisher only for a package that exists, so each package's first version is published by hand once, then its trusted publisher is set (docs/publishing.md). A brief switch to GitHub Packages the same morning was dropped before release. Replaces the NPM_TOKEN of decisions 36 and 43."
     }
   ],
   "releases": [
@@ -1809,6 +1814,45 @@
           "outcome": "we have our own design system in a day"
         }
       ]
+    },
+    {
+      "kind": "release",
+      "state": "approved",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "Anyone can npm install Primal.",
+      "version": "1.0.1",
+      "name": "On npm",
+      "track": "Distribution",
+      "status": "Approved by TL on Niko's word, 2026-11-15 (decision 49). Built in session 70-folio-packages-github.",
+      "dependsOn": [
+        "1.0.0"
+      ],
+      "goal": "Primal's four packages are ready for npmjs, each with full metadata and its own README, published by Trusted Publishing.",
+      "usersSee": "On npmjs.com, the four @mycelium-llc/primal-* packages at 1.0.1, each with the Primal mark, install, a 30-second example and links back.",
+      "size": "S",
+      "items": [
+        {
+          "text": "*Done 2026-11-15:* Full npm metadata for the four packages (description, keywords, homepage, repository with directory, bugs, MIT, author Mycelium LLC <hello@myceliumllc.dev>, files, exports, sideEffects, peer dependencies).",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-15:* A README per package with the Primal mark (served from primal.myceliumllc.dev), install, a 30-second example and links back; the npm organisation's avatar made from the Mycelium mark.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-15:* publish.yml with npm Trusted Publishing (OIDC, provenance, no token), skipping a package not on npm yet and a version already there; docs/publishing.md with the first manual publish and the trusted-publisher settings.",
+          "state": "done"
+        },
+        {
+          "text": "Release chain for 1.0.1, the first publish by hand, the trusted publishers set, and npm showing 1.0.1 for all four."
+        }
+      ],
+      "rollout": "Merged and tagged 1.0.1; the site deploys on the tag; the first version of each package is published by hand from the tag, then each package's trusted publisher is set.",
+      "doneWhen": "npmjs.com shows the four packages at 1.0.1 with their READMEs and logo, and the next tag publishes them from CI.",
+      "mutations": []
     }
   ],
   "shipped": [
