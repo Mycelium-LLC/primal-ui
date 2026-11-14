@@ -264,6 +264,11 @@
       "n": 48,
       "decision": "The skip link is Primal's",
       "ruling": "The showcase and the landing page each carried the same hand-written skip link, and Field Notes and the starter had none: a foundational piece Primal lacked. It is now .pr-skip in primal-css, named in the app shell's contract, and used by the showcase, the landing page, Field Notes and the starter. Decided by Claude under decision 12."
+    },
+    {
+      "n": 49,
+      "decision": "GitHub Packages, now",
+      "ruling": "TL on Niko's delegation, 2026-11-15: Mycelium's package scope is @mycelium-llc on GitHub Packages (Mycelium-LLC/mycelium-ui publishes @mycelium-llc/release-tracking there with the workflow's GITHUB_TOKEN); there is no npmjs organisation. Primal publishes its four packages there from 1.0.1, the same way, with no credential stored and no step for Niko; the npmjs workflow stays in place, dormant (run by hand only), for later. This narrows decisions 36 and 43: the registry is GitHub Packages until npmjs is set up. Installing needs a GitHub token with read:packages, even for a public package, and every install instruction says so."
     }
   ],
   "releases": [
@@ -1809,6 +1814,41 @@
           "outcome": "we have our own design system in a day"
         }
       ]
+    },
+    {
+      "kind": "release",
+      "state": "approved",
+      "pending": null,
+      "plannedFor": null,
+      "makesTrue": [],
+      "globalOrIrreversible": false,
+      "businessMeasure": "Anyone can install Primal today.",
+      "version": "1.0.1",
+      "name": "On GitHub Packages",
+      "track": "Distribution",
+      "status": "Approved by TL on Niko's delegation, 2026-11-15 (decision 49). Built in session 70-folio-packages-github.",
+      "dependsOn": [
+        "1.0.0"
+      ],
+      "goal": "Primal's four packages can be installed from a registry today, from GitHub Packages, with install instructions that say exactly how.",
+      "usersSee": "The packages at 1.0.1 on GitHub Packages, and install steps (an .npmrc line and a token) in the README, the package READMEs, the showcase, the landing page and the starter.",
+      "size": "S",
+      "items": [
+        {
+          "text": "*Done 2026-11-15:* A workflow publishes the four packages to GitHub Packages on each GitHub release with the workflow's GITHUB_TOKEN, skipping a version already there; the npmjs workflow is manual only.",
+          "state": "done"
+        },
+        {
+          "text": "*Done 2026-11-15:* Install instructions for GitHub Packages (the .npmrc lines, a token with read:packages) in the README, the four package READMEs, Getting started, the landing page and the starter, which ships the .npmrc.",
+          "state": "done"
+        },
+        {
+          "text": "Release chain for 1.0.1, and `npm view @mycelium-llc/<package> --registry=https://npm.pkg.github.com` shows 1.0.1 for all four."
+        }
+      ],
+      "rollout": "A GitHub release 1.0.1 publishes the packages; the Deploy workflow on the tag puts the showcase and landing page live.",
+      "doneWhen": "npm view shows 1.0.1 for all four packages on GitHub Packages, and a new project installs them following the README.",
+      "mutations": []
     }
   ],
   "shipped": [

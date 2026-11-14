@@ -1,6 +1,6 @@
 {
   "name": "@mycelium-llc/primal-angular",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mycelium Primal's Angular adapter (Angular 22+). Needs @mycelium-llc/primal-tokens and @mycelium-llc/primal-css loaded as global styles.",
   "license": "MIT",
   "author": "Mycelium LLC",

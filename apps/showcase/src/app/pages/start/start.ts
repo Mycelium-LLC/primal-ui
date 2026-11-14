@@ -53,6 +53,10 @@ export class AppShell {
   --pr-tertiary-angle: -30;
 }`;
 
+  protected readonly npmrc = `# .npmrc
+@mycelium-llc:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=\${GITHUB_TOKEN}`;
+
   protected readonly install = `npm install @mycelium-llc/primal-tokens @mycelium-llc/primal-css @mycelium-llc/primal-angular`;
 
   protected readonly build = `# in a clone of Mycelium-LLC/primal-ui
