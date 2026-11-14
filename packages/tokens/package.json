@@ -1,39 +1,58 @@
 {
   "name": "@mycelium-llc/primal-tokens",
   "version": "1.0.1",
-  "description": "Mycelium Primal's design tokens, framework-independent.",
-  "license": "MIT",
-  "author": "Mycelium LLC",
+  "description": "Mycelium Primal's design tokens: every colour, size, space, radius, motion and type value as CSS custom properties and JSON, in light and dark, from three colour choices.",
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "css-custom-properties",
+    "css-variables",
+    "theming",
+    "dark-mode",
+    "oklch",
+    "wcag",
+    "accessibility",
+    "rtl",
+    "mycelium",
+    "mycelium-primal"
+  ],
   "homepage": "https://primal.myceliumllc.dev",
+  "bugs": {
+    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mycelium-LLC/primal-ui.git",
     "directory": "packages/tokens"
   },
-  "bugs": {
-    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  "license": "MIT",
+  "author": "Mycelium LLC <hello@myceliumllc.dev>",
+  "scripts": {
+    "build": "node build.mjs",
+    "check": "node build.mjs --check && node check-contrast.mjs"
   },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
-  "keywords": [
-    "design-system",
-    "mycelium-primal",
-    "css",
-    "design-tokens",
-    "accessibility",
-    "rtl"
-  ],
   "style": "primal-tokens.css",
+  "exports": {
+    "./primal-tokens.css": "./primal-tokens.css",
+    "./primal-tokens.json": "./primal-tokens.json",
+    "./colour-model": {
+      "types": "./src/colour-model.d.mts",
+      "default": "./src/colour-model.mjs"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
     "primal-tokens.css",
     "primal-tokens.json",
     "src",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
-  "scripts": {
-    "build": "node build.mjs",
-    "check": "node build.mjs --check && node check-contrast.mjs"
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,38 +1,45 @@
 {
   "name": "@mycelium-llc/primal-angular",
   "version": "1.0.1",
-  "description": "Mycelium Primal's Angular adapter (Angular 22+). Needs @mycelium-llc/primal-tokens and @mycelium-llc/primal-css loaded as global styles.",
-  "license": "MIT",
-  "author": "Mycelium LLC",
+  "description": "Mycelium Primal for Angular 22+: fields, actions, feedback, navigation, dialogs, tables and cells as standalone, signal-based components and directives. Needs @mycelium-llc/primal-tokens and @mycelium-llc/primal-css.",
+  "keywords": [
+    "angular",
+    "angular-components",
+    "design-system",
+    "ui-components",
+    "signals",
+    "standalone",
+    "forms",
+    "accessibility",
+    "rtl",
+    "dark-mode",
+    "mycelium",
+    "mycelium-primal"
+  ],
   "homepage": "https://primal.myceliumllc.dev",
+  "bugs": {
+    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mycelium-LLC/primal-ui.git",
     "directory": "packages/angular"
   },
-  "bugs": {
-    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
-  "keywords": [
-    "design-system",
-    "mycelium-primal",
-    "angular",
-    "components",
-    "accessibility",
-    "rtl"
-  ],
+  "license": "MIT",
+  "author": "Mycelium LLC <hello@myceliumllc.dev>",
   "peerDependencies": {
     "@angular/common": "^22.2.0",
     "@angular/core": "^22.2.0",
     "@angular/router": "^22.2.0",
-    "rxjs": "^7.8.0"
+    "rxjs": "^7.8.0",
+    "@mycelium-llc/primal-css": "^1.0.0",
+    "@mycelium-llc/primal-tokens": "^1.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }

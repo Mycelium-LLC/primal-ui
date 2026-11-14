@@ -1,23 +1,51 @@
-# @mycelium-llc/primal-css
+<p align="center">
+  <a href="https://primal.myceliumllc.dev"><img src="https://primal.myceliumllc.dev/brand/primal-mark.png" width="96" height="96" alt="Mycelium Primal"></a>
+</p>
 
-**TL;DR:** Mycelium Primal's CSS: a reset, a classless base that makes every native HTML element read right, the components' styles, and Google Sans bundled. Works on any web page, with or without a framework.
+<h1 align="center">@mycelium-llc/primal-css</h1>
 
-On GitHub Packages: point the scope there in your project's `.npmrc`, with a GitHub token that has `read:packages` in `GITHUB_TOKEN` (needed even for a public package):
+<p align="center">The CSS of Mycelium Primal: a reset and a classless base so every native HTML element reads right, layout and component classes, and Google Sans bundled. Works on any page, with or without a framework.</p>
 
-```ini
-@mycelium-llc:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-```
+<p align="center">
+  <a href="https://primal.myceliumllc.dev">Site</a> ·
+  <a href="https://primal.myceliumllc.dev/showcase/">Showcase</a> ·
+  <a href="https://primal.myceliumllc.dev/showcase/contracts/catalog">Contracts</a> ·
+  <a href="https://github.com/Mycelium-LLC/primal-ui">GitHub</a> ·
+  <a href="https://github.com/Mycelium-LLC/primal-ui/blob/main/CHANGELOG.md">Changelog</a>
+</p>
+
+## Install
 
 ```bash
 npm install @mycelium-llc/primal-tokens @mycelium-llc/primal-css
 ```
 
+## In 30 seconds
+
 ```html
 <link rel="stylesheet" href="node_modules/@mycelium-llc/primal-tokens/primal-tokens.css" />
 <link rel="stylesheet" href="node_modules/@mycelium-llc/primal-css/src/primal.css" />
+
+<main class="pr-container">
+  <h1>Hello</h1>
+  <p>Plain HTML already reads right: type, spacing, links, lists, tables, forms.</p>
+  <button class="pr-button-primary">Save Changes</button>
+</main>
 ```
 
-Every value comes from the tokens, so light, dark and right to left follow on their own. Components and the markup to copy are in the [showcase](https://primal.myceliumllc.dev/showcase/). Google Sans is under the SIL Open Font License (`src/fonts/OFL.txt`).
+Light and dark follow the person's system, and right to left follows `dir="rtl"`. Every element, class and the markup to copy are in the [showcase](https://primal.myceliumllc.dev/showcase/). Never edit Primal's CSS: change the tokens in your own file, loaded after it.
 
-Part of [Mycelium Primal](https://primal.myceliumllc.dev) · MIT
+## The Primal packages
+
+| Package | What it is |
+|---|---|
+| [`@mycelium-llc/primal-tokens`](https://www.npmjs.com/package/@mycelium-llc/primal-tokens) | The design tokens: CSS custom properties and JSON, light and dark |
+| [`@mycelium-llc/primal-css`](https://www.npmjs.com/package/@mycelium-llc/primal-css) | Classless CSS: plain HTML reads right, plus layout and component classes |
+| [`@mycelium-llc/primal-angular`](https://www.npmjs.com/package/@mycelium-llc/primal-angular) | The Angular 22+ adapter |
+| [`@mycelium-llc/primal-contracts`](https://www.npmjs.com/package/@mycelium-llc/primal-contracts) | Every component's contract as JSON, and a checker for your own |
+
+All four share one version. Mycelium Primal is an open-source design system by [Mycelium](https://myceliumllc.dev), built from first principles: use it as it is, or [fork it](https://github.com/Mycelium-LLC/primal-ui/blob/main/docs/fork.md) into your own.
+
+## License
+
+MIT. The Google Sans font files in `src/fonts` are under the SIL Open Font License 1.1 (`src/fonts/OFL.txt`).

@@ -1,3 +1,5 @@
+<p align="center"><a href="https://primal.myceliumllc.dev"><img src="apps/site/brand/primal-mark.png" width="96" height="96" alt="Mycelium Primal"></a></p>
+
 # Mycelium Primal
 
 **TL;DR:** An open-source design system where every element keeps a written promise. Use it as it is in Angular (or its CSS on any web page), or make it the base of your own design system.
@@ -13,14 +15,7 @@
 
 ## Install Primal
 
-Primal's packages are on GitHub Packages, under `@mycelium-llc`. GitHub Packages asks for a GitHub token even to install a public package, so point the scope there once, in your project's `.npmrc`:
-
-```ini
-@mycelium-llc:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-```
-
-and give it a token: a GitHub personal access token (classic) with the `read:packages` scope, in `GITHUB_TOKEN` (in CI, the workflow's own `GITHUB_TOKEN` with `permissions: packages: read`). Then, in an Angular 22 project:
+In an Angular 22 project:
 
 ```bash
 npm install @mycelium-llc/primal-tokens @mycelium-llc/primal-css @mycelium-llc/primal-angular

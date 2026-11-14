@@ -1,33 +1,50 @@
 {
   "name": "@mycelium-llc/primal-css",
   "version": "1.0.1",
-  "description": "Mycelium Primal's reset, base typography and layout in plain CSS, with Google Sans bundled (OFL). Needs @mycelium-llc/primal-tokens.",
-  "license": "MIT",
-  "author": "Mycelium LLC",
+  "description": "Mycelium Primal's classless CSS: a reset and base styles so plain HTML reads right with no classes, layout and component classes, and Google Sans bundled. Needs @mycelium-llc/primal-tokens.",
+  "keywords": [
+    "design-system",
+    "classless-css",
+    "css",
+    "css-framework",
+    "reset",
+    "typography",
+    "google-sans",
+    "accessibility",
+    "rtl",
+    "dark-mode",
+    "mycelium",
+    "mycelium-primal"
+  ],
   "homepage": "https://primal.myceliumllc.dev",
+  "bugs": {
+    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mycelium-LLC/primal-ui.git",
     "directory": "packages/css"
   },
-  "bugs": {
-    "url": "https://github.com/Mycelium-LLC/primal-ui/issues"
+  "license": "(MIT AND OFL-1.1)",
+  "author": "Mycelium LLC <hello@myceliumllc.dev>",
+  "peerDependencies": {
+    "@mycelium-llc/primal-tokens": "^1.0.0"
   },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
-  "keywords": [
-    "design-system",
-    "mycelium-primal",
-    "css",
-    "design-tokens",
-    "accessibility",
-    "rtl"
-  ],
   "style": "src/primal.css",
+  "exports": {
+    "./primal.css": "./src/primal.css",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
     "src",
-    "README.md"
-  ]
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

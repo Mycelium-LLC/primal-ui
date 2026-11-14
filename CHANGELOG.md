@@ -2,11 +2,12 @@
 
 Every release of Mycelium Primal, newest first. Each one's full plan is in [`.folio/`](.folio/README.md), and its QA record in [`docs/qa/`](docs/qa/).
 
-## 1.0.1 — On GitHub Packages (2026-11-15)
+## 1.0.1 — On npm (2026-11-15)
 
-- The four packages are published to GitHub Packages (`npm.pkg.github.com`) under `@mycelium-llc`, by a workflow on each GitHub release that uses the repository's own token. 1.0.1 is the first version you can install; 1.0.0 was never published.
-- Install needs a project `.npmrc` that points `@mycelium-llc` at GitHub Packages, and a GitHub token with `read:packages` (GitHub asks for one even for a public package). The README, every package's README, the showcase's Getting started, the landing page and the starter say how; the starter ships the `.npmrc`.
-- The npmjs workflow stays, run by hand only, for a later move to npmjs.
+- The packages are ready for npmjs: each has its full description, keywords, homepage, repository, bugs, author, license, `exports` and `sideEffects`, and its own README with the Primal mark, install, a 30-second example and links back. `@mycelium-llc/primal-css` and `@mycelium-llc/primal-angular` name the Primal packages they need as peer dependencies.
+- Publishing uses npm Trusted Publishing: a release tag publishes from GitHub Actions with provenance and no stored npm token. Each package's first version is published by hand, once (`docs/publishing.md`).
+- The Primal mark is served at https://primal.myceliumllc.dev/brand/primal-mark.png for the READMEs.
+- The adapter's README no longer says "Private until Primal 1.0.0".
 
 ## 1.0.0 — Open to everyone (2026-11-14)
 
