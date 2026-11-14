@@ -1,9 +1,11 @@
 name: Publish
 
-# A release tag (x.y.z) on main publishes the four packages to npm with provenance.
+# A release tag (x.y.z) on main publishes the four packages to npm with provenance. Run it by hand on a
+# tag (Actions → Publish → Run workflow → the tag) to publish a release whose tag came before the token.
 on:
   push:
     tags: ['[0-9]+.[0-9]+.[0-9]+']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -33,6 +35,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          [ -n "$NODE_AUTH_TOKEN" ] || { echo "::error::The repository secret NPM_TOKEN is not set: an automation token of the npm organisation mycelium-llc."; exit 1; }
           for p in packages/tokens packages/css packages/contracts dist/primal-angular; do
+            name=$(node -p "require('./$p/package.json').name"); version=$(node -p "require('./$p/package.json').version")
+            if npm view "$name@$version" version >/dev/null 2>&1; then echo "$name@$version is already on npm"; continue; fi
             (cd "$p" && npm publish --provenance --access public)
           done

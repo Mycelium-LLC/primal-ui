@@ -13,19 +13,6 @@
   overflow: hidden;
 }
 
-.pr-skip {
-  position: absolute;
-  inset-inline-start: -100vw;
-}
-
-.pr-skip:focus {
-  inset-inline-start: var(--pr-gutter);
-  inset-block-start: var(--pr-gutter);
-  z-index: var(--pr-layer-overlay);
-  background-color: var(--pr-color-surface-raised);
-  padding: var(--pr-gap-component);
-}
-
 /* ---------------------------------------------------------------- header */
 
 .pr-header {

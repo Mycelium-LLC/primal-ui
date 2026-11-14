@@ -19,19 +19,6 @@ body {
   --site-width: min(var(--pr-container-reading), 100% - 2 * var(--pr-gutter));
 }
 
-.site-skip {
-  position: absolute;
-  inset-inline-start: -100vw;
-}
-
-.site-skip:focus {
-  inset-inline-start: var(--pr-gutter);
-  inset-block-start: var(--pr-gutter);
-  z-index: var(--pr-layer-overlay);
-  padding: var(--pr-gap-component);
-  background-color: var(--pr-color-surface-raised);
-}
-
 main:focus,
 #start:focus {
   outline: none;
