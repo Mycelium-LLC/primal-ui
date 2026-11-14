@@ -1,6 +1,6 @@
 {
   "name": "@mycelium-llc/primal-tokens",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mycelium Primal's design tokens, framework-independent.",
   "license": "MIT",
   "author": "Mycelium LLC",

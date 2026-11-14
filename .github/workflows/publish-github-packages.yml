@@ -1,0 +1,53 @@
+name: Publish to GitHub Packages
+
+# A GitHub release (x.y.z) publishes the four packages to GitHub Packages (npm.pkg.github.com) under
+# @mycelium-llc, Mycelium's package scope there (TL on Niko's delegation, 2026-11-15). Like
+# Mycelium-LLC/mycelium-ui's publish-release-tracking.yml, no credential is stored anywhere: the
+# workflow's own GITHUB_TOKEN publishes, scoped by `packages: write`. A version already there is
+# skipped, so a re-run is safe. The npmjs workflow (publish.yml) stays, run by hand only, for later.
+#
+# Installing needs a GitHub token with read:packages, even for a public package: see the README.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    # GitHub-hosted, like every job of this public repository that isn't a push of ours.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+          scope: '@mycelium-llc'
+      - run: npm ci
+      - name: The release is the packages' version
+        if: github.event_name == 'release'
+        run: |
+          for p in packages/tokens packages/css packages/contracts packages/angular; do
+            v=$(node -p "require('./$p/package.json').version")
+            [ "$v" = "${{ github.event.release.tag_name }}" ] || { echo "$p is $v, the release is ${{ github.event.release.tag_name }}"; exit 1; }
+          done
+      - run: npm run check:tokens && npm run check:contracts && npm test
+      - run: npm run build
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for p in packages/tokens packages/css packages/contracts dist/primal-angular; do
+            name=$(node -p "require('./$p/package.json').name"); version=$(node -p "require('./$p/package.json').version")
+            if npm view "$name@$version" version --registry=https://npm.pkg.github.com >/dev/null 2>&1; then
+              echo "$name@$version is already on GitHub Packages"; continue
+            fi
+            # npm provenance is for npmjs only; GitHub Packages rejects it.
+            (cd "$p" && npm pkg delete publishConfig.provenance && npm publish --registry=https://npm.pkg.github.com)
+          done
