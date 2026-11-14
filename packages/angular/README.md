@@ -4,15 +4,8 @@
 
 ## Install
 
-Until Primal is published, the packages come from its repository as package files:
-
 ```bash
-# in a clone of Mycelium-LLC/primal-ui
-npm install
-npm run pack            # writes dist/packs/*.tgz
-
-# in your project
-npm install /path/to/primal-ui/dist/packs/*.tgz
+npm install @mycelium-llc/primal-tokens @mycelium-llc/primal-css @mycelium-llc/primal-angular
 ```
 
 Load the tokens, then the core styles, then your own theme, in `angular.json`:
